@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtPlayer with Ad and DASH Quality Switching</title>
+    <!-- Include ArtPlayer library -->
+    <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+    <!-- Include dash.js library -->
+    <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+    <!-- Include ArtPlayer DASH Quality Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-dash-quality/dist/artplayer-plugin-dash-quality.min.js"></script>
+    <!-- Include ArtPlayer Ads Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-ads/dist/artplayer-plugin-ads.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .artplayer-app {
+            width: 100%;
+            height: 100vh;
+            background: #000; /* Set a background color for the player */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Create a container for the player -->
+<div class="artplayer-app"></div>
+
+<script>
+    // Initialize ArtPlayer with Ad and DASH Quality Switching
+    var art = new Artplayer({
+        container: '.artplayer-app',
+        url: 'https://repackager.wixmp.com/video.wixstatic.com/video/d7f9fb_b54736f2057949fc9960cbe14208f675/,480p,720p,/mp4/file.mp4.urlset/manifest.mpd',
+        autoSize: true,
+        fullscreen: true,
+      setting: true,
+      volume: 0.5,
+    isLive: false,
+    muted: false,
+    autoplay: false,
+    pip: true,
+    autoSize: true,
+    autoMini: true,
+    setting: true,
+    loop: false,
+    flip: false,
+    playbackRate: true,
+    aspectRatio: true,
+    fullscreen: true,
+    subtitleOffset: false,
+    miniProgressBar: true,
+    mutex: true,
+    backdrop: true,
+    playsInline: true,
+    autoPlayback: true,
+    airplay: true,
+    theme: '#05C546',
+       layers: [
+        {
+            html: '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
+            style: {
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+                opacity: '.9',
+            },
+        },
+    ],
+        icons: {
+        loading: '<img src="https://static.wixstatic.com/media/3e4e16_1ef09c0d1abf47f49496376e90c751da~mv2.gif">',
+   state: '<img width="150" heigth="150" src="https://static.wixstatic.com/shapes/d7f9fb_95fb30ee12b845d4822891db4c7d6b82.svg">'    
+    },
+        plugins: [
+            artplayerPluginAds({
+                // HTML广告，假如是视频广告则忽略该值
+                html: '<img src="https://video.wixstatic.com/video/3e4e16_b659a4bf001d472d914b4999ded1b837/1080p/mp4/file.mp4" alt="Ad Poster">',
+
+                // 视频广告的地址
+                video: 'https://video.wixstatic.com/video/3e4e16_b659a4bf001d472d914b4999ded1b837/1080p/mp4/file.mp4',
+
+                // 广告跳转网址，为空则不跳转
+                url: '',
+
+                // 必须观看的时长，期间不能被跳过，单位为秒
+                // 当该值大于或等于totalDuration时，不能提前关闭广告
+                // 当该值等于或小于0时，则随时都可以关闭广告
+                playDuration: 5,
+
+                // 广告总时长，单位为秒
+                totalDuration: 10,
+
+                // 多语言支持
+                i18n: {
+                    close: 'Funga',
+                    countdown: '%s Amasegonda 5',
+                    detail: 'Kwamamaza',
+                    canBeClosed: '%s Amasegonda 3',
+                },
+            }),
+            artplayerPluginDashQuality({
+                // Show quality in control
+                control: true,
+
+                // Show quality in setting
+                setting: true,
+
+                // Get the resolution text from level
+                getResolution: (level) => level.height + 'P',
+
+                // I18n
+                title: 'Quality',
+                auto: 'Auto',
+              
+            }),
+        ],
+        customType: {
+            mp4: function playMp4(video, url, art) {
+                video.src = url;
+                art.on('destroy', () => {
+                    video.src = '';
+                });
+            },
+            mpd: function playMpd(video, url, art) {
+                if (dashjs?.MediaPlayer) {
+                    if (art.dash) art.dash.reset();
+                    const dash = dashjs.MediaPlayer().create();
+                    dash.initialize(video, url, art.option.autoplay);
+                    art.dash = dash;
+                    art.on('destroy', () => dash.reset());
+                } else {
+                    art.notice.show = 'Unsupported playback format: mpd';
+                }
+            }
+        },
+    });
+</script>
+
+</body>
+</html>
