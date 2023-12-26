@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>new1</title>
+    <title>ArtPlayer with Ad and HLS Quality Switching</title>
     <!-- Include ArtPlayer library -->
     <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
     <!-- Include Hls.js library -->
@@ -37,7 +36,7 @@
     // Initialize ArtPlayer with Ad and HLS Quality Switching
     var art = new Artplayer({
         container: '.artplayer-app',
-        url: '',
+        url: 'https://repackager.wixmp.com/video.wixstatic.com/video/d7f9fb_2c0367990c8547b4a344fad72a12003a/,480p,720p,/mp4/file.mp4.urlset/master.m3u8',
         autoSize: true,
         fullscreen: true,
         setting: true,
@@ -133,17 +132,6 @@
                 }
             }
         },
-        quality: [
-            {
-                default: true,
-                html: 'SD 480P',
-                url: 'https://repackager.wixmp.com/video.wixstatic.com/video/d7f9fb_2c0367990c8547b4a344fad72a12003a/,480p,/mp4/file.mp4.urlset/master.m3u8',
-            },
-            {
-                html: 'HD 720P',
-                url: 'https://repackager.wixmp.com/video.wixstatic.com/video/d7f9fb_2c0367990c8547b4a344fad72a12003a/,720p,/mp4/file.mp4.urlset/master.m3u8',
-            },
-        ],
     });
 </script>
 
