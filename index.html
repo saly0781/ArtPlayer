@@ -33,10 +33,23 @@
 <div class="artplayer-app"></div>
 
 <script>
+function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    // Get movielink and adlink from URL parameters
+    var movielink = getParameterByName('movielink');
+    var adlink = getParameterByName('adlink');
     // Initialize ArtPlayer with Ad and HLS Quality Switching
     var art = new Artplayer({
         container: '.artplayer-app',
-        url: 'https://repackager.wixmp.com/video.wixstatic.com/video/d7f9fb_2c0367990c8547b4a344fad72a12003a/,480p,720p,/mp4/file.mp4.urlset/master.m3u8',
+        url: ' + movielink + ',
         autoSize: true,
         fullscreen: true,
         setting: true,
@@ -65,7 +78,7 @@
                 html: '<img src="https://video.wixstatic.com/video/3e4e16_b659a4bf001d472d914b4999ded1b837/1080p/mp4/file.mp4" alt="Ad Poster">',
 
                 // 视频广告的地址
-                video: 'https://video.wixstatic.com/video/3e4e16_b659a4bf001d472d914b4999ded1b837/1080p/mp4/file.mp4',
+                video: ' + adlink + ',
 
                 // 广告跳转网址，为空则不跳转
                 url: '',
