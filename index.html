@@ -43,75 +43,132 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    // Get movielink and adlink from URL parameters
+    // Get movielink, adlink, and adstatus from URL parameters
     var movielink = getParameterByName('movieLink');
     var adlink = getParameterByName('adlink');
+    var adstatus = getParameterByName('adstatus');
 
-    // Initialize ArtPlayer with Ad and HLS Quality Switching
-    var art = new Artplayer({
-        container: '.artplayer-app',
-        url: movielink,
-        autoSize: true,
-        fullscreen: true,
-        setting: true,
-        volume: 0.5,
-        isLive: false,
-        muted: false,
-        autoplay: false,
-        pip: false,
-        autoMini: true,
-        loop: false,
-        flip: false,
-        playbackRate: true,
-        aspectRatio: true,
-        fullscreen: true,
-        subtitleOffset: false,
-        miniProgressBar: true,
-        mutex: true,
-        backdrop: true,
-        playsInline: false,
-        autoPlayback: true,
-        airplay: false,
-        theme: '#05C546',
-        plugins: [
-            artplayerPluginAds({
-                html: '<img src="' + adlink + '" alt="Ad Poster">',
-                video: adlink,
-                url: '',
-                playDuration: 5,
-                totalDuration: 10,
-                i18n: {
-                    close: 'Funga',
-                    countdown: '%s Amasegonda 5',
-                    detail: 'Kwamamaza',
-                    canBeClosed: '%s Amasegonda 3',
-                },
-            }),
-            artplayerPluginHlsQuality({
-                control: true,
-                setting: true,
-                getResolution: (level) => level.height + 'P',
-                title: 'Quality',
-                auto: 'Auto',
-            }),
-        ],
-        customType: {
-            m3u8: function playM3u8(video, url, art) {
-                if (Hls.isSupported()) {
-                    if (art.hls) art.hls.destroy();
-                    const hls = new Hls();
-                    hls.loadSource(url);
-                    hls.attachMedia(video);
-                    art.hls = hls;
-                    art.on('destroy', () => hls.destroy());
-                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                    video.src = url;
-                } else {
-                    art.notice.show = 'Unsupported playback format: m3u8';
+    // Initialize ArtPlayer with or without Ads based on adstatus
+    var art;
+    if (adstatus === 'true') {
+        art = new Artplayer({
+            container: '.artplayer-app',
+            url: movielink,
+            autoSize: true,
+            fullscreen: true,
+            setting: true,
+            volume: 0.5,
+            isLive: false,
+            muted: false,
+            autoplay: false,
+            pip: false,
+            autoMini: true,
+            loop: false,
+            flip: false,
+            playbackRate: true,
+            aspectRatio: true,
+            fullscreen: true,
+            subtitleOffset: false,
+            miniProgressBar: true,
+            mutex: true,
+            backdrop: true,
+            playsInline: false,
+            autoPlayback: true,
+            airplay: false,
+            theme: '#05C546',
+            plugins: [
+                artplayerPluginAds({
+                    html: '<img src="' + adlink + '" alt="Ad Poster">',
+                    video: adlink,
+                    url: '',
+                    playDuration: 5,
+                    totalDuration: 10,
+                    i18n: {
+                        close: 'Funga',
+                        countdown: '%s Amasegonda 5',
+                        detail: 'Kwamamaza',
+                        canBeClosed: '%s Amasegonda 3',
+                    },
+                }),
+                artplayerPluginHlsQuality({
+                    control: true,
+                    setting: true,
+                    getResolution: (level) => level.height + 'P',
+                    title: 'Quality',
+                    auto: 'Auto',
+                }),
+            ],
+            customType: {
+                m3u8: function playM3u8(video, url, art) {
+                    if (Hls.isSupported()) {
+                        if (art.hls) art.hls.destroy();
+                        const hls = new Hls();
+                        hls.loadSource(url);
+                        hls.attachMedia(video);
+                        art.hls = hls;
+                        art.on('destroy', () => hls.destroy());
+                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = url;
+                    } else {
+                        art.notice.show = 'Unsupported playback format: m3u8';
+                    }
                 }
-            }
-        },
-    });
+            },
+        });
+    } else {
+        // If adstatus is false or not provided, initialize ArtPlayer without Ads
+        art = new Artplayer({
+            container: '.artplayer-app',
+            url: movielink,
+            autoSize: true,
+            fullscreen: true,
+            setting: true,
+            volume: 0.5,
+            isLive: false,
+            muted: false,
+            autoplay: false,
+            pip: false,
+            autoMini: true,
+            loop: false,
+            flip: false,
+            playbackRate: true,
+            aspectRatio: true,
+            fullscreen: true,
+            subtitleOffset: false,
+            miniProgressBar: true,
+            mutex: true,
+            backdrop: true,
+            playsInline: false,
+            autoPlayback: true,
+            airplay: false,
+            theme: '#05C546',
+            plugins: [
+                artplayerPluginHlsQuality({
+                    control: true,
+                    setting: true,
+                    getResolution: (level) => level.height + 'P',
+                    title: 'Quality',
+                    auto: 'Auto',
+                }),
+            ],
+            customType: {
+                m3u8: function playM3u8(video, url, art) {
+                    if (Hls.isSupported()) {
+                        if (art.hls) art.hls.destroy();
+                        const hls = new Hls();
+                        hls.loadSource(url);
+                        hls.attachMedia(video);
+                        art.hls = hls;
+                        art.on('destroy', () => hls.destroy());
+                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = url;
+                    } else {
+                        art.notice.show = 'Unsupported playback format: m3u8';
+                    }
+                }
+            },
+        });
+    }
 </script>
 
 </body>
