@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art5</title>
+    <title>Art</title>
     <!-- Include ArtPlayer library -->
     <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
     <!-- Include Hls.js library -->
@@ -38,6 +38,7 @@
         container: '.artplayer-app',
         url: 'https://repackager.wixmp.com/video.wixstatic.com/video/d7f9fb_2c0367990c8547b4a344fad72a12003a/,480p,720p,/mp4/file.mp4.urlset/master.m3u8',
         autoSize: true,
+        fullscreen: true,
         setting: true,
         volume: 0.5,
         isLive: false,
@@ -59,34 +60,20 @@
         airplay: false,
         theme: '#05C546',
        layers: [
-        {
-            html: '<img width="10%" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
-            style: {
-                position: 'absolute',
-                top: '2%',
-                right: '2%',
-                opacity: '.9',
+            {
+                html: '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
+                style: {
+                    position: 'absolute',
+                    top: '20px',
+                    right: '20px',
+                    opacity: '.9',
+                },
             },
+        ],
+        icons: {
+            loading: '<img src="https://static.wixstatic.com/media/3e4e16_1ef09c0d1abf47f49496376e90c751da~mv2.gif">',
+            state: '<img width="150" heigth="150" src="https://static.wixstatic.com/shapes/d7f9fb_95fb30ee12b845d4822891db4c7d6b82.svg">',
         },
-    ],
-    icons: {
-        loading: '<img width="10%" src="https://static.wixstatic.com/media/3e4e16_1ef09c0d1abf47f49496376e90c751da~mv2.gif">',
-        state: '<img width="15%" src="https://static.wixstatic.com/shapes/d7f9fb_95fb30ee12b845d4822891db4c7d6b82.svg">',
-    },
-});
-
-// @media query and associated styles and plugins should be outside the art initialization
-@media only screen and (max-width: 600px) {
-    art.layers = [
-        {
-            style: {
-                top: '50%',
-                right: 'auto',
-                left: '2%',
-                transform: 'translateY(-50%)',
-            },
-        },
-    ];
         plugins: [
             artplayerPluginAds({
                 // HTML广告，假如是视频广告则忽略该值
