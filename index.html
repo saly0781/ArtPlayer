@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art32</title>
+    <title>Art</title>
     <!-- Include ArtPlayer library -->
     <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
     <!-- Include Hls.js library -->
@@ -59,22 +59,37 @@
         autoPlayback: true,
         airplay: false,
         theme: '#05C546',
-       layers: [
-            {
-               const imageContainer = document.getElementById('html'); // Replace 'yourContainerId' with the actual ID of your container
+      // Assuming you have a container element with the id "html"
+const container = document.getElementById('html');
 
-imageContainer.innerHTML = '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">';
+// Your layers array
+const layers = [
+    {
+        html: '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
+        style: {
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            opacity: '0.9',
+        },
+    },
+    // Add more layers as needed
+];
 
-const image = imageContainer.querySelector('img');
-if (image) {
-    image.style.position = 'relative';
-    image.style.top = '20px';
-    image.style.right = '20px';
-    image.style.opacity = '0.9';
-}
+// Loop through each layer and append it to the container
+layers.forEach(layer => {
+    const layerElement = document.createElement('div');
+    layerElement.innerHTML = layer.html;
 
-            },
-        ],
+    const image = layerElement.querySelector('img');
+    if (image) {
+        // Apply styles to the image
+        Object.assign(image.style, layer.style);
+    }
+
+    container.appendChild(layerElement);
+});
+
         icons: {
             loading: '<img src="https://static.wixstatic.com/media/3e4e16_1ef09c0d1abf47f49496376e90c751da~mv2.gif">',
             state: '<img width="150" heigth="150" src="https://static.wixstatic.com/shapes/d7f9fb_95fb30ee12b845d4822891db4c7d6b82.svg">',
