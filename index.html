@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4t4t4</title>
+    <title>4</title>
     <!-- Include ArtPlayer library -->
     <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
     <!-- Include Hls.js library -->
@@ -33,7 +33,7 @@
 <div class="artplayer-app"></div>
 
 <script>
-function getParameterByName(name, url) {
+    function getParameterByName(name, url) {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, '\\$&');
         var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -44,12 +44,13 @@ function getParameterByName(name, url) {
     }
 
     // Get movielink and adlink from URL parameters
-    var movielink = getParameterByName('movielink');
+    var movielink = getParameterByName('movieLink');
     var adlink = getParameterByName('adlink');
+
     // Initialize ArtPlayer with Ad and HLS Quality Switching
     var art = new Artplayer({
         container: '.artplayer-app',
-        url: ' + movielink + ',
+        url: movielink,
         autoSize: true,
         fullscreen: true,
         setting: true,
@@ -74,24 +75,11 @@ function getParameterByName(name, url) {
         theme: '#05C546',
         plugins: [
             artplayerPluginAds({
-                // HTML广告，假如是视频广告则忽略该值
-                html: '<img src="https://video.wixstatic.com/video/3e4e16_b659a4bf001d472d914b4999ded1b837/1080p/mp4/file.mp4" alt="Ad Poster">',
-
-                // 视频广告的地址
-                video: ' + adlink + ',
-
-                // 广告跳转网址，为空则不跳转
+                html: '<img src="' + adlink + '" alt="Ad Poster">',
+                video: adlink,
                 url: '',
-
-                // 必须观看的时长，期间不能被跳过，单位为秒
-                // 当该值大于或等于totalDuration时，不能提前关闭广告
-                // 当该值等于或小于0时，则随时都可以关闭广告
                 playDuration: 5,
-
-                // 广告总时长，单位为秒
                 totalDuration: 10,
-
-                // 多语言支持
                 i18n: {
                     close: 'Funga',
                     countdown: '%s Amasegonda 5',
@@ -100,16 +88,9 @@ function getParameterByName(name, url) {
                 },
             }),
             artplayerPluginHlsQuality({
-                // Show quality in control
                 control: true,
-
-                // Show quality in setting
                 setting: true,
-
-                // Get the resolution text from level
                 getResolution: (level) => level.height + 'P',
-
-                // I18n
                 title: 'Quality',
                 auto: 'Auto',
             }),
