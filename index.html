@@ -59,36 +59,17 @@
         autoPlayback: true,
         airplay: false,
         theme: '#05C546',
-Layers [     // Assuming you have a container element with the id "html"
-const container = document.getElementById('html');
-
-// Your layers array
-const layers = [
-    {
-        html: '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
-        style: {
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            opacity: '0.9',
-        },
-    },
-    // Add more layers as needed
-];
-
-// Loop through each layer and append it to the container
-layers.forEach(layer => {
-    const layerElement = document.createElement('div');
-    layerElement.innerHTML = layer.html;
-
-    const image = layerElement.querySelector('img');
-    if (image) {
-        // Apply styles to the image
-        Object.assign(image.style, layer.style);
-    }
-
-    container.appendChild(layerElement);
-}); ];
+layers: [
+            {
+                html: '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
+                style: {
+                    position: 'absolute',
+                    top: '20px',
+                    right: '20px',
+                    opacity: '.9',
+                },
+            },
+        ],
 
         icons: {
             loading: '<img src="https://static.wixstatic.com/media/3e4e16_1ef09c0d1abf47f49496376e90c751da~mv2.gif">',
