@@ -61,13 +61,18 @@
         theme: '#05C546',
        layers: [
             {
-                html: '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
-                style: {
-                    position: 'absolute',
-                    top: '20px',
-                    right: '20px',
-                    opacity: '.9',
-                },
+               const imageContainer = document.getElementById('html'); // Replace 'yourContainerId' with the actual ID of your container
+
+imageContainer.innerHTML = '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">';
+
+const image = imageContainer.querySelector('img');
+if (image) {
+    image.style.position = 'relative';
+    image.style.top = '20px';
+    image.style.right = '20px';
+    image.style.opacity = '0.9';
+}
+
             },
         ],
         icons: {
