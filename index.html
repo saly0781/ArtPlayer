@@ -59,21 +59,44 @@
         autoPlayback: true,
         airplay: false,
         theme: '#05C546',
-        layers: [
-            {
-                html: '<img width="100" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
-                style: {
-                    position: 'absolute',
-                    top: '20px',
-                    right: '20px',
-                    opacity: '.9',
-                },
+        const playerConfig = {
+    layers: [
+        {
+            html: '<img style="width: 20vw; max-width: 100px;" src="https://static.wixstatic.com/media/3e4e16_7914c47b91d04d2394f029150fb575e2~mv2.png">',
+            style: {
+                position: 'absolute',
+                top: '2vw',
+                right: '2vw',
+                opacity: '.9',
             },
-        ],
-        icons: {
-            loading: '<img src="https://static.wixstatic.com/media/3e4e16_1ef09c0d1abf47f49496376e90c751da~mv2.gif">',
-            state: '<img width="150" heigth="150" src="https://static.wixstatic.com/shapes/d7f9fb_95fb30ee12b845d4822891db4c7d6b82.svg">',
         },
+    ],
+    icons: {
+        loading: '<img style="max-width: 100%;" src="https://static.wixstatic.com/media/3e4e16_1ef09c0d1abf47f49496376e90c751da~mv2.gif">',
+        state: '<img style="width: 15vw; max-width: 150px; height: auto;" src="https://static.wixstatic.com/shapes/d7f9fb_95fb30ee12b845d4822891db4c7d6b82.svg">',
+    },
+};
+
+// Apply responsive styles for Android and iPhones
+const applyMobileStyles = () => {
+    const playerContainer = document.getElementById('player-container');
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        // Apply styles for Android and iPhones
+        playerContainer.style.width = '100%';
+        // Add more mobile-specific styles as needed
+    } else {
+        // Reset styles for other devices
+        playerContainer.style.width = '80%';
+        // Add more styles for larger screens as needed
+    }
+};
+
+// Handle window resize events for responsiveness
+window.addEventListener('resize', applyMobileStyles);
+
+// Initial application of responsive styles
+applyMobileStyles();
         plugins: [
             artplayerPluginAds({
                 // HTML广告，假如是视频广告则忽略该值
