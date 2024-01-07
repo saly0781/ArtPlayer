@@ -95,6 +95,7 @@
                     getResolution: (level) => level.height + 'P',
                     title: 'Quality',
                     auto: 'Auto',
+                     autoplay: true,
                 }),
             ],
             customType: {
@@ -106,12 +107,6 @@
                         hls.attachMedia(video);
                         art.hls = hls;
                         art.on('destroy', () => hls.destroy());
-                         // my custom codes starts
-                        art.on('loadedmetadata', function() {
-                // Video metadata has loaded, initiate autoplay
-                art.option('autoplay', true);
-            });
-                         // my custom codes ends
                     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                         video.src = url;
                     } else {
@@ -167,12 +162,6 @@
                         hls.attachMedia(video);
                         art.hls = hls;
                         art.on('destroy', () => hls.destroy());
-                         // my custom codes starts
-                        art.on('loadedmetadata', function() {
-                // Video metadata has loaded, initiate autoplay
-                art.option('autoplay', true);
-            });
-                         // my custom codes ends
                     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                         video.src = url;
                     } else {
