@@ -167,7 +167,7 @@
                     getResolution: (level) => level.height + 'P',
                     title: 'Quality',
                     auto: 'Auto',
-                    autoplay: true,
+                    autoplay: false,
                     playsInline: true,
                 }),
             ],
@@ -186,12 +186,12 @@
                         art.notice.show = 'Unsupported playback format: m3u8';
                     }
                 }
-            },
-        });
-art.on('ready', () => {
-    art.play();
-})
-        
+            },            
+        },
+                             function onReady(art) {
+        this.play()
+    },
+                           );    
     }
 
 </script>
