@@ -81,6 +81,8 @@
     lang: navigator.language.toLowerCase(),
     moreVideoAttr: {
         crossOrigin: 'anonymous',
+        'webkit-playsinline': true,
+        playsInline: true,
     },
             plugins: [
                 artplayerPluginAds({
@@ -159,6 +161,8 @@
     lang: navigator.language.toLowerCase(),
     moreVideoAttr: {
         crossOrigin: 'anonymous',
+        'webkit-playsinline': true,
+        playsInline: true,
     },
             plugins: [
                 artplayerPluginHlsQuality({
@@ -186,13 +190,7 @@
                         art.notice.show = 'Unsupported playback format: m3u8';
                     }
                 }
-            },
-
-             moreVideoAttr: {
-        'webkit-playsinline': true,
-        playsInline: true,
-    },
-            
+            },     
         },
                              function onReady(art) {
         this.play()
