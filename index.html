@@ -58,7 +58,7 @@
             volume: 0.5,
     isLive: false,
     muted: true,
-    autoplay: true,
+    autoplay: false,
     pip: false,
     autoSize: true,
     autoMini: true,
@@ -72,7 +72,7 @@
     fullscreenWeb: false,
     subtitleOffset: true,
     miniProgressBar: true,
-    mutex: true,
+    mutex: false,
     backdrop: true,
     playsInline: true,
     autoPlayback: true,
@@ -122,6 +122,11 @@
                 }
             },
         });
+
+        art.on('ready', () => {
+    art.play();
+})
+        
     } else {
         // If adstatus is false or not provided, initialize ArtPlayer without Ads
         art = new Artplayer({
@@ -131,7 +136,7 @@
             volume: 0.5,
     isLive: false,
     muted: true,
-    autoplay: true,
+    autoplay: false,
     pip: false,
     autoSize: true,
     autoMini: true,
@@ -145,7 +150,7 @@
     fullscreenWeb: false,
     subtitleOffset: true,
     miniProgressBar: true,
-    mutex: true,
+    mutex: false,
     backdrop: true,
     playsInline: true,
     autoPlayback: true,
@@ -183,6 +188,10 @@
                 }
             },
         });
+art.on('ready', () => {
+    art.play();
+})
+        
     }
 
 </script>
