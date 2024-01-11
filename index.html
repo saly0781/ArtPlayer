@@ -48,11 +48,9 @@
     var adlink = getParameterByName('adlink');
     var adstatus = getParameterByName('adstatus');
 
-    var baseDomain = movielink.match(/^https?:\/\/([^/?#]+)(?:[/?#]|$)/i);
-    baseDomain = baseDomain && baseDomain[1];  // Extract base domain
+    var newURL = 'https://player.rebamovie.com';
 
-    // Construct the new URL with only the base domain
-    var newURL = 'https://' + baseDomain;
+    // Redirect to the new URL
     window.location.href = newURL;
 
     // Initialize ArtPlayer with or without Ads based on adstatus
