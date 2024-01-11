@@ -54,8 +54,17 @@
         art = new Artplayer({
             container: '.artplayer-app',
             url: movielink,
+     
+
+
             poster: 'https://static.wixstatic.com/media/d7f9fb_db68e7ad112f4361acdfe955cd4da6e8~mv2.jpg',
             volume: 0.5,
+                   art.on('ready', () => {
+    // Add an event listener for user interaction (click)
+    art.container.addEventListener('click', function () {
+        // Autoplay the video after user interaction
+        art.play();
+    });
     isLive: false,
     muted: false,
     autoplay: false,
@@ -134,8 +143,16 @@
         art = new Artplayer({
               container: '.artplayer-app',
             url: movielink,
+            
+
             poster: 'https://static.wixstatic.com/media/d7f9fb_db68e7ad112f4361acdfe955cd4da6e8~mv2.jpg',
             volume: 0.5,
+            art.on('ready', () => {
+    // Add an event listener for user interaction (click)
+    art.container.addEventListener('click', function () {
+        // Autoplay the video after user interaction
+        art.play();
+    });
     isLive: false,
     muted: false,
     autoplay: false,
