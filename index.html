@@ -48,11 +48,6 @@
     var adlink = getParameterByName('adlink');
     var adstatus = getParameterByName('adstatus');
 
-    var newURL = 'https://player.rebamovie.com';
-
-    // Redirect to the new URL
-    window.location.href = newURL;
-
     // Initialize ArtPlayer with or without Ads based on adstatus
     var art;
     if (adstatus === 'true') {
@@ -202,6 +197,9 @@
     },
                            );    
     }
+
+    var newURL = window.location.origin + window.location.pathname;
+    history.replaceState({}, document.title, newURL);
 
 </script>
 
