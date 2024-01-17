@@ -209,6 +209,30 @@
 
     var newURL = window.location.origin + window.location.pathname;
     history.replaceState({}, document.title, newURL);
+   document.addEventListener('DOMContentLoaded', function () {
+            // ... (your existing code) ...
+
+            // Function to disable right-click
+            function disableRightClick(event) {
+                event.preventDefault();
+            }
+
+            // Add an event listener for right-click prevention
+            window.addEventListener('contextmenu', disableRightClick);
+
+            // Function to handle keydown events
+            function handleKeydown(event) {
+                if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && event.keyCode === 73)) {
+                    // Prevent F12 and Ctrl+Shift+I
+                    event.preventDefault();
+                }
+            }
+
+            // Add an event listener for keydown events
+            document.addEventListener('keydown', handleKeydown);
+
+            // ... (your existing code) ...
+        });
 
 </script>
 
