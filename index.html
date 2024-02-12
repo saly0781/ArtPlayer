@@ -29,7 +29,79 @@
     </style>
 </head>
 <body>
+<script type='text/javascript'> if(typeof document.onselectstart!="undefined" ) {document.onselectstart=new Function ("return false" ); } else{document.onmousedown=new Function ("return false" );document.onmouseup=new Function ("return false"); } </script>
+<!-- End disable copy paste --></!->
+<script language=javascript>
+<!--
 
+//edit by iamravlo
+
+
+var message="Ibyo Mukanze Ntibyemewe";
+
+///////////////////////////////////
+function clickIE4(){
+if (event.button==2){
+alert(message);
+return false;
+}
+}
+
+function clickNS4(e){
+if (document.layers||document.getElementById&&!document.all){
+if (e.which==2||e.which==3){
+alert(message);
+return false;
+}
+}
+}
+
+if (document.layers){
+document.captureEvents(Event.MOUSEDOWN);
+document.onmousedown=clickNS4;
+}
+else if (document.all&&!document.getElementById){
+document.onmousedown=clickIE4;
+}
+
+document.oncontextmenu=new Function("alert(message);return false")
+
+// -->
+</script>
+
+
+<script>
+        // Compile and run this code and see if it is easy to use F12 for developer tools or use the context menu to inspect an element
+var addHandler = function (element, type, handler) {
+	if (element.addEventListener) {
+		element.addEventListener(type, handler, false);
+	} else if (element.attachEvent) {
+		element.attachEvent("on" + type, handler);
+	} else {
+		element["on" + type] = handler;
+	}
+};
+
+var preventDefault = function (event) {
+	if (event.preventDefault) {
+		event.preventDefault();
+	} else {
+		event.returnValue = false;
+	}
+};
+
+addHandler(window, "contextmenu", function (event) {
+	preventDefault(event);
+});
+document.onkeydown = function (event) {
+	if (event.keyCode == 123) { // Prevent F12
+		return false;
+	}
+	else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I        
+		return false;
+	}
+};
+    </script>
 <!-- Create a container for the player -->
 <div class="artplayer-app"></div>
 
