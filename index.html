@@ -121,7 +121,6 @@ document.onkeydown = function (event) {
     var adlink = getParameterByName('adlink');
     var adstatus = getParameterByName('adstatus');
     //var movieId = getParameterByName('movieId');
-    var movieId = "mymovies";
 
 Artplayer.MOBILE_CLICK_PLAY = true;
 Artplayer.MOBILE_DBCLICK_PLAY = false;
@@ -131,7 +130,7 @@ Artplayer.MOBILE_DBCLICK_PLAY = false;
     if (adstatus === 'true') {
         art = new Artplayer({
 	container: '.artplayer-app',
-	id: movieId,
+	//id: movieId,
         url: movielink,
         poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
         volume: 1.0,
@@ -212,7 +211,7 @@ art.aspectRatio = '16:9';
         // If adstatus is false or not provided, initialize ArtPlayer without Ads
         art = new Artplayer({
     container: '.artplayer-app',
-    id: movieId,
+    //id: movieId,
     url: movielink,
     poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
     isLive: false,
