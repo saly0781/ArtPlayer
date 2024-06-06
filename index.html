@@ -121,6 +121,9 @@ document.onkeydown = function (event) {
     var adlink = getParameterByName('adlink');
     var adstatus = getParameterByName('adstatus');
 
+Artplayer.MOBILE_CLICK_PLAY = true;
+Artplayer.MOBILE_DBCLICK_PLAY = false;
+	
     // Initialize ArtPlayer with or without Ads based on adstatus
     var art;
     if (adstatus === 'true') {
@@ -196,8 +199,8 @@ document.onkeydown = function (event) {
 
         art.on('ready', () => {
     art.play();
-art.volume = 0.5;
-art.muted = false;
+//art.volume = 0.5;
+//art.muted = false;
 art.aspectRatio = '16:9';
 })
         
@@ -263,8 +266,8 @@ art.aspectRatio = '16:9';
         },
 function onReady(art) {
         this.play()
-	this.volume = 0.5;
-	this.muted = false;
+	//this.volume = 0.5;
+	//this.muted = false;
 	this.aspectRatio = '16:9';
     },
                            );    
