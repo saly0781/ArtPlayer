@@ -120,6 +120,8 @@ document.onkeydown = function (event) {
     var movielink = getParameterByName('movieLink');
     var adlink = getParameterByName('adlink');
     var adstatus = getParameterByName('adstatus');
+    //var movieId = getParameterByName('movieId');
+    var movieId = "mymovies";
 
 Artplayer.MOBILE_CLICK_PLAY = true;
 Artplayer.MOBILE_DBCLICK_PLAY = false;
@@ -129,6 +131,7 @@ Artplayer.MOBILE_DBCLICK_PLAY = false;
     if (adstatus === 'true') {
         art = new Artplayer({
 	container: '.artplayer-app',
+	id: movieId,
         url: movielink,
         poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
         volume: 1.0,
@@ -141,6 +144,7 @@ Artplayer.MOBILE_DBCLICK_PLAY = false;
     setting: true,
     loop: false,
     flip: false,
+    autoPlayback: true,
     antiOverlap: true,
     playbackRate: true,
     aspectRatio: true,
@@ -207,9 +211,10 @@ art.aspectRatio = '16:9';
     } else {
         // If adstatus is false or not provided, initialize ArtPlayer without Ads
         art = new Artplayer({
-              container: '.artplayer-app',
-            url: movielink,
-            poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
+    container: '.artplayer-app',
+    id: movieId,
+    url: movielink,
+    poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
     isLive: false,
     muted: false,
     autoplay: false,
@@ -219,6 +224,7 @@ art.aspectRatio = '16:9';
     screenshot: false,
     setting: true,
     loop: false,
+    autoPlayback: true,
     autoOrientation: true,
     antiOverlap: true,
     flip: false,
