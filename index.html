@@ -125,16 +125,12 @@ document.onkeydown = function (event) {
     var art;
     if (adstatus === 'true') {
         art = new Artplayer({
-            container: '.artplayer-app',
-            url: movielink,
-     
-
-
-            poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
-            volume: 1.0,
-    isLive: false,
-    muted: false,
-    autoplay: false,
+	container: '.artplayer-app',
+        url: movielink,
+        poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
+        volume: 1.0,
+	isLive: false,
+	autoOrientation: true,
     pip: false,
     autoSize: false,
     autoMini: true,
@@ -152,7 +148,6 @@ document.onkeydown = function (event) {
     mutex: false,
     backdrop: true,
     playsInline: true,
-    autoPlayback: true,
     airplay: true,
     theme: '#05C546',
     lang: navigator.language.toLowerCase(),
@@ -204,6 +199,9 @@ document.onkeydown = function (event) {
 
         art.on('ready', () => {
     art.play();
+art.volume = 0.5;
+art.muted = false;
+art.aspectRatio = '16:9';
 })
         
     } else {
@@ -211,8 +209,6 @@ document.onkeydown = function (event) {
         art = new Artplayer({
               container: '.artplayer-app',
             url: movielink,
-            
-
             poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
             volume: 1.0,
             
@@ -225,6 +221,7 @@ document.onkeydown = function (event) {
     screenshot: false,
     setting: true,
     loop: false,
+    autoOrientation: true,
     antiOverlap: true,
     flip: false,
     playbackRate: true,
@@ -273,8 +270,11 @@ document.onkeydown = function (event) {
                 }
             },     
         },
-                             function onReady(art) {
+function onReady(art) {
         this.play()
+	this.volume = 0.5;
+	this.muted = false;
+	this.aspectRatio = '16:9';
     },
                            );    
     }
