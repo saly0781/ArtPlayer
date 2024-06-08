@@ -123,13 +123,18 @@
         }
 
         // Get movielink, adlink, and adstatus from URL parameters
+        var type = getParameterByName('type');
         var movielink = getParameterByName('movieLink');
         var adlink = getParameterByName('adlink');
         var adstatus = getParameterByName('adstatus');
         var movieId = getParameterByName('movieId');
+        var episodeId = getParameterByName('episodeId');
+        var finalMovieId =  episodeId== "empty" ? movieId : episodeId
         var percentage = 0;
         var newData = {
             movieId: movieId,
+            episodeId : episodeId,
+            type : type,
             percentage: 1.0,
             status: "running"
         };
