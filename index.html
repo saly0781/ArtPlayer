@@ -123,21 +123,21 @@
         }
 
         // Get movielink, adlink, and adstatus from URL parameters
-        //var type = getParameterByName('type');
+        var type = getParameterByName('type');
         var movielink = getParameterByName('movieLink');
         var adlink = getParameterByName('adlink');
         var adstatus = getParameterByName('adstatus');
-        //var movieId = getParameterByName('movieId');
-        //var episodeId = getParameterByName('episodeId');
-       // var finalMovieId =  episodeId== "empty" ? movieId : episodeId;
+        var movieId = getParameterByName('movieId');
+        var episodeId = getParameterByName('episodeId');
+        var finalMovieId =  episodeId== "empty" ? movieId : episodeId;
         var percentage = 0;
-       /* var newData = {
+        var newData = {
             movieId: movieId,
             episodeId : episodeId,
             type : type,
             percentage: 1.0,
             status: "running"
-        };*/
+        };
 
         // Artplayer settings
         Artplayer.MOBILE_DBCLICK_PLAY = true;
@@ -147,7 +147,7 @@
         if (adstatus === 'true') {
             art = new Artplayer({
                 container: '.artplayer-app',
-              //  id: movieId,
+                id: finalMovieId,
                 url: movielink,
                 poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
                 volume: 1.0,
@@ -226,7 +226,7 @@
             // If adstatus is false or not provided, initialize ArtPlayer without Ads
             art = new Artplayer({
                 container: '.artplayer-app',
-               // id: movieId,
+                id: finalMovieId,
                 url: movielink,
                 poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
                 isLive: false,
@@ -292,7 +292,7 @@
         }
 
         // Functions for sending messages and tracking time updates
-       /* function sendMessage(msg) {
+       function sendMessage(msg) {
             window.parent.postMessage(msg, "*");
         }
 
@@ -306,7 +306,7 @@
             sendMessage(newData);
         }
 
-        art.on('video:timeupdate', onTimeUpdate);*/
+        art.on('video:timeupdate', onTimeUpdate);
     </script>
 </body>
 
