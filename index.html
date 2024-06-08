@@ -127,12 +127,11 @@
         var adlink = getParameterByName('adlink');
         var adstatus = getParameterByName('adstatus');
         var movieId = getParameterByName('movieId');
-        var totalduration;
         var percentage = 0;
         var newData = {
             movieId: movieId,
             percentage: 1.0,
-            status: "started",
+            status: "running"
         };
 
         // Artplayer settings
@@ -216,7 +215,6 @@
             art.on('ready', () => {
                 art.play();
                 art.aspectRatio = '16:9';
-                totalduration = art.duration;
             });
 
         } else {
@@ -285,7 +283,6 @@
             art.on('ready', () => {
                 art.play();
                 art.aspectRatio = '16:9';
-                totalduration = art.duration;
             });
         }
 
@@ -295,7 +292,7 @@
         }
 
         function onTimeUpdate() {
-            percentage = (art.currentTime / totalduration) * 100;
+            percentage = (art.currentTime / art.duration) * 100;
             newData.percentage = percentage;
             if (percentage > 80) {
                 art.off('video:timeupdate', onTimeUpdate);
