@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-hls-quality/dist/artplayer-plugin-hls-quality.min.js"></script>
     <!-- Include ArtPlayer Ads Plugin -->
     <script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-ads/dist/artplayer-plugin-ads.min.js"></script>
+    <!-- Include ArtPlayer Danmuku Plugin -->
     <script src="path/to/artplayer-plugin-danmuku.js"></script>
     <style>
         html,
@@ -25,7 +27,6 @@
             width: 100%;
             height: 100%;
             background: #000000;
-            /* Set a background color for the player */
             margin: 0;
             padding: 0;
         }
@@ -33,7 +34,8 @@
 </head>
 
 <body>
-    <script type='text/javascript'>
+    <script type="text/javascript">
+        // Disable text selection
         if (typeof document.onselectstart != "undefined") {
             document.onselectstart = new Function("return false");
         } else {
@@ -41,16 +43,11 @@
             document.onmouseup = new Function("return false");
         }
     </script>
-    <!-- End disable copy paste -->
-    </!->
-    <script language=javascript>
-        <!--
-        //edit by iamravlo
 
-
+    <script language="javascript">
+        // Disable right-click context menu with a custom message
         var message = "Ibyo Mukanze Ntibyemewe";
 
-        ///////////////////////////////////
         function clickIE4() {
             if (event.button == 2) {
                 alert(message);
@@ -74,15 +71,11 @@
             document.onmousedown = clickIE4;
         }
 
-        document.oncontextmenu = new Function("alert(message);return false")
-
-        // 
-        -->
+        document.oncontextmenu = new Function("alert(message);return false");
     </script>
 
-
     <script>
-        // Compile and run this code and see if it is easy to use F12 for developer tools or use the context menu to inspect an element
+        // Prevent F12 (developer tools) and Ctrl+Shift+I
         var addHandler = function(element, type, handler) {
             if (element.addEventListener) {
                 element.addEventListener(type, handler, false);
@@ -104,6 +97,7 @@
         addHandler(window, "contextmenu", function(event) {
             preventDefault(event);
         });
+
         document.onkeydown = function(event) {
             if (event.keyCode == 123) { // Prevent F12
                 return false;
@@ -112,10 +106,12 @@
             }
         };
     </script>
+
     <!-- Create a container for the player -->
     <div class="artplayer-app"></div>
 
     <script>
+        // Function to get URL parameters by name
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
             name = name.replace(/[\[\]]/g, '\\$&');
@@ -137,9 +133,9 @@
             movieId: movieId,
             percentage: 1.0,
             status: "started",
-        }
+        };
 
-        //Artplayer.MOBILE_CLICK_PLAY = true;
+        // Artplayer settings
         Artplayer.MOBILE_DBCLICK_PLAY = true;
 
         // Initialize ArtPlayer with or without Ads based on adstatus
@@ -219,87 +215,81 @@
 
             art.on('ready', () => {
                 art.play();
-                //art.volume = 0.5;
-                //art.muted = false;
                 art.aspectRatio = '16:9';
                 totalduration = art.duration;
-            })
+            });
 
         } else {
             // If adstatus is false or not provided, initialize ArtPlayer without Ads
             art = new Artplayer({
-                    container: '.artplayer-app',
-                    id: movieId,
-                    url: movielink,
-                    poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
-                    isLive: false,
-                    muted: false,
-                    autoplay: false,
-                    pip: false,
-                    autoSize: false,
-                    autoMini: true,
-                    screenshot: false,
-                    setting: true,
-                    loop: false,
-                    autoPlayback: true,
-                    autoOrientation: true,
-                    antiOverlap: true,
-                    flip: false,
-                    playbackRate: true,
-                    aspectRatio: true,
-                    fullscreen: true,
-                    fullscreenWeb: false,
-                    miniProgressBar: true,
-                    backdrop: true,
+                container: '.artplayer-app',
+                id: movieId,
+                url: movielink,
+                poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
+                isLive: false,
+                muted: false,
+                autoplay: false,
+                pip: false,
+                autoSize: false,
+                autoMini: true,
+                screenshot: false,
+                setting: true,
+                loop: false,
+                autoPlayback: true,
+                autoOrientation: true,
+                antiOverlap: true,
+                flip: false,
+                playbackRate: true,
+                aspectRatio: true,
+                fullscreen: true,
+                fullscreenWeb: false,
+                miniProgressBar: true,
+                backdrop: true,
+                playsInline: true,
+                airplay: true,
+                theme: '#05C546',
+                lang: navigator.language.toLowerCase(),
+                moreVideoAttr: {
+                    crossOrigin: 'anonymous',
+                    'webkit-playsinline': true,
                     playsInline: true,
-                    airplay: true,
-                    theme: '#05C546',
-                    lang: navigator.language.toLowerCase(),
-                    moreVideoAttr: {
-                        crossOrigin: 'anonymous',
-                        'webkit-playsinline': true,
+                },
+                plugins: [
+                    artplayerPluginHlsQuality({
+                        control: true,
+                        setting: true,
+                        getResolution: (level) => level.height + 'P',
+                        title: 'Quality',
+                        auto: 'Auto',
                         playsInline: true,
-                    },
-                    plugins: [
-                        artplayerPluginHlsQuality({
-                            control: true,
-                            setting: true,
-                            getResolution: (level) => level.height + 'P',
-                            title: 'Quality',
-                            auto: 'Auto',
-                            playsInline: true,
-                        }),
-                    ],
-                    customType: {
-                        m3u8: function playM3u8(video, url, art) {
-                            if (Hls.isSupported()) {
-                                if (art.hls) art.hls.destroy();
-                                const hls = new Hls();
-                                hls.loadSource(url);
-                                hls.attachMedia(video);
-                                art.hls = hls;
-                                art.on('destroy', () => hls.destroy());
-                            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                                video.src = url;
-                            } else {
-                                art.notice.show = 'Unsupported playback format: m3u8';
-                            }
+                    }),
+                ],
+                customType: {
+                    m3u8: function playM3u8(video, url, art) {
+                        if (Hls.isSupported()) {
+                            if (art.hls) art.hls.destroy();
+                            const hls = new Hls();
+                            hls.loadSource(url);
+                            hls.attachMedia(video);
+                            art.hls = hls;
+                            art.on('destroy', () => hls.destroy());
+                        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                            video.src = url;
+                        } else {
+                            art.notice.show = 'Unsupported playback format: m3u8';
                         }
                     },
                 },
-                function onReady(art) {
-                    this.play()
-                    //this.volume = 0.5;
-                    //this.muted = false;
-                    this.aspectRatio = '16:9';
-                    totalduration = this.duration;
-                },
-            );
+            });
+
+            art.on('ready', () => {
+                art.play();
+                art.aspectRatio = '16:9';
+                totalduration = art.duration;
+            });
         }
 
-        var newURL = window.location.origin + window.location.pathname;
-        history.replaceState({}, document.title, newURL);
-
+        // Functions for sending messages and tracking time updates
         function sendMessage(msg) {
             window.parent.postMessage(msg, "*");
         }
@@ -316,7 +306,6 @@
 
         art.on('video:timeupdate', onTimeUpdate);
     </script>
-
 </body>
 
 </html>
