@@ -294,7 +294,7 @@
         function onTimeUpdate() {
             percentage = (art.currentTime / art.duration) * 100;
             newData.percentage = percentage;
-            if (percentage > 80) {
+            if (percentage > 85) {
                 art.off('video:timeupdate', onTimeUpdate);
                 newData.status = "ended";
             }
