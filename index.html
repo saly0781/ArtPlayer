@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--  link : ?movieLink=https://video.wixstatic.com/video/ad1226_a127a6ec15304d49a9b64c54f88e7be9/720p/mp4/file.mp4&adstatus=false&deviceType=website&movieId=3beb68c0-6e91-40b4-a3c0-940297d2ae25&episodeId=empty&type=M -->
+  <!-- v 1.0.0 (2) -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rebamovie App Player</title>
     <!-- Include ArtPlayer library -->
     <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
@@ -16,299 +17,1170 @@
     <!-- Include ArtPlayer Danmuku Plugin -->
     <script src="path/to/artplayer-plugin-danmuku.js"></script>
     <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
 
-        .artplayer-app {
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            margin: 0;
-            padding: 0;
-        }
+      .artplayer-app {
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        margin: 0;
+        padding: 0;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <script type="text/javascript">
-        // Disable text selection
-        if (typeof document.onselectstart != "undefined") {
-            document.onselectstart = new Function("return false");
-        } else {
-            document.onmousedown = new Function("return false");
-            document.onmouseup = new Function("return false");
-        }
+      // Disable text selection
+      if (typeof document.onselectstart != "undefined") {
+        document.onselectstart = new Function("return false");
+      } else {
+        document.onmousedown = new Function("return false");
+        document.onmouseup = new Function("return false");
+      }
     </script>
 
     <script language="javascript">
-        // Disable right-click context menu with a custom message
-        var message = "Ibyo Mukanze Ntibyemewe";
+      // Disable right-click context menu with a custom message
 
-        function clickIE4() {
-            if (event.button == 2) {
-                alert(message);
-                return false;
-            }
+      function clickIE4() {
+        if (event.button == 2) {
+          return false;
         }
+      }
 
-        function clickNS4(e) {
-            if (document.layers || document.getElementById && !document.all) {
-                if (e.which == 2 || e.which == 3) {
-                    alert(message);
-                    return false;
-                }
-            }
+      function clickNS4(e) {
+        if (document.layers || (document.getElementById && !document.all)) {
+          if (e.which == 2 || e.which == 3) {
+            return false;
+          }
         }
+      }
 
-        if (document.layers) {
-            document.captureEvents(Event.MOUSEDOWN);
-            document.onmousedown = clickNS4;
-        } else if (document.all && !document.getElementById) {
-            document.onmousedown = clickIE4;
-        }
+      if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS4;
+      } else if (document.all && !document.getElementById) {
+        document.onmousedown = clickIE4;
+      }
 
-        document.oncontextmenu = new Function("alert(message);return false");
+      document.oncontextmenu = new Function("alert(message);return false");
     </script>
 
     <script>
-        // Prevent F12 (developer tools) and Ctrl+Shift+I
-        var addHandler = function(element, type, handler) {
-            if (element.addEventListener) {
-                element.addEventListener(type, handler, false);
-            } else if (element.attachEvent) {
-                element.attachEvent("on" + type, handler);
-            } else {
-                element["on" + type] = handler;
-            }
-        };
+      // Prevent F12 (developer tools) and Ctrl+Shift+I
+      var addHandler = function (element, type, handler) {
+        if (element.addEventListener) {
+          element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+          element.attachEvent("on" + type, handler);
+        } else {
+          element["on" + type] = handler;
+        }
+      };
 
-        var preventDefault = function(event) {
-            if (event.preventDefault) {
-                event.preventDefault();
-            } else {
-                event.returnValue = false;
-            }
-        };
+      var preventDefault = function (event) {
+        if (event.preventDefault) {
+          event.preventDefault();
+        } else {
+          event.returnValue = false;
+        }
+      };
 
-        addHandler(window, "contextmenu", function(event) {
-            preventDefault(event);
-        });
+      addHandler(window, "contextmenu", function (event) {
+        preventDefault(event);
+      });
 
-        document.onkeydown = function(event) {
-            if (event.keyCode == 123) { // Prevent F12
-                return false;
-            } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I        
-                return false;
-            }
-        };
+      document.onkeydown = function (event) {
+        if (event.keyCode == 123) {
+          // Prevent F12
+          return false;
+        } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+          // Prevent Ctrl+Shift+I
+          return false;
+        }
+      };
     </script>
 
     <!-- Create a container for the player -->
     <div class="artplayer-app"></div>
 
+    <!-- Main PlayerScript  -->
     <script>
-        // Function to get URL parameters by name
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      //Function To Receives data
+      window.onmessage = (event) => {
+        if (event.data) {
+          console.log(`HTML Component received a message: ${event.data}`);
+          // additional code here
         }
+      };
 
-        // Get movielink, adlink, and adstatus from URL parameters
-        var type = getParameterByName('type');
-        var movielink = getParameterByName('movieLink');
-        var adlink = getParameterByName('adlink');
-        var adstatus = getParameterByName('adstatus');
-        var movieId = getParameterByName('movieId');
-        var episodeId = getParameterByName('episodeId');
-        var finalMovieId =  episodeId== "empty" ? movieId : episodeId;
-        var percentage = 0;
-        var newData = {
-            movieId: movieId,
-            episodeId : episodeId,
-            type : type,
-            percentage: 1.0,
-            status: "running"
+      function isMobileDevice() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return /mobile|android|iphone|ipod|blackberry|iemobile|opera mini/.test(
+          userAgent
+        );
+      }
+      // Function to get URL parameters by name
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+
+      // Get movielink, adlink, and adstatus from URL parameters
+      var type = getParameterByName("type");
+      var movielink = getParameterByName("movieLink");
+      var adlink = getParameterByName("adlink");
+      var adstatus = getParameterByName("adstatus");
+      var movieId = getParameterByName("movieId");
+      var episodeId = getParameterByName("episodeId");
+      var finalMovieId = episodeId == "empty" ? movieId : episodeId;
+      var percentage = 0;
+      var container = document.querySelector(".artplayer-app");
+      var watchLaterContainer;
+      var watch_Later_Card;
+      var player_container_div;
+      var slideWidth;
+      var art_controls;
+      var art_bottom;
+      var art_mask;
+      var oldMainIndex = null;
+      var newMainIndex;
+      var navButtonLeft;
+      var userRole = getParameterByName("userRole"); // to be Deleted later
+      var userChoice = userRole == "Admin" ? "grid" : "none"; // to be Deleted later
+      var navButtonRight;
+      var selectElement;
+      var seasons = [
+        { value: 1, text: 'Season 1' },
+        { value: 2, text: 'Season 2' },
+        { value: 3, text: 'Season 3' },
+        { value: 4, text: 'Season 4' }
+    ];
+      var slideData = [
+          {
+            image:
+              "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
+            title: "The Flash S01EP100",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
+            title: "Captain America the cival war war war",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
+            title: "The Flash S01EP100",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
+            title: "Captain America the cival war war war",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
+            title: "The Flash S01EP100",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
+            title: "Captain America the cival war war war",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
+            title: "The Flash S01EP100",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
+            title: "Captain America the cival war war war",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
+            title: "The Flash S01EP100",
+          },
+          {
+            image:
+              "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
+            title: "Captain America the cival war war war",
+          },
+          // Add more slide data as needed
+        ];;
+      var art_video_player;
+      var deviceType = isMobileDevice() ? "mobile" : "desktop";
+      var condition_To_Hide_Select_Button;
+      var art;
+      var S_e = [0, 0];
+      var device_height = deviceType == "desktop" ? "250px" : "200px";
+      var screen_position = deviceType == "desktop" ? "end" : "end";
+      var player_container_div_marginBottom =
+        deviceType == "desktop" ? "30px" : "20px";
+      var watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
+
+      var newData = {
+        movieId: movieId,
+        episodeId: episodeId,
+        title: "",
+        image: "",
+        longCover: "",
+        pageLink: "",
+        type: type,
+        S_E: S_e,
+        minPercentage: "",
+        status: "running",
+      };
+
+      // Artplayer settings
+      Artplayer.MOBILE_DBCLICK_PLAY = true;
+      Artplayer.CONTEXTMENU = false;
+      Artplayer.AUTO_PLAYBACK_MIN = 180;
+      Artplayer.TOUCH_MOVE_RATIO = 1;
+
+      // Initialize the Player
+      art = new Artplayer({
+        container: ".artplayer-app",
+        id: finalMovieId,
+        url: movielink,
+        poster:
+          "https://global.discourse-cdn.com/business7/uploads/streamlit/original/3X/8/8/884d6003f08f20c3b21a0dcd33b04cead8a43603.jpeg",
+        isLive: false,
+        muted: false,
+        autoplay: false,
+        pip: false,
+        autoSize: false,
+        autoMini: true,
+        screenshot: false,
+        setting: true,
+        loop: false,
+        autoPlayback: true,
+        autoOrientation: true,
+        antiOverlap: true,
+        flip: false,
+        playbackRate: true,
+        aspectRatio: true,
+        fullscreen: true,
+        fullscreenWeb: false,
+        miniProgressBar: true,
+        backdrop: true,
+        playsInline: true,
+        airplay: true,
+        theme: "#05C546",
+        lang: navigator.language.toLowerCase(),
+        layers: [
+          //Object for wachLater Layer
+          {
+            name: "wachLaterLayer",
+            html: `
+                      <div id= "player-container-div" style=" width: 100%; /* height: ${device_height}; */ overflow: hidden; align-self: ${screen_position};position: absolute; margin-bottom: ${player_container_div_marginBottom};">
+                      <div class="title_container" id="myDiv">
+                        <div>
+                          <span id= "title_watchList" style="font-size: ${watchList_title_size};display: inline-block;">Watch List</span>
+                            <div id="custom-select-div" class="custom-select">
+                              <select id="season-select">
+                                  <!-- Existing options can be here -->
+                              </select>
+                          </div>
+                          </div>
+                          <div class="close-icon" id="closeIcon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                                  <path d="M18.3 5.71a1 1 0 0 0-1.42-1.42L12 9.17 7.12 4.29a1 1 0 1 0-1.42 1.42L10.83 12l-5.71 5.71a1 1 0 0 0 1.42 1.42L12 14.83l4.88 4.88a1 1 0 0 0 1.42-1.42L13.17 12l5.71-5.71z"/>
+                              </svg>
+                          </div>
+                      </div>
+                      <div id="main-div" style="width: 100%; height: 75%; "></div>
+                      </div>
+                      `,
+            style: {
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+              //marginBottom: '10px',
+              //alignSelf: 'center',
+              background: `linear-gradient(to bottom,
+                             transparent 45%,
+                             black 75%,
+                             black)
+            		            `,
+              opacity: "0",
+              visibility: "hidden",
+              transition: "opacity 0.5s ease-in-out",
+              display: "grid",
+            },
+          },
+
+          //Object for Card for WatchLater Layer
+          {
+            name: "wachLaterCardLayer",
+            html: `
+                       <div class="playlist_icon_container" style="position: absolute;">
+                          <div style="margin-right: 10px; margin-left: 10px;">
+                              <div style="font-size: calc(${watchList_title_size} - 5px);">Continue</div>
+                              <div style="font-size: ${watchList_title_size};font-family: sans-serif;"><b>Watching</b></div>
+                          </div>
+                          <div class="playlist-icon" style="margin-top: 5%;">
+                              <div class="rectangle rect1">
+                                  <div class="play-button">
+                                      <svg class="play-icon" viewBox="-2 1 25 22">
+                                          <path d="M17.982 9.275 8.06 3.27A2.013 2.013 0 0 0 5 4.994v12.011a2.017 2.017 0 0 0 3.06 1.725l9.922-6.005a2.017 2.017 0 0 0 0-3.45z"></path>
+                                      </svg>
+                                  </div>
+                              </div>
+                              <div class="rectangle rect2"></div>
+                              <div class="rectangle rect3"></div>
+                          </div>
+                      </div>
+                      
+                      `,
+            style: {
+              position: "absolute",
+              width: "300px",
+              height: "140px",
+              overflow: "hidden",
+              opacity: "1",
+              visibility: "visible",
+              transition: "opacity 0.5s ease-in-out",
+              display: userChoice,
+              right: "10px",
+              bottom: "calc(var(--art-control-height) + 15px)",
+              transform: "translateX(350px)",
+              transition: "transform 0.4s",
+            },
+            click: function () {
+              watchLaterContainer.style.visibility = "visible";
+              watchLaterContainer.style.opacity = "1";
+            },
+          },
+        ],
+
+        controls: [],
+        moreVideoAttr: {
+          crossOrigin: "anonymous",
+        },
+        plugins:
+          adstatus === "false"
+            ? [
+                artplayerPluginHlsQuality({
+                  control: true,
+                  setting: true,
+                  getResolution: (level) => level.height + "P",
+                  title: "Quality",
+                  auto: "Auto",
+                }),
+              ]
+            : [
+                artplayerPluginAds({
+                  html: '<img src="' + adlink + '" alt="Ad Poster">',
+                  video: adlink,
+                  url: "",
+                  playDuration: 5,
+                  totalDuration: 10,
+                  i18n: {
+                    close: "Funga",
+                    countdown: "%s Amasegonda 5",
+                    detail: "Kwamamaza",
+                    canBeClosed: "%s Amasegonda 3",
+                  },
+                }),
+                artplayerPluginHlsQuality({
+                  control: true,
+                  setting: true,
+                  getResolution: (level) => level.height + "P",
+                  title: "Quality",
+                  auto: "Auto",
+                }),
+              ],
+        customType: {
+          m3u8: function playM3u8(video, url, art) {
+            if (Hls.isSupported()) {
+              if (art.hls) art.hls.destroy();
+              const hls = new Hls();
+              hls.loadSource(url);
+              hls.attachMedia(video);
+              art.hls = hls;
+              art.on("destroy", () => hls.destroy());
+            } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+              video.src = url;
+            } else {
+              art.notice.show = "Unsupported playback format: m3u8";
+            }
+          },
+        },
+      });
+
+      // Function for handling Fullscreen state
+      art.on("fullscreen", (state) => {
+        console.log("NOW WE ARE II FULLLSCREEN!", state);
+      });
+
+      //An event for controlling when the DOM is loaded
+      document.addEventListener("DOMContentLoaded", function () {
+
+        art_mask = document.querySelector(".art-mask");
+        var custom_select_div = document.getElementById("custom-select-div");
+        var title_watchList = document.getElementById("title_watchList");
+        art_bottom = document.querySelector(".art-bottom");
+        art_controls = document.querySelector(".art-controls");
+        art_video_player = document.querySelector(".art-video");
+        watchLaterContainer = document.querySelector(
+          ".art-layer.art-layer-wachLaterLayer"
+        );
+        watch_Later_Card = document.querySelector(
+          ".art-layer.art-layer-wachLaterCardLayer"
+        );
+        player_container_div = document.getElementById("player-container-div");
+        selectElement = document.getElementById("season-select");
+
+        
+        sendMessage({ action: "getdata", data: null });
+        createElement();
+        watchListObserver();
+
+        document.getElementById("closeIcon").onclick = function () {
+          watchLaterContainer.style.opacity = "0";
+          watchLaterContainer.style.visibility = "hidden";
         };
 
-        // Artplayer settings
-        Artplayer.MOBILE_DBCLICK_PLAY = true;
+        condition_To_Hide_Select_Button = type == "M" ? false : true;
 
-        // Initialize ArtPlayer with or without Ads based on adstatus
-        var art;
-        if (adstatus === 'true') {
-            art = new Artplayer({
-                container: '.artplayer-app',
-                id: finalMovieId,
-                url: movielink,
-                poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
-                volume: 1.0,
-                isLive: false,
-                autoOrientation: true,
-                pip: false,
-                autoSize: false,
-                autoMini: true,
-                screenshot: false,
-                setting: true,
-                loop: false,
-                flip: false,
-                autoPlayback: true,
-                antiOverlap: true,
-                playbackRate: true,
-                aspectRatio: true,
-                fullscreen: true,
-                fullscreenWeb: false,
-                miniProgressBar: true,
-                backdrop: true,
-                playsInline: true,
-                airplay: true,
-                theme: '#05C546',
-                lang: navigator.language.toLowerCase(),
-                moreVideoAttr: {
-                    crossOrigin: 'anonymous',
-                    'webkit-playsinline': true,
-                    playsInline: true,
-                },
-                plugins: [
-                    artplayerPluginAds({
-                        html: '<img src="' + adlink + '" alt="Ad Poster">',
-                        video: adlink,
-                        url: '',
-                        playDuration: 5,
-                        totalDuration: 10,
-                        i18n: {
-                            close: 'Funga',
-                            countdown: '%s Amasegonda 5',
-                            detail: 'Kwamamaza',
-                            canBeClosed: '%s Amasegonda 3',
-                        },
-                    }),
-                    artplayerPluginHlsQuality({
-                        control: true,
-                        setting: true,
-                        getResolution: (level) => level.height + 'P',
-                        title: 'Quality',
-                        auto: 'Auto',
-                    }),
-                ],
-                customType: {
-                    m3u8: function playM3u8(video, url, art) {
-                        if (Hls.isSupported()) {
-                            if (art.hls) art.hls.destroy();
-                            const hls = new Hls();
-                            hls.loadSource(url);
-                            hls.attachMedia(video);
-                            art.hls = hls;
-                            art.on('destroy', () => hls.destroy());
-                        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                            video.src = url;
-                        } else {
-                            art.notice.show = 'Unsupported playback format: m3u8';
-                        }
-                    }
-                },
-            });
-
-            art.on('ready', () => {
-                art.play();
-                art.aspectRatio = '16:9';
-            });
-
+        if (condition_To_Hide_Select_Button) {
+          custom_select_div.style.display = "block";
+          title_watchList.style.display = "none";
         } else {
-            // If adstatus is false or not provided, initialize ArtPlayer without Ads
-            art = new Artplayer({
-                container: '.artplayer-app',
-                id: finalMovieId,
-                url: movielink,
-                poster: 'https://static.wixstatic.com/media/ad1226_76a631f3926e4de28db123f9616b4e37~mv2.jpg',
-                isLive: false,
-                muted: false,
-                autoplay: false,
-                pip: false,
-                autoSize: false,
-                autoMini: true,
-                screenshot: false,
-                setting: true,
-                loop: false,
-                autoPlayback: true,
-                autoOrientation: true,
-                antiOverlap: true,
-                flip: false,
-                playbackRate: true,
-                aspectRatio: true,
-                fullscreen: true,
-                fullscreenWeb: false,
-                miniProgressBar: true,
-                backdrop: true,
-                playsInline: true,
-                airplay: true,
-                theme: '#05C546',
-                lang: navigator.language.toLowerCase(),
-                moreVideoAttr: {
-                    crossOrigin: 'anonymous',
-                    'webkit-playsinline': true,
-                    playsInline: true,
-                },
-                plugins: [
-                    artplayerPluginHlsQuality({
-                        control: true,
-                        setting: true,
-                        getResolution: (level) => level.height + 'P',
-                        title: 'Quality',
-                        auto: 'Auto',
-                        playsInline: true,
-                    }),
-                ],
-                customType: {
-                    m3u8: function playM3u8(video, url, art) {
-                        if (Hls.isSupported()) {
-                            if (art.hls) art.hls.destroy();
-                            const hls = new Hls();
-                            hls.loadSource(url);
-                            hls.attachMedia(video);
-                            art.hls = hls;
-                            art.on('destroy', () => hls.destroy());
-                        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                            video.src = url;
-                        } else {
-                            art.notice.show = 'Unsupported playback format: m3u8';
-                        }
-                    },
-                },
-            });
-
-            art.on('ready', () => {
-                art.play();
-                art.aspectRatio = '16:9';
-                console.log("the player loaded succesfully!");
-            });
+          custom_select_div.style.display = "none";
+          title_watchList.style.display = "block";
         }
 
-        // Functions for sending messages and tracking time updates
-       function sendMessage(msg) {
-            window.parent.postMessage(msg, "*");
-        }
+        // ---------------------- OBSERVER FOR CONTROLS ---------------------------
 
-        function onTimeUpdate() {
-            percentage = (art.currentTime / art.duration) * 100;
-            newData.percentage = percentage;
-            if (percentage > 85) {
-                art.off('video:timeupdate', onTimeUpdate);
-                newData.status = "ended";
+        const observer = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                watch_Later_Card.style.transform = "translateX(0px)";
+                // Do something when the element is in the viewport
+              } else {
+                watch_Later_Card.style.transform = "translateX(350px)";
+                // Do something when the element is out of the viewport
+              }
+            });
+          },
+          {
+            root: null, // relative to the viewport
+            threshold: 0.7, // percentage of the element's visibility
+          }
+        );
+
+        observer.observe(art_controls);
+
+        observeOnStart();
+
+        //--------------------- EVENTLISTENER FOR CLOSING WATCHLATER LIST -------------
+
+        watchLaterContainer.addEventListener("click", (e) => {
+          if (
+            e.target.tagName.toLowerCase() === "div" &&
+            e.target.classList[1] == "art-layer-wachLaterLayer"
+          ) {
+            watchLaterContainer.style.opacity = "0";
+            watchLaterContainer.style.visibility = "hidden";
+          }
+        });
+
+        //---------------------- FUNCTION TO AUTO PLAYER -------------------------------
+
+        art_video_player.addEventListener("canplay", function () {
+          // art.play();
+          art.aspectRatio = "16:9";
+        });
+      });
+
+      // ------------ detect savers ----------------------------------------
+
+      function observeOnStart() {
+        // Select the video element using querySelector
+        const videoElement = document.querySelector("video");
+
+        // Options for the observer (which mutations to observe)
+        const config = { attributes: true };
+
+        // Callback function to execute when mutations are observed
+        const callback = function (mutationsList, observer) {
+          for (let mutation of mutationsList) {
+            if (
+              mutation.type === "attributes" &&
+              mutation.attributeName === "__idm_id__"
+            ) {
+              console.log(
+                "__idm_id__ attribute added:",
+                videoElement.getAttribute("__idm_id__")
+              );
             }
-            sendMessage(newData);
+          }
+        };
+
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(callback);
+
+        // Start observing the video element for configured mutations
+        observer.observe(videoElement, config);
+      }
+
+      //-----------  Functions for sending messages and tracking time updates --------
+
+      function sendMessage(msg) {
+        window.parent.postMessage(msg, "*");
+      }
+
+      function onTimeUpdate() {
+        percentage = (art.currentTime / art.duration) * 100;
+        newData.minPercentage = percentage;
+        if (percentage > 85) {
+          art.off("video:timeupdate", onTimeUpdate);
+          newData.status = "ended";
+          art.storage.del(newData.movieId);
+        }
+        sendMessage({ action: "timeupdate", data: newData });
+      }
+
+      art.on("video:timeupdate", onTimeUpdate);
+
+      function watchListObserver() {
+        const target = document.querySelector(
+          ".art-layer.art-layer-wachLaterLayer"
+        );
+        const observer = new MutationObserver((mutationsList, observer) => {
+          mutationsList.forEach((mutation) => {
+            if (
+              mutation.type === "attributes" &&
+              mutation.attributeName === "style"
+            ) {
+              const visibility = getComputedStyle(target).visibility;
+              if (visibility === "visible") {
+                // Element visibility changed to visible!
+                art_mask.style.visibility = "hidden";
+                art_bottom.style.transform = "translateY(300px)";
+              } else if (visibility === "hidden") {
+                art_mask.style.visibility = "visible";
+                art_bottom.style.transform = "translateY(0px)";
+                // Element visibility changed to hidden!
+              }
+            }
+          });
+        });
+
+        observer.observe(target, {
+          attributes: true,
+          attributeFilter: ["style"],
+        });
+      }
+
+      // Function to add options dynamically
+      function addOption(value, text) {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = text;
+        selectElement.appendChild(option);
+      }
+
+      function createElement() {
+
+        function createAndAppendElement(
+          tag,
+          parent,
+          className,
+          styles,
+          innerHTML,
+          id
+        ) {
+          const element = document.createElement(tag);
+
+          if (id) element.id = id;
+          if (className) element.className = className;
+          if (styles) Object.assign(element.style, styles);
+          if (innerHTML) element.innerHTML = innerHTML;
+          parent.appendChild(element);
+          return element;
         }
 
-        art.on('video:timeupdate', onTimeUpdate);
-    </script>
-</body>
+        function slide1AndLastAreInViewPort(elementId, element) {
+          const target = document.getElementById(elementId);
 
+          const observer = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  element.style.visibility = "hidden";
+                  // Do something when the element is in the viewport
+                } else {
+                  element.style.visibility = "visible";
+                  // Do something when the element is out of the viewport
+                }
+              });
+            },
+            {
+              root: null, // relative to the viewport
+              threshold: 0.7, // percentage of the element's visibility
+            }
+          );
+
+          observer.observe(target);
+        }
+
+        function nextToWatch(url, movieId) {
+          art.switchUrl(url).then(() => {
+            art.play();
+            art.option.id = movieId;
+          });
+        }
+
+        function selectedSlide(oldSlideId, newSlideId) {
+
+          const oldIndex = oldSlideId != null ? oldSlideId.replace(/slide(\d+|Last)/g, "$1") : null;
+          const newIndex = newSlideId.replace(/slide(\d+|Last)/g, "$1");
+
+          const oldElementgradient = document.getElementById(
+            "gradient" + oldIndex
+          );
+          const oldElementslide = document.getElementById("slide" + oldIndex);
+          const oldElementslide_label = document.getElementById(
+            "slide_label" + oldIndex
+          );
+          const oldElementslide_loading_icon = document.getElementById(
+            "slide_loading_icon" + oldIndex
+          );
+          const oldElementsvg = document.getElementById("svg_icon" + oldIndex);
+          const oldElementslide_number = document.getElementById(
+            "slide_number" + oldIndex
+          );
+
+          const newElementgradient = document.getElementById(
+            "gradient" + newIndex
+          );
+          const newElementslide = document.getElementById("slide" + newIndex);
+          const newElementslide_label = document.getElementById(
+            "slide_label" + newIndex
+          );
+          const newElementslide_loading_icon = document.getElementById(
+            "slide_loading_icon" + newIndex
+          );
+          const newElementsvg = document.getElementById("svg_icon" + newIndex);
+          const newElementslide_number = document.getElementById(
+            "slide_number" + newIndex
+          );
+
+          function removeInlineStyleIfExists(element, property) {
+            if (element.style.getPropertyValue(property)) {
+              element.style.removeProperty(property);
+            }
+          }
+
+          if (oldSlideId != null) {
+            removeInlineStyleIfExists(oldElementgradient, "opacity");
+            removeInlineStyleIfExists(oldElementslide, "border");
+            removeInlineStyleIfExists(oldElementslide_number, "color");
+            removeInlineStyleIfExists(
+              oldElementslide_label,
+              "background-color"
+            );
+            oldElementslide_loading_icon.style.display = "none";
+            oldElementsvg.style.display = "block";
+          }
+
+          newElementgradient.style.opacity = "1";
+          newElementslide.style.border = "3px solid #00ff0a";
+          newElementslide_label.style.backgroundColor = "#00ff0a";
+          newElementslide_loading_icon.style.display = "block";
+          newElementsvg.style.display = "none";
+          newElementslide_number.style.color = "black";
+        }
+
+        function populateSeason() {
+          seasons.forEach((season) => {
+            addOption(season.value, season.text);
+          });
+        }
+
+        function populateSlides() {
+          const slideWrapper = document.querySelector(".slide-wrapper");
+          slideWrapper.innerHTML = ""; // Clear previous slides if any
+          slideData.forEach((slide, index) => {
+            let slideDiv;
+
+            if (index === 0) {
+              slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
+                marginRight: "10px",
+                marginLeft: "10px",
+              });
+              slideDiv.id = "slide" + (index + 1);
+              // insert Data : image , title
+              slideDiv.innerHTML = `
+                         <img src="${slide.image}" alt="Slide ${index + 1}">
+                         <img id="slide_loading_icon${
+                           index + 1
+                         }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
+                            " alt="Description of the GIF" style="
+                            width: 120px;
+                            height: 35px;
+                            display: none;
+                            position: absolute;
+                            top: 40%;
+                            right: 25%;
+                        ">
+                         <div id="slide_label${
+                           index + 1
+                         }" class="slide_label" style=" display: ${
+                type == "M" ? "none" : "block"
+              };"><b id="slide_number${index + 1}">${index + 1}</b></div>
+                         <div class="gradient" id="gradient${index + 1}"></div>
+                         <div class="caption">${slide.title}</div>
+                         <!-- Your SVG icon here -->
+                         <svg id="svg_icon${
+                           index + 1
+                         }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+                             <path d="M8 5v14l11-7z" />
+                         </svg>
+                     `;
+            } else {
+              slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
+                marginRight: "10px",
+              });
+              slideDiv.id =
+                "slide" + (slideData.length == index + 1 ? "Last" : index + 1);
+              // insert Data : image , title
+              const indexed = slideData.length == index + 1 ? "Last" : index + 1;
+              slideDiv.innerHTML = `
+                         <img src="${slide.image}" alt="Slide ${index + 1}">
+                         <img id="slide_loading_icon${
+                           indexed
+                         }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
+                            " alt="Description of the GIF" style="
+                            width: 120px;
+                            height: 35px;
+                            display: none;
+                            position: absolute;
+                            top: 40%;
+                            right: 25%;
+                        ">
+                         <div id="slide_label${
+                           indexed
+                         }" class="slide_label" style=" display: ${
+                type == "M" ? "none" : "block"
+              };"><b id="slide_number${indexed}">${index + 1}</b></div>
+                         <div class="gradient" id="gradient${indexed}"></div>
+                         <div class="caption">${slide.title}</div>
+                         <!-- Your SVG icon here -->
+                         <svg id="svg_icon${indexed
+                         }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+                             <path d="M8 5v14l11-7z" />
+                         </svg>
+                     `;
+            }
+
+            // Click event listener per Slide
+            slideDiv.addEventListener("click", () => {
+              watchLaterContainer.style.opacity = "0";
+              watchLaterContainer.style.visibility = "hidden";
+              // function to call nextMovie ....
+
+              newMainIndex = slideDiv.id;
+              selectedSlide(oldMainIndex, newMainIndex);
+              oldMainIndex = newMainIndex;
+              //console.log("Clicked slide : ", slideData[index]);
+            });
+          });
+
+          slideWidth = document.querySelector(".slide").clientWidth;
+        }
+
+        const mainDiv = document.getElementById("main-div");
+
+        navButtonLeft = createAndAppendElement(
+          "div",
+          mainDiv,
+          "nav-button left",
+          {
+            visibility: "hidden",
+          }
+        );
+        navButtonLeft.innerHTML = `
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                         <path d="M8 5v14l11-7z" />
+                     </svg>
+                 `;
+
+        navButtonRight = createAndAppendElement(
+          "div",
+          mainDiv,
+          "nav-button right",
+          {
+            visibility: "visible",
+          }
+        );
+        navButtonRight.innerHTML = `
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                         <path d="M8 5v14l11-7z" />
+                     </svg>
+                 `;
+
+        const slideshowContainer = createAndAppendElement(
+          "div",
+          mainDiv,
+          "slideshow-container",
+          {
+            position: "relative",
+            height: "100%",
+            overflow: "hidden",
+            marginLeft: "10px",
+          }
+        );
+        const slideWrapper = createAndAppendElement(
+          "div",
+          slideshowContainer,
+          "slide-wrapper"
+        );
+
+        // Adding styles for dynamic elements
+        const style = document.createElement("style");
+        style.innerHTML = `
+                     .slide {
+                         display: inline-block;
+                         padding-left: 0px;
+                         margin-right: 0px;
+                         width: calc(${device_height} + 50px);
+                         scroll-snap-align: start;
+                         border-radius: 15px;
+                         overflow: hidden;
+                         position: relative;
+            	           height: 100%;
+            	           border: 1px solid lightgray;
+            	           cursor: pointer;
+            	           align: center;
+                     }
+
+                     .slide img {
+                         width: 100%;
+                         height: 100%;
+                         object-fit: cover;
+                     }
+
+                     .gradient {
+                         position: absolute;
+                         bottom: 0;
+                         left: 0;
+                         width: 100%;
+                         height: 50%;
+                         background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+                         border-radius: 0 0 15px 15px;
+                         transition: opacity 0.3s ease;
+                         opacity: 0;
+                     }
+
+                    .playlist-icon {
+                        position: relative;
+                        width: 70%;
+                        /* Adjusted width to fit rectangles */
+                        height: 100%;
+                        /* Adjusted height to fit rectangles */
+                    }
+
+                    .rectangle {
+                        position: absolute;
+                        opacity: 0.8;
+                        border-radius: 20px;
+                        border: 2px solid;
+                        border-color: darkgrey;
+                    }
+
+                    .rect1 {
+                        width: 100%;
+                        height: 90%;
+                        opacity: 1;
+                        top: 5%;
+                        left: 0;
+                        z-index: 3;
+                        background-color: black;
+                        background-image: url('https://static.wixstatic.com/media/ad1226_494e7f2268114a34a8db709db6dd9fc8~mv2.jpeg');
+                        background-size: cover;
+                        background-position: center;
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .play-button {
+                        width: 50px;
+                        /* Adjust size as needed */
+                        height: 50px;
+                        /* Adjust size as needed */
+                        border-radius: 50%;
+                        /* Makes it circular */
+                        background-color: #000000b3;
+                        /* Background color */
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .play-icon {
+                        width: 40px;
+                        /* Adjust size of the play icon */
+                        fill: white;
+                        /* Icon color */
+                    }
+
+                    .rect2 {
+                        width: 95%;
+                        height: 95%;
+                        top: -0.5%;
+                        left: 2%;
+                        z-index: 2;
+                        background-color: #4d4d4d;
+                    }
+
+                    .rect3 {
+                        width: 90%;
+                        height: 100%;
+                        top: -5%;
+                        left: 5%;
+                        z-index: 1;
+                        background-color: gray;
+                    }
+
+                    .playlist_icon_container {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        width: 100%;
+                        padding: 10px;
+                        height: 100%;
+                        border-radius: 20px;
+                        transition: background-color 0.3s, transform 0.3s;
+                    }
+
+                    .playlist_icon_container:hover {
+                        transform: scale(1.05);
+                        cursor: pointer;
+                    }
+
+                     .title_container {
+                         display: flex;
+                         justify-content: space-between;
+                         align-items: center;
+                         width: 100%;
+                         padding: 10px;
+                         margin-bottom: 10px;
+                         height: 20%;
+                    }
+
+                    .custom-select {
+                      position: relative;
+                      display: inline-block;
+                      width: 200px;
+                      height: 100%;
+                    }
+
+                    .custom-select select {
+                      display: inline-block;
+                      width: 100%;
+                      padding: 10px 15px;
+                      font-size: 16px;
+                      border-radius: 12px; /* Rounded corners */
+                      background-color: #0c0c0c; /* Gray background */
+                      color: white; /* White text color */
+                      -webkit-appearance: none;
+                      -moz-appearance: none;
+                      appearance: none;
+                      cursor: pointer;
+                    }
+
+                    /* Add an arrow icon to the right */
+                    .custom-select::after {
+                      content: '\\25BC'; /* Downward arrow */
+                      position: absolute;
+                      top: 50%;
+                      right: 15px;
+                      transform: translateY(-50%);
+                      pointer-events: none;
+                      color: white; /* Arrow color */
+                    }
+
+                    /* Style the options (modern browsers only) */
+                    select option {
+                      background-color: white;
+                      color: grey;
+                    }
+
+                    select option:hover {
+                      background-color: lightgray;
+                    }
+
+                    .close-icon {
+                        cursor: pointer;
+                        width: 24px;
+                        height: 24px;
+                        background-color: rgba(0, 0, 0, 0.8);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: background-color 0.3s ease;
+                   }
+
+                      .close-icon svg {
+                          fill: white;
+                       }
+                      .close-icon:hover {
+                          background-color: rgba(0, 0, 0, 0.6);
+                      }
+
+                     .caption {
+                         position: absolute;
+                         bottom: 5px;
+                         left: 0px;
+                         right: 5px;
+                         color: #f2f2f2;
+                         font-size: calc(${watchList_title_size} - 4px);
+                         z-index: 1;
+                         transition: opacity 0.3s ease;
+                         opacity: 1;
+                         white-space: normal;
+                         word-wrap: break-word;
+                         overflow: hidden;
+                         text-overflow: ellipsis;
+            	           border-radius: 15px;
+                         padding: 5px;
+                         padding-left: 8px;
+                         padding-right: 8px;
+            	           width: calc(100% - 10px);
+            	           background-color: transparent;
+                         margin-left: 5px;
+                     }
+
+                     .svg-icon {
+                         position: absolute;
+                         top: 50%;
+                         left: 50%;
+                         transform: translate(-50%, -50%);
+                         width: 50px;
+                         height: 50px;
+                         fill: #fff;
+                         transition: opacity 0.3s ease;
+                         opacity: 0;
+                     }
+
+
+                     .slide-wrapper {
+                        white-space: nowrap;
+                        overflow: auto hidden;
+                        height: 98%;
+                        scroll-snap-type: x mandatory;
+                     }
+
+                    .slide-wrapper::-webkit-scrollbar {
+                      display: none;
+                    }
+
+                    .slide:hover .gradient,
+                    .slide:hover .svg-icon,
+                    .slide:hover .caption {
+                         opacity: 1;
+                   }
+
+                    .nav-button {
+                         position: absolute;
+                         top: 60%;
+                         transform: translateY(-50%);
+                         width: 50px;
+                         height: 50px;
+                         background-color: rgba(0, 0, 0, 0.7);
+                         border-radius: 50%;
+                         display: flex;
+                         align-items: center;
+                         justify-content: center;
+                         cursor: pointer;
+                         transition: background-color 0.3s ease;
+                         border: 0px solid #1adb51;
+                         z-index: 2;
+                     }
+
+                     .nav-button.left {
+                         left: 10px;
+                         transform: translateY(-50%) scaleX(-1);
+                     }
+
+                     .nav-button.right {
+                         right: 10px;
+                     }
+
+                     .nav-button svg {
+                         width: 20px;
+                         height: 20px;
+                         fill: #fff;
+                     }
+
+                     .nav-button:hover {
+                         background-color: rgba(0, 0, 0, 0.8);
+                     }
+
+                    .slide_label {
+                          position: absolute;
+                          right: 10px;
+                          top: 0px;
+                          background-color: #000000d4;
+                          width: fit-content;
+                          height: 25%;
+                          border-bottom-right-radius: 10px;
+                          border-bottom-left-radius: 10px;
+                          font-family: sans-serif;
+                          font-size: 150%;
+                          text-align: center;
+                          align-content: center;
+                          padding: 10px;
+                     }
+
+                 `;
+        document.head.appendChild(style);
+
+        populateSlides(); // Adjust margin-right between slides here
+        populateSeason();
+        window.addEventListener("resize", () => {
+          populateSlides(); // Update slides on window resize
+        });
+
+        // Button functionality
+        slide1AndLastAreInViewPort("slide1", navButtonLeft);
+        slide1AndLastAreInViewPort("slideLast", navButtonRight);
+
+        navButtonLeft.addEventListener("click", () => {
+          slideWrapper.scrollTo({
+            left: slideWrapper.scrollLeft - slideWidth - 10,
+            behavior: "smooth",
+          });
+        });
+
+        navButtonRight.addEventListener("click", () => {
+          slideWrapper.scrollTo({
+            left: slideWrapper.scrollLeft + slideWidth + 10,
+            behavior: "smooth",
+          });
+        });
+      }
+    </script>
+  </body>
 </html>
