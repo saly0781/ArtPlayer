@@ -425,13 +425,13 @@
     //Function To Receives data
     window.onmessage = (event) => {
       if (event.data) {
-        //event.data;
-        if (slides_availability == true) {
-          slideData = event.data.epsodes[0];
+        console.log(event.data);
+        /*if (slides_availability == true) {
+          slideData = event.data.epsodes;
           seasons = event.data.seasons;
           populateSlides();
           populateSeason();
-        }
+        }*/
       }
     };
 
