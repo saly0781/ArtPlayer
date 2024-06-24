@@ -456,18 +456,14 @@
     //Function To Receives data
     window.addEventListener('message', function (event) {
 
-      console.log("Sent Data from Website : ", event.data);
       sendMessage("messages Received");
       if (event.data.action == "getdata") {
         if (slides_availability == true) {
-          console.log("Slides are visible 1");
           sendMessage("Data loaded 1");
           slideData = event.data.data.epsodes[0];
           seasons = event.data.data.seasons;
-          console.log("slideData 1", slideData);
-          console.log("seasons 1", seasons);
-          //populateSlides();
-          //populateSeason();
+          populateSlides(slideData);
+          populateSeason(seasons);
         } else {
 
           console.log("Slides are not available");
@@ -481,8 +477,8 @@
               clearInterval(timer);
               slideData = event.data.data.epsodes;
               seasons = event.data.data.seasons[0];
-              //populateSlides();
-              //populateSeason();
+              populateSlides(slideData);
+              populateSeason(seasons);
             } else {
               console.log('Variable is still false.');
             }
@@ -692,18 +688,18 @@
         newElementslide_number.style.color = "black";
       }
 
-      function populateSeason() {
+      function populateSeason(seasonsparameter) {
         selectElement.innerHTML = '';// deleting all existing options
-        seasons.forEach((season) => {
+        seasonsparameter.forEach((season) => {
           addOption(season.value, season.text);
         });
       }
 
-      function populateSlides() {
+      function populateSlides(slideDataParameter) {
         const slideWrapper = document.querySelector(".slide-wrapper");
         slideWrapper.innerHTML = ""; // Clear previous slides if any
         slides_availability = true;
-        slideData.forEach((slide, index) => {
+        slideDataParameter.forEach((slide, index) => {
           let slideDiv;
 
           if (index === 0) {
@@ -741,9 +737,9 @@
               marginRight: "10px",
             });
             slideDiv.id =
-              "slide" + (slideData.length == index + 1 ? "Last" : index + 1);
+              "slide" + (slideDataParameter.length == index + 1 ? "Last" : index + 1);
             // insert Data : image , title
-            const indexed = slideData.length == index + 1 ? "Last" : index + 1;
+            const indexed = slideDataParameter.length == index + 1 ? "Last" : index + 1;
             slideDiv.innerHTML = `
                          <img src="${slide.image}" alt="Slide ${index + 1}">
                          <img id="slide_loading_icon${indexed
@@ -778,12 +774,11 @@
             newMainIndex = slideDiv.id;
             selectedSlide(oldMainIndex, newMainIndex);
             oldMainIndex = newMainIndex;
-            //console.log("Clicked slide : ", slideData[index]);
+            //console.log("Clicked slide : ", slideDataParameter[index]);
           });
         });
 
         slideWidth = document.querySelector(".slide").clientWidth;
-        sendMessage({ action: "getdata", data: null });
       }
 
       const mainDiv = document.getElementById("main-div");
