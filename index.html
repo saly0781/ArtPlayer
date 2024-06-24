@@ -460,9 +460,10 @@
     //Function To Receives data
     window.addEventListener('message', function (event) {
 
-      console.log("Received data", event.data);
       if (event.data.action == "getdata") {
         onloadSeason_Episode();
+      } else if (event.data.action == "getstreamingurl") {
+        nextToWatch(event.data.data.link, event.data.data.movieId);
       }
 
     });
@@ -677,7 +678,7 @@
           selectedSlide(oldMainIndex, newMainIndex);
           oldMainIndex = newMainIndex;
           console.log("Clicked slide : ", slideDataParameter[index]["v_v"]);
-          sendMessage({ action: "getstreamingurl", data: slideDataParameter[index]["v_v"] })
+          sendMessage({ action: "getstreamingurl", data: {links : slideDataParameter[index]["v_v"], movieId : slideDataParameter[index].id} });
         });
       });
 
@@ -1149,10 +1150,6 @@
                  `;
       document.head.appendChild(style);
 
-      window.addEventListener("resize", () => {
-        populateSlides(slideData); // Update slides on window resize
-      });
-
       // Button functionality
       slide1AndLastAreInViewPort("slide1", navButtonLeft);
       slide1AndLastAreInViewPort("slideLast", navButtonRight);
@@ -1171,6 +1168,7 @@
         });
       });
     }
+
   </script>
 </body>
 
