@@ -578,6 +578,100 @@
       selectElement.appendChild(option);
     }
 
+
+    function populateSeason(seasonsparameter) {
+      selectElement.innerHTML = '';// deleting all existing options
+      seasonsparameter.forEach((season) => {
+        addOption(season.value, season.text);
+      });
+    }
+
+    function populateSlides(slideDataParameter) {
+      console.log("slideData :", slideDataParameter);
+      const slideWrapper = document.querySelector(".slide-wrapper");
+      slideWrapper.innerHTML = ""; // Clear previous slides if any
+      slideDataParameter.forEach((slide, index) => {
+        let slideDiv;
+
+        if (index === 0) {
+          slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
+            marginRight: "10px",
+            marginLeft: "10px",
+          });
+          slideDiv.id = "slide" + (index + 1);
+          // insert Data : image , title
+          slideDiv.innerHTML = `
+                         <img src="${slide.image}" alt="Slide ${index + 1}">
+                         <img id="slide_loading_icon${index + 1
+            }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
+                            " alt="Description of the GIF" style="
+                            width: 120px;
+                            height: 35px;
+                            display: none;
+                            position: absolute;
+                            top: 40%;
+                            right: 25%;
+                        ">
+                         <div id="slide_label${index + 1
+            }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
+            };"><b id="slide_number${index + 1}">${index + 1}</b></div>
+                         <div class="gradient" id="gradient${index + 1}"></div>
+                         <div class="caption">${slide.title}</div>
+                         <!-- Your SVG icon here -->
+                         <svg id="svg_icon${index + 1
+            }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+                             <path d="M8 5v14l11-7z" />
+                         </svg>
+                     `;
+        } else {
+          slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
+            marginRight: "10px",
+          });
+          slideDiv.id =
+            "slide" + (slideDataParameter.length == index + 1 ? "Last" : index + 1);
+          // insert Data : image , title
+          const indexed = slideDataParameter.length == index + 1 ? "Last" : index + 1;
+          slideDiv.innerHTML = `
+                         <img src="${slide.image}" alt="Slide ${index + 1}">
+                         <img id="slide_loading_icon${indexed
+            }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
+                            " alt="Description of the GIF" style="
+                            width: 120px;
+                            height: 35px;
+                            display: none;
+                            position: absolute;
+                            top: 40%;
+                            right: 25%;
+                        ">
+                         <div id="slide_label${indexed
+            }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
+            };"><b id="slide_number${indexed}">${index + 1}</b></div>
+                         <div class="gradient" id="gradient${indexed}"></div>
+                         <div class="caption">${slide.title}</div>
+                         <!-- Your SVG icon here -->
+                         <svg id="svg_icon${indexed
+            }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+                             <path d="M8 5v14l11-7z" />
+                         </svg>
+                     `;
+        }
+
+        // Click event listener per Slide
+        slideDiv.addEventListener("click", () => {
+          watchLaterContainer.style.opacity = "0";
+          watchLaterContainer.style.visibility = "hidden";
+          // function to call nextMovie ....
+
+          newMainIndex = slideDiv.id;
+          selectedSlide(oldMainIndex, newMainIndex);
+          oldMainIndex = newMainIndex;
+          //console.log("Clicked slide : ", slideDataParameter[index]);
+        });
+      });
+
+      slideWidth = document.querySelector(".slide").clientWidth;
+    }
+
     function createElement() {
 
       function createAndAppendElement(
@@ -691,99 +785,6 @@
         newElementslide_loading_icon.style.display = "block";
         newElementsvg.style.display = "none";
         newElementslide_number.style.color = "black";
-      }
-
-      function populateSeason(seasonsparameter) {
-        selectElement.innerHTML = '';// deleting all existing options
-        seasonsparameter.forEach((season) => {
-          addOption(season.value, season.text);
-        });
-      }
-
-      function populateSlides(slideDataParameter) {
-        console.log("slideData :", slideDataParameter);
-        const slideWrapper = document.querySelector(".slide-wrapper");
-        slideWrapper.innerHTML = ""; // Clear previous slides if any
-        slideDataParameter.forEach((slide, index) => {
-          let slideDiv;
-
-          if (index === 0) {
-            slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
-              marginRight: "10px",
-              marginLeft: "10px",
-            });
-            slideDiv.id = "slide" + (index + 1);
-            // insert Data : image , title
-            slideDiv.innerHTML = `
-                         <img src="${slide.image}" alt="Slide ${index + 1}">
-                         <img id="slide_loading_icon${index + 1
-              }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
-                            " alt="Description of the GIF" style="
-                            width: 120px;
-                            height: 35px;
-                            display: none;
-                            position: absolute;
-                            top: 40%;
-                            right: 25%;
-                        ">
-                         <div id="slide_label${index + 1
-              }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
-              };"><b id="slide_number${index + 1}">${index + 1}</b></div>
-                         <div class="gradient" id="gradient${index + 1}"></div>
-                         <div class="caption">${slide.title}</div>
-                         <!-- Your SVG icon here -->
-                         <svg id="svg_icon${index + 1
-              }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
-                             <path d="M8 5v14l11-7z" />
-                         </svg>
-                     `;
-          } else {
-            slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
-              marginRight: "10px",
-            });
-            slideDiv.id =
-              "slide" + (slideDataParameter.length == index + 1 ? "Last" : index + 1);
-            // insert Data : image , title
-            const indexed = slideDataParameter.length == index + 1 ? "Last" : index + 1;
-            slideDiv.innerHTML = `
-                         <img src="${slide.image}" alt="Slide ${index + 1}">
-                         <img id="slide_loading_icon${indexed
-              }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
-                            " alt="Description of the GIF" style="
-                            width: 120px;
-                            height: 35px;
-                            display: none;
-                            position: absolute;
-                            top: 40%;
-                            right: 25%;
-                        ">
-                         <div id="slide_label${indexed
-              }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
-              };"><b id="slide_number${indexed}">${index + 1}</b></div>
-                         <div class="gradient" id="gradient${indexed}"></div>
-                         <div class="caption">${slide.title}</div>
-                         <!-- Your SVG icon here -->
-                         <svg id="svg_icon${indexed
-              }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
-                             <path d="M8 5v14l11-7z" />
-                         </svg>
-                     `;
-          }
-
-          // Click event listener per Slide
-          slideDiv.addEventListener("click", () => {
-            watchLaterContainer.style.opacity = "0";
-            watchLaterContainer.style.visibility = "hidden";
-            // function to call nextMovie ....
-
-            newMainIndex = slideDiv.id;
-            selectedSlide(oldMainIndex, newMainIndex);
-            oldMainIndex = newMainIndex;
-            //console.log("Clicked slide : ", slideDataParameter[index]);
-          });
-        });
-
-        slideWidth = document.querySelector(".slide").clientWidth;
       }
 
       const mainDiv = document.getElementById("main-div");
