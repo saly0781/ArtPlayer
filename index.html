@@ -458,6 +458,7 @@
     //Function To Receives data
     window.addEventListener('message', function (event) {
 
+      sendMessage("received Data");
       if (event.data.action == "getdata") {
         onloadSeason_Episode();
       }
@@ -674,7 +675,7 @@
           selectedSlide(oldMainIndex, newMainIndex);
           oldMainIndex = newMainIndex;
           console.log("Clicked slide : ", slideDataParameter[index]["v_v"]);
-          sendMessage({action: "getstreamingurl", data: slideDataParameter[index]["v_v"]})
+          sendMessage({ action: "getstreamingurl", data: slideDataParameter[index]["v_v"] })
         });
       });
 
