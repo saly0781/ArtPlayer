@@ -445,6 +445,8 @@
         }
       });
 
+      // Add an event listener for the change event
+      selectElement.addEventListener('change', changeSeason);
       //---------------------- FUNCTION TO AUTO PLAYER -------------------------------
 
       art_video_player.addEventListener("canplay", function () {
@@ -456,37 +458,41 @@
     //Function To Receives data
     window.addEventListener('message', function (event) {
 
-      sendMessage("messages Received");
       if (event.data.action == "getdata") {
-        if (slides_availability == true) {
-          sendMessage("Data loaded 1", slideData, seasons);
-          slideData = event.data.data.epsodes[0];
-          seasons = event.data.data.seasons;
-          populateSlides(slideData);
-          populateSeason(seasons);
-        } else {
-
-          console.log("Slides are not available");
-          let timer;
-
-          timer = setInterval(function () {
-            console.log('Checking variable...');
-            if (slides_availability) {
-              console.log("Slides are visible 2");
-              clearInterval(timer);
-              slideData = event.data.data.epsodes;
-              seasons = event.data.data.seasons[0];
-              populateSlides(slideData);
-              populateSeason(seasons);
-              sendMessage("Data loaded 2", slideData, seasons);
-            } else {
-              console.log('Variable is still false.');
-            }
-          }, 1000); // Check every second
-        }
+        onloadSeason_Episode();
       }
 
     });
+
+
+    function onloadSeason_Episode() {
+      if (slides_availability == true) {
+        sendMessage("Data loaded 1", slideData, seasons);
+        slideData = event.data.data.epsodes;
+        seasons = event.data.data.seasons;
+        populateSlides(slideData[0]);
+        populateSeason(seasons, 0);
+      } else {
+
+        console.log("Slides are not available");
+        let timer;
+
+        timer = setInterval(function () {
+          console.log('Checking variable...');
+          if (slides_availability) {
+            console.log("Slides are visible 2");
+            clearInterval(timer);
+            slideData = event.data.data.epsodes;
+            seasons = event.data.data.seasons;
+            populateSlides(slideData[0]);
+            populateSeason(seasons, 0);
+            sendMessage("Data loaded 2", slideData, seasons);
+          } else {
+            console.log('Variable is still false.');
+          }
+        }, 1000); // Check every second
+      }
+    }
 
     // ------------ detect savers ----------------------------------------
 
@@ -568,6 +574,11 @@
       });
     }
 
+    function changeSeason() {
+      const selectedIndex = selectElement.selectedIndex;
+      populateSlides(slideData[selectedIndex]);
+    }
+
     // Function to add options dynamically
     function addOption(value, text) {
       const option = document.createElement("option");
@@ -576,11 +587,12 @@
       selectElement.appendChild(option);
     }
 
-    function populateSeason(seasonsparameter) {
+    function populateSeason(seasonsparameter, startingIndex) {
       selectElement.innerHTML = '';// deleting all existing options
       seasonsparameter.forEach((season) => {
         addOption(season.value, season.text);
       });
+      selectElement.selectedIndex = startingIndex;
     }
 
     function populateSlides(slideDataParameter) {
