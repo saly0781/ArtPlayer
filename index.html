@@ -133,34 +133,34 @@
     }
 
     // Get movielink, adlink, and adstatus from URL parameters
-    var type = getParameterByName("type");
-    var movielink = getParameterByName("movieLink");
-    var adlink = getParameterByName("adlink");
-    var adstatus = getParameterByName("adstatus");
-    var movieId = getParameterByName("movieId");
-    var episodeId = getParameterByName("episodeId");
-    var finalMovieId = episodeId == "empty" ? movieId : episodeId;
-    var percentage = 0;
-    var container = document.querySelector(".artplayer-app");
-    var watchLaterContainer;
-    var watch_Later_Card;
-    var player_container_div;
-    var slideWidth;
-    var art_controls;
-    var art_bottom;
-    var art_mask;
-    var oldMainIndex = null;
-    var newMainIndex;
-    var navButtonLeft;
-    var userRole = getParameterByName("userRole"); // to be Deleted later
-    var userChoice = userRole == "Admin" ? "grid" : "none"; // to be Deleted later
-    var navButtonRight;
-    var selectElement;
-    var slides_availability = false;
-    var seasons = [
+    let type = getParameterByName("type");
+    let movielink = getParameterByName("movieLink");
+    let adlink = getParameterByName("adlink");
+    let adstatus = getParameterByName("adstatus");
+    let movieId = getParameterByName("movieId");
+    let episodeId = getParameterByName("episodeId");
+    let finalMovieId = episodeId == "empty" ? movieId : episodeId;
+    let percentage = 0;
+    let container = document.querySelector(".artplayer-app");
+    let watchLaterContainer;
+    let watch_Later_Card;
+    let player_container_div;
+    let slideWidth;
+    let art_controls;
+    let art_bottom;
+    let art_mask;
+    let oldMainIndex = null;
+    let newMainIndex;
+    let navButtonLeft;
+    let userRole = getParameterByName("userRole"); // to be Deleted later
+    let userChoice = userRole == "Admin" ? "grid" : "none"; // to be Deleted later
+    let navButtonRight;
+    let selectElement;
+    let slides_availability = false;
+    let seasons = [
       { value: 1, text: 'Loading ...' }
     ];
-    var slideData = [
+    let slideData = [
       {
         image:
           "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
@@ -168,18 +168,18 @@
       }
       // Add more slide data as needed
     ];;
-    var art_video_player;
-    var deviceType = isMobileDevice() ? "mobile" : "desktop";
-    var condition_To_Hide_Select_Button;
-    var art;
-    var S_e = [0, 0];
-    var device_height = deviceType == "desktop" ? "250px" : "200px";
-    var screen_position = deviceType == "desktop" ? "end" : "end";
-    var player_container_div_marginBottom =
+    let art_video_player;
+    let deviceType = isMobileDevice() ? "mobile" : "desktop";
+    let condition_To_Hide_Select_Button;
+    let art;
+    let S_e = [0, 0];
+    let device_height = deviceType == "desktop" ? "250px" : "200px";
+    let screen_position = deviceType == "desktop" ? "end" : "end";
+    let player_container_div_marginBottom =
       deviceType == "desktop" ? "30px" : "20px";
-    var watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
+    let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
 
-    var newData = {
+    let newData = {
       movieId: movieId,
       episodeId: episodeId,
       title: "",
@@ -464,8 +464,10 @@
           sendMessage("Data loaded 1");
           slideData = event.data.data.epsodes[0];
           seasons = event.data.data.seasons;
-          populateSlides();
-          populateSeason();
+          console.log("slideData 1", slideData);
+          console.log("seasons 1", seasons);
+          //populateSlides();
+          //populateSeason();
         } else {
 
           console.log("Slides are not available");
@@ -479,8 +481,8 @@
               clearInterval(timer);
               slideData = event.data.data.epsodes;
               seasons = event.data.data.seasons[0];
-              populateSlides();
-              populateSeason();
+              //populateSlides();
+              //populateSeason();
             } else {
               console.log('Variable is still false.');
             }
