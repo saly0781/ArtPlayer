@@ -718,7 +718,7 @@
       }
 
       function populateSeason() {
-        selectElement..innerHTML = '';// deleting all existing options
+        selectElement.innerHTML = '';// deleting all existing options
         seasons.forEach((season) => {
           addOption(season.value, season.text);
         });
