@@ -473,12 +473,12 @@
             console.log('Checking variable...');
             if (slides_availability) {
               console.log("Slides are visible 2");
-              sendMessage("Data loaded 2");
               clearInterval(timer);
               slideData = event.data.data.epsodes;
               seasons = event.data.data.seasons[0];
               populateSlides(slideData);
               populateSeason(seasons);
+              sendMessage("Data loaded 2");
             } else {
               console.log('Variable is still false.');
             }
@@ -1131,10 +1131,8 @@
                  `;
       document.head.appendChild(style);
 
-      populateSlides(); // Adjust margin-right between slides here
-      populateSeason();
       window.addEventListener("resize", () => {
-        populateSlides(); // Update slides on window resize
+        populateSlides(slideData); // Update slides on window resize
       });
 
       // Button functionality
