@@ -462,8 +462,8 @@
         if (slides_availability == true) {
           console.log("Slides are visible 1");
           sendMessage("Data loaded 1");
-          slideData = event.data.data.epsodes;
-          seasons = event.data.data.seasons[0];
+          slideData = event.data.data.epsodes[0];
+          seasons = event.data.data.seasons;
           populateSlides();
           populateSeason();
         } else {
