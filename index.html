@@ -593,6 +593,9 @@
         if (styles) Object.assign(element.style, styles);
         if (innerHTML) element.innerHTML = innerHTML;
         parent.appendChild(element);
+        if (className == "slide-wrapper") {
+          slides_availability = true;
+        }
         return element;
       }
 
@@ -698,7 +701,6 @@
       function populateSlides(slideDataParameter) {
         const slideWrapper = document.querySelector(".slide-wrapper");
         slideWrapper.innerHTML = ""; // Clear previous slides if any
-        slides_availability = true;
         slideDataParameter.forEach((slide, index) => {
           let slideDiv;
 
