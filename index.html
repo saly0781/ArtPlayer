@@ -377,15 +377,12 @@
     //Function To Receives data
     window.addEventListener('message', function (event) {
 
-      // Process the message
-      console.log('Received message:', event.data);
-
-      /*if (slides_availability == true) {
-               slideData = event.data.epsodes;
-               seasons = event.data.seasons;
+      if (event.data.action == "getdata") {
+               slideData = event.data.data.epsodes;
+               seasons = event.data.data.seasons[0];
                populateSlides();
                populateSeason();
-             }*/
+             }
     });
 
     //An event for controlling when the DOM is loaded
@@ -576,7 +573,7 @@
       }
 
       function slide1AndLastAreInViewPort(elementId, element) {
-        const target = document.getElementById(elementId);
+       /* const target = document.getElementById(elementId);
 
         const observer = new IntersectionObserver(
           (entries, observer) => {
@@ -596,7 +593,7 @@
           }
         );
 
-        observer.observe(target);
+        observer.observe(target);*/
       }
 
       function nextToWatch(url, movieId) {
