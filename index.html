@@ -576,7 +576,6 @@
       selectElement.appendChild(option);
     }
 
-
     function populateSeason(seasonsparameter) {
       selectElement.innerHTML = '';// deleting all existing options
       seasonsparameter.forEach((season) => {
@@ -598,7 +597,7 @@
           slideDiv.id = "slide" + (index + 1);
           // insert Data : image , title
           slideDiv.innerHTML = `
-                         <img src="${slide.image}" alt="Slide ${index + 1}">
+                         <img src="${slide.longCover}" alt="Slide ${index + 1}">
                          <img id="slide_loading_icon${index + 1
             }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
                             " alt="Description of the GIF" style="
@@ -629,7 +628,7 @@
           // insert Data : image , title
           const indexed = slideDataParameter.length == index + 1 ? "Last" : index + 1;
           slideDiv.innerHTML = `
-                         <img src="${slide.image}" alt="Slide ${index + 1}">
+                         <img src="${slide.longCover}" alt="Slide ${index + 1}">
                          <img id="slide_loading_icon${indexed
             }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
                             " alt="Description of the GIF" style="
@@ -781,7 +780,6 @@
       newElementsvg.style.display = "none";
       newElementslide_number.style.color = "black";
     }
-
 
     function createElement() {
 
