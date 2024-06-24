@@ -699,6 +699,7 @@
       }
 
       function populateSlides(slideDataParameter) {
+        console.log("slideData :" ,slideDataParameter);
         const slideWrapper = document.querySelector(".slide-wrapper");
         slideWrapper.innerHTML = ""; // Clear previous slides if any
         slideDataParameter.forEach((slide, index) => {
