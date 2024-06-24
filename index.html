@@ -158,62 +158,14 @@
     var selectElement;
     var slides_availability = false;
     var seasons = [
-      { value: 1, text: 'Season 1' },
-      { value: 2, text: 'Season 2' },
-      { value: 3, text: 'Season 3' },
-      { value: 4, text: 'Season 4' }
+      { value: 1, text: 'Loading ...' }
     ];
     var slideData = [
       {
         image:
-          "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
-        title: "The Flash S01EP100",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
-        title: "Captain America the cival war war war",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
-        title: "The Flash S01EP100",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
-        title: "Captain America the cival war war war",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
-        title: "The Flash S01EP100",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
-        title: "Captain America the cival war war war",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
-        title: "The Flash S01EP100",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
-        title: "Captain America the cival war war war",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/3e4e16_a25648b9c1354d04ab60273182922b3d~mv2.png",
-        title: "The Flash S01EP100",
-      },
-      {
-        image:
-          "https://static.wixstatic.com/media/ad1226_db3571e2e5ce422fbff939891f70c20a~mv2.jpg",
-        title: "Captain America the cival war war war",
-      },
+          "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
+        title: "Loading ...",
+      }
       // Add more slide data as needed
     ];;
     var art_video_player;
@@ -452,9 +404,6 @@
       );
       player_container_div = document.getElementById("player-container-div");
       selectElement = document.getElementById("season-select");
-
-
-      sendMessage({ action: "getdata", data: null });
       createElement();
       watchListObserver();
 
@@ -808,6 +757,7 @@
         });
 
         slideWidth = document.querySelector(".slide").clientWidth;
+        sendMessage({ action: "getdata", data: null });
       }
 
       const mainDiv = document.getElementById("main-div");
