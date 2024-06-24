@@ -377,6 +377,7 @@
     //Function To Receives data
     window.addEventListener('message', function (event) {
 
+      console.log("Sent Data from Website : " , event.data);
       if (event.data.action == "getdata") {
                slideData = event.data.data.epsodes;
                seasons = event.data.data.seasons[0];
