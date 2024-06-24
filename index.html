@@ -308,8 +308,6 @@
             transition: "transform 0.4s",
           },
           click: function () {
-            populateSlides(slideData);
-            populateSeason(seasons);
             watchLaterContainer.style.visibility = "visible";
             watchLaterContainer.style.opacity = "1";
           },
@@ -587,7 +585,6 @@
     }
 
     function populateSlides(slideDataParameter) {
-      console.log("slideData :", slideDataParameter);
       const slideWrapper = document.querySelector(".slide-wrapper");
       slideWrapper.innerHTML = ""; // Clear previous slides if any
       slideDataParameter.forEach((slide, index) => {
@@ -672,120 +669,121 @@
       slideWidth = document.querySelector(".slide").clientWidth;
     }
 
+    function createAndAppendElement(
+      tag,
+      parent,
+      className,
+      styles,
+      innerHTML,
+      id
+    ) {
+      const element = document.createElement(tag);
+
+      if (id) element.id = id;
+      if (className) element.className = className;
+      if (styles) Object.assign(element.style, styles);
+      if (innerHTML) element.innerHTML = innerHTML;
+      parent.appendChild(element);
+      if (className == "slide-wrapper") {
+        slides_availability = true;
+      }
+      return element;
+    }
+
+    function slide1AndLastAreInViewPort(elementId, element) {
+      /* const target = document.getElementById(elementId);
+ 
+       const observer = new IntersectionObserver(
+         (entries, observer) => {
+           entries.forEach((entry) => {
+             if (entry.isIntersecting) {
+               element.style.visibility = "hidden";
+               // Do something when the element is in the viewport
+             } else {
+               element.style.visibility = "visible";
+               // Do something when the element is out of the viewport
+             }
+           });
+         },
+         {
+           root: null, // relative to the viewport
+           threshold: 0.7, // percentage of the element's visibility
+         }
+       );
+ 
+       observer.observe(target);*/
+    }
+
+    function nextToWatch(url, movieId) {
+      art.switchUrl(url).then(() => {
+        art.play();
+        art.option.id = movieId;
+      });
+    }
+
+    function selectedSlide(oldSlideId, newSlideId) {
+
+      const oldIndex = oldSlideId != null ? oldSlideId.replace(/slide(\d+|Last)/g, "$1") : null;
+      const newIndex = newSlideId.replace(/slide(\d+|Last)/g, "$1");
+
+      const oldElementgradient = document.getElementById(
+        "gradient" + oldIndex
+      );
+      const oldElementslide = document.getElementById("slide" + oldIndex);
+      const oldElementslide_label = document.getElementById(
+        "slide_label" + oldIndex
+      );
+      const oldElementslide_loading_icon = document.getElementById(
+        "slide_loading_icon" + oldIndex
+      );
+      const oldElementsvg = document.getElementById("svg_icon" + oldIndex);
+      const oldElementslide_number = document.getElementById(
+        "slide_number" + oldIndex
+      );
+
+      const newElementgradient = document.getElementById(
+        "gradient" + newIndex
+      );
+      const newElementslide = document.getElementById("slide" + newIndex);
+      const newElementslide_label = document.getElementById(
+        "slide_label" + newIndex
+      );
+      const newElementslide_loading_icon = document.getElementById(
+        "slide_loading_icon" + newIndex
+      );
+      const newElementsvg = document.getElementById("svg_icon" + newIndex);
+      const newElementslide_number = document.getElementById(
+        "slide_number" + newIndex
+      );
+
+      function removeInlineStyleIfExists(element, property) {
+        if (element.style.getPropertyValue(property)) {
+          element.style.removeProperty(property);
+        }
+      }
+
+      if (oldSlideId != null) {
+        removeInlineStyleIfExists(oldElementgradient, "opacity");
+        removeInlineStyleIfExists(oldElementslide, "border");
+        removeInlineStyleIfExists(oldElementslide_number, "color");
+        removeInlineStyleIfExists(
+          oldElementslide_label,
+          "background-color"
+        );
+        oldElementslide_loading_icon.style.display = "none";
+        oldElementsvg.style.display = "block";
+      }
+
+      newElementgradient.style.opacity = "1";
+      newElementslide.style.border = "3px solid #00ff0a";
+      newElementslide_label.style.backgroundColor = "#00ff0a";
+      newElementslide_loading_icon.style.display = "block";
+      newElementsvg.style.display = "none";
+      newElementslide_number.style.color = "black";
+    }
+
+
     function createElement() {
-
-      function createAndAppendElement(
-        tag,
-        parent,
-        className,
-        styles,
-        innerHTML,
-        id
-      ) {
-        const element = document.createElement(tag);
-
-        if (id) element.id = id;
-        if (className) element.className = className;
-        if (styles) Object.assign(element.style, styles);
-        if (innerHTML) element.innerHTML = innerHTML;
-        parent.appendChild(element);
-        if (className == "slide-wrapper") {
-          slides_availability = true;
-        }
-        return element;
-      }
-
-      function slide1AndLastAreInViewPort(elementId, element) {
-        /* const target = document.getElementById(elementId);
- 
-         const observer = new IntersectionObserver(
-           (entries, observer) => {
-             entries.forEach((entry) => {
-               if (entry.isIntersecting) {
-                 element.style.visibility = "hidden";
-                 // Do something when the element is in the viewport
-               } else {
-                 element.style.visibility = "visible";
-                 // Do something when the element is out of the viewport
-               }
-             });
-           },
-           {
-             root: null, // relative to the viewport
-             threshold: 0.7, // percentage of the element's visibility
-           }
-         );
- 
-         observer.observe(target);*/
-      }
-
-      function nextToWatch(url, movieId) {
-        art.switchUrl(url).then(() => {
-          art.play();
-          art.option.id = movieId;
-        });
-      }
-
-      function selectedSlide(oldSlideId, newSlideId) {
-
-        const oldIndex = oldSlideId != null ? oldSlideId.replace(/slide(\d+|Last)/g, "$1") : null;
-        const newIndex = newSlideId.replace(/slide(\d+|Last)/g, "$1");
-
-        const oldElementgradient = document.getElementById(
-          "gradient" + oldIndex
-        );
-        const oldElementslide = document.getElementById("slide" + oldIndex);
-        const oldElementslide_label = document.getElementById(
-          "slide_label" + oldIndex
-        );
-        const oldElementslide_loading_icon = document.getElementById(
-          "slide_loading_icon" + oldIndex
-        );
-        const oldElementsvg = document.getElementById("svg_icon" + oldIndex);
-        const oldElementslide_number = document.getElementById(
-          "slide_number" + oldIndex
-        );
-
-        const newElementgradient = document.getElementById(
-          "gradient" + newIndex
-        );
-        const newElementslide = document.getElementById("slide" + newIndex);
-        const newElementslide_label = document.getElementById(
-          "slide_label" + newIndex
-        );
-        const newElementslide_loading_icon = document.getElementById(
-          "slide_loading_icon" + newIndex
-        );
-        const newElementsvg = document.getElementById("svg_icon" + newIndex);
-        const newElementslide_number = document.getElementById(
-          "slide_number" + newIndex
-        );
-
-        function removeInlineStyleIfExists(element, property) {
-          if (element.style.getPropertyValue(property)) {
-            element.style.removeProperty(property);
-          }
-        }
-
-        if (oldSlideId != null) {
-          removeInlineStyleIfExists(oldElementgradient, "opacity");
-          removeInlineStyleIfExists(oldElementslide, "border");
-          removeInlineStyleIfExists(oldElementslide_number, "color");
-          removeInlineStyleIfExists(
-            oldElementslide_label,
-            "background-color"
-          );
-          oldElementslide_loading_icon.style.display = "none";
-          oldElementsvg.style.display = "block";
-        }
-
-        newElementgradient.style.opacity = "1";
-        newElementslide.style.border = "3px solid #00ff0a";
-        newElementslide_label.style.backgroundColor = "#00ff0a";
-        newElementslide_loading_icon.style.display = "block";
-        newElementsvg.style.display = "none";
-        newElementslide_number.style.color = "black";
-      }
 
       const mainDiv = document.getElementById("main-div");
 
