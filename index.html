@@ -622,7 +622,7 @@
                         ">
                          <div id="slide_label${index + 1
             }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
-            };"><b id="slide_number${index + 1}">${index + 1}</b></div>
+            };"><b id="slide_number${index + 1}">${slide.episode}</b></div>
                          <div class="gradient" id="gradient${index + 1}"></div>
                          <div class="caption">${slide.title}</div>
                          <!-- Your SVG icon here -->
@@ -653,7 +653,7 @@
                         ">
                          <div id="slide_label${indexed
             }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
-            };"><b id="slide_number${indexed}">${index + 1}</b></div>
+            };"><b id="slide_number${indexed}">${slide.episode}</b></div>
                          <div class="gradient" id="gradient${indexed}"></div>
                          <div class="caption">${slide.title}</div>
                          <!-- Your SVG icon here -->
@@ -673,7 +673,8 @@
           newMainIndex = slideDiv.id;
           selectedSlide(oldMainIndex, newMainIndex);
           oldMainIndex = newMainIndex;
-          //console.log("Clicked slide : ", slideDataParameter[index]);
+          console.log("Clicked slide : ", slideDataParameter[index]["v_v"]);
+          sendMessage({action: "getstreamingurl", data: slideDataParameter[index]["v_v"]})
         });
       });
 
