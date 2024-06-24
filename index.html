@@ -157,7 +157,6 @@
     var navButtonRight;
     var selectElement;
     var slides_availability = false;
-    var getdataReady = false;
     var seasons = [
       { value: 1, text: 'Loading ...' }
     ];
@@ -458,19 +457,25 @@
     window.addEventListener('message', function (event) {
 
       console.log("Sent Data from Website : ", event.data);
+      sendMessage("messages Received");
       if (event.data.action == "getdata") {
         if (slides_availability == true) {
+          console.log("Slides are visible 1");
+          sendMessage("Data loaded 1");
           slideData = event.data.data.epsodes;
           seasons = event.data.data.seasons[0];
           populateSlides();
           populateSeason();
         } else {
+
+          console.log("Slides are not available");
           let timer;
 
           timer = setInterval(function () {
             console.log('Checking variable...');
             if (slides_availability) {
-              console.log('Variable changed to true. Stopping the timer.');
+              console.log("Slides are visible 2");
+              sendMessage("Data loaded 2");
               clearInterval(timer);
               slideData = event.data.data.epsodes;
               seasons = event.data.data.seasons[0];
