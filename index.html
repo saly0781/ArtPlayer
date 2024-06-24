@@ -173,7 +173,7 @@
     let condition_To_Hide_Select_Button;
     let art;
     let S_e = [0, 0];
-    let device_height = deviceType == "desktop" ? "250px" : "200px";
+    let device_height = deviceType == "desktop" ? "280px" : "200px";
     let screen_position = deviceType == "desktop" ? "end" : "end";
     let player_container_div_marginBottom =
       deviceType == "desktop" ? "30px" : "20px";
@@ -232,7 +232,7 @@
         {
           name: "wachLaterLayer",
           html: `
-                      <div id= "player-container-div" style=" width: 100%; /* height: ${device_height}; */ overflow: hidden; align-self: ${screen_position};position: absolute; margin-bottom: ${player_container_div_marginBottom};">
+                      <div id= "player-container-div" style=" width: 100%;  height: ${device_height};  overflow: hidden; align-self: ${screen_position};position: absolute; margin-bottom: ${player_container_div_marginBottom};">
                       <div class="title_container" id="myDiv">
                         <div>
                           <span id= "title_watchList" style="font-size: ${watchList_title_size};display: inline-block;">Watch List</span>
@@ -854,7 +854,7 @@
                          display: inline-block;
                          padding-left: 0px;
                          margin-right: 0px;
-                         width: calc(${device_height} + 50px);
+                         width: calc(${device_height} + 100px);
                          scroll-snap-align: start;
                          border-radius: 15px;
                          overflow: hidden;
