@@ -374,18 +374,6 @@
       console.log("NOW WE ARE II FULLLSCREEN!", state);
     });
 
-    //Function To Receives data
-    window.addEventListener('message', function (event) {
-
-      console.log("Sent Data from Website : " , event.data);
-      if (event.data.action == "getdata") {
-               slideData = event.data.data.epsodes;
-               seasons = event.data.data.seasons[0];
-               populateSlides();
-               populateSeason();
-             }
-    });
-
     //An event for controlling when the DOM is loaded
     document.addEventListener("DOMContentLoaded", function () {
 
@@ -463,6 +451,20 @@
         // art.play();
         art.aspectRatio = "16:9";
       });
+    });
+
+    //Function To Receives data
+    window.addEventListener('message', function (event) {
+
+      console.log("Sent Data from Website : ", event.data);
+      sendMessage({message: "Message Received", data: event.data } );
+      if (event.data.action == "getdata") {
+               slideData = event.data.data.epsodes;
+               seasons = event.data.data.seasons[0];
+               populateSlides();
+               populateSeason();
+               sendMessage("Data loaded");
+             }
     });
 
     // ------------ detect savers ----------------------------------------
@@ -574,27 +576,27 @@
       }
 
       function slide1AndLastAreInViewPort(elementId, element) {
-       /* const target = document.getElementById(elementId);
-
-        const observer = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                element.style.visibility = "hidden";
-                // Do something when the element is in the viewport
-              } else {
-                element.style.visibility = "visible";
-                // Do something when the element is out of the viewport
-              }
-            });
-          },
-          {
-            root: null, // relative to the viewport
-            threshold: 0.7, // percentage of the element's visibility
-          }
-        );
-
-        observer.observe(target);*/
+        /* const target = document.getElementById(elementId);
+ 
+         const observer = new IntersectionObserver(
+           (entries, observer) => {
+             entries.forEach((entry) => {
+               if (entry.isIntersecting) {
+                 element.style.visibility = "hidden";
+                 // Do something when the element is in the viewport
+               } else {
+                 element.style.visibility = "visible";
+                 // Do something when the element is out of the viewport
+               }
+             });
+           },
+           {
+             root: null, // relative to the viewport
+             threshold: 0.7, // percentage of the element's visibility
+           }
+         );
+ 
+         observer.observe(target);*/
       }
 
       function nextToWatch(url, movieId) {
