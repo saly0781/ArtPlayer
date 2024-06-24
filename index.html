@@ -17,7 +17,7 @@
   <!-- Include ArtPlayer Ads Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-ads/dist/artplayer-plugin-ads.min.js"></script>
   <!-- Include ArtPlayer Danmuku Plugin -->
- <!-- <script src="path/to/artplayer-plugin-danmuku.js"></script> -->
+  <!-- <script src="path/to/artplayer-plugin-danmuku.js"></script> -->
   <style>
     html,
     body {
@@ -201,7 +201,7 @@
     // Initialize the Player
     art = new Artplayer({
       container: ".artplayer-app",
-      id: finalMovieId,
+      id: movieId,
       url: movielink,
       poster: "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
       isLive: false,
@@ -375,17 +375,18 @@
     });
 
     //Function To Receives data
-    window.onmessage = (event) => {
-     
-        console.log(event.data);
-        /*if (slides_availability == true) {
-          slideData = event.data.epsodes;
-          seasons = event.data.seasons;
-          populateSlides();
-          populateSeason();
-        }*/
-     
-    };
+    window.addEventListener('message', function (event) {
+
+      // Process the message
+      console.log('Received message:', event.data);
+
+      /*if (slides_availability == true) {
+               slideData = event.data.epsodes;
+               seasons = event.data.seasons;
+               populateSlides();
+               populateSeason();
+             }*/
+    });
 
     //An event for controlling when the DOM is loaded
     document.addEventListener("DOMContentLoaded", function () {
