@@ -337,39 +337,38 @@
       moreVideoAttr: {
         crossOrigin: "anonymous",
       },
-      plugins:
-        adstatus === "false"
-          ? [
-            artplayerPluginHlsQuality({
-              control: true,
-              setting: true,
-              getResolution: (level) => level.height + "P",
-              title: "Quality",
-              auto: "Auto",
-            }),
-          ]
-          : [
-            artplayerPluginAds({
-              html: '<img src="' + adlink + '" alt="Ad Poster">',
-              video: adlink,
-              url: "",
-              playDuration: 5,
-              totalDuration: 10,
-              i18n: {
-                close: "Funga",
-                countdown: "%s Amasegonda 5",
-                detail: "Kwamamaza",
-                canBeClosed: "%s Amasegonda 3",
-              },
-            }),
-            artplayerPluginHlsQuality({
-              control: true,
-              setting: true,
-              getResolution: (level) => level.height + "P",
-              title: "Quality",
-              auto: "Auto",
-            }),
-          ],
+      plugins: adstatus === "false"
+        ? [
+          artplayerPluginHlsQuality({
+            control: true,
+            setting: true,
+            getResolution: (level) => level.height + "P",
+            title: "Quality",
+            auto: "Auto",
+          }),
+        ]
+        : [
+          artplayerPluginAds({
+            html: '<img src="' + adlink + '" alt="Ad Poster">',
+            video: adlink,
+            url: "",
+            playDuration: 5,
+            totalDuration: 10,
+            i18n: {
+              close: "Funga",
+              countdown: "%s Amasegonda 5",
+              detail: "Kwamamaza",
+              canBeClosed: "%s Amasegonda 3",
+            },
+          }),
+          artplayerPluginHlsQuality({
+            control: true,
+            setting: true,
+            getResolution: (level) => level.height + "P",
+            title: "Quality",
+            auto: "Auto",
+          }),
+        ],
       customType: {
         m3u8: function playM3u8(video, url, art) {
           if (Hls.isSupported()) {
@@ -498,8 +497,7 @@
         populateSeason(seasons, current_season_index);
 
       } else {
-
-        console.log("Slides are not available");
+        
         let timer;
 
         timer = setInterval(function () {
@@ -738,9 +736,7 @@
 
         selectedSlide(oldMainIndex, newMainIndex);
         oldMainIndex = newMainIndex;
-        console.log("Next slide : ", current_slideData[current_slide_index]["v_v"]);
         sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
-
 
       }
 
@@ -792,7 +788,6 @@
     }
 
     function nextToWatch(url, movieId) {
-      console.log("link to watch : ", url);
       art.switchUrl(url).then(() => {
         art.play();
         art.option.id = movieId;
