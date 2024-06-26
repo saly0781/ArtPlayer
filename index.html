@@ -167,16 +167,21 @@
         title: "Loading ...",
       }
       // Add more slide data as needed
-    ];;
+    ];
+    let current_slideData;
+    let current_season_index = 0;
+    let current_slideData_index = 0;
     let art_video_player;
     let deviceType = isMobileDevice() ? "mobile" : "desktop";
     let condition_To_Hide_Select_Button;
     let art;
+    let watch_Later_Card_poster = "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg";
     let S_e = [0, 0];
     let device_height = deviceType == "desktop" ? "280px" : "200px";
     let screen_position = deviceType == "desktop" ? "end" : "end";
     let player_container_div_marginBottom = "20px";
     let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
+    let current_slide_index = 0;
 
     let newData = {
       movieId: movieId,
@@ -294,8 +299,8 @@
                       `,
           style: {
             position: "absolute",
-            width: "300px",
-            height: "140px",
+            width: "330px",
+            height: "160px",
             overflow: "hidden",
             opacity: "1",
             visibility: "visible",
@@ -313,7 +318,23 @@
         },
       ],
 
-      controls: [],
+      controls: [
+      {
+			name: 'next-episode-button',
+			index: 20,
+			position: 'left',
+			html: '<img src="https://static.wixstatic.com/shapes/3e4e16_24b3116fb18e43cfb392070385c1fa7d.svg" style="width:60%;height:60%;" alt="Next Episode">',
+			tooltip: 'Next Episode',
+			style: {
+				display: userRole == "Admin" ? "flex" : "none",
+			},
+			click: function (...args) {
+				art.url = 'videooo.mp4';
+        go_to_next_slide();
+			}
+		},
+
+      ],
       moreVideoAttr: {
         crossOrigin: "anonymous",
       },
@@ -453,7 +474,7 @@
         art.aspectRatio = "16:9";
       });
 
-      sendMessage({action: "loaded"});
+      sendMessage({ action: "loaded" });
     });
 
     //Function To Receives data
@@ -470,28 +491,29 @@
 
     function onloadSeason_Episode() {
       if (slides_availability == true) {
-        sendMessage("Data loaded 1", slideData, seasons);
+
         slideData = event.data.data.epsodes;
         seasons = event.data.data.seasons;
-        populateSlides(slideData[0]);
-        populateSeason(seasons, 0);
+        current_slideData = slideData[current_slideData_index];
+        populateSlides(current_slideData);
+        populateSeason(seasons, current_season_index);
+
       } else {
 
         console.log("Slides are not available");
         let timer;
 
         timer = setInterval(function () {
-          console.log('Checking variable...');
+
           if (slides_availability) {
-            console.log("Slides are visible 2");
+
             clearInterval(timer);
             slideData = event.data.data.epsodes;
             seasons = event.data.data.seasons;
-            populateSlides(slideData[0]);
-            populateSeason(seasons, 0);
-            sendMessage("Data loaded 2", slideData, seasons);
-          } else {
-            console.log('Variable is still false.');
+            current_slideData = slideData[current_slideData_index];
+            populateSlides(current_slideData);
+            populateSeason(seasons, current_season_index);
+
           }
         }, 1000); // Check every second
       }
@@ -621,7 +643,7 @@
                             display: none;
                             position: absolute;
                             top: 40%;
-                            right: 25%;
+                            right: 30%;
                         ">
                          <div id="slide_label${index + 1
             }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
@@ -652,7 +674,7 @@
                             display: none;
                             position: absolute;
                             top: 40%;
-                            right: 25%;
+                            right: 30%;
                         ">
                          <div id="slide_label${indexed
             }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
@@ -677,11 +699,49 @@
           selectedSlide(oldMainIndex, newMainIndex);
           oldMainIndex = newMainIndex;
           console.log("Clicked slide : ", slideDataParameter[index]["v_v"]);
-          sendMessage({ action: "getstreamingurl", data: {links : slideDataParameter[index]["v_v"], movieId : slideDataParameter[index].id} });
+          sendMessage({ action: "getstreamingurl", data: { links: slideDataParameter[index]["v_v"], movieId: slideDataParameter[index].id } });
+          art.url = '';
+          current_slide_index = index;
         });
       });
 
       slideWidth = document.querySelector(".slide").clientWidth;
+    }
+
+    function go_to_next_slide() {
+
+      current_slide_index = current_slide_index + 1;
+
+      if (current_slideData.length < current_slide_index + 1) {
+
+        if (seasons.length < current_season_index) {
+
+          current_season_index = current_season_index + 1;
+          current_slideData_index = current_slideData_index + 1;
+          selectElement.selectedIndex = current_season_index;
+          current_slideData = slideData[current_slideData_index];
+          oldMainIndex = null;
+          current_slide_index = 0;
+          populateSlides(current_slideData);
+          go_to_next_slide();
+
+        }
+
+      } else {
+
+        if (current_slideData.length == current_slide_index + 1) {
+          current_slide_index = "Last";
+        }
+
+        newMainIndex = "slide" + (current_slide_index + 1);
+        selectedSlide(oldMainIndex, newMainIndex);
+        oldMainIndex = newMainIndex;
+        console.log("Next slide : ", slideDataParameter[current_slide_index]["v_v"]);
+        sendMessage({ action: "getstreamingurl", data: { links: slideDataParameter[current_slide_index]["v_v"], movieId: slideDataParameter[current_slide_index].id } });
+
+
+      }
+
     }
 
     function createAndAppendElement(
@@ -806,7 +866,7 @@
         mainDiv,
         "nav-button left",
         {
-          visibility: "hidden",
+          visibility: "visible",// To Change
         }
       );
       navButtonLeft.innerHTML = `
@@ -853,7 +913,7 @@
                          display: inline-block;
                          padding-left: 0px;
                          margin-right: 0px;
-                         width: calc(${device_height} + 100px);
+                         width: calc(${device_height} + 60px);
                          scroll-snap-align: start;
                          border-radius: 15px;
                          overflow: hidden;
@@ -906,7 +966,7 @@
                         left: 0;
                         z-index: 3;
                         background-color: black;
-                        background-image: url('https://static.wixstatic.com/media/ad1226_494e7f2268114a34a8db709db6dd9fc8~mv2.jpeg');
+                        background-image: url(${watch_Later_Card_poster});
                         background-size: cover;
                         background-position: center;
                         position: relative;
