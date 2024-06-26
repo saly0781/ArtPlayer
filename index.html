@@ -182,7 +182,7 @@
     let player_container_div_marginBottom = "20px";
     let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
     let current_slide_index = 0;
-    let is_last_season  = false;
+    let is_last_season = false;
     let newData = {
       movieId: movieId,
       episodeId: episodeId,
@@ -599,6 +599,7 @@
     function changeSeason() {
       const selectedIndex = selectElement.selectedIndex;
       populateSlides(slideData[selectedIndex]);
+
     }
 
     // Function to add options dynamically
@@ -698,6 +699,8 @@
           sendMessage({ action: "getstreamingurl", data: { links: slideDataParameter[index]["v_v"], movieId: slideDataParameter[index].id } });
           art.url = '';
           current_slide_index = index;
+          current_season_index = selectElement.selectedIndex;
+          console.log("clicked slide index : " + current_slide_index, "current season of slide : " + current_season_index);
         });
       });
 
@@ -747,9 +750,7 @@
 
       if (current_slideData.length < current_slide_index + 1) {
 
-        console.log("total slideData : " + current_slideData.length, "current index slide : " + current_slide_index + 1);
-
-        if (seasons.length <= current_season_index) {
+        if (seasons.length >= current_season_index) {
 
           current_season_index = current_season_index + 1;
           current_slideData_index = current_slideData_index + 1;
@@ -761,7 +762,6 @@
           populateSlides(current_slideData);
           selectedSlide(oldMainIndex, newMainIndex);
           sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
-          console.log("total Season : " + current_slideData.length, "current index : " + current_season_index);
 
           seasons.length == current_season_index ? is_last_season = true : is_last_season = false;
 
@@ -824,64 +824,46 @@
     }
 
     function selectedSlide(oldSlideId, newSlideId) {
+      const oldIndex = oldSlideId ? oldSlideId.replace(/slide(\d+|Last)/g, "$1") : null;
+      const newIndex = newSlideId ? newSlideId.replace(/slide(\d+|Last)/g, "$1") : null;
 
-      const oldIndex = oldSlideId != null ? oldSlideId.replace(/slide(\d+|Last)/g, "$1") : null;
-      const newIndex = newSlideId.replace(/slide(\d+|Last)/g, "$1");
+      const oldElementgradient = oldIndex ? document.getElementById("gradient" + oldIndex) : null;
+      const oldElementslide = oldIndex ? document.getElementById("slide" + oldIndex) : null;
+      const oldElementslide_label = oldIndex ? document.getElementById("slide_label" + oldIndex) : null;
+      const oldElementslide_loading_icon = oldIndex ? document.getElementById("slide_loading_icon" + oldIndex) : null;
+      const oldElementsvg = oldIndex ? document.getElementById("svg_icon" + oldIndex) : null;
+      const oldElementslide_number = oldIndex ? document.getElementById("slide_number" + oldIndex) : null;
 
-      const oldElementgradient = document.getElementById(
-        "gradient" + oldIndex
-      );
-      const oldElementslide = document.getElementById("slide" + oldIndex);
-      const oldElementslide_label = document.getElementById(
-        "slide_label" + oldIndex
-      );
-      const oldElementslide_loading_icon = document.getElementById(
-        "slide_loading_icon" + oldIndex
-      );
-      const oldElementsvg = document.getElementById("svg_icon" + oldIndex);
-      const oldElementslide_number = document.getElementById(
-        "slide_number" + oldIndex
-      );
-
-      const newElementgradient = document.getElementById(
-        "gradient" + newIndex
-      );
-      const newElementslide = document.getElementById("slide" + newIndex);
-      const newElementslide_label = document.getElementById(
-        "slide_label" + newIndex
-      );
-      const newElementslide_loading_icon = document.getElementById(
-        "slide_loading_icon" + newIndex
-      );
-      const newElementsvg = document.getElementById("svg_icon" + newIndex);
-      const newElementslide_number = document.getElementById(
-        "slide_number" + newIndex
-      );
+      const newElementgradient = newIndex ? document.getElementById("gradient" + newIndex) : null;
+      const newElementslide = newIndex ? document.getElementById("slide" + newIndex) : null;
+      const newElementslide_label = newIndex ? document.getElementById("slide_label" + newIndex) : null;
+      const newElementslide_loading_icon = newIndex ? document.getElementById("slide_loading_icon" + newIndex) : null;
+      const newElementsvg = newIndex ? document.getElementById("svg_icon" + newIndex) : null;
+      const newElementslide_number = newIndex ? document.getElementById("slide_number" + newIndex) : null;
 
       function removeInlineStyleIfExists(element, property) {
-        if (element.style.getPropertyValue(property)) {
+        if (element && element.style.getPropertyValue(property)) {
           element.style.removeProperty(property);
         }
       }
 
       if (oldSlideId != null) {
-        removeInlineStyleIfExists(oldElementgradient, "opacity");
-        removeInlineStyleIfExists(oldElementslide, "border");
-        removeInlineStyleIfExists(oldElementslide_number, "color");
-        removeInlineStyleIfExists(
-          oldElementslide_label,
-          "background-color"
-        );
-        oldElementslide_loading_icon.style.display = "none";
-        oldElementsvg.style.display = "block";
+        if (oldElementgradient) removeInlineStyleIfExists(oldElementgradient, "opacity");
+        if (oldElementslide) removeInlineStyleIfExists(oldElementslide, "border");
+        if (oldElementslide_number) removeInlineStyleIfExists(oldElementslide_number, "color");
+        if (oldElementslide_label) removeInlineStyleIfExists(oldElementslide_label, "background-color");
+        if (oldElementslide_loading_icon) oldElementslide_loading_icon.style.display = "none";
+        if (oldElementsvg) oldElementsvg.style.display = "block";
       }
 
-      newElementgradient.style.opacity = "1";
-      newElementslide.style.border = "3px solid #00ff0a";
-      newElementslide_label.style.backgroundColor = "#00ff0a";
-      newElementslide_loading_icon.style.display = "block";
-      newElementsvg.style.display = "none";
-      newElementslide_number.style.color = "black";
+      if (newSlideId != null) {
+        if (newElementgradient) newElementgradient.style.opacity = "1";
+        if (newElementslide) newElementslide.style.border = "3px solid #00ff0a";
+        if (newElementslide_label) newElementslide_label.style.backgroundColor = "#00ff0a";
+        if (newElementslide_loading_icon) newElementslide_loading_icon.style.display = "block";
+        if (newElementsvg) newElementsvg.style.display = "none";
+        if (newElementslide_number) newElementslide_number.style.color = "black";
+      }
     }
 
     function createElement() {
