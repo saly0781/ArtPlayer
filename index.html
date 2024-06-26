@@ -599,7 +599,10 @@
     function changeSeason() {
       const selectedIndex = selectElement.selectedIndex;
       populateSlides(slideData[selectedIndex]);
-
+      selectedSlide(oldMainIndex, null);
+      if (selectedIndex == current_season_index) {
+        selectedSlide(null, oldMainIndex);
+      }
     }
 
     // Function to add options dynamically
