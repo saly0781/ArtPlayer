@@ -329,7 +329,6 @@
 				display: userRole == "Admin" ? "flex" : "none",
 			},
 			click: function (...args) {
-				art.url = 'videooo.mp4';
         go_to_next_slide();
 			}
 		},
@@ -698,7 +697,6 @@
           newMainIndex = slideDiv.id;
           selectedSlide(oldMainIndex, newMainIndex);
           oldMainIndex = newMainIndex;
-          console.log("Clicked slide : ", slideDataParameter[index]["v_v"]);
           sendMessage({ action: "getstreamingurl", data: { links: slideDataParameter[index]["v_v"], movieId: slideDataParameter[index].id } });
           art.url = '';
           current_slide_index = index;
@@ -714,6 +712,8 @@
 
       if (current_slideData.length < current_slide_index + 1) {
 
+        console.log("next slide 1");
+
         if (seasons.length < current_season_index) {
 
           current_season_index = current_season_index + 1;
@@ -728,6 +728,8 @@
         }
 
       } else {
+
+        console.log("next slide 2");
 
         if (current_slideData.length == current_slide_index + 1) {
           current_slide_index = "Last";
@@ -790,6 +792,7 @@
     }
 
     function nextToWatch(url, movieId) {
+      console.log("link to watch : " , url);
       art.switchUrl(url).then(() => {
         art.play();
         art.option.id = movieId;
