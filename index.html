@@ -323,7 +323,7 @@
           name: 'next-episode-button',
           index: 20,
           position: 'left',
-          html: '<img src="https://static.wixstatic.com/shapes/3e4e16_24b3116fb18e43cfb392070385c1fa7d.svg" style="width:60%;height:60%;" alt="Next Episode">',
+          html: '<svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
           tooltip: 'Next Episode',
           style: {
             display: userRole == "Admin" ? "flex" : "none",
@@ -497,7 +497,7 @@
         populateSeason(seasons, current_season_index);
 
       } else {
-        
+
         let timer;
 
         timer = setInterval(function () {
