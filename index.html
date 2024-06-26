@@ -150,7 +150,7 @@
     let art_bottom;
     let art_mask;
     let oldMainIndex = null;
-    let newMainIndex;
+    let newMainIndex = "slide1";
     let navButtonLeft;
     let userRole = getParameterByName("userRole"); // to be Deleted later
     let userChoice = userRole == "Admin" ? "grid" : "none"; // to be Deleted later
@@ -319,19 +319,19 @@
       ],
 
       controls: [
-      {
-			name: 'next-episode-button',
-			index: 20,
-			position: 'left',
-			html: '<img src="https://static.wixstatic.com/shapes/3e4e16_24b3116fb18e43cfb392070385c1fa7d.svg" style="width:60%;height:60%;" alt="Next Episode">',
-			tooltip: 'Next Episode',
-			style: {
-				display: userRole == "Admin" ? "flex" : "none",
-			},
-			click: function (...args) {
-        go_to_next_slide();
-			}
-		},
+        {
+          name: 'next-episode-button',
+          index: 20,
+          position: 'left',
+          html: '<img src="https://static.wixstatic.com/shapes/3e4e16_24b3116fb18e43cfb392070385c1fa7d.svg" style="width:60%;height:60%;" alt="Next Episode">',
+          tooltip: 'Next Episode',
+          style: {
+            display: userRole == "Admin" ? "flex" : "none",
+          },
+          click: function (...args) {
+            go_to_next_slide();
+          }
+        },
 
       ],
       moreVideoAttr: {
@@ -704,6 +704,7 @@
       });
 
       slideWidth = document.querySelector(".slide").clientWidth;
+      selectedSlide(oldMainIndex, newMainIndex);
     }
 
     function go_to_next_slide() {
@@ -712,8 +713,6 @@
 
       if (current_slideData.length < current_slide_index + 1) {
 
-        console.log("next slide 1");
-
         if (seasons.length < current_season_index) {
 
           current_season_index = current_season_index + 1;
@@ -721,6 +720,7 @@
           selectElement.selectedIndex = current_season_index;
           current_slideData = slideData[current_slideData_index];
           oldMainIndex = null;
+          newMainIndex = "slide1";
           current_slide_index = 0;
           populateSlides(current_slideData);
           go_to_next_slide();
@@ -729,17 +729,17 @@
 
       } else {
 
-        console.log("next slide 2");
 
         if (current_slideData.length == current_slide_index + 1) {
-          current_slide_index = "Last";
+          newMainIndex = "slideLast";
+        } else {
+          newMainIndex = "slide" + (current_slide_index + 1);
         }
 
-        newMainIndex = "slide" + (current_slide_index + 1);
         selectedSlide(oldMainIndex, newMainIndex);
         oldMainIndex = newMainIndex;
-        console.log("Next slide : ", slideDataParameter[current_slide_index]["v_v"]);
-        sendMessage({ action: "getstreamingurl", data: { links: slideDataParameter[current_slide_index]["v_v"], movieId: slideDataParameter[current_slide_index].id } });
+        console.log("Next slide : ", current_slideData[current_slide_index]["v_v"]);
+        sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
 
 
       }
@@ -792,7 +792,7 @@
     }
 
     function nextToWatch(url, movieId) {
-      console.log("link to watch : " , url);
+      console.log("link to watch : ", url);
       art.switchUrl(url).then(() => {
         art.play();
         art.option.id = movieId;
