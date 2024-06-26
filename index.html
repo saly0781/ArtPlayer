@@ -182,7 +182,7 @@
     let player_container_div_marginBottom = "20px";
     let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
     let current_slide_index = 0;
-
+    let all_episodes_finished = false;
     let newData = {
       movieId: movieId,
       episodeId: episodeId,
@@ -705,38 +705,63 @@
       selectedSlide(oldMainIndex, newMainIndex);
     }
 
+    function hide_next_Button(state) {
+
+      art.controls.update(
+        {
+          name: 'next-episode-button',
+          index: 20,
+          position: 'left',
+          html: '<svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
+          tooltip: 'Next Episode',
+          style: {
+            display: deviceType == "desktop" && type != "M"  ? "flex" : "none",
+          },
+          click: function (...args) {
+            go_to_next_slide();
+          }
+        },
+
+      );
+
+    }
+
     function go_to_next_slide() {
 
       current_slide_index = current_slide_index + 1;
 
-      if (current_slideData.length < current_slide_index + 1) {
+      if (current_slideData.length == current_slide_index + 1) {
+        if (all_episodes_finished == true) {
+          // Function to Hide Next Button
+        }
+        newMainIndex = "slideLast";
+        selectedSlide(oldMainIndex, newMainIndex);
+        oldMainIndex = newMainIndex;
+        sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
+      } else {
+        newMainIndex = "slide" + (current_slide_index + 1);
+        selectedSlide(oldMainIndex, newMainIndex);
+        oldMainIndex = newMainIndex;
+        sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
+      }
 
-        if (seasons.length < current_season_index) {
+      if (current_slideData.length == current_slide_index + 1) {
+
+        if (seasons.length <= current_season_index) {
 
           current_season_index = current_season_index + 1;
           current_slideData_index = current_slideData_index + 1;
           selectElement.selectedIndex = current_season_index;
           current_slideData = slideData[current_slideData_index];
-          oldMainIndex = null;
+          oldMainIndex = "slide1";
           newMainIndex = "slide1";
           current_slide_index = 0;
           populateSlides(current_slideData);
           go_to_next_slide();
 
-        }
-
-      } else {
-
-
-        if (current_slideData.length == current_slide_index + 1) {
-          newMainIndex = "slideLast";
         } else {
-          newMainIndex = "slide" + (current_slide_index + 1);
+          all_episodes_finished = true;
         }
-
-        selectedSlide(oldMainIndex, newMainIndex);
-        oldMainIndex = newMainIndex;
-        sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
 
       }
 
