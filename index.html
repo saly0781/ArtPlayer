@@ -114,7 +114,6 @@
 
   <!-- Main PlayerScript  -->
   <script>
-
     function isMobileDevice() {
       const userAgent = navigator.userAgent.toLowerCase();
       return /mobile|android|iphone|ipod|blackberry|iemobile|opera mini/.test(
@@ -157,15 +156,13 @@
     let navButtonRight;
     let selectElement;
     let slides_availability = false;
-    let seasons = [
-      { value: 1, text: 'Loading ...' }
-    ];
+    let seasons = [{ value: 1, text: "Loading ..." }];
     let slideData = [
       {
         image:
           "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
         title: "Loading ...",
-      }
+      },
       // Add more slide data as needed
     ];
     let current_slideData;
@@ -175,7 +172,8 @@
     let deviceType = isMobileDevice() ? "mobile" : "desktop";
     let condition_To_Hide_Select_Button;
     let art;
-    let watch_Later_Card_poster = "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg";
+    let watch_Later_Card_poster =
+      "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg";
     let S_e = [0, 0];
     let device_height = deviceType == "desktop" ? "280px" : "200px";
     let screen_position = deviceType == "desktop" ? "end" : "end";
@@ -183,6 +181,11 @@
     let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
     let current_slide_index = 0;
     let is_last_season = false;
+    let pathCode = "M8 5v14l11-7z";
+    let next_fast_pathCode =
+      deviceType == "mobile"
+        ? "M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"
+        : "M12 2a10 10 0 1 0 10 10h-1.5a8.5 8.5 0 1 1-3.8-7.2l-3.2 3.2H22V2l-2.8 2.8A9.98 9.98 0 0 0 12 2z";
     let newData = {
       movieId: movieId,
       episodeId: episodeId,
@@ -207,7 +210,8 @@
       container: ".artplayer-app",
       id: finalMovieId,
       url: movielink,
-      poster: "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
+      poster:
+        "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
       isLive: false,
       muted: false,
       autoplay: false,
@@ -232,11 +236,49 @@
       theme: "#05C546",
       lang: navigator.language.toLowerCase(),
       layers: [
+        //Object for Next-Previous-Play Button
+        {
+          name: "rebaPlayerControls",
+          html: `<div class="button-rebaPlayer left-button-rebaPlayer" id="leftButtonDiv">
+            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        	</div>
+        	<div class="center-button-rebaPlayer" id="centerButtonDiv">
+        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+        	        width: 70px;
+        	        height: 70px;
+        	    ">
+        	            <path id="playingButtonPath" d="${pathCode}" />
+        	        </svg>
+        	    </button>
+        	</div>
+        	<div class="button-rebaPlayer right-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" id="rightButtonDiv" onclick="rightButtonClick()">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+        	        </svg>
+        	    </button>
+        	</div>`,
+          style: {
+            width: "100%",
+            height: "10%",
+            alignSelf: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            //display: "none",
+          },
+        },
+
         //Object for wachLater Layer
         {
           name: "wachLaterLayer",
-          html: `
-                      <div id= "player-container-div" style=" width: 100%;  height: ${device_height};  overflow: hidden; align-self: ${screen_position};position: absolute; margin-bottom: ${player_container_div_marginBottom};">
+          html: `<div id= "player-container-div" style=" width: 100%;  height: ${device_height};  overflow: hidden; align-self: ${screen_position};position: absolute; margin-bottom: ${player_container_div_marginBottom};">
                       <div class="title_container" id="myDiv">
                         <div>
                           <span id= "title_watchList" style="font-size: ${watchList_title_size};display: inline-block;">Watch List</span>
@@ -320,55 +362,55 @@
 
       controls: [
         {
-          name: 'next-episode-button',
+          name: "next-episode-button",
           index: 20,
-          position: 'left',
+          position: "left",
           html: '<svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
-          tooltip: 'Next Episode',
+          tooltip: "Next Episode",
           style: {
             display: userRole == "Admin" ? "flex" : "none",
           },
           click: function (...args) {
             go_to_next_slide();
-          }
+          },
         },
-
       ],
       moreVideoAttr: {
         crossOrigin: "anonymous",
       },
-      plugins: adstatus === "false"
-        ? [
-          artplayerPluginHlsQuality({
-            control: true,
-            setting: true,
-            getResolution: (level) => level.height + "P",
-            title: "Quality",
-            auto: "Auto",
-          }),
-        ]
-        : [
-          artplayerPluginAds({
-            html: '<img src="' + adlink + '" alt="Ad Poster">',
-            video: adlink,
-            url: "",
-            playDuration: 5,
-            totalDuration: 10,
-            i18n: {
-              close: "Funga",
-              countdown: "%s Amasegonda 5",
-              detail: "Kwamamaza",
-              canBeClosed: "%s Amasegonda 3",
-            },
-          }),
-          artplayerPluginHlsQuality({
-            control: true,
-            setting: true,
-            getResolution: (level) => level.height + "P",
-            title: "Quality",
-            auto: "Auto",
-          }),
-        ],
+      plugins:
+        adstatus === "false"
+          ? [
+            artplayerPluginHlsQuality({
+              control: true,
+              setting: true,
+              getResolution: (level) => level.height + "P",
+              title: "Quality",
+              auto: "Auto",
+            }),
+          ]
+          : [
+            artplayerPluginAds({
+              html: '<img src="' + adlink + '" alt="Ad Poster">',
+              video: adlink,
+              url: "",
+              playDuration: 5,
+              totalDuration: 10,
+              i18n: {
+                close: "Funga",
+                countdown: "%s Amasegonda 5",
+                detail: "Kwamamaza",
+                canBeClosed: "%s Amasegonda 3",
+              },
+            }),
+            artplayerPluginHlsQuality({
+              control: true,
+              setting: true,
+              getResolution: (level) => level.height + "P",
+              title: "Quality",
+              auto: "Auto",
+            }),
+          ],
       customType: {
         m3u8: function playM3u8(video, url, art) {
           if (Hls.isSupported()) {
@@ -394,7 +436,6 @@
 
     //An event for controlling when the DOM is loaded
     document.addEventListener("DOMContentLoaded", function () {
-
       art_mask = document.querySelector(".art-mask");
       var custom_select_div = document.getElementById("custom-select-div");
       var title_watchList = document.getElementById("title_watchList");
@@ -417,6 +458,8 @@
         watchLaterContainer.style.visibility = "hidden";
       };
 
+      document.querySelector(".art-mask").style.display = "none";
+
       condition_To_Hide_Select_Button = type == "M" ? false : true;
 
       if (condition_To_Hide_Select_Button) {
@@ -434,9 +477,84 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               watch_Later_Card.style.transform = "translateX(0px)";
+
+              art.layers.update({
+                name: "rebaPlayerControls",
+                html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        	</div>
+        	<div class="center-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+        	        width: 70px;
+        	        height: 70px;
+        	    ">
+        	            <path id="playingButtonPath" d="${pathCode}" />
+        	        </svg>
+        	    </button>
+        	</div>
+        	<div class="button-rebaPlayer right-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+        	        </svg>
+        	    </button>
+        	</div>`,
+                style: {
+                  width: "100%",
+                  height: "10%",
+                  alignSelf: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "absolute",
+                },
+              });
               // Do something when the element is in the viewport
             } else {
               watch_Later_Card.style.transform = "translateX(350px)";
+
+              art.layers.update({
+                name: "rebaPlayerControls",
+                html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        	</div>
+        	<div class="center-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+        	        width: 70px;
+        	        height: 70px;
+        	    ">
+        	            <path id="playingButtonPath" d="${pathCode}" />
+        	        </svg>
+        	    </button>
+        	</div>
+        	<div class="button-rebaPlayer right-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+        	        </svg>
+        	    </button>
+        	</div>`,
+                style: {
+                  width: "100%",
+                  height: "10%",
+                  alignSelf: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "absolute",
+                  display: "none",
+                },
+              });
               // Do something when the element is out of the viewport
             }
           });
@@ -464,7 +582,7 @@
       });
 
       // Add an event listener for the change event
-      selectElement.addEventListener('change', changeSeason);
+      selectElement.addEventListener("change", changeSeason);
       //---------------------- FUNCTION TO AUTO PLAYER -------------------------------
 
       art_video_player.addEventListener("canplay", function () {
@@ -476,41 +594,32 @@
     });
 
     //Function To Receives data
-    window.addEventListener('message', function (event) {
-
+    window.addEventListener("message", function (event) {
       if (event.data.action == "getdata") {
         onloadSeason_Episode();
       } else if (event.data.action == "getstreamingurl") {
         nextToWatch(event.data.data.link, event.data.data.movieId);
       }
-
     });
-
 
     function onloadSeason_Episode() {
       if (slides_availability == true) {
-
         slideData = event.data.data.epsodes;
         seasons = event.data.data.seasons;
         current_slideData = slideData[current_slideData_index];
         populateSlides(current_slideData);
         populateSeason(seasons, current_season_index);
-
       } else {
-
         let timer;
 
         timer = setInterval(function () {
-
           if (slides_availability) {
-
             clearInterval(timer);
             slideData = event.data.data.epsodes;
             seasons = event.data.data.seasons;
             current_slideData = slideData[current_slideData_index];
             populateSlides(current_slideData);
             populateSeason(seasons, current_season_index);
-
           }
         }, 1000); // Check every second
       }
@@ -566,6 +675,108 @@
 
     art.on("video:timeupdate", onTimeUpdate);
 
+    art.on("pause", () => {
+      pathCode = "M8 5v14l11-7z";
+      art.layers.update({
+        name: "rebaPlayerControls",
+        html: `<div class="button-rebaPlayer left-button-rebaPlayer">
+          <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                  <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+              </svg>
+          </button>
+        </div>
+        <div class="center-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+                <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+                width: 70px;
+                height: 70px;
+            ">
+                    <path id="playingButtonPath" d="${pathCode}" />
+                </svg>
+            </button>
+        </div>
+        <div class="button-rebaPlayer right-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        </div>`,
+        style: {
+          width: "100%",
+          height: "10%",
+          alignSelf: "center",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "absolute",
+          //display: "none",
+        },
+      });
+    });
+
+    art.on("play", () => {
+      pathCode = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+      art.layers.update({
+        name: "rebaPlayerControls",
+        html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
+          <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                  <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+              </svg>
+          </button>
+        </div>
+        <div class="center-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+                <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+                width: 70px;
+                height: 70px;
+            ">
+                    <path id="playingButtonPath" d="${pathCode}" />
+                </svg>
+            </button>
+        </div>
+        <div class="button-rebaPlayer right-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        </div>`,
+        style: {
+          width: "100%",
+          height: "10%",
+          alignSelf: "center",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "absolute",
+          //display: "none",
+        },
+      });
+    });
+
+    function leftButtonClick() {
+      if (deviceType == "desktop") {
+        art.backward = 30;
+      } else {
+        //go_to_next_slide();
+      }
+    }
+
+    function rightButtonClick() {
+      if (deviceType == "desktop") {
+        art.forward = 30;
+      } else {
+        go_to_next_slide();
+      }
+    }
+
+    function centerButtonClick() {
+      art.toggle();
+    }
+
     function watchListObserver() {
       const target = document.querySelector(
         ".art-layer.art-layer-wachLaterLayer"
@@ -614,7 +825,7 @@
     }
 
     function populateSeason(seasonsparameter, startingIndex) {
-      selectElement.innerHTML = '';// deleting all existing options
+      selectElement.innerHTML = ""; // deleting all existing options
       seasonsparameter.forEach((season) => {
         addOption(season.value, season.text);
       });
@@ -662,13 +873,14 @@
             marginRight: "10px",
           });
           slideDiv.id =
-            "slide" + (slideDataParameter.length == index + 1 ? "Last" : index + 1);
+            "slide" +
+            (slideDataParameter.length == index + 1 ? "Last" : index + 1);
           // insert Data : image , title
-          const indexed = slideDataParameter.length == index + 1 ? "Last" : index + 1;
+          const indexed =
+            slideDataParameter.length == index + 1 ? "Last" : index + 1;
           slideDiv.innerHTML = `
                          <img src="${slide.longCover}" alt="Slide ${index + 1}">
-                         <img id="slide_loading_icon${indexed
-            }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
+                         <img id="slide_loading_icon${indexed}" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
                             " alt="Description of the GIF" style="
                             width: 120px;
                             height: 35px;
@@ -677,14 +889,12 @@
                             top: 40%;
                             right: 30%;
                         ">
-                         <div id="slide_label${indexed
-            }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
+                         <div id="slide_label${indexed}" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
             };"><b id="slide_number${indexed}">${slide.episode}</b></div>
                          <div class="gradient" id="gradient${indexed}"></div>
                          <div class="caption">${slide.title}</div>
                          <!-- Your SVG icon here -->
-                         <svg id="svg_icon${indexed
-            }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+                         <svg id="svg_icon${indexed}" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
                              <path d="M8 5v14l11-7z" />
                          </svg>
                      `;
@@ -699,11 +909,20 @@
           newMainIndex = slideDiv.id;
           selectedSlide(oldMainIndex, newMainIndex);
           oldMainIndex = newMainIndex;
-          sendMessage({ action: "getstreamingurl", data: { links: slideDataParameter[index]["v_v"], movieId: slideDataParameter[index].id } });
-          art.url = '';
+          sendMessage({
+            action: "getstreamingurl",
+            data: {
+              links: slideDataParameter[index]["v_v"],
+              movieId: slideDataParameter[index].id,
+            },
+          });
+          art.url = "";
           current_slide_index = index;
           current_season_index = selectElement.selectedIndex;
-          console.log("clicked slide index : " + current_slide_index, "current season of slide : " + current_season_index);
+          console.log(
+            "clicked slide index : " + current_slide_index,
+            "current season of slide : " + current_season_index
+          );
         });
       });
 
@@ -712,28 +931,22 @@
     }
 
     function hide_next_Button(state) {
-
-      art.controls.update(
-        {
-          name: 'next-episode-button',
-          index: 20,
-          position: 'left',
-          html: '<svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
-          tooltip: 'Next Episode',
-          style: {
-            display: deviceType == "desktop" && type != "M" ? "flex" : "none",
-          },
-          click: function (...args) {
-            go_to_next_slide();
-          }
+      art.controls.update({
+        name: "next-episode-button",
+        index: 20,
+        position: "left",
+        html: '<svg height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
+        tooltip: "Next Episode",
+        style: {
+          display: deviceType == "desktop" && type != "M" ? "flex" : "none",
         },
-
-      );
-
+        click: function (...args) {
+          go_to_next_slide();
+        },
+      });
     }
 
     function go_to_next_slide() {
-
       current_slide_index = current_slide_index + 1;
 
       if (current_slideData.length == current_slide_index + 1) {
@@ -743,18 +956,28 @@
         newMainIndex = "slideLast";
         selectedSlide(oldMainIndex, newMainIndex);
         oldMainIndex = newMainIndex;
-        sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
+        sendMessage({
+          action: "getstreamingurl",
+          data: {
+            links: current_slideData[current_slide_index]["v_v"],
+            movieId: current_slideData[current_slide_index].id,
+          },
+        });
       } else if (current_slideData.length > current_slide_index + 1) {
         newMainIndex = "slide" + (current_slide_index + 1);
         selectedSlide(oldMainIndex, newMainIndex);
         oldMainIndex = newMainIndex;
-        sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
+        sendMessage({
+          action: "getstreamingurl",
+          data: {
+            links: current_slideData[current_slide_index]["v_v"],
+            movieId: current_slideData[current_slide_index].id,
+          },
+        });
       }
 
       if (current_slideData.length < current_slide_index + 1) {
-
         if (seasons.length >= current_season_index) {
-
           current_season_index = current_season_index + 1;
           current_slideData_index = current_slideData_index + 1;
           selectElement.selectedIndex = current_season_index;
@@ -764,14 +987,19 @@
           current_slide_index = 0;
           populateSlides(current_slideData);
           selectedSlide(oldMainIndex, newMainIndex);
-          sendMessage({ action: "getstreamingurl", data: { links: current_slideData[current_slide_index]["v_v"], movieId: current_slideData[current_slide_index].id } });
+          sendMessage({
+            action: "getstreamingurl",
+            data: {
+              links: current_slideData[current_slide_index]["v_v"],
+              movieId: current_slideData[current_slide_index].id,
+            },
+          });
 
-          seasons.length == current_season_index ? is_last_season = true : is_last_season = false;
-
+          seasons.length == current_season_index
+            ? (is_last_season = true)
+            : (is_last_season = false);
         }
-
       }
-
     }
 
     function createAndAppendElement(
@@ -798,25 +1026,25 @@
     function slide1AndLastAreInViewPort(elementId, element) {
       /* const target = document.getElementById(elementId);
  
-       const observer = new IntersectionObserver(
-         (entries, observer) => {
-           entries.forEach((entry) => {
-             if (entry.isIntersecting) {
-               element.style.visibility = "hidden";
-               // Do something when the element is in the viewport
-             } else {
-               element.style.visibility = "visible";
-               // Do something when the element is out of the viewport
-             }
-           });
-         },
-         {
-           root: null, // relative to the viewport
-           threshold: 0.7, // percentage of the element's visibility
-         }
-       );
+     const observer = new IntersectionObserver(
+       (entries, observer) => {
+         entries.forEach((entry) => {
+           if (entry.isIntersecting) {
+             element.style.visibility = "hidden";
+             // Do something when the element is in the viewport
+           } else {
+             element.style.visibility = "visible";
+             // Do something when the element is out of the viewport
+           }
+         });
+       },
+       {
+         root: null, // relative to the viewport
+         threshold: 0.7, // percentage of the element's visibility
+       }
+     );
  
-       observer.observe(target);*/
+     observer.observe(target);*/
     }
 
     function nextToWatch(url, movieId) {
@@ -827,22 +1055,50 @@
     }
 
     function selectedSlide(oldSlideId, newSlideId) {
-      const oldIndex = oldSlideId ? oldSlideId.replace(/slide(\d+|Last)/g, "$1") : null;
-      const newIndex = newSlideId ? newSlideId.replace(/slide(\d+|Last)/g, "$1") : null;
+      const oldIndex = oldSlideId
+        ? oldSlideId.replace(/slide(\d+|Last)/g, "$1")
+        : null;
+      const newIndex = newSlideId
+        ? newSlideId.replace(/slide(\d+|Last)/g, "$1")
+        : null;
 
-      const oldElementgradient = oldIndex ? document.getElementById("gradient" + oldIndex) : null;
-      const oldElementslide = oldIndex ? document.getElementById("slide" + oldIndex) : null;
-      const oldElementslide_label = oldIndex ? document.getElementById("slide_label" + oldIndex) : null;
-      const oldElementslide_loading_icon = oldIndex ? document.getElementById("slide_loading_icon" + oldIndex) : null;
-      const oldElementsvg = oldIndex ? document.getElementById("svg_icon" + oldIndex) : null;
-      const oldElementslide_number = oldIndex ? document.getElementById("slide_number" + oldIndex) : null;
+      const oldElementgradient = oldIndex
+        ? document.getElementById("gradient" + oldIndex)
+        : null;
+      const oldElementslide = oldIndex
+        ? document.getElementById("slide" + oldIndex)
+        : null;
+      const oldElementslide_label = oldIndex
+        ? document.getElementById("slide_label" + oldIndex)
+        : null;
+      const oldElementslide_loading_icon = oldIndex
+        ? document.getElementById("slide_loading_icon" + oldIndex)
+        : null;
+      const oldElementsvg = oldIndex
+        ? document.getElementById("svg_icon" + oldIndex)
+        : null;
+      const oldElementslide_number = oldIndex
+        ? document.getElementById("slide_number" + oldIndex)
+        : null;
 
-      const newElementgradient = newIndex ? document.getElementById("gradient" + newIndex) : null;
-      const newElementslide = newIndex ? document.getElementById("slide" + newIndex) : null;
-      const newElementslide_label = newIndex ? document.getElementById("slide_label" + newIndex) : null;
-      const newElementslide_loading_icon = newIndex ? document.getElementById("slide_loading_icon" + newIndex) : null;
-      const newElementsvg = newIndex ? document.getElementById("svg_icon" + newIndex) : null;
-      const newElementslide_number = newIndex ? document.getElementById("slide_number" + newIndex) : null;
+      const newElementgradient = newIndex
+        ? document.getElementById("gradient" + newIndex)
+        : null;
+      const newElementslide = newIndex
+        ? document.getElementById("slide" + newIndex)
+        : null;
+      const newElementslide_label = newIndex
+        ? document.getElementById("slide_label" + newIndex)
+        : null;
+      const newElementslide_loading_icon = newIndex
+        ? document.getElementById("slide_loading_icon" + newIndex)
+        : null;
+      const newElementsvg = newIndex
+        ? document.getElementById("svg_icon" + newIndex)
+        : null;
+      const newElementslide_number = newIndex
+        ? document.getElementById("slide_number" + newIndex)
+        : null;
 
       function removeInlineStyleIfExists(element, property) {
         if (element && element.style.getPropertyValue(property)) {
@@ -851,26 +1107,37 @@
       }
 
       if (oldSlideId != null) {
-        if (oldElementgradient) removeInlineStyleIfExists(oldElementgradient, "opacity");
-        if (oldElementslide) removeInlineStyleIfExists(oldElementslide, "border");
-        if (oldElementslide_number) removeInlineStyleIfExists(oldElementslide_number, "color");
-        if (oldElementslide_label) removeInlineStyleIfExists(oldElementslide_label, "background-color");
-        if (oldElementslide_loading_icon) oldElementslide_loading_icon.style.display = "none";
+        if (oldElementgradient)
+          removeInlineStyleIfExists(oldElementgradient, "opacity");
+        if (oldElementslide)
+          removeInlineStyleIfExists(oldElementslide, "border");
+        if (oldElementslide_number)
+          removeInlineStyleIfExists(oldElementslide_number, "color");
+        if (oldElementslide_label)
+          removeInlineStyleIfExists(
+            oldElementslide_label,
+            "background-color"
+          );
+        if (oldElementslide_loading_icon)
+          oldElementslide_loading_icon.style.display = "none";
         if (oldElementsvg) oldElementsvg.style.display = "block";
       }
 
       if (newSlideId != null) {
         if (newElementgradient) newElementgradient.style.opacity = "1";
-        if (newElementslide) newElementslide.style.border = "3px solid #00ff0a";
-        if (newElementslide_label) newElementslide_label.style.backgroundColor = "#00ff0a";
-        if (newElementslide_loading_icon) newElementslide_loading_icon.style.display = "block";
+        if (newElementslide)
+          newElementslide.style.border = "3px solid #00ff0a";
+        if (newElementslide_label)
+          newElementslide_label.style.backgroundColor = "#00ff0a";
+        if (newElementslide_loading_icon)
+          newElementslide_loading_icon.style.display = "block";
         if (newElementsvg) newElementsvg.style.display = "none";
-        if (newElementslide_number) newElementslide_number.style.color = "black";
+        if (newElementslide_number)
+          newElementslide_number.style.color = "black";
       }
     }
 
     function createElement() {
-
       const mainDiv = document.getElementById("main-div");
 
       navButtonLeft = createAndAppendElement(
@@ -878,7 +1145,7 @@
         mainDiv,
         "nav-button left",
         {
-          visibility: "visible",// To Change
+          visibility: "visible", // To Change
         }
       );
       navButtonLeft.innerHTML = `
@@ -1202,7 +1469,7 @@
                          background-color: rgba(0, 0, 0, 0.8);
                      }
 
-                    .slide_label {
+                     .slide_label {
                           position: absolute;
                           right: 10px;
                           top: 0px;
@@ -1218,6 +1485,62 @@
                           padding: 10px;
                      }
 
+                      .all_button-rebaPlayer {
+                         border-radius: 50%;
+                         transition: transform 0.1s;
+                      }
+                  
+                     .all_button-rebaPlayer:active {
+                          transform: scale(0.8);
+                       }
+                     .button-rebaPlayer {
+                         display: flex;
+                         justify-content: center;
+                         position: absolute;
+                     }
+                  
+                     .left-button-rebaPlayer {
+                         right: 50%;
+                         margin-right: 90px;
+                         /* 40px + half the width of the button (50px) */
+                     }
+                  
+                     .right-button-rebaPlayer {
+                         left: 50%;
+                         margin-left: 90px;
+                         /* 40px + half the width of the button (50px) */
+                     }
+                  
+                     .button-rebaPlayer button {
+                         background: none;
+                         border: none;
+                         cursor: pointer;
+                     }
+                  
+                     .center-button-rebaPlayer {
+                         position: absolute;
+                         left: 50%;
+                         transform: translateX(-50%);
+                     }
+                  
+                     .center-button-rebaPlayer button {
+                         background: none;
+                         border: none;
+                         cursor: pointer;
+                     }
+                  
+                     .rebaPlayerSvg {
+                         width: 60px;
+                         height: 60px;
+                         fill: white;
+                         background-color: #00000040;
+                         border-radius: 50%;
+                     }
+                  
+                     .left-button-rebaPlayer svg {
+                         transform: scaleX(-1);
+                         /* Flip horizontally */
+                     }
                  `;
       document.head.appendChild(style);
 
@@ -1239,7 +1562,6 @@
         });
       });
     }
-
   </script>
 </body>
 
