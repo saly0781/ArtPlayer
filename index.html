@@ -182,6 +182,7 @@
     let current_slide_index = 0;
     let is_last_season = false;
     let pathCode = "M8 5v14l11-7z";
+    let viewBoxSize = deviceType == "mobile" ? "0 0 36 36" : "-6 -6 36 36";
     let next_fast_pathCode =
       deviceType == "mobile"
         ? "M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"
@@ -241,7 +242,7 @@
           name: "rebaPlayerControls",
           html: `<div class="button-rebaPlayer left-button-rebaPlayer" id="leftButtonDiv">
             <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
                     <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
                 </svg>
             </button>
@@ -258,7 +259,7 @@
         	</div>
         	<div class="button-rebaPlayer right-button-rebaPlayer" >
         	    <button class="all_button-rebaPlayer" id="rightButtonDiv" onclick="rightButtonClick()">
-        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
         	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
         	        </svg>
         	    </button>
@@ -482,7 +483,7 @@
                 name: "rebaPlayerControls",
                 html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
             <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
                     <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
                 </svg>
             </button>
@@ -499,7 +500,7 @@
         	</div>
         	<div class="button-rebaPlayer right-button-rebaPlayer" >
         	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
         	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
         	        </svg>
         	    </button>
@@ -522,7 +523,7 @@
                 name: "rebaPlayerControls",
                 html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
             <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
                     <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
                 </svg>
             </button>
@@ -539,7 +540,7 @@
         	</div>
         	<div class="button-rebaPlayer right-button-rebaPlayer" >
         	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
         	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
         	        </svg>
         	    </button>
@@ -681,7 +682,7 @@
         name: "rebaPlayerControls",
         html: `<div class="button-rebaPlayer left-button-rebaPlayer">
           <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
                   <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
               </svg>
           </button>
@@ -698,7 +699,7 @@
         </div>
         <div class="button-rebaPlayer right-button-rebaPlayer" >
             <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
                     <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
                 </svg>
             </button>
@@ -722,7 +723,7 @@
         name: "rebaPlayerControls",
         html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
           <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
                   <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
               </svg>
           </button>
@@ -739,7 +740,7 @@
         </div>
         <div class="button-rebaPlayer right-button-rebaPlayer" >
             <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
                     <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
                 </svg>
             </button>
