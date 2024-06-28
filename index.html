@@ -625,9 +625,8 @@
         const fullTime = timeParts[0];
         const [minutes, seconds] = fullTime.split(':').map(part => parseInt(part, 10));
 
-        if (!isNaN(minutes) && !isNaN(seconds)) {
           const timeInSeconds = (minutes * 60) + seconds;
-
+          console.error('Time : ' , timeInSeconds);
           // Copy the time in seconds to clipboard
           copyToClipboard(timeInSeconds.toString());
 
@@ -640,6 +639,7 @@
             textarea.style.left = '-9999px';
             document.body.appendChild(textarea);
             textarea.select();
+            console.error('Text Time : ' , textarea.value);
             document.execCommand('copy');
             document.body.removeChild(textarea);
 
@@ -647,9 +647,7 @@
             //alert('Content copied to clipboard');
 
           }
-        } else {
-          console.error('Failed to parse time.');
-        }
+    
       } else {
         console.error('Time element not found.');
       }
