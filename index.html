@@ -604,22 +604,51 @@
       } else if (event.data.action == "getstreamingurl") {
         nextToWatch(event.data.data.link, event.data.data.movieId);
       } else if (event.data.action == "copyTime") {
-        // Select the element containing the time
-        const timeElement = document.querySelector('.art-control-time');
-
-        // Get the text content of the element
-        const timeText = timeElement.textContent.trim();
-
-        // Split the text by the slash character ('/')
-        const timeParts = timeText.split(' / ');
-
-        // Extract the time before the slash
-        const timeBeforeSlash = timeParts[0];
-        console.error("Time Now : ", timeBeforeSlash);
+        sen_is_copying();
       }
 
 
     });
+
+    function sen_is_copying() {
+
+      // Select the element containing the time
+      const timeElement = document.querySelector('.art-control-time');
+
+      // Get the text content of the element
+      const timeText = timeElement.textContent.trim();
+
+      // Split the text by the slash character ('/')
+      const timeParts = timeText.split(' / ');
+
+      // Extract the time before the slash (assuming it's in HH:mm:ss format)
+      const fullTime = timeParts[0];
+      const [hours, minutes, seconds] = fullTime.split(':');
+      const timeInMinutes = parseInt(hours) * 60 + parseInt(minutes);
+
+      // Convert minutes to seconds
+      const timeInSeconds = timeInMinutes * 60;
+
+      // Copy the time in seconds to clipboard
+      copyToClipboard(timeInSeconds.toString());
+
+      // Function to copy text to clipboard
+      function copyToClipboard(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'absolute';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        // Inform the user that the content has been copied
+        alert('Movie Time Copied');
+      }
+
+    }
 
     function onloadSeason_Episode() {
       if (slides_availability == true) {
