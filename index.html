@@ -643,6 +643,9 @@
             document.execCommand('copy');
             document.body.removeChild(textarea);
 
+            // Inform the user that the content has been copied
+            alert('Content copied to clipboard');
+
           }
         } else {
           console.error('Failed to parse time.');
