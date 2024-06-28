@@ -154,7 +154,7 @@
     let newMainIndex = "slide1";
     let navButtonLeft;
     let userRole = getParameterByName("userRole"); // to be Deleted later
-    let userChoice = userRole == "Admin" ? "grid" : "none"; // to be Deleted later
+    let userChoice = type != "M" ? "grid" : "none"; // to be Deleted later
     let navButtonRight;
     let selectElement;
     let slides_availability = false;
@@ -373,7 +373,7 @@
           html: '<svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
           tooltip: "Next Episode",
           style: {
-            display: userRole == "Admin" ? "flex" : "none",
+            display: type != "M" ? "flex" : "none",
           },
           click: function (...args) {
             go_to_next_slide();
