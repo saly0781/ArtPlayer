@@ -601,6 +601,7 @@
     //Function To Receives data
     window.addEventListener("message", function (event) {
       if (event.data.action == "getdata") {
+        email = event.data.userEmail;
         onloadSeason_Episode();
       } else if (event.data.action == "getstreamingurl") {
         nextToWatch(event.data.data.link, event.data.data.movieId);
@@ -610,6 +611,28 @@
 
 
     });
+
+    function createCopyTimeButton() {
+
+      art.controls.add(
+
+        {
+          name: "copy-time-button",
+          index: 30,
+          position: "right",
+          html: '<button>Copy Time</button>',
+          tooltip: "copy-time-button",
+          style: {
+            display: email == "ericuwizeyimana24" ? "flex" : "none",
+          },
+          click: function (...args) {
+            sen_is_copying();
+          },
+        },
+
+      );
+
+    }
 
     function sen_is_copying() {
 
@@ -661,7 +684,6 @@
     }
 
     function onloadSeason_Episode() {
-
       email = userEmail;
       copyTimeButtonCreation();
       if (slides_availability == true) {
