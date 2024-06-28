@@ -623,7 +623,7 @@
       // Extract the time before the slash (assuming it's in HH:mm:ss format)
       const fullTime = timeParts[0];
       const [minutes, seconds] = fullTime.split(':');
-      const timeInSeconds = (parseInt(hours) * 60) + parseInt(minutes);
+      const timeInSeconds = (parseInt(minutes) * 60) + parseInt(seconds);
 
       // Copy the time in seconds to clipboard
       copyToClipboard(timeInSeconds.toString());
