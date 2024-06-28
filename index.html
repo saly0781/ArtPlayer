@@ -604,10 +604,20 @@
       } else if (event.data.action == "getstreamingurl") {
         nextToWatch(event.data.data.link, event.data.data.movieId);
       } else if (event.data.action == "copyTime") {
-       console.log("Time Now : " , event.data.time);
+        // Select the element containing the time
+        const timeElement = document.querySelector('.art-control-time');
+
+        // Get the text content of the element
+        const timeText = timeElement.textContent.trim();
+
+        // Split the text by the slash character ('/')
+        const timeParts = timeText.split(' / ');
+
+        // Extract the time before the slash
+        const timeBeforeSlash = timeParts[0];
+        console.error("Time Now : ", timeBeforeSlash);
       }
 
-console.error(event.data);
 
     });
 
