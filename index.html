@@ -138,6 +138,7 @@
     let adstatus = getParameterByName("adstatus");
     let movieId = getParameterByName("movieId");
     let episodeId = getParameterByName("episodeId");
+    let languageCode = getParameterByName("languageCode");
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
     let percentage = 0;
     let container = document.querySelector(".artplayer-app");
@@ -180,6 +181,8 @@
     let player_container_div_marginBottom = "20px";
     let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
     let current_slide_index = 0;
+    let title_continue = languageCode == "rw" ? "Izindi" : "Next";
+    let title_watching = languageCode == "rw" ? "Episode" : "Epsode"
     let is_last_season = false;
     let pathCode = "M8 5v14l11-7z";
     let viewBoxSize = deviceType == "mobile" ? "0 0 36 36" : "-6 -6 36 36";
@@ -323,8 +326,8 @@
           html: `
                        <div class="playlist_icon_container" style="position: absolute;">
                           <div style="margin-right: 10px; margin-left: 10px;">
-                              <div style="font-size: calc(${watchList_title_size} - 5px);">Continue</div>
-                              <div style="font-size: ${watchList_title_size};font-family: sans-serif;"><b>Watching</b></div>
+                              <div style="font-size: calc(${watchList_title_size} - 5px);">${title_continue}</div>
+                              <div style="font-size: ${watchList_title_size};font-family: sans-serif;"><b>${title_watching}</b></div>
                           </div>
                           <div class="playlist-icon" style="margin-top: 5%;">
                               <div class="rectangle rect1">
@@ -600,6 +603,8 @@
         onloadSeason_Episode();
       } else if (event.data.action == "getstreamingurl") {
         nextToWatch(event.data.data.link, event.data.data.movieId);
+      } else if (event.data.action == "copyTime") {
+       console.log("Time Now : " , event.data.time);
       }
     });
 
