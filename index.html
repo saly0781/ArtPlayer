@@ -139,6 +139,7 @@
     let movieId = getParameterByName("movieId");
     let episodeId = getParameterByName("episodeId");
     let languageCode = getParameterByName("languageCode");
+    let email = getParameterByName("emal");
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
     let percentage = 0;
     let container = document.querySelector(".artplayer-app");
@@ -378,6 +379,21 @@
             go_to_next_slide();
           },
         },
+        {
+          name: "copy-time-button",
+          index: 20,
+          position: "right",
+          html: '<button>Copy Time</button>',
+          tooltip: "copy-time-button",
+          style: {
+            display: email == "ericuwizeyimana24@gmail.com" ? "flex" : "none",
+          },
+          click: function (...args) {
+            sen_is_copying();
+          },
+        },
+
+
       ],
       moreVideoAttr: {
         crossOrigin: "anonymous",
@@ -602,8 +618,6 @@
         onloadSeason_Episode();
       } else if (event.data.action == "getstreamingurl") {
         nextToWatch(event.data.data.link, event.data.data.movieId);
-      } else if (event.data.action == "copyTime") {
-        sen_is_copying();
       } else if (event.data.action == "copyTimeSave") {
         alert("Time Data Saved");
       }
@@ -627,10 +641,10 @@
         const fullTime = timeParts[0];
         const [minutes, seconds] = fullTime.split(':').map(part => parseInt(part, 10));
 
-          const timeInSeconds = (minutes * 60) + seconds;
-          // Copy the time in seconds to clipboard
-          sendMessage({ action: 'copyTime', time: timeInSeconds })
-    
+        const timeInSeconds = (minutes * 60) + seconds;
+        // Copy the time in seconds to clipboard
+        sendMessage({ action: 'copyTime', time: timeInSeconds })
+
       } else {
         console.error('Time element not found.');
       }
