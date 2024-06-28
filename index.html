@@ -632,14 +632,17 @@
           copyToClipboard(timeInSeconds.toString());
 
           // Function to copy text to clipboard
-          async function copyToClipboard(text) {
-            try {
-              await navigator.clipboard.writeText(text);
-              // Inform the user that the content has been copied
-              alert('Movie Time Copied');
-            } catch (err) {
-              console.error('Failed to copy text: ', err);
-            }
+          function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
           }
         } else {
           console.error('Failed to parse time.');
