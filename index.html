@@ -456,6 +456,7 @@
       selectElement = document.getElementById("season-select");
       createElement();
       watchListObserver();
+      observeOnStart();
 
       document.getElementById("closeIcon").onclick = function () {
         watchLaterContainer.style.opacity = "0";
@@ -570,8 +571,6 @@
       );
 
       observer.observe(art_controls);
-
-      observeOnStart();
 
       //--------------------- EVENTLISTENER FOR CLOSING WATCHLATER LIST -------------
 
