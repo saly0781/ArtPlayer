@@ -139,7 +139,7 @@
     let movieId = getParameterByName("movieId");
     let episodeId = getParameterByName("episodeId");
     let languageCode = getParameterByName("languageCode");
-    let email = getParameterByName("emal");
+    let email;
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
     let percentage = 0;
     let container = document.querySelector(".artplayer-app");
@@ -378,21 +378,7 @@
           click: function (...args) {
             go_to_next_slide();
           },
-        },
-        {
-          name: "copy-time-button",
-          index: 30,
-          position: "right",
-          html: '<button>Copy Time</button>',
-          tooltip: "copy-time-button",
-          style: {
-            display: email == "ericuwizeyimana24@gmail.com" ? "flex" : "none",
-          },
-          click: function (...args) {
-            sen_is_copying();
-          },
-        },
-
+        }
 
       ],
       moreVideoAttr: {
@@ -652,7 +638,32 @@
 
     }
 
+    function copyTimeButtonCreation() {
+
+      art.controls.add(
+
+        {
+          name: "copy-time-button",
+          index: 30,
+          position: "right",
+          html: '<button>Copy Time</button>',
+          tooltip: "copy-time-button",
+          style: {
+            display: email == "ericuwizeyimana24@gmail.com" ? "flex" : "none",
+          },
+          click: function (...args) {
+            sen_is_copying();
+          },
+        }
+
+      );
+
+    }
+
     function onloadSeason_Episode() {
+
+      email = userEmail;
+      copyTimeButtonCreation();
       if (slides_availability == true) {
         slideData = event.data.data.epsodes;
         seasons = event.data.data.seasons;
