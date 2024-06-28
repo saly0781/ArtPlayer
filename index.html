@@ -604,6 +604,8 @@
         nextToWatch(event.data.data.link, event.data.data.movieId);
       } else if (event.data.action == "copyTime") {
         sen_is_copying();
+      } else if (event.data.action == "copyTimeSave") {
+        alert("Time Data Saved");
       }
 
 
@@ -626,27 +628,8 @@
         const [minutes, seconds] = fullTime.split(':').map(part => parseInt(part, 10));
 
           const timeInSeconds = (minutes * 60) + seconds;
-          console.error('Time : ' , timeInSeconds);
           // Copy the time in seconds to clipboard
-          copyToClipboard(timeInSeconds.toString());
-
-          // Function to copy text to clipboard
-          function copyToClipboard(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.setAttribute('readonly', '');
-            textarea.style.position = 'absolute';
-            textarea.style.left = '-9999px';
-            document.body.appendChild(textarea);
-            textarea.select();
-            console.error('Text Time : ' , textarea.value);
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-
-            // Inform the user that the content has been copied
-            //alert('Content copied to clipboard');
-
-          }
+          sendMessage({ action: 'copyTime', time: timeInSeconds })
     
       } else {
         console.error('Time element not found.');
