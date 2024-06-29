@@ -680,6 +680,7 @@
 
         // All Time set and sent to DB
         if (allTime[0] != null && allTime[1] != null) {
+          allTime[2] = totalTime;      
           sendMessage({ action: 'copyTime', time: allTime });
           art.notice.show = 'Time Stamps Sent to be saved !';
         }
@@ -688,7 +689,6 @@
         console.error('Time element not found.');
       }
     }
-
 
     function onloadSeason_Episode() {
       if (slides_availability == true) {
@@ -714,7 +714,6 @@
     }
 
     // ------------ detect savers ----------------------------------------
-
     function observeOnStart() {
       // Select the video element using querySelector
       const videoElement = document.querySelector("video");
@@ -745,7 +744,6 @@
     }
 
     //-----------  Functions for sending messages and tracking time updates --------
-
     function sendMessage(msg) {
       window.parent.postMessage(msg, "*");
     }
@@ -917,7 +915,7 @@
     function populateSeason(seasonsparameter, startingIndex) {
       selectElement.innerHTML = ""; // deleting all existing options
       seasonsparameter.forEach((season) => {
-        addOption(season.value, season.text);
+        addOption(season.value, season.label);
       });
       selectElement.selectedIndex = startingIndex;
     }
@@ -1652,6 +1650,7 @@
         });
       });
     }
+
   </script>
 </body>
 
