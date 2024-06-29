@@ -150,6 +150,7 @@
     let art_controls;
     let art_bottom;
     let art_mask;
+    let allTime = [null, null];
     let oldMainIndex = "slide1";
     let newMainIndex = "slide1";
     let navButtonLeft;
@@ -636,20 +637,58 @@
         // Split the text by the slash character ('/')
         const timeParts = timeText.split(' / ');
 
-        // Extract the time before the slash (assuming it's in mm:ss format)
-        const fullTime = timeParts[0];
-        const [minutes, seconds] = fullTime.split(':').map(part => parseInt(part, 10));
+        // Extract the time before the slash
+        const currentTime = timeParts[0];
+        const totalTime = timeParts[1];
 
-        const timeInSeconds = (minutes * 60) + seconds;
-        // Copy the time in seconds to clipboard
-        sendMessage({ action: 'copyTime', time: timeInSeconds })
+        function convertTimeToSec(arrayTime) {
+          // Split the time by colon
+          const timeUnits = arrayTime.split(':').map(part => parseInt(part, 10));
+
+          // Initialize variables for hours, minutes, and seconds
+          let hours = 0, minutes = 0, seconds = 0;
+
+          // Check the length of timeUnits to determine if hours are included
+          if (timeUnits.length === 3) {
+            // Format is hh:mm:ss
+            [hours, minutes, seconds] = timeUnits;
+          } else if (timeUnits.length === 2) {
+            // Format is mm:ss
+            [minutes, seconds] = timeUnits;
+          }
+
+          // Convert the time to seconds
+          return (hours * 3600) + (minutes * 60) + seconds;
+        }
+
+        const currentTimeInSeconds = convertTimeToSec(currentTime);
+        const totalTimeInSeconds = convertTimeToSec(totalTime);
+
+        let percentageTime = currentTimeInSeconds / totalTimeInSeconds;
+
+        // Initializing the starting time
+        if (percentageTime < 0.5) {
+          allTime[0] = currentTimeInSeconds;
+          art.notice.show = 'Staring Time Copied';
+        }
+
+        // Initializing the ending time
+        if (percentageTime > 0.5) {
+          allTime[1] = currentTimeInSeconds;
+          art.notice.show = 'Ending Time Copied';
+        }
+
+        // All Time set and sent to DB
+        if (allTime[0] != null && allTime[1] != null) {
+          sendMessage({ action: 'copyTime', time: allTime });
+          art.notice.show = 'Time Stamps Sent to be saved !';
+        }
 
       } else {
         console.error('Time element not found.');
       }
-
-
     }
+
 
     function onloadSeason_Episode() {
       if (slides_availability == true) {
