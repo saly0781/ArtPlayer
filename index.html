@@ -848,6 +848,7 @@
     function leftButtonClick() {
       if (deviceType == "desktop") {
         art.backward = 30;
+        art.notice.show = languageCode == "rw" ? 'Wihutishije amasegonda - 30 ' : 'Fast Backward - 30 ';
       } else {
         //go_to_next_slide();
       }
@@ -856,6 +857,7 @@
     function rightButtonClick() {
       if (deviceType == "desktop") {
         art.forward = 30;
+        art.notice.show = languageCode == "rw" ? 'Wihutishije amasegonda + 30 ' : 'Fast Forward + 30 ';
       } else {
         go_to_next_slide();
       }
