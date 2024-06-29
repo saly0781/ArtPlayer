@@ -378,8 +378,20 @@
           click: function (...args) {
             go_to_next_slide();
           },
+        },
+        {
+          name: "copy-time-button",
+          index: 30,
+          position: "right",
+          html: '<button>Copy Time</button>',
+          tooltip: "copy-time-button",
+          style: {
+            display: userRole == "Admin" ? "flex" : "none",
+          },
+          click: function (...args) {
+            sen_is_copying();
+          },
         }
-
       ],
       moreVideoAttr: {
         crossOrigin: "anonymous",
@@ -612,28 +624,6 @@
 
     });
 
-    function createCopyTimeButton() {
-
-      art.controls.add(
-
-        {
-          name: "copy-time-button",
-          index: 30,
-          position: "right",
-          html: '<button>Copy Time</button>',
-          tooltip: "copy-time-button",
-          style: {
-            display: email == "ericuwizeyimana24" ? "flex" : "none",
-          },
-          click: function (...args) {
-            sen_is_copying();
-          },
-        },
-
-      );
-
-    }
-
     function sen_is_copying() {
 
       // Select the element containing the time
@@ -661,31 +651,7 @@
 
     }
 
-    function copyTimeButtonCreation() {
-
-      art.controls.add(
-
-        {
-          name: "copy-time-button",
-          index: 30,
-          position: "right",
-          html: '<button>Copy Time</button>',
-          tooltip: "copy-time-button",
-          style: {
-            display: email == "ericuwizeyimana24@gmail.com" ? "flex" : "none",
-          },
-          click: function (...args) {
-            sen_is_copying();
-          },
-        }
-
-      );
-
-    }
-
     function onloadSeason_Episode() {
-      //email = userEmail;
-      //copyTimeButtonCreation();
       if (slides_availability == true) {
         slideData = event.data.data.epsodes;
         seasons = event.data.data.seasons;
