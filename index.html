@@ -139,6 +139,10 @@
     let movieId = getParameterByName("movieId");
     let episodeId = getParameterByName("episodeId");
     let languageCode = getParameterByName("languageCode");
+    let current_slideData_index = getParameterByName("currentEpisodeIndex");
+    let current_season_index = getParameterByName("currentSeasonIndex");
+    let newMainIndex = getParameterByName("currentEpisodeSlideId");
+    let oldMainIndex = "slide1";
     let email;
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
     let percentage = 0;
@@ -151,8 +155,6 @@
     let art_bottom;
     let art_mask;
     let allTime = [null, null];
-    let oldMainIndex = "slide1";
-    let newMainIndex = "slide1";
     let navButtonLeft;
     let userRole = getParameterByName("userRole"); // to be Deleted later
     let userChoice = type != "M" ? "grid" : "none"; // to be Deleted later
@@ -169,8 +171,6 @@
       // Add more slide data as needed
     ];
     let current_slideData;
-    let current_season_index = 0;
-    let current_slideData_index = 0;
     let art_video_player;
     let deviceType = isMobileDevice() ? "mobile" : "desktop";
     let condition_To_Hide_Select_Button;
@@ -208,7 +208,6 @@
     // Artplayer settings
     Artplayer.MOBILE_DBCLICK_PLAY = true;
     Artplayer.CONTEXTMENU = false;
-    Artplayer.AUTO_PLAYBACK_MIN = 180;
     Artplayer.TOUCH_MOVE_RATIO = 1;
 
     // Initialize the Player
@@ -360,6 +359,12 @@
             transition: "transform 0.4s",
           },
           click: function () {
+            // scroll to the beginning of the selected slide
+            const slideWrapper = document.querySelector(".slide-wrapper");
+            slideWrapper.scrollTo({
+              left: current_slide_index * (slideWidth + 10),
+            });
+            // change styles for watchLaterContainer
             watchLaterContainer.style.visibility = "visible";
             watchLaterContainer.style.opacity = "1";
           },
@@ -620,6 +625,8 @@
         nextToWatch(event.data.data.link, event.data.data.movieId);
       } else if (event.data.action == "copyTimeSave") {
         alert(event.data.data);
+      } else if (event.data.action == "initialData") {
+        newData = event.data.data;
       }
 
 
@@ -680,7 +687,7 @@
 
         // All Time set and sent to DB
         if (allTime[0] != null && allTime[1] != null) {
-          allTime[2] = totalTime;      
+          allTime[2] = totalTime;
           sendMessage({ action: 'copyTime', time: allTime });
           art.notice.show = 'Time Stamps Sent to be saved !';
         }
@@ -750,13 +757,16 @@
 
     function onTimeUpdate() {
       percentage = (art.currentTime / art.duration) * 100;
-      newData.minPercentage = percentage;
-      if (percentage > 85) {
+      if (percentage > 80 && type == "M") {
         art.off("video:timeupdate", onTimeUpdate);
-        newData.status = "ended";
-        art.storage.del(newData.movieId);
+        art.storage.del(newData.id);
+        sendMessage({ action: "deleteContinue", data: newData });
+      } else if (percentage > 80 && type != "M" && is_last_season == true && newMainIndex == "slideLast") {
+        art.off("video:timeupdate", onTimeUpdate);
+        art.storage.del(newData.id);
+        sendMessage({ action: "deleteContinue", data: newData });
       }
-      sendMessage({ action: "timeupdate", data: newData });
+      
     }
 
     art.on("video:timeupdate", onTimeUpdate);
@@ -934,7 +944,7 @@
           slideDiv.id = "slide" + (index + 1);
           // insert Data : image , title
           slideDiv.innerHTML = `
-                         <img src="${slide.longCover}" alt="Slide ${index + 1}">
+                         <img src="${convertWixImageUrl(slide.longCover)}" alt="Slide ${index + 1}">
                          <img id="slide_loading_icon${index + 1
             }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
                             " alt="Description of the GIF" style="
@@ -967,7 +977,7 @@
           const indexed =
             slideDataParameter.length == index + 1 ? "Last" : index + 1;
           slideDiv.innerHTML = `
-                         <img src="${slide.longCover}" alt="Slide ${index + 1}">
+                         <img src="${convertWixImageUrl(slide.longCover)}" alt="Slide ${index + 1}">
                          <img id="slide_loading_icon${indexed}" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
                             " alt="Description of the GIF" style="
                             width: 120px;
@@ -995,6 +1005,8 @@
           // function to call nextMovie ....
 
           newMainIndex = slideDiv.id;
+          newData = slideDataParameter[index];
+          newData["S_E"].push(newMainIndex);
           selectedSlide(oldMainIndex, newMainIndex);
           oldMainIndex = newMainIndex;
           sendMessage({
@@ -1002,20 +1014,23 @@
             data: {
               links: slideDataParameter[index]["v_v"],
               movieId: slideDataParameter[index].id,
+              saveData : newData,
             },
           });
           art.url = "";
           current_slide_index = index;
           current_season_index = selectElement.selectedIndex;
-          console.log(
-            "clicked slide index : " + current_slide_index,
-            "current season of slide : " + current_season_index
-          );
         });
       });
 
       slideWidth = document.querySelector(".slide").clientWidth;
       selectedSlide(oldMainIndex, newMainIndex);
+
+      // event to handle initial scroll
+      slideWrapper.scrollTo({
+        left: current_slide_index * (slideWidth + 10),
+      });
+
     }
 
     function hide_next_Button(state) {
@@ -1042,6 +1057,8 @@
           // Function to Hide Next Button
         }
         newMainIndex = "slideLast";
+        newData = current_slideData[current_slide_index];
+        newData["S_E"].push(newMainIndex);
         selectedSlide(oldMainIndex, newMainIndex);
         oldMainIndex = newMainIndex;
         sendMessage({
@@ -1049,10 +1066,13 @@
           data: {
             links: current_slideData[current_slide_index]["v_v"],
             movieId: current_slideData[current_slide_index].id,
+            saveData : newData,
           },
         });
       } else if (current_slideData.length > current_slide_index + 1) {
         newMainIndex = "slide" + (current_slide_index + 1);
+        newData = current_slideData[current_slide_index];
+        newData["S_E"].push(newMainIndex);
         selectedSlide(oldMainIndex, newMainIndex);
         oldMainIndex = newMainIndex;
         sendMessage({
@@ -1060,6 +1080,7 @@
           data: {
             links: current_slideData[current_slide_index]["v_v"],
             movieId: current_slideData[current_slide_index].id,
+            saveData : newData,
           },
         });
       }
@@ -1073,6 +1094,8 @@
           oldMainIndex = "slide1";
           newMainIndex = "slide1";
           current_slide_index = 0;
+          newData = current_slideData[current_slide_index];
+          newData["S_E"].push(newMainIndex);
           populateSlides(current_slideData);
           selectedSlide(oldMainIndex, newMainIndex);
           sendMessage({
@@ -1080,6 +1103,7 @@
             data: {
               links: current_slideData[current_slide_index]["v_v"],
               movieId: current_slideData[current_slide_index].id,
+              saveData : newData,
             },
           });
 
@@ -1648,8 +1672,22 @@
           left: slideWrapper.scrollLeft + slideWidth + 10,
           behavior: "smooth",
         });
+
       });
     }
+
+    function convertWixImageUrl(wixImageUrl) {
+    const regex = /^wix:image:\/\/v1\/([^\/]+)\/([^\/]+)\.(jpg|jpeg|png|webp|gif|bmp|tiff|svg)/;
+    const match = wixImageUrl.match(regex);
+
+    if (match) {
+        const extractedPart1 = match[1];
+        const fileExtension = match[3];
+        return `https://static.wixstatic.com/media/${extractedPart1}`;
+    } else {
+        return undefined; // or handle the case where the pattern is not found
+    }
+}
 
   </script>
 </body>
