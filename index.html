@@ -179,7 +179,6 @@
       "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg";
     let S_e = [0, 0];
     let device_height = deviceType == "desktop" ? "280px" : "200px";
-    let screen_position = deviceType == "desktop" ? "end" : "end";
     let player_container_div_marginBottom = "20px";
     let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
     let current_slide_index = 0;
@@ -283,7 +282,7 @@
         //Object for wachLater Layer
         {
           name: "wachLaterLayer",
-          html: `<div id= "player-container-div" style=" width: 100%;  height: ${device_height};  overflow: hidden; align-self: ${screen_position};position: absolute; margin-bottom: ${player_container_div_marginBottom};">
+          html: `<div id= "player-container-div" style=" width: 100%;  height: ${device_height};  overflow: hidden; position: absolute; bottom: ${player_container_div_marginBottom};">
                       <div class="title_container" id="myDiv">
                         <div>
                           <span id= "title_watchList" style="font-size: ${watchList_title_size};display: inline-block;">Watch List</span>
