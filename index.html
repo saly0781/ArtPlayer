@@ -1016,7 +1016,6 @@
               saveData : newData,
             },
           });
-          art.url = "";
           current_slide_index = index;
           current_season_index = selectElement.selectedIndex;
         });
@@ -1160,8 +1159,8 @@
 
     function nextToWatch(url, movieId) {
       art.switchUrl(url).then(() => {
+        art.option.id = newData.id;
         art.play();
-        art.option.id = movieId;
       });
     }
 
