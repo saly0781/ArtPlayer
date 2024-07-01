@@ -746,7 +746,6 @@
 
     function onTimeUpdate() {
       percentage = (art.currentTime / art.duration) * 100;
-      sendMessage({ action: "watching", data: newData });
       if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
         art.off("video:timeupdate", onTimeUpdate);
         art.storage.del(newData.id);
