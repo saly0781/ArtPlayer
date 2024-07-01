@@ -192,7 +192,7 @@
       deviceType == "mobile"
         ? "M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"
         : "M12 2a10 10 0 1 0 10 10h-1.5a8.5 8.5 0 1 1-3.8-7.2l-3.2 3.2H22V2l-2.8 2.8A9.98 9.98 0 0 0 12 2z";
-    let newData ;
+    let newData;
 
     // Artplayer settings
     Artplayer.MOBILE_DBCLICK_PLAY = true;
@@ -757,7 +757,7 @@
         sendMessage({ action: "deleteContinue", data: newData });
         continueToWatchDeleted == true;
       }
-      
+
     }
 
     art.on("video:timeupdate", onTimeUpdate);
@@ -991,25 +991,29 @@
 
         // Click event listener per Slide
         slideDiv.addEventListener("click", () => {
-          watchLaterContainer.style.opacity = "0";
-          watchLaterContainer.style.visibility = "hidden";
-          // function to call nextMovie ....
 
-          newMainIndex = slideDiv.id;
-          newData = slideDataParameter[index];
-          newData["S_E"].push(newMainIndex);
-          selectedSlide(oldMainIndex, newMainIndex);
-          oldMainIndex = newMainIndex;
-          sendMessage({
-            action: "getstreamingurl",
-            data: {
-              links: slideDataParameter[index]["v_v"],
-              movieId: slideDataParameter[index].id,
-              saveData : newData,
-            },
-          });
-          current_slide_index = index;
-          current_season_index = selectElement.selectedIndex;
+          if (current_slide_index != index && current_season_index != selectElement.selectedIndex) {
+            watchLaterContainer.style.opacity = "0";
+            watchLaterContainer.style.visibility = "hidden";
+            // function to call nextMovie ....
+
+            newMainIndex = slideDiv.id;
+            newData = slideDataParameter[index];
+            newData["S_E"].push(newMainIndex);
+            selectedSlide(oldMainIndex, newMainIndex);
+            oldMainIndex = newMainIndex;
+            sendMessage({
+              action: "getstreamingurl",
+              data: {
+                links: slideDataParameter[index]["v_v"],
+                movieId: slideDataParameter[index].id,
+                saveData: newData,
+              },
+            });
+            current_slide_index = index;
+            current_season_index = selectElement.selectedIndex;
+          }
+
         });
       });
 
@@ -1056,7 +1060,7 @@
           data: {
             links: current_slideData[current_slide_index]["v_v"],
             movieId: current_slideData[current_slide_index].id,
-            saveData : newData,
+            saveData: newData,
           },
         });
       } else if (current_slideData.length > current_slide_index + 1) {
@@ -1070,7 +1074,7 @@
           data: {
             links: current_slideData[current_slide_index]["v_v"],
             movieId: current_slideData[current_slide_index].id,
-            saveData : newData,
+            saveData: newData,
           },
         });
       }
@@ -1093,7 +1097,7 @@
             data: {
               links: current_slideData[current_slide_index]["v_v"],
               movieId: current_slideData[current_slide_index].id,
-              saveData : newData,
+              saveData: newData,
             },
           });
 
@@ -1667,17 +1671,17 @@
     }
 
     function convertWixImageUrl(wixImageUrl) {
-    const regex = /^wix:image:\/\/v1\/([^\/]+)\/([^\/]+)\.(jpg|jpeg|png|webp|gif|bmp|tiff|svg)/;
-    const match = wixImageUrl.match(regex);
+      const regex = /^wix:image:\/\/v1\/([^\/]+)\/([^\/]+)\.(jpg|jpeg|png|webp|gif|bmp|tiff|svg)/;
+      const match = wixImageUrl.match(regex);
 
-    if (match) {
+      if (match) {
         const extractedPart1 = match[1];
         const fileExtension = match[3];
         return `https://static.wixstatic.com/media/${extractedPart1}`;
-    } else {
+      } else {
         return undefined; // or handle the case where the pattern is not found
+      }
     }
-}
 
   </script>
 </body>
