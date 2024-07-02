@@ -616,10 +616,44 @@
         alert(event.data.data);
       } else if (event.data.action == "initialData") {
         newData = event.data.data;
+        if (newData.cwId == undefined) {
+          sendMessage({ action: "callTimer"});
+        }
+      } else if (event.data.action == "addToContinueWatching") {
+        startTimer_To_Save_To_ContinueWatching();
       }
 
 
     });
+
+    function startTimer_To_Save_To_ContinueWatching() {
+      startTimer(1, function() {
+        sendMessage({ action: "addToContinueWatching"});
+        // You can perform any action you want when the timer ends
+      });
+    }
+
+    // Function to start the timer
+    function startTimer(duration, callback) {
+      let timer = duration * 60; // Convert minutes to seconds
+
+      let interval = setInterval(function () {
+        let minutes = Math.floor(timer / 60);
+        let seconds = timer % 60;
+
+        // Decrease the timer
+        timer--;
+
+        // Check if the timer has reached 0
+        if (timer < 0) {
+          clearInterval(interval);
+          // Execute the callback function
+          if (typeof callback === 'function') {
+            callback();
+          }
+        }
+      }, 1000); // Update the timer every second (1000 milliseconds)
+    }
 
     function sen_is_copying() {
 
