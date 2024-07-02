@@ -1026,7 +1026,6 @@
         // Click event listener per Slide
         slideDiv.addEventListener("click", () => {
 
-          if (current_slide_index != index && current_season_index != selectElement.selectedIndex) {
             watchLaterContainer.style.opacity = "0";
             watchLaterContainer.style.visibility = "hidden";
             // function to call nextMovie ....
@@ -1046,7 +1045,6 @@
             });
             current_slide_index = index;
             current_season_index = selectElement.selectedIndex;
-          }
 
         });
       });
