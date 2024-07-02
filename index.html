@@ -627,7 +627,7 @@
     });
 
     function startTimer_To_Save_To_ContinueWatching() {
-      startTimer(1, function() {
+      startTimer(10, function() {
         sendMessage({ action: "addToContinueWatching"});
         // You can perform any action you want when the timer ends
       });
