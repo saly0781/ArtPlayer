@@ -515,7 +515,7 @@
         let title_watching = languageCode == "rw" ? "Episode" : "Episodes";
         let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
         //art.controls.update(wachLaterLayer("none", "block", title_watchList));
-        art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
+        //art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
         email = event.data.userEmail;
         onloadSeason_Episode();
       } else if (event.data.action == "getstreamingurl") {
