@@ -190,6 +190,8 @@
         : "M12 2a10 10 0 1 0 10 10h-1.5a8.5 8.5 0 1 1-3.8-7.2l-3.2 3.2H22V2l-2.8 2.8A9.98 9.98 0 0 0 12 2z";
     let newData;
     let rect1_backgroundImage;
+    let custom_select_div;
+    let title_watchList_Element;
 
     // Artplayer settings
     Artplayer.MOBILE_DBCLICK_PLAY = true;
@@ -270,7 +272,7 @@
         wachLaterLayer("none", "block", "none"),
 
         //Object for Card for WatchLater Layer
-        wachLaterCardLayer(type == "M" ? "none" : "block", "other", "Episodes"),
+        wachLaterCardLayer(type == "M" ? "none" : "block", "Next", "Episodes"),
       ],
 
       controls: [
@@ -363,11 +365,12 @@
     //An event for controlling when the DOM is loaded
     document.addEventListener("DOMContentLoaded", function () {
       art_mask = document.querySelector(".art-mask");
-      var custom_select_div = document.getElementById("custom-select-div");
+      custom_select_div = document.getElementById("custom-select-div");
       art_bottom = document.querySelector(".art-bottom");
       art_controls = document.querySelector(".art-controls");
       art_video_player = document.querySelector(".art-video");
       rect1_backgroundImage = document.querySelector(".rect1");
+      title_watchList_Element = document.getElementById("title_watchList");
       watchLaterContainer = document.querySelector(
         ".art-layer.art-layer-wachLaterLayer"
       );
@@ -514,10 +517,9 @@
         let title_continue = languageCode == "rw" ? "Izindi" : "Other";
         let title_watching = languageCode == "rw" ? "Episode" : "Episodes";
         let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
-        //art.controls.update(wachLaterLayer("none", "block", title_watchList));
-        //art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
         email = event.data.userEmail;
         onloadSeason_Episode();
+        watchLaterSelectAndTitleElement(true);
       } else if (event.data.action == "getstreamingurl") {
         nextToWatch(event.data.data.link, event.data.data.movieId);
       } else if (event.data.action == "copyTimeSave") {
@@ -530,9 +532,10 @@
       } else if (event.data.action == "addToContinueWatching") {
         startTimer_To_Save_To_ContinueWatching();
       } else if (event.data.action == "watchLaterData") {
-        //current_slideData = event.data.data;
-        //rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
-        //onloadWatchlater_Movies();
+        current_slideData = event.data.data;
+        rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
+        onloadWatchlater_Movies();
+        watchLaterSelectAndTitleElement(false);
       }
 
 
@@ -621,11 +624,10 @@
         }
 
         // All Time set and sent to DB
-        if (allTime[0] != null && allTime[1] != null) {
+     
           allTime[2] = totalTime;
           sendMessage({ action: 'copyTime', time: allTime });
           art.notice.show = 'Time Stamps Sent to be saved !';
-        }
 
       } else {
         console.error('Time element not found.');
@@ -634,11 +636,6 @@
 
     function onloadWatchlater_Movies() {
       if (slides_availability == true) {
-        let title_continue = languageCode == "rw" ? "Izindi" : "Other";
-        let title_watching = languageCode == "rw" ? "Filme" : "Movies";
-        let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
-        art.controls.update(wachLaterLayer("block", "none", title_watchList));
-        art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
         populateSlides(current_slideData);
       } else {
         let timer;
@@ -646,11 +643,6 @@
         timer = setInterval(function () {
           if (slides_availability) {
             clearInterval(timer);
-            let title_continue = languageCode == "rw" ? "Izindi" : "Other";
-            let title_watching = languageCode == "rw" ? "Filme" : "Movies";
-            let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
-            art.controls.update(wachLaterLayer("block", "none", title_watchList));
-            art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
             populateSlides(current_slideData);
           }
         }, 1000); // Check every second
@@ -662,8 +654,7 @@
         slideData = event.data.data.epsodes;
         seasons = event.data.data.seasons;
         current_slideData = slideData[current_slideData_index];
-        //rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
-      
+        rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
         populateSlides(current_slideData);
         populateSeason(seasons, current_season_index);
       } else {
@@ -675,8 +666,7 @@
             slideData = event.data.data.epsodes;
             seasons = event.data.data.seasons;
             current_slideData = slideData[current_slideData_index];
-            //rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
-
+            rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
             populateSlides(current_slideData);
             populateSeason(seasons, current_season_index);
           }
@@ -988,7 +978,7 @@
           current_season_index = selectElement.selectedIndex;
 
           if (newMainIndex != "slideLast") {
-            //rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[current_slide_index + 1].longCover})`;
+            rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[current_slide_index + 1].longCover)})`;
           }
 
         });
@@ -1660,6 +1650,28 @@
       }
     }
 
+    function watchLaterSelectAndTitleElement(isSerie) {
+      let cardTitleContinue1 = document.getElementById("cardTitleContinue1");
+      let cardTitleContinue2 = document.getElementById("cardTitleContinue2");
+      let title_continue = languageCode == "rw" ? "Izindi" : "Other";
+      let title_watching = languageCode == "rw" ? "Filme" : "Movies";
+      let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
+
+      if (isSerie) {
+        // codes for When is Serie
+        cardTitleContinue1.textContent = languageCode == "rw" ? "Izindi" : "Next";
+        cardTitleContinue2.textContent = languageCode == "rw" ? "Episode" : "Epsodes";
+        custom_select_div.style.display = "block";
+        title_watchList.style.display = "none";
+      } else {
+        // codes for When is Movie
+        cardTitleContinue1.textContent = languageCode == "rw" ? "Izindi" : "Other";
+        cardTitleContinue2.textContent = languageCode == "rw" ? "Filme" : "Movies";
+        title_watchList.textContent = languageCode == "rw" ? "Izindi Filme" : "Watch List";
+        custom_select_div.style.display = "none";
+        title_watchList.style.display = "block";
+      }
+    }
     //---------------------------- Element watchLater -----------------------------------------------------------------
 
     function wachLaterCardLayer(displayValue, title_continue, title_watching) {
@@ -1668,8 +1680,8 @@
         html: `
                        <div class="playlist_icon_container" style="position: absolute;">
                           <div style="margin-right: 10px; margin-left: 10px;">
-                              <div style="font-size: calc(${watchList_title_size} - 5px);">${title_continue}</div>
-                              <div style="font-size: ${watchList_title_size};font-family: sans-serif;"><b>${title_watching}</b></div>
+                              <div id="cardTitleContinue1" style="font-size: calc(${watchList_title_size} - 5px);">${title_continue}</div>
+                              <div id="cardTitleContinue2" style="font-size: ${watchList_title_size};font-family: sans-serif;"><b>${title_watching}</b></div>
                           </div>
                           <div class="playlist-icon" style="margin-top: 5%;">
                               <div class="rectangle rect1">
@@ -1753,6 +1765,8 @@
         },
       };
     }
+
+
 
   </script>
 </body>
