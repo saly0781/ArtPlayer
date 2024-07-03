@@ -661,8 +661,9 @@
         let title_continue = languageCode == "rw" ? "Izindi" : "Other";
         let title_watching = languageCode == "rw" ? "Episode" : "Episodes";
         let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
-        art.controls.update(wachLaterLayer("none", "block", title_watchList));
-        art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
+        //art.controls.update(wachLaterLayer("none", "block", title_watchList));
+        //art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
+        console.log("Episodes : ", current_slideData);
         populateSlides(current_slideData);
         populateSeason(seasons, current_season_index);
       } else {
@@ -678,8 +679,8 @@
             let title_continue = languageCode == "rw" ? "Izindi" : "Other";
             let title_watching = languageCode == "rw" ? "Episode" : "Episodes";
             let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
-            art.controls.update(wachLaterLayer("none", "block", title_watchList));
-            art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
+            //art.controls.update(wachLaterLayer("none", "block", title_watchList));
+            //art.controls.update(wachLaterCardLayer("grid", title_continue, title_watching));
             populateSlides(current_slideData);
             populateSeason(seasons, current_season_index);
           }
