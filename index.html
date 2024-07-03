@@ -525,9 +525,9 @@
       } else if (event.data.action == "addToContinueWatching") {
         startTimer_To_Save_To_ContinueWatching();
       } else if (event.data.action == "watchLaterData") {
-        current_slideData = event.data.data;
-        rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
-        onloadWatchlater_Movies();
+        //current_slideData = event.data.data;
+        //rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
+        //onloadWatchlater_Movies();
       }
 
 
@@ -657,7 +657,7 @@
         slideData = event.data.data.epsodes;
         seasons = event.data.data.seasons;
         current_slideData = slideData[current_slideData_index];
-        rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
+        //rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
         let title_continue = languageCode == "rw" ? "Izindi" : "Other";
         let title_watching = languageCode == "rw" ? "Episode" : "Episodes";
         let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
@@ -674,7 +674,7 @@
             slideData = event.data.data.epsodes;
             seasons = event.data.data.seasons;
             current_slideData = slideData[current_slideData_index];
-            rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
+            //rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[0].longCover})`;
             let title_continue = languageCode == "rw" ? "Izindi" : "Other";
             let title_watching = languageCode == "rw" ? "Episode" : "Episodes";
             let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
@@ -991,7 +991,7 @@
           current_season_index = selectElement.selectedIndex;
 
           if (newMainIndex != "slideLast") {
-            rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[current_slide_index + 1].longCover})`;
+            //rect1_backgroundImage.style.backgroundImage = `url(${current_slideData[current_slide_index + 1].longCover})`;
           }
 
         });
