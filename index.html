@@ -142,6 +142,7 @@
     let current_slideData_index = getParameterByName("currentEpisodeIndex");
     let current_season_index = getParameterByName("currentSeasonIndex");
     let newMainIndex = getParameterByName("currentEpisodeSlideId");
+    let watchLaterAvailalbe = getParameterByName("watchLaterAvailalbe");
     let oldMainIndex = "slide1";
     let email;
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
@@ -272,7 +273,7 @@
         wachLaterLayer("none", "block", "none"),
 
         //Object for Card for WatchLater Layer
-        wachLaterCardLayer(type == "M" ? "none" : "block", "Next", "Episodes"),
+        wachLaterCardLayer(type == "M" && watchLaterAvailalbe == "no" ? "none" : "block", "Next", "Episodes"),
       ],
 
       controls: [
