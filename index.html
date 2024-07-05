@@ -537,6 +537,10 @@
         rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
         onloadWatchlater_Movies();
         watchLaterSelectAndTitleElement(false);
+      } else if (event.data.action == "changeQuality") {
+        art.switchUrl(event.data.data).then(() => {
+        art.play();
+      });
       }
 
 
