@@ -539,8 +539,8 @@
         watchLaterSelectAndTitleElement(false);
       } else if (event.data.action == "changeQuality") {
         art.switchUrl(event.data.data).then(() => {
-          art.play();
-        });
+        art.play();
+      });
       }
 
 
@@ -629,10 +629,10 @@
         }
 
         // All Time set and sent to DB
-
-        allTime[2] = totalTime;
-        sendMessage({ action: 'copyTime', time: allTime });
-        art.notice.show = 'Time Stamps Sent to be saved !';
+     
+          allTime[2] = totalTime;
+          sendMessage({ action: 'copyTime', time: allTime });
+          art.notice.show = 'Time Stamps Sent to be saved !';
 
       } else {
         console.error('Time element not found.');
@@ -1677,9 +1677,6 @@
         custom_select_div.style.display = "none";
         title_watchList.style.display = "block";
       }
-
-      console.error("isSerie : ", isSerie);
-
     }
     //---------------------------- Element watchLater -----------------------------------------------------------------
 
