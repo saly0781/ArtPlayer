@@ -1658,6 +1658,9 @@
     function watchLaterSelectAndTitleElement(isSerie) {
       let cardTitleContinue1 = document.getElementById("cardTitleContinue1");
       let cardTitleContinue2 = document.getElementById("cardTitleContinue2");
+      title_watchList_Element = document.getElementById("title_watchList");
+      custom_select_div = document.getElementById("custom-select-div");
+
       let title_continue = languageCode == "rw" ? "Izindi" : "Other";
       let title_watching = languageCode == "rw" ? "Filme" : "Movies";
       let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
@@ -1666,16 +1669,16 @@
         // codes for When is Serie
         cardTitleContinue1.textContent = languageCode == "rw" ? "Izindi" : "Next";
         cardTitleContinue2.textContent = languageCode == "rw" ? "Episode" : "Epsodes";
-        title_watchList.textContent = languageCode == "rw" ? "Izindi Filme" : "Watch List";
+        title_watchList_Element.textContent = languageCode == "rw" ? "Izindi Filme" : "Watch List";
         custom_select_div.style.display = "block";
-        title_watchList.style.display = "none";
+        title_watchList_Element.style.display = "none";
       } else {
         // codes for When is Movie
         cardTitleContinue1.textContent = languageCode == "rw" ? "Izindi" : "Other";
         cardTitleContinue2.textContent = languageCode == "rw" ? "Filme" : "Movies";
-        title_watchList.textContent = languageCode == "rw" ? "Izindi Filme" : "Watch List";
+        title_watchList_Element.textContent = languageCode == "rw" ? "Izindi Filme" : "Watch List";
         custom_select_div.style.display = "none";
-        title_watchList.style.display = "block";
+        title_watchList_Element.style.display = "block";
       }
     }
     //---------------------------- Element watchLater -----------------------------------------------------------------
