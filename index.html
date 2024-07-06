@@ -539,8 +539,8 @@
         watchLaterSelectAndTitleElement(false);
       } else if (event.data.action == "changeQuality") {
         art.switchUrl(event.data.data).then(() => {
-          art.play();
-        });
+        art.play();
+      });
       }
 
 
@@ -629,10 +629,10 @@
         }
 
         // All Time set and sent to DB
-
-        allTime[2] = totalTime;
-        sendMessage({ action: 'copyTime', time: allTime });
-        art.notice.show = 'Time Stamps Sent to be saved !';
+     
+          allTime[2] = totalTime;
+          sendMessage({ action: 'copyTime', time: allTime });
+          art.notice.show = 'Time Stamps Sent to be saved !';
 
       } else {
         console.error('Time element not found.');
@@ -1666,7 +1666,6 @@
         // codes for When is Serie
         cardTitleContinue1.textContent = languageCode == "rw" ? "Izindi" : "Next";
         cardTitleContinue2.textContent = languageCode == "rw" ? "Episode" : "Epsodes";
-        title_watchList.textContent = languageCode == "rw" ? "Izindi Filme" : "Watch List";
         custom_select_div.style.display = "block";
         title_watchList.style.display = "none";
       } else {
@@ -1677,9 +1676,6 @@
         custom_select_div.style.display = "none";
         title_watchList.style.display = "block";
       }
-
-      console.error("isSerie : ", isSerie);
-
     }
     //---------------------------- Element watchLater -----------------------------------------------------------------
 
@@ -1708,8 +1704,8 @@
                       `,
         style: {
           position: "absolute",
-          width: deviceType == "desktop" ? "330px" : "230px",
-          height: deviceType == "desktop" ? "160px" : "120px",
+          width: "330px",
+          height: "160px",
           overflow: "hidden",
           opacity: "1",
           visibility: "visible",
