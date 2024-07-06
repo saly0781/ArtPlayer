@@ -1662,10 +1662,11 @@
       let title_watching = languageCode == "rw" ? "Filme" : "Movies";
       let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
 
-      if (isSerie) {
+      if (ç) {
         // codes for When is Serie
         cardTitleContinue1.textContent = languageCode == "rw" ? "Izindi" : "Next";
         cardTitleContinue2.textContent = languageCode == "rw" ? "Episode" : "Epsodes";
+        title_watchList.textContent = languageCode == "rw" ? "Izindi Filme" : "Watch List";
         custom_select_div.style.display = "block";
         title_watchList.style.display = "none";
       } else {
@@ -1676,6 +1677,9 @@
         custom_select_div.style.display = "none";
         title_watchList.style.display = "block";
       }
+
+      console.error("isSerie : ", isSerie);
+
     }
     //---------------------------- Element watchLater -----------------------------------------------------------------
 
