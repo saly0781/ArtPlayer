@@ -193,11 +193,15 @@
     let rect1_backgroundImage;
     let custom_select_div;
     let title_watchList_Element;
+    let watch_Later_List_Data = [];
 
     // Artplayer settings
     Artplayer.MOBILE_DBCLICK_PLAY = true;
     Artplayer.CONTEXTMENU = false;
     Artplayer.TOUCH_MOVE_RATIO = 1;
+    Artplayer.LOG_VERSION = false;
+    Artplayer.AUTO_PLAYBACK_MAX = 20;
+
 
     // Initialize the Player
     art = new Artplayer({
@@ -515,12 +519,11 @@
     //Function To Receives data
     window.addEventListener("message", function (event) {
       if (event.data.action == "getdata") {
-        let title_continue = languageCode == "rw" ? "Izindi" : "Other";
-        let title_watching = languageCode == "rw" ? "Episode" : "Episodes";
-        let title_watchList = languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
-        email = event.data.userEmail;
+
+        slideData = event.data.data.epsodes;
+        seasons = event.data.data.seasons;
         onloadSeason_Episode();
-        watchLaterSelectAndTitleElement(true);
+
       } else if (event.data.action == "getstreamingurl") {
         nextToWatch(event.data.data.link, event.data.data.movieId);
       } else if (event.data.action == "copyTimeSave") {
@@ -533,14 +536,14 @@
       } else if (event.data.action == "addToContinueWatching") {
         startTimer_To_Save_To_ContinueWatching();
       } else if (event.data.action == "watchLaterData") {
-        current_slideData = event.data.data;
-        rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
+
+        watch_Later_List_Data = event.data.data;
         onloadWatchlater_Movies();
-        watchLaterSelectAndTitleElement(false);
+
       } else if (event.data.action == "changeQuality") {
         art.switchUrl(event.data.data).then(() => {
-        art.play();
-      });
+          art.play();
+        });
       }
 
 
@@ -629,10 +632,10 @@
         }
 
         // All Time set and sent to DB
-     
-          allTime[2] = totalTime;
-          sendMessage({ action: 'copyTime', time: allTime });
-          art.notice.show = 'Time Stamps Sent to be saved !';
+
+        allTime[2] = totalTime;
+        sendMessage({ action: 'copyTime', time: allTime });
+        art.notice.show = 'Time Stamps Sent to be saved !';
 
       } else {
         console.error('Time element not found.');
@@ -640,28 +643,31 @@
     }
 
     function onloadWatchlater_Movies() {
+      rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(watch_Later_List_Data[0].longCover)})`;
       if (slides_availability == true) {
-        populateSlides(current_slideData);
+        populateSlides(watch_Later_List_Data);
+        watchLaterSelectAndTitleElement(false);
       } else {
         let timer;
 
         timer = setInterval(function () {
           if (slides_availability) {
             clearInterval(timer);
-            populateSlides(current_slideData);
+            populateSlides(watch_Later_List_Data);
+            watchLaterSelectAndTitleElement(false);
           }
         }, 1000); // Check every second
       }
+
     }
 
     function onloadSeason_Episode() {
       if (slides_availability == true) {
-        slideData = event.data.data.epsodes;
-        seasons = event.data.data.seasons;
         current_slideData = slideData[current_slideData_index];
         rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
         populateSlides(current_slideData);
         populateSeason(seasons, current_season_index);
+        watchLaterSelectAndTitleElement(true);
       } else {
         let timer;
 
@@ -674,6 +680,7 @@
             rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
             populateSlides(current_slideData);
             populateSeason(seasons, current_season_index);
+            watchLaterSelectAndTitleElement(true);
           }
         }, 1000); // Check every second
       }
@@ -731,6 +738,8 @@
     }
 
     art.on("video:timeupdate", onTimeUpdate);
+
+    art.on("video:ended", go_to_next_slide);
 
     art.on("pause", () => {
       pathCode = "M8 5v14l11-7z";
@@ -875,6 +884,11 @@
       }
     }
 
+    // Check if "Final" exists in the string
+    function findFinal(str) {
+      return str.includes("Final");
+    }
+
     // Function to add options dynamically
     function addOption(value, text) {
       const option = document.createElement("option");
@@ -933,10 +947,10 @@
           });
           slideDiv.id =
             "slide" +
-            (slideDataParameter.length == index + 1 ? "Last" : index + 1);
+            (slideDataParameter.length == index + 1 && findFinal(slide.episode) ? "Last" : index + 1);
           // insert Data : image , title
           const indexed =
-            slideDataParameter.length == index + 1 ? "Last" : index + 1;
+            slideDataParameter.length == index + 1 && findFinal(slide.episode) ? "Last" : index + 1;
           slideDiv.innerHTML = `
                          <img src="${convertWixImageUrl(slide.longCover)}" alt="Slide ${index + 1}">
                          <img id="slide_loading_icon${indexed}" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
@@ -968,7 +982,7 @@
 
           newMainIndex = slideDiv.id;
           newData = slideDataParameter[index];
-          newData["S_E"].push(newMainIndex);
+          newData["S_E"][2] = newMainIndex;
           selectedSlide(oldMainIndex, newMainIndex);
           oldMainIndex = newMainIndex;
           sendMessage({
@@ -1024,7 +1038,7 @@
         }
         newMainIndex = "slideLast";
         newData = current_slideData[current_slide_index];
-        newData["S_E"].push(newMainIndex);
+        newData["S_E"][2] = newMainIndex;
         selectedSlide(oldMainIndex, newMainIndex);
         oldMainIndex = newMainIndex;
         sendMessage({
@@ -1038,7 +1052,7 @@
       } else if (current_slideData.length > current_slide_index + 1) {
         newMainIndex = "slide" + (current_slide_index + 1);
         newData = current_slideData[current_slide_index];
-        newData["S_E"].push(newMainIndex);
+        newData["S_E"][2] = newMainIndex;
         selectedSlide(oldMainIndex, newMainIndex);
         oldMainIndex = newMainIndex;
         sendMessage({
@@ -1061,7 +1075,7 @@
           newMainIndex = "slide1";
           current_slide_index = 0;
           newData = current_slideData[current_slide_index];
-          newData["S_E"].push(newMainIndex);
+          newData["S_E"][2] = newMainIndex;
           populateSlides(current_slideData);
           selectedSlide(oldMainIndex, newMainIndex);
           sendMessage({
