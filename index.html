@@ -143,7 +143,7 @@
     let current_season_index = getParameterByName("currentSeasonIndex");
     let newMainIndex = getParameterByName("currentEpisodeSlideId");
     let watchLaterAvailalbe = getParameterByName("watchLaterAvailalbe");
-    let oldMainIndex = "slide1";
+    let oldMainIndex = getParameterByName("currentEpisodeSlideId");
     let email;
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
     let percentage = 0;
