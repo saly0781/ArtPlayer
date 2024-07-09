@@ -634,7 +634,7 @@
         }
 
         // All Time set and sent to DB
-        if (allTime[0] && allTime[1]) {
+        if (allTime[0] != null && allTime[1] != null) {
           allTime[2] = totalTime;
           sendMessage({ action: 'copyTime', time: allTime, data: { id: data.id, dbName: data.dbName } });
           art.notice.show = 'Time Stamps Sent to be saved !';
