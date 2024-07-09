@@ -304,7 +304,9 @@
             display: userRole == "Admin" ? "flex" : "none",
           },
           click: function (...args) {
-            sen_is_copying();
+
+            sen_is_copying({ id: newData.id, dbName: current_season_index, type: newData.type });
+
           },
         }
       ],
@@ -578,7 +580,7 @@
       }, 1000); // Update the timer every second (1000 milliseconds)
     }
 
-    function sen_is_copying() {
+    function sen_is_copying(data) {
 
       // Select the element containing the time
       const timeElement = document.querySelector('.art-control-time');
@@ -632,10 +634,11 @@
         }
 
         // All Time set and sent to DB
-
-        allTime[2] = totalTime;
-        sendMessage({ action: 'copyTime', time: allTime });
-        art.notice.show = 'Time Stamps Sent to be saved !';
+        if (allTime[0] && allTime[1]) {
+          allTime[2] = totalTime;
+          sendMessage({ action: 'copyTime', time: allTime, data: { id: data.id, dbName: data.dbName } });
+          art.notice.show = 'Time Stamps Sent to be saved !';
+        }
 
       } else {
         console.error('Time element not found.');
@@ -1788,8 +1791,6 @@
         },
       };
     }
-
-
 
   </script>
 </body>
