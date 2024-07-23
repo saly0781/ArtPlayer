@@ -140,9 +140,9 @@
     let languageCode = getParameterByName("languageCode");
     let current_slideData_index = Number(getParameterByName("currentEpisodeIndex"));
     let current_season_index = Number(getParameterByName("currentSeasonIndex"));
-    let newMainIndex = Number(getParameterByName("currentEpisodeSlideId"));
+    let newMainSlideId = getParameterByName("currentEpisodeSlideId");
     let watchLaterAvailalbe = getParameterByName("watchLaterAvailalbe");
-    let oldMainIndex = Number(getParameterByName("currentEpisodeSlideId"));
+    let oldMainSlideId = getParameterByName("currentEpisodeSlideId");
     let email;
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
     let percentage = 0;
@@ -201,6 +201,7 @@
     Artplayer.LOG_VERSION = false;
     Artplayer.AUTO_PLAYBACK_MAX = 20;
 
+    console.log("TESTING DATA  : ", current_season_index, current_slideData_index, newMainSlideId);
 
     // Initialize the Player
     art = new Artplayer({
@@ -635,7 +636,7 @@
         // All Time set and sent to DB
         if (allTime[0] != null && allTime[1] != null) {
           allTime[2] = totalTime;
-          sendMessage({ action: 'copyTime', time: allTime, data: { id: data.id, dbName: data.dbName , type: data.type} });
+          sendMessage({ action: 'copyTime', time: allTime, data: { id: data.id, dbName: data.dbName, type: data.type } });
           art.notice.show = 'Time Stamps Sent to be saved !';
         }
 
@@ -730,7 +731,7 @@
         art.storage.del(newData.id);
         sendMessage({ action: "deleteContinue", data: newData });
         continueToWatchDeleted == true;
-      } else if (percentage > 80 && type != "M" && is_last_season == true && newMainIndex == "slideLast" && continueToWatchDeleted == false) {
+      } else if (percentage > 80 && type != "M" && is_last_season == true && newMainSlideId == "slideLast" && continueToWatchDeleted == false) {
         art.off("video:timeupdate", onTimeUpdate);
         art.storage.del(newData.id);
         sendMessage({ action: "deleteContinue", data: newData });
@@ -880,9 +881,9 @@
     function changeSeason() {
       const selectedIndex = selectElement.selectedIndex;
       populateSlides(slideData[selectedIndex]);
-      selectedSlide(oldMainIndex, null);
+      selectedSlide(oldMainSlideId, null);
       if (selectedIndex == current_season_index) {
-        selectedSlide(null, oldMainIndex);
+        selectedSlide(null, oldMainSlideId);
       }
     }
 
@@ -982,11 +983,11 @@
           watchLaterContainer.style.visibility = "hidden";
           // function to call nextMovie ....
 
-          newMainIndex = slideDiv.id;
+          newMainSlideId = slideDiv.id;
           newData = slideDataParameter[index];
-          newData["S_E"][2] = newMainIndex;
-          selectedSlide(oldMainIndex, newMainIndex);
-          oldMainIndex = newMainIndex;
+          newData["S_E"][2] = newMainSlideId;
+          selectedSlide(oldMainSlideId, newMainSlideId);
+          oldMainSlideId = newMainSlideId;
           sendMessage({
             action: "getstreamingurl",
             data: {
@@ -998,15 +999,17 @@
           current_slide_index = index;
           current_season_index = selectElement.selectedIndex;
 
-          if (newMainIndex != "slideLast") {
+          if (newMainSlideId != "slideLast") {
             rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[current_slide_index + 1].longCover)})`;
           }
+
+          console.log("SLIDE DATA : ", selectElement.selectedIndex);
 
         });
       });
 
       slideWidth = document.querySelector(".slide").clientWidth;
-      selectedSlide(oldMainIndex, newMainIndex);
+      selectedSlide(oldMainSlideId, newMainSlideId);
 
       // event to handle initial scroll
       slideWrapper.scrollTo({
@@ -1038,11 +1041,11 @@
         if (is_last_season == true) {
           // Function to Hide Next Button
         }
-        newMainIndex = "slideLast";
+        newMainSlideId = "slideLast";
         newData = current_slideData[current_slide_index];
-        newData["S_E"][2] = newMainIndex;
-        selectedSlide(oldMainIndex, newMainIndex);
-        oldMainIndex = newMainIndex;
+        newData["S_E"][2] = newMainSlideId;
+        selectedSlide(oldMainSlideId, newMainSlideId);
+        oldMainSlideId = newMainSlideId;
         sendMessage({
           action: "getstreamingurl",
           data: {
@@ -1052,11 +1055,11 @@
           },
         });
       } else if (current_slideData.length > current_slide_index + 1) {
-        newMainIndex = "slide" + (current_slide_index + 1);
+        newMainSlideId = "slide" + (current_slide_index + 1);
         newData = current_slideData[current_slide_index];
-        newData["S_E"][2] = newMainIndex;
-        selectedSlide(oldMainIndex, newMainIndex);
-        oldMainIndex = newMainIndex;
+        newData["S_E"][2] = newMainSlideId;
+        selectedSlide(oldMainSlideId, newMainSlideId);
+        oldMainSlideId = newMainSlideId;
         sendMessage({
           action: "getstreamingurl",
           data: {
@@ -1073,13 +1076,13 @@
           current_slideData_index = current_slideData_index + 1;
           selectElement.selectedIndex = current_season_index;
           current_slideData = slideData[current_slideData_index];
-          oldMainIndex = "slide1";
-          newMainIndex = "slide1";
+          oldMainSlideId = "slide1";
+          newMainSlideId = "slide1";
           current_slide_index = 0;
           newData = current_slideData[current_slide_index];
-          newData["S_E"][2] = newMainIndex;
+          newData["S_E"][2] = newMainSlideId;
           populateSlides(current_slideData);
-          selectedSlide(oldMainIndex, newMainIndex);
+          selectedSlide(oldMainSlideId, newMainSlideId);
           sendMessage({
             action: "getstreamingurl",
             data: {
