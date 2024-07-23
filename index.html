@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--  link : ?movieLink=https://video.wixstatic.com/video/ad1226_a127a6ec15304d49a9b64c54f88e7be9/720p/mp4/file.mp4&adstatus=false&deviceType=website&movieId=3beb68c0-6e91-40b4-a3c0-940297d2ae25&episodeId=empty&type=M -->
 <!-- v 1.0.0 (2) -->
 
 <head>
@@ -139,11 +138,11 @@
     let movieId = getParameterByName("movieId");
     let episodeId = getParameterByName("episodeId");
     let languageCode = getParameterByName("languageCode");
-    let current_slideData_index = getParameterByName("currentEpisodeIndex");
-    let current_season_index = getParameterByName("currentSeasonIndex");
-    let newMainIndex = getParameterByName("currentEpisodeSlideId");
+    let current_slideData_index = Number(getParameterByName("currentEpisodeIndex"));
+    let current_season_index = Number(getParameterByName("currentSeasonIndex"));
+    let newMainIndex = Number(getParameterByName("currentEpisodeSlideId"));
     let watchLaterAvailalbe = getParameterByName("watchLaterAvailalbe");
-    let oldMainIndex = getParameterByName("currentEpisodeSlideId");
+    let oldMainIndex = Number(getParameterByName("currentEpisodeSlideId"));
     let email;
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
     let percentage = 0;
@@ -520,7 +519,7 @@
 
     //Function To Receives data
     window.addEventListener("message", function (event) {
-      if (event.data.action == "getdata") {
+      if (event.data.action == "seasonData") {
 
         slideData = event.data.data.epsodes;
         seasons = event.data.data.seasons;
