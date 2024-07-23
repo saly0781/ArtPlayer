@@ -138,7 +138,7 @@
     let movieId = getParameterByName("movieId");
     let episodeId = getParameterByName("episodeId");
     let languageCode = getParameterByName("languageCode");
-    let current_slideData_index = Number(getParameterByName("currentEpisodeIndex"));
+    let current_slide_index = Number(getParameterByName("currentEpisodeIndex"));
     let current_season_index = Number(getParameterByName("currentSeasonIndex"));
     let newMainSlideId = getParameterByName("currentEpisodeSlideId");
     let watchLaterAvailalbe = getParameterByName("watchLaterAvailalbe");
@@ -180,7 +180,6 @@
     let device_height = deviceType == "desktop" ? "280px" : "200px";
     let player_container_div_marginBottom = "20px";
     let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
-    let current_slide_index = 0;
     let is_last_season = false;
     let pathCode = "M8 5v14l11-7z";
     let viewBoxSize = deviceType == "mobile" ? "0 0 36 36" : "-6 -6 36 36";
@@ -201,7 +200,7 @@
     Artplayer.LOG_VERSION = false;
     Artplayer.AUTO_PLAYBACK_MAX = 20;
 
-    console.log("TESTING DATA  : ", current_season_index, current_slideData_index, newMainSlideId);
+    console.log("TESTING DATA  : ", current_season_index, newMainSlideId);
 
     // Initialize the Player
     art = new Artplayer({
@@ -666,7 +665,7 @@
 
     function onloadSeason_Episode() {
       if (slides_availability == true) {
-        current_slideData = slideData[current_slideData_index];
+        current_slideData = slideData[current_season_index];
         rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
         populateSlides(current_slideData);
         populateSeason(seasons);
@@ -679,7 +678,7 @@
             clearInterval(timer);
             slideData = event.data.data.epsodes;
             seasons = event.data.data.seasons;
-            current_slideData = slideData[current_slideData_index];
+            current_slideData = slideData[current_season_index];
             rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
             populateSlides(current_slideData);
             populateSeason(seasons);
@@ -1069,11 +1068,11 @@
       }
 
       if (current_slideData.length < current_slide_index + 1) {
-        if (seasons.length >= current_season_index) {
+        let temp_season_index = current_season_index + 1;
+        if (seasons.length > temp_season_index) {
           current_season_index = current_season_index + 1;
-          current_slideData_index = current_slideData_index + 1;
           selectElement.selectedIndex = current_season_index;
-          current_slideData = slideData[current_slideData_index];
+          current_slideData = slideData[current_season_index];
           oldMainSlideId = "slide1";
           newMainSlideId = "slide1";
           current_slide_index = 0;
