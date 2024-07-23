@@ -1740,7 +1740,7 @@
         click: function () {
           // scroll to the beginning of the selected slide
           selectElement.selectedIndex = Number(current_season_index);
-          console.log("SelectElement : ", selectElement, selectElement.selectedIndex)
+          console.log("SelectElement : ", selectElement, selectElement.selectedIndex,current_season_index)
           const slideWrapper = document.querySelector(".slide-wrapper");
           slideWrapper.scrollTo({
             left: current_slide_index * (slideWidth + 10),
