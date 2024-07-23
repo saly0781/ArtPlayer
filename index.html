@@ -669,7 +669,7 @@
         current_slideData = slideData[current_slideData_index];
         rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
         populateSlides(current_slideData);
-        populateSeason(seasons, current_season_index);
+        populateSeason(seasons);
         watchLaterSelectAndTitleElement(true);
       } else {
         let timer;
@@ -682,7 +682,7 @@
             current_slideData = slideData[current_slideData_index];
             rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[0].longCover)})`;
             populateSlides(current_slideData);
-            populateSeason(seasons, current_season_index);
+            populateSeason(seasons);
             watchLaterSelectAndTitleElement(true);
           }
         }, 1000); // Check every second
@@ -900,12 +900,12 @@
       selectElement.appendChild(option);
     }
 
-    function populateSeason(seasonsparameter, startingIndex) {
+    function populateSeason(seasonsparameter) {
       selectElement.innerHTML = ""; // deleting all existing options
       seasonsparameter.forEach((season) => {
         addOption(season.value, season.label);
       });
-      selectElement.selectedIndex = startingIndex;
+      selectElement.selectedIndex = current_season_index;
     }
 
     function populateSlides(slideDataParameter) {
@@ -1002,8 +1002,6 @@
           if (newMainSlideId != "slideLast") {
             rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(current_slideData[current_slide_index + 1].longCover)})`;
           }
-
-          console.log("SLIDE DATA : ", selectElement.selectedIndex);
 
         });
       });
