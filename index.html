@@ -1139,11 +1139,11 @@
           for (let mutation of mutationsList) {
             if (
               mutation.type === "attributes" &&
-              mutation.attributeName === "__idm_id__"
+              mutation.attributeName === "__mdb_id__"
             ) {
               console.log(
-                "__idm_id__ attribute added:",
-                videoElement.getAttribute("__idm_id__")
+                "__mdb_id__ attribute added:",
+                videoElement.getAttribute("__mdb_id__")
               );
             }
           }
@@ -1165,7 +1165,7 @@
         percentage = (art.currentTime / art.duration) * 100;
         if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
           art.off("video:timeupdate", onTimeUpdate);
-          art.storage.del(newData.id);
+          art.storage.del(art.id);
           sendMessage({ action: "deleteContinue", data: newData });
           continueToWatchDeleted == true;
         } else if (
@@ -1176,7 +1176,7 @@
           continueToWatchDeleted == false
         ) {
           art.off("video:timeupdate", onTimeUpdate);
-          art.storage.del(newData.id);
+          art.storage.del(art.id);
           sendMessage({ action: "deleteContinue", data: newData });
           continueToWatchDeleted == true;
         }
