@@ -1237,7 +1237,7 @@
         if (adstatus === "true" && adStarted == false) {
           adStarted = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
-          adsPlugin.startAd();
+          adsPlugin.updateVideoLink(adlink);
         }
         
         pathCode = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
@@ -1617,7 +1617,7 @@
 
       function nextToWatch(url, movieId) {
         art.switchUrl(url).then(() => {
-          art.option.id = newData.id;
+          art.option.id = movieId;
           art.play();
         });
       }
