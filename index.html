@@ -955,6 +955,7 @@
         } else if (event.data.action == "copyTimeSave") {
           alert(event.data.data);
         } else if (event.data.action == "initialData") {
+          allLolls = event.data.allLolls;
           newData = event.data.data;
           if (newData.cwId == undefined) {
             sendMessage({ action: "callTimer" });
