@@ -1,663 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- v 1.0.0 (2) -->
+<!-- v 1.0.0 (2) -->
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rebamovie App Player</title>
-    <!-- Include ArtPlayer library -->
-    <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
-    <!-- Include Hls.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js"></script>
-    <!-- Include ArtPlayer HLS Quality Plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/artplayer-plugin-hls-quality/dist/artplayer-plugin-hls-quality.min.js"></script>
-    <script>
-      /**
-       * Skipped minification because the original files appears to be already minified.
-       * Original file: /npm/artplayer-plugin-ads@1.0.6/dist/artplayer-plugin-ads.js
-       *
-       * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
-       */
-      /*!
-       * artplayer-plugin-ads.js v1.0.6
-       * Github: https://github.com/zhw2590582/ArtPlayer
-       * (c) 2017-2022 Harvey Zack
-       * Released under the MIT License.
-       */
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rebamovie App Player</title>
+  <!-- Include ArtPlayer library -->
+  <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+  <!-- Include Hls.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js"></script>
+  <!-- Include ArtPlayer HLS Quality Plugin -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/artplayer-plugin-hls-quality/dist/artplayer-plugin-hls-quality.min.js"></script>
+  <script>
+    /**
+     * Skipped minification because the original files appears to be already minified.
+     * Original file: /npm/artplayer-plugin-ads@1.0.6/dist/artplayer-plugin-ads.js
+     *
+     * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+     */
+    /*!
+     * artplayer-plugin-ads.js v1.0.6
+     * Github: https://github.com/zhw2590582/ArtPlayer
+     * (c) 2017-2022 Harvey Zack
+     * Released under the MIT License.
+     */
 
-      !(function (e, n, l, t, i) {
-        var a =
-            "undefined" != typeof globalThis
-              ? globalThis
-              : "undefined" != typeof self
-              ? self
-              : "undefined" != typeof window
+    !(function (e, n, l, t, i) {
+      var a =
+        "undefined" != typeof globalThis
+          ? globalThis
+          : "undefined" != typeof self
+            ? self
+            : "undefined" != typeof window
               ? window
               : "undefined" != typeof global
-              ? global
-              : {},
-          r = "function" == typeof a.parcelRequirea5da && a.parcelRequirea5da,
-          o = r.cache || {},
-          d =
-            "undefined" != typeof module &&
-            "function" == typeof module.require &&
-            module.require.bind(module);
-        function p(n, l) {
-          if (!o[n]) {
-            if (!e[n]) {
-              var t =
-                "function" == typeof a.parcelRequirea5da && a.parcelRequirea5da;
-              if (!l && t) return t(n, !0);
-              if (r) return r(n, !0);
-              if (d && "string" == typeof n) return d(n);
-              var i = new Error("Cannot find module '" + n + "'");
-              throw ((i.code = "MODULE_NOT_FOUND"), i);
-            }
-            (u.resolve = function (l) {
-              var t = e[n][1][l];
-              return null != t ? t : l;
-            }),
-              (u.cache = {});
-            var s = (o[n] = new p.Module(n));
-            e[n][0].call(s.exports, u, s, s.exports, this);
+                ? global
+                : {},
+        r = "function" == typeof a.parcelRequirea5da && a.parcelRequirea5da,
+        o = r.cache || {},
+        d =
+          "undefined" != typeof module &&
+          "function" == typeof module.require &&
+          module.require.bind(module);
+      function p(n, l) {
+        if (!o[n]) {
+          if (!e[n]) {
+            var t =
+              "function" == typeof a.parcelRequirea5da && a.parcelRequirea5da;
+            if (!l && t) return t(n, !0);
+            if (r) return r(n, !0);
+            if (d && "string" == typeof n) return d(n);
+            var i = new Error("Cannot find module '" + n + "'");
+            throw ((i.code = "MODULE_NOT_FOUND"), i);
           }
-          return o[n].exports;
-          function u(e) {
-            var n = u.resolve(e);
-            return !1 === n ? {} : p(n);
-          }
+          (u.resolve = function (l) {
+            var t = e[n][1][l];
+            return null != t ? t : l;
+          }),
+            (u.cache = {});
+          var s = (o[n] = new p.Module(n));
+          e[n][0].call(s.exports, u, s, s.exports, this);
         }
-        (p.isParcelRequire = !0),
-          (p.Module = function (e) {
-            (this.id = e), (this.bundle = p), (this.exports = {});
-          }),
-          (p.modules = e),
-          (p.cache = o),
-          (p.parent = r),
-          (p.register = function (n, l) {
-            e[n] = [
-              function (e, n) {
-                n.exports = l;
-              },
-              {},
-            ];
-          }),
-          Object.defineProperty(p, "root", {
-            get: function () {
-              return a.parcelRequirea5da;
+        return o[n].exports;
+        function u(e) {
+          var n = u.resolve(e);
+          return !1 === n ? {} : p(n);
+        }
+      }
+      (p.isParcelRequire = !0),
+        (p.Module = function (e) {
+          (this.id = e), (this.bundle = p), (this.exports = {});
+        }),
+        (p.modules = e),
+        (p.cache = o),
+        (p.parent = r),
+        (p.register = function (n, l) {
+          e[n] = [
+            function (e, n) {
+              n.exports = l;
             },
-          }),
-          (a.parcelRequirea5da = p);
-        for (var s = 0; s < n.length; s++) p(n[s]);
-        var u = p(l);
-        "object" == typeof exports && "undefined" != typeof module
-          ? (module.exports = u)
-          : "function" == typeof define &&
-            define.amd &&
-            define(function () {
-              return u;
-            });
-      })(
-        {
-          E13ST: [
-            function (e, n, l) {
-              var t = e("@parcel/transformer-js/src/esmodule-helpers.js");
-              t.defineInteropFlag(l);
-              var i = e("bundle-text:./style.less"),
-                a = t.interopDefault(i);
-              function r(e) {
-                return (n) => {
-                  const {
-                    template: { $player: l },
-                    icons: {
-                      volume: t,
-                      volumeClose: i,
-                      fullscreenOn: a,
-                      fullscreenOff: r,
-                      loading: o,
+            {},
+          ];
+        }),
+        Object.defineProperty(p, "root", {
+          get: function () {
+            return a.parcelRequirea5da;
+          },
+        }),
+        (a.parcelRequirea5da = p);
+      for (var s = 0; s < n.length; s++) p(n[s]);
+      var u = p(l);
+      "object" == typeof exports && "undefined" != typeof module
+        ? (module.exports = u)
+        : "function" == typeof define &&
+        define.amd &&
+        define(function () {
+          return u;
+        });
+    })(
+      {
+        E13ST: [
+          function (e, n, l) {
+            var t = e("@parcel/transformer-js/src/esmodule-helpers.js");
+            t.defineInteropFlag(l);
+            var i = e("bundle-text:./style.less"),
+              a = t.interopDefault(i);
+            function r(e) {
+              return (n) => {
+                const {
+                  template: { $player: l },
+                  icons: {
+                    volume: t,
+                    volumeClose: i,
+                    fullscreenOn: a,
+                    fullscreenOff: r,
+                    loading: o,
+                  },
+                  constructor: {
+                    validator: d,
+                    utils: { query: p, append: s, setStyle: u },
+                  },
+                } = n;
+                e = d(
+                  {
+                    html: "",
+                    video: "",
+                    url: "",
+                    playDuration: 5,
+                    totalDuration: 10,
+                    muted: !1,
+                    i18n: {
+                      close: "关闭广告",
+                      countdown: "%s秒",
+                      detail: "查看详情",
+                      canBeClosed: "%s秒后可关闭广告",
                     },
-                    constructor: {
-                      validator: d,
-                      utils: { query: p, append: s, setStyle: u },
+                    ...e,
+                  },
+                  {
+                    html: "?string",
+                    video: "?string",
+                    url: "?string",
+                    playDuration: "number",
+                    totalDuration: "number",
+                    muted: "?boolean",
+                    i18n: {
+                      close: "string",
+                      countdown: "string",
+                      detail: "string",
+                      canBeClosed: "string",
                     },
-                  } = n;
-                  e = d(
-                    {
-                      html: "",
-                      video: "",
-                      url: "",
-                      playDuration: 5,
-                      totalDuration: 10,
-                      muted: !1,
-                      i18n: {
-                        close: "关闭广告",
-                        countdown: "%s秒",
-                        detail: "查看详情",
-                        canBeClosed: "%s秒后可关闭广告",
-                      },
-                      ...e,
-                    },
-                    {
-                      html: "?string",
-                      video: "?string",
-                      url: "?string",
-                      playDuration: "number",
-                      totalDuration: "number",
-                      muted: "?boolean",
-                      i18n: {
-                        close: "string",
-                        countdown: "string",
-                        detail: "string",
-                        canBeClosed: "string",
-                      },
-                    }
-                  );
-                  let c = null,
-                    y = null,
-                    f = null,
-                    g = null,
-                    m = null,
-                    v = null,
-                    x = 0,
-                    h = null,
-                    b = !1,
-                    w = !1,
-                    D = !1;
-                  function j(e, n) {
-                    return n.replace("%s", e);
                   }
-                  function k() {
-                    (b = !0),
-                      n.play(),
-                      e.video && c.pause(),
-                      u(n.template.$ads, "display", "none"),
-                      n.emit("artplayerPluginAds:skip", e);
-                      resetAd();
-                  }
-                  function O() {
-                    b ||
-                      (h = setTimeout(() => {
-                        x += 1;
-                        const n = e.playDuration - x;
-                        n >= 1
-                          ? (f.innerHTML = j(n, e.i18n.canBeClosed))
-                          : ((f.innerHTML = e.i18n.close), D || (D = !0)),
-                          (g.innerHTML = j(
-                            e.totalDuration - x,
-                            e.i18n.countdown
-                          )),
-                          x >= e.totalDuration ? k() : O();
-                      }, 1e3));
-                  }
-                  function $() {
-                    b || clearTimeout(h);
+                );
+                let c = null,
+                  y = null,
+                  f = null,
+                  g = null,
+                  m = null,
+                  v = null,
+                  x = 0,
+                  h = null,
+                  b = !1,
+                  w = !1,
+                  D = !1;
+                function j(e, n) {
+                  return n.replace("%s", e);
+                }
+                function k() {
+                  (b = !0),
+                    n.play(),
+                    e.video && c.pause(),
+                    u(n.template.$ads, "display", "none"),
+                    n.emit("artplayerPluginAds:skip", e);
+                  resetAd();
+                }
+                function O() {
+                  b ||
+                    (h = setTimeout(() => {
+                      x += 1;
+                      const n = e.playDuration - x;
+                      n >= 1
+                        ? (f.innerHTML = j(n, e.i18n.canBeClosed))
+                        : ((f.innerHTML = e.i18n.close), D || (D = !0)),
+                        (g.innerHTML = j(
+                          e.totalDuration - x,
+                          e.i18n.countdown
+                        )),
+                        x >= e.totalDuration ? k() : O();
+                    }, 1e3));
+                }
+                function $() {
+                  b || clearTimeout(h);
+                }
+
+                function resetAd() {
+                  // Remove event listeners
+                  if (n.unproxy) {
+                    n.unproxy(f, "click");
+                    n.unproxy(c, "error");
+                    n.unproxy(c, "loadedmetadata");
+                    n.unproxy(document, "visibilitychange");
                   }
 
-                  function resetAd() {
-                    // Remove event listeners
-                    if (n.unproxy) {
-                      n.unproxy(f, "click");
-                      n.unproxy(c, "error");
-                      n.unproxy(c, "loadedmetadata");
-                      n.unproxy(document, "visibilitychange");
-                    }
-
-                    // Clear ad elements
-                    if (n.template && n.template.$ads) {
-                      n.template.$ads.innerHTML = "";
-                    }
-
-                    // Reset variables
-                    f = null; // Close button element
-                    g = null; // Countdown element
-                    m = null; // Control elements
-                    y = null; // Timer element
-                    c = null; // Video element
-                    v = null; // Loading element
-
-                    // Reset state variables
-                    w = false; // Ad started flag
-                    D = false; // Ad close flag
-                    b = false; // Ad finished flag
-                    x = 0; // Time counter
-
+                  // Clear ad elements
+                  if (n.template && n.template.$ads) {
+                    n.template.$ads.innerHTML = "";
                   }
 
-                  function P() {
-                    if (!w) {
-                      w = true;
-                      (function () {
-                        n.template.$ads = s(
-                          l,
-                          '<div class="artplayer-plugin-ads"></div>'
-                        );
-                        c = s(
-                          n.template.$ads,
-                          e.video
-                            ? `<video class="artplayer-plugin-ads-video" src="${e.video}" loop playsInline></video>`
-                            : `<div class="artplayer-plugin-ads-html">${e.html}</div>`
-                        );
-                        v = s(
-                          n.template.$ads,
-                          '<div class="artplayer-plugin-ads-loading"></div>'
-                        );
-                        s(v, o);
-                        y = s(
-                          n.template.$ads,
-                          `<div class="artplayer-plugin-ads-timer"><div class="artplayer-plugin-ads-close">${
-                            e.playDuration <= 0
-                              ? e.i18n.close
-                              : j(e.playDuration, e.i18n.canBeClosed)
-                          }</div><div class="artplayer-plugin-ads-countdown">${j(
-                            e.totalDuration,
-                            e.i18n.countdown
-                          )}</div></div>`
-                        );
-                        f = p(".artplayer-plugin-ads-close", y);
-                        g = p(".artplayer-plugin-ads-countdown", y);
-                        if (e.playDuration >= e.totalDuration) {
-                          u(f, "display", "none");
+                  // Reset variables
+                  f = null; // Close button element
+                  g = null; // Countdown element
+                  m = null; // Control elements
+                  y = null; // Timer element
+                  c = null; // Video element
+                  v = null; // Loading element
+
+                  // Reset state variables
+                  w = false; // Ad started flag
+                  D = false; // Ad close flag
+                  b = false; // Ad finished flag
+                  x = 0; // Time counter
+
+                }
+
+                function P() {
+                  if (!w) {
+                    w = true;
+                    (function () {
+                      n.template.$ads = s(
+                        l,
+                        '<div class="artplayer-plugin-ads"></div>'
+                      );
+                      c = s(
+                        n.template.$ads,
+                        e.video
+                          ? `<video class="artplayer-plugin-ads-video" src="${e.video}" loop playsInline></video>`
+                          : `<div class="artplayer-plugin-ads-html">${e.html}</div>`
+                      );
+                      v = s(
+                        n.template.$ads,
+                        '<div class="artplayer-plugin-ads-loading"></div>'
+                      );
+                      s(v, o);
+                      y = s(
+                        n.template.$ads,
+                        `<div class="artplayer-plugin-ads-timer"><div class="artplayer-plugin-ads-close">${e.playDuration <= 0
+                          ? e.i18n.close
+                          : j(e.playDuration, e.i18n.canBeClosed)
+                        }</div><div class="artplayer-plugin-ads-countdown">${j(
+                          e.totalDuration,
+                          e.i18n.countdown
+                        )}</div></div>`
+                      );
+                      f = p(".artplayer-plugin-ads-close", y);
+                      g = p(".artplayer-plugin-ads-countdown", y);
+                      if (e.playDuration >= e.totalDuration) {
+                        u(f, "display", "none");
+                      }
+                      n.proxy(f, "click", () => {
+                        if (D) {
+                          k();
                         }
-                        n.proxy(f, "click", () => {
-                          if (D) {
-                            k();
-                          }
-                        });
-                        m = s(
-                          n.template.$ads,
-                          `<div class="artplayer-plugin-ads-control"><div class="artplayer-plugin-ads-detail">${e.i18n.detail}</div><div class="artplayer-plugin-ads-muted"></div><div class="artplayer-plugin-ads-fullscreen"></div></div>`
-                        );
-                        const d = p(".artplayer-plugin-ads-detail", m);
-                        const x = p(".artplayer-plugin-ads-muted", m);
-                        const h = p(".artplayer-plugin-ads-fullscreen", m);
-                        if (e.url) {
-                          n.proxy(d, "click", () => {
-                            window.open(e.url);
-                            n.emit("artplayerPluginAds:click", e);
-                          });
-                        } else {
-                          u(d, "display", "none");
-                        }
-                        if (e.video) {
-                          const l = s(x, t);
-                          const a = s(x, i);
-                          u(a, "display", "none");
-                          if (e.muted) {
-                            c.muted = true;
-                            u(l, "display", "none");
-                            u(a, "display", "inline-flex");
-                          }
-                          n.proxy(x, "click", () => {
-                            c.muted = !c.muted;
-                            if (c.muted) {
-                              u(l, "display", "none");
-                              u(a, "display", "inline-flex");
-                            } else {
-                              u(l, "display", "inline-flex");
-                              u(a, "display", "none");
-                            }
-                          });
-                        } else {
-                          u(x, "display", "none");
-                        }
-                        const b = s(h, a);
-                        const w = s(h, r);
-                        u(w, "display", "none");
-                        n.proxy(h, "click", () => {
-                          n.fullscreen = !n.fullscreen;
-                          if (n.fullscreen) {
-                            u(b, "display", "inline-flex");
-                            u(w, "display", "none");
-                          } else {
-                            u(b, "display", "none");
-                            u(w, "display", "inline-flex");
-                          }
-                        });
-                        n.proxy(c, "click", () => {
-                          if (e.url) {
-                            window.open(e.url);
-                          }
+                      });
+                      m = s(
+                        n.template.$ads,
+                        `<div class="artplayer-plugin-ads-control"><div class="artplayer-plugin-ads-detail">${e.i18n.detail}</div><div class="artplayer-plugin-ads-muted"></div><div class="artplayer-plugin-ads-fullscreen"></div></div>`
+                      );
+                      const d = p(".artplayer-plugin-ads-detail", m);
+                      const x = p(".artplayer-plugin-ads-muted", m);
+                      const h = p(".artplayer-plugin-ads-fullscreen", m);
+                      if (e.url) {
+                        n.proxy(d, "click", () => {
+                          window.open(e.url);
                           n.emit("artplayerPluginAds:click", e);
                         });
-                      })();
-                      n.pause();
+                      } else {
+                        u(d, "display", "none");
+                      }
                       if (e.video) {
-                        n.proxy(c, "error", k);
-                        n.proxy(c, "loadedmetadata", () => {
-                          O();
-                          c.play();
-                          u(y, "display", "flex");
-                          u(m, "display", "flex");
-                          u(v, "display", "none");
-                          n.emit("preLoll", e);
+                        const l = s(x, t);
+                        const a = s(x, i);
+                        u(a, "display", "none");
+                        if (e.muted) {
+                          c.muted = true;
+                          u(l, "display", "none");
+                          u(a, "display", "inline-flex");
+                        }
+                        n.proxy(x, "click", () => {
+                          c.muted = !c.muted;
+                          if (c.muted) {
+                            u(l, "display", "none");
+                            u(a, "display", "inline-flex");
+                          } else {
+                            u(l, "display", "inline-flex");
+                            u(a, "display", "none");
+                          }
                         });
                       } else {
+                        u(x, "display", "none");
+                      }
+                      const b = s(h, a);
+                      const w = s(h, r);
+                      u(w, "display", "none");
+                      n.proxy(h, "click", () => {
+                        n.fullscreen = !n.fullscreen;
+                        if (n.fullscreen) {
+                          u(b, "display", "inline-flex");
+                          u(w, "display", "none");
+                        } else {
+                          u(b, "display", "none");
+                          u(w, "display", "inline-flex");
+                        }
+                      });
+                      n.proxy(c, "click", () => {
+                        if (e.url) {
+                          window.open(e.url);
+                        }
+                        n.emit("artplayerPluginAds:click", e);
+                      });
+                    })();
+                    n.pause();
+                    if (e.video) {
+                      n.proxy(c, "error", k);
+                      n.proxy(c, "loadedmetadata", () => {
                         O();
+                        c.play();
                         u(y, "display", "flex");
                         u(m, "display", "flex");
                         u(v, "display", "none");
                         n.emit("preLoll", e);
-                      }
-                      n.proxy(document, "visibilitychange", () => {
-                        if (document.hidden) {
-                          $();
-                        } else {
-                          O();
-                        }
                       });
+                    } else {
+                      O();
+                      u(y, "display", "flex");
+                      u(m, "display", "flex");
+                      u(v, "display", "none");
+                      n.emit("preLoll", e);
                     }
+                    n.proxy(document, "visibilitychange", () => {
+                      if (document.hidden) {
+                        $();
+                      } else {
+                        O();
+                      }
+                    });
                   }
+                }
 
-                  function updateVideoLink(newVideoLink) {
-                      P();
-                      e.video = newVideoLink;
-                      c.src = newVideoLink;
-                      c.load();
-                  }
+                function updateVideoLink(newVideoLink) {
+                  P();
+                  e.video = newVideoLink;
+                  c.src = newVideoLink;
+                  c.load();
+                }
 
-                  return {
-                    name: "artplayerPluginAds",
-                    skip: k,
-                    pause: $,
-                    play: O,
-                    startAd: P, // Expose the P function
-                    updateVideoLink, // Expose the updateVideoLink function
-                    resetAd,
-                  };
+                return {
+                  name: "artplayerPluginAds",
+                  skip: k,
+                  pause: $,
+                  play: O,
+                  startAd: P, // Expose the P function
+                  updateVideoLink, // Expose the updateVideoLink function
+                  resetAd,
                 };
-              }
-              if (
-                ((l.default = r),
+              };
+            }
+            if (
+              ((l.default = r),
                 (r.env = "production"),
                 (r.version = "1.0.6"),
                 (r.build = "1663552935766"),
                 "undefined" != typeof document &&
-                  !document.getElementById("artplayer-plugin-ads"))
-              ) {
-                const e = document.createElement("style");
-                (e.id = "artplayer-plugin-ads"),
-                  (e.textContent = a.default),
-                  document.head.appendChild(e);
-              }
-              "undefined" != typeof window && (window.artplayerPluginAds = r);
-            },
-            {
-              "bundle-text:./style.less": "5j5O2",
-              "@parcel/transformer-js/src/esmodule-helpers.js": "9v6Cv",
-            },
-          ],
-          "5j5O2": [
-            function (e, n, l) {
-              n.exports =
-                ".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;top:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}";
-            },
-            {},
-          ],
-          "9v6Cv": [
-            function (e, n, l) {
-              (l.interopDefault = function (e) {
-                return e && e.__esModule ? e : { default: e };
-              }),
-                (l.defineInteropFlag = function (e) {
-                  Object.defineProperty(e, "__esModule", { value: !0 });
-                }),
-                (l.exportAll = function (e, n) {
-                  return (
-                    Object.keys(e).forEach(function (l) {
-                      "default" === l ||
-                        "__esModule" === l ||
-                        n.hasOwnProperty(l) ||
-                        Object.defineProperty(n, l, {
-                          enumerable: !0,
-                          get: function () {
-                            return e[l];
-                          },
-                        });
-                    }),
-                    n
-                  );
-                }),
-                (l.export = function (e, n, l) {
-                  Object.defineProperty(e, n, { enumerable: !0, get: l });
-                });
-            },
-            {},
-          ],
-        },
-        ["E13ST"],
-        "E13ST"
-      );
-    </script>
-    <!-- Include ArtPlayer Ads Plugin -->
-    <!-- Include ArtPlayer Danmuku Plugin -->
-    <!-- <script src="path/to/artplayer-plugin-danmuku.js"></script> -->
-    <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      .artplayer-app {
-        width: 100%;
-        height: 100%;
-        background: #000000;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-
-  <body>
-    <script type="text/javascript">
-      // Disable text selection
-      if (typeof document.onselectstart != "undefined") {
-        document.onselectstart = new Function("return false");
-      } else {
-        document.onmousedown = new Function("return false");
-        document.onmouseup = new Function("return false");
-      }
-    </script>
-
-    <script language="javascript">
-      // Disable right-click context menu with a custom message
-
-      function clickIE4() {
-        if (event.button == 2) {
-          return false;
-        }
-      }
-
-      function clickNS4(e) {
-        if (document.layers || (document.getElementById && !document.all)) {
-          if (e.which == 2 || e.which == 3) {
-            return false;
-          }
-        }
-      }
-
-      if (document.layers) {
-        document.captureEvents(Event.MOUSEDOWN);
-        document.onmousedown = clickNS4;
-      } else if (document.all && !document.getElementById) {
-        document.onmousedown = clickIE4;
-      }
-
-      document.oncontextmenu = new Function("alert(message);return false");
-    </script>
-
-    <script>
-      // Prevent F12 (developer tools) and Ctrl+Shift+I
-      var addHandler = function (element, type, handler) {
-        if (element.addEventListener) {
-          element.addEventListener(type, handler, false);
-        } else if (element.attachEvent) {
-          element.attachEvent("on" + type, handler);
-        } else {
-          element["on" + type] = handler;
-        }
-      };
-
-      var preventDefault = function (event) {
-        if (event.preventDefault) {
-          event.preventDefault();
-        } else {
-          event.returnValue = false;
-        }
-      };
-
-      addHandler(window, "contextmenu", function (event) {
-        preventDefault(event);
-      });
-
-      document.onkeydown = function (event) {
-        if (event.keyCode == 123) {
-          // Prevent F12
-          return false;
-        } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
-          // Prevent Ctrl+Shift+I
-          return false;
-        }
-      };
-    </script>
-
-    <!-- Create a container for the player -->
-    <div class="artplayer-app"></div>
-
-    <!-- Main PlayerScript  -->
-    <script>
-      function isMobileDevice() {
-        const userAgent = navigator.userAgent.toLowerCase();
-        return /mobile|android|iphone|ipod|blackberry|iemobile|opera mini/.test(
-          userAgent
-        );
-      }
-      // Function to get URL parameters by name
-      function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-          results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return "";
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-      }
-
-      // Get movielink, adlink, and adstatus from URL parameters
-      let type = getParameterByName("type");
-      let movielink = getParameterByName("movieLink");
-      let adlink =
-        "https://video.wixstatic.com/video/3e4e16_aeb4e36309414fd7921fecaf7598c4a1/720p/mp4/file.mp4"; //getParameterByName("adlink");
-      let adstatus = getParameterByName("adstatus");
-      let movieId = getParameterByName("movieId");
-      let episodeId = getParameterByName("episodeId");
-      let languageCode = getParameterByName("languageCode");
-      let current_slide_index = Number(
-        getParameterByName("currentEpisodeIndex")
-      );
-      let current_season_index = Number(
-        getParameterByName("currentSeasonIndex")
-      );
-      let newMainSlideId = getParameterByName("currentEpisodeSlideId");
-      let watchLaterAvailalbe = getParameterByName("watchLaterAvailalbe");
-      let oldMainSlideId = getParameterByName("currentEpisodeSlideId");
-      let email;
-      let finalMovieId = episodeId == "empty" ? movieId : episodeId;
-      let percentage = 0;
-      let container = document.querySelector(".artplayer-app");
-      let watchLaterContainer;
-      let watch_Later_Card;
-      let player_container_div;
-      let slideWidth;
-      let art_controls;
-      let art_bottom;
-      let art_mask;
-      let allTime = [null, null];
-      let navButtonLeft;
-      let userRole = getParameterByName("userRole"); // to be Deleted later
-      let navButtonRight;
-      let selectElement;
-      let slides_availability = false;
-      let continueToWatchDeleted = false;
-      let seasons = [{ value: 1, text: "Loading ..." }];
-      let slideData = [
-        {
-          image:
-            "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
-          title: "Loading ...",
-        },
-        // Add more slide data as needed
-      ];
-      let current_slideData;
-      let art_video_player;
-      let deviceType = isMobileDevice() ? "mobile" : "desktop";
-      let art;
-      let watch_Later_Card_poster =
-        "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg";
-      let S_e = [0, 0];
-      let device_height = deviceType == "desktop" ? "280px" : "200px";
-      let player_container_div_marginBottom = "20px";
-      let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
-      let is_last_season = false;
-      let pathCode = "M8 5v14l11-7z";
-      let viewBoxSize = deviceType == "mobile" ? "0 0 36 36" : "-6 -6 36 36";
-      let next_fast_pathCode =
-        deviceType == "mobile"
-          ? "M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"
-          : "M12 2a10 10 0 1 0 10 10h-1.5a8.5 8.5 0 1 1-3.8-7.2l-3.2 3.2H22V2l-2.8 2.8A9.98 9.98 0 0 0 12 2z";
-      let newData;
-      let rect1_backgroundImage;
-      let custom_select_div;
-      let title_watchList_Element;
-      let watch_Later_List_Data = [];
-      let preLoll = false;
-      let midLoll = false;
-      let postLoll = false;
-      let allLolls = [];
-      // Artplayer settings
-      Artplayer.MOBILE_DBCLICK_PLAY = true;
-      Artplayer.CONTEXTMENU = false;
-      Artplayer.TOUCH_MOVE_RATIO = 1;
-      Artplayer.LOG_VERSION = false;
-      Artplayer.AUTO_PLAYBACK_MAX = 20;
-
-      // Initialize the Player
-      art = new Artplayer({
-        container: ".artplayer-app",
-        id: finalMovieId,
-        url: movielink,
-        poster:
-          "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
-        isLive: false,
-        muted: false,
-        autoplay: false,
-        pip: false,
-        autoSize: false,
-        autoMini: true,
-        screenshot: false,
-        setting: true,
-        loop: false,
-        autoPlayback: true,
-        autoOrientation: true,
-        antiOverlap: true,
-        flip: false,
-        playbackRate: true,
-        aspectRatio: true,
-        fullscreen: true,
-        fullscreenWeb: false,
-        miniProgressBar: true,
-        backdrop: true,
-        playsInline: true,
-        airplay: true,
-        theme: "#05C546",
-        lang: navigator.language.toLowerCase(),
-        layers: [
-          //Object for Next-Previous-Play Button
+                !document.getElementById("artplayer-plugin-ads"))
+            ) {
+              const e = document.createElement("style");
+              (e.id = "artplayer-plugin-ads"),
+                (e.textContent = a.default),
+                document.head.appendChild(e);
+            }
+            "undefined" != typeof window && (window.artplayerPluginAds = r);
+          },
           {
-            name: "rebaPlayerControls",
-            html: `<div class="button-rebaPlayer left-button-rebaPlayer" id="leftButtonDiv">
+            "bundle-text:./style.less": "5j5O2",
+            "@parcel/transformer-js/src/esmodule-helpers.js": "9v6Cv",
+          },
+        ],
+        "5j5O2": [
+          function (e, n, l) {
+            n.exports =
+              ".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;top:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}";
+          },
+          {},
+        ],
+        "9v6Cv": [
+          function (e, n, l) {
+            (l.interopDefault = function (e) {
+              return e && e.__esModule ? e : { default: e };
+            }),
+              (l.defineInteropFlag = function (e) {
+                Object.defineProperty(e, "__esModule", { value: !0 });
+              }),
+              (l.exportAll = function (e, n) {
+                return (
+                  Object.keys(e).forEach(function (l) {
+                    "default" === l ||
+                      "__esModule" === l ||
+                      n.hasOwnProperty(l) ||
+                      Object.defineProperty(n, l, {
+                        enumerable: !0,
+                        get: function () {
+                          return e[l];
+                        },
+                      });
+                  }),
+                  n
+                );
+              }),
+              (l.export = function (e, n, l) {
+                Object.defineProperty(e, n, { enumerable: !0, get: l });
+              });
+          },
+          {},
+        ],
+      },
+      ["E13ST"],
+      "E13ST"
+    );
+  </script>
+  <!-- Include ArtPlayer Ads Plugin -->
+  <!-- Include ArtPlayer Danmuku Plugin -->
+  <!-- <script src="path/to/artplayer-plugin-danmuku.js"></script> -->
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .artplayer-app {
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="text/javascript">
+    // Disable text selection
+    if (typeof document.onselectstart != "undefined") {
+      document.onselectstart = new Function("return false");
+    } else {
+      document.onmousedown = new Function("return false");
+      document.onmouseup = new Function("return false");
+    }
+  </script>
+
+  <script language="javascript">
+    // Disable right-click context menu with a custom message
+
+    function clickIE4() {
+      if (event.button == 2) {
+        return false;
+      }
+    }
+
+    function clickNS4(e) {
+      if (document.layers || (document.getElementById && !document.all)) {
+        if (e.which == 2 || e.which == 3) {
+          return false;
+        }
+      }
+    }
+
+    if (document.layers) {
+      document.captureEvents(Event.MOUSEDOWN);
+      document.onmousedown = clickNS4;
+    } else if (document.all && !document.getElementById) {
+      document.onmousedown = clickIE4;
+    }
+
+    document.oncontextmenu = new Function("alert(message);return false");
+  </script>
+
+  <script>
+    // Prevent F12 (developer tools) and Ctrl+Shift+I
+    var addHandler = function (element, type, handler) {
+      if (element.addEventListener) {
+        element.addEventListener(type, handler, false);
+      } else if (element.attachEvent) {
+        element.attachEvent("on" + type, handler);
+      } else {
+        element["on" + type] = handler;
+      }
+    };
+
+    var preventDefault = function (event) {
+      if (event.preventDefault) {
+        event.preventDefault();
+      } else {
+        event.returnValue = false;
+      }
+    };
+
+    addHandler(window, "contextmenu", function (event) {
+      preventDefault(event);
+    });
+
+    document.onkeydown = function (event) {
+      if (event.keyCode == 123) {
+        // Prevent F12
+        return false;
+      } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+        // Prevent Ctrl+Shift+I
+        return false;
+      }
+    };
+  </script>
+
+  <!-- Create a container for the player -->
+  <div class="artplayer-app"></div>
+
+  <!-- Main PlayerScript  -->
+  <script>
+    function isMobileDevice() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      return /mobile|android|iphone|ipod|blackberry|iemobile|opera mini/.test(
+        userAgent
+      );
+    }
+    // Function to get URL parameters by name
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // Get movielink, adlink, and adstatus from URL parameters
+    let type = getParameterByName("type");
+    let movielink = getParameterByName("movieLink");
+    let adlink =
+      "https://video.wixstatic.com/video/3e4e16_aeb4e36309414fd7921fecaf7598c4a1/720p/mp4/file.mp4"; //getParameterByName("adlink");
+    let adstatus = getParameterByName("adstatus");
+    let movieId = getParameterByName("movieId");
+    let episodeId = getParameterByName("episodeId");
+    let languageCode = getParameterByName("languageCode");
+    let current_slide_index = Number(
+      getParameterByName("currentEpisodeIndex")
+    );
+    let current_season_index = Number(
+      getParameterByName("currentSeasonIndex")
+    );
+    let newMainSlideId = getParameterByName("currentEpisodeSlideId");
+    let watchLaterAvailalbe = getParameterByName("watchLaterAvailalbe");
+    let oldMainSlideId = getParameterByName("currentEpisodeSlideId");
+    let email;
+    let finalMovieId = episodeId == "empty" ? movieId : episodeId;
+    let percentage = 0;
+    let container = document.querySelector(".artplayer-app");
+    let watchLaterContainer;
+    let watch_Later_Card;
+    let player_container_div;
+    let slideWidth;
+    let art_controls;
+    let art_bottom;
+    let art_mask;
+    let allTime = [null, null];
+    let navButtonLeft;
+    let userRole = getParameterByName("userRole"); // to be Deleted later
+    let navButtonRight;
+    let selectElement;
+    let slides_availability = false;
+    let continueToWatchDeleted = false;
+    let seasons = [{ value: 1, text: "Loading ..." }];
+    let slideData = [
+      {
+        image:
+          "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
+        title: "Loading ...",
+      },
+      // Add more slide data as needed
+    ];
+    let current_slideData;
+    let art_video_player;
+    let deviceType = isMobileDevice() ? "mobile" : "desktop";
+    let art;
+    let watch_Later_Card_poster =
+      "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg";
+    let S_e = [0, 0];
+    let device_height = deviceType == "desktop" ? "280px" : "200px";
+    let player_container_div_marginBottom = "20px";
+    let watchList_title_size = deviceType == "desktop" ? "22px" : "18px";
+    let is_last_season = false;
+    let pathCode = "M8 5v14l11-7z";
+    let viewBoxSize = deviceType == "mobile" ? "0 0 36 36" : "-6 -6 36 36";
+    let next_fast_pathCode =
+      deviceType == "mobile"
+        ? "M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"
+        : "M12 2a10 10 0 1 0 10 10h-1.5a8.5 8.5 0 1 1-3.8-7.2l-3.2 3.2H22V2l-2.8 2.8A9.98 9.98 0 0 0 12 2z";
+    let newData;
+    let rect1_backgroundImage;
+    let custom_select_div;
+    let title_watchList_Element;
+    let watch_Later_List_Data = [];
+    let preLoll = false;
+    let midLoll = false;
+    let postLoll = false;
+    let allLolls = [];
+    // Artplayer settings
+    Artplayer.MOBILE_DBCLICK_PLAY = true;
+    Artplayer.CONTEXTMENU = false;
+    Artplayer.TOUCH_MOVE_RATIO = 1;
+    Artplayer.LOG_VERSION = false;
+    Artplayer.AUTO_PLAYBACK_MAX = 20;
+
+    // Initialize the Player
+    art = new Artplayer({
+      container: ".artplayer-app",
+      id: finalMovieId,
+      url: movielink,
+      poster:
+        "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
+      isLive: false,
+      muted: false,
+      autoplay: false,
+      pip: false,
+      autoSize: false,
+      autoMini: true,
+      screenshot: false,
+      setting: true,
+      loop: false,
+      autoPlayback: true,
+      autoOrientation: true,
+      antiOverlap: true,
+      flip: false,
+      playbackRate: true,
+      aspectRatio: true,
+      fullscreen: true,
+      fullscreenWeb: false,
+      miniProgressBar: true,
+      backdrop: true,
+      playsInline: true,
+      airplay: true,
+      theme: "#05C546",
+      lang: navigator.language.toLowerCase(),
+      layers: [
+        //Object for Next-Previous-Play Button
+        {
+          name: "rebaPlayerControls",
+          html: `<div class="button-rebaPlayer left-button-rebaPlayer" id="leftButtonDiv">
             <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
                 <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
                     <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
@@ -681,716 +681,715 @@
         	        </svg>
         	    </button>
         	</div>`,
-            style: {
-              width: "100%",
-              height: "10%",
-              alignSelf: "center",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              position: "absolute",
-              //display: "none",
-            },
+          style: {
+            width: "100%",
+            height: "10%",
+            alignSelf: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            //display: "none",
           },
+        },
 
-          //Object for wachLater Layer
-          wachLaterLayer("none", "block", "none"),
+        //Object for wachLater Layer
+        wachLaterLayer("none", "block", "none"),
 
-          //Object for Card for WatchLater Layer
-          wachLaterCardLayer(
-            type == "M" && watchLaterAvailalbe == "no" ? "none" : "block",
-            "Next",
-            "Episodes"
-          ),
-        ],
+        //Object for Card for WatchLater Layer
+        wachLaterCardLayer(
+          type == "M" && watchLaterAvailalbe == "no" ? "none" : "block",
+          "Next",
+          "Episodes"
+        ),
+      ],
 
-        controls: [
-          {
-            name: "next-episode-button",
-            index: 20,
-            position: "left",
-            html: '<svg height="100%" version="1.1" viewBox="0 0 36 36"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
-            tooltip: "Next Episode",
-            style: {
-              display: deviceType == "desktop" && type != "M" ? "flex" : "none",
-            },
-            click: function (...args) {
-              go_to_next_slide();
-            },
+      controls: [
+        {
+          name: "next-episode-button",
+          index: 20,
+          position: "left",
+          html: '<svg height="100%" version="1.1" viewBox="0 0 36 36"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
+          tooltip: "Next Episode",
+          style: {
+            display: deviceType == "desktop" && type != "M" ? "flex" : "none",
           },
-          {
-            name: "copy-time-button",
-            index: 30,
-            position: "right",
-            html: "<button>Copy Time</button>",
-            tooltip: "copy-time-button",
-            style: {
-              display: userRole == "Admin" ? "flex" : "none",
-            },
-            click: function (...args) {
-              sen_is_copying({
-                id: newData.id,
-                dbName: current_season_index,
-                type: newData.type,
+          click: function (...args) {
+            go_to_next_slide();
+          },
+        },
+        {
+          name: "copy-time-button",
+          index: 30,
+          position: "right",
+          html: "<button>Copy Time</button>",
+          tooltip: "copy-time-button",
+          style: {
+            display: userRole == "Admin" ? "flex" : "none",
+          },
+          click: function (...args) {
+            sen_is_copying({
+              id: newData.id,
+              dbName: current_season_index,
+              type: newData.type,
+            });
+          },
+        },
+      ],
+      moreVideoAttr: {
+        crossOrigin: "anonymous",
+      },
+      plugins:
+        adstatus === "false"
+          ? [
+            artplayerPluginHlsQuality({
+              control: true,
+              setting: true,
+              getResolution: (level) => level.height + "P",
+              title: "Quality",
+              auto: "Auto",
+            }),
+          ]
+          : [
+            artplayerPluginAds({
+              html: '<img src="' + adlink + '" alt="Ad Poster">',
+              video: allLolls.length > 0 ? allLolls[0] : adlink,
+              url: "",
+              playDuration: 5,
+              totalDuration: 10,
+              i18n: {
+                close: "Funga",
+                countdown: "%s Amasegonda 5",
+                detail: "Kwamamaza",
+                canBeClosed: "%s Amasegonda 3",
+              },
+            }),
+            artplayerPluginHlsQuality({
+              control: true,
+              setting: true,
+              getResolution: (level) => level.height + "P",
+              title: "Quality",
+              auto: "Auto",
+            }),
+          ],
+      customType: {
+        m3u8: function playM3u8(video, url, art) {
+          if (Hls.isSupported()) {
+            if (art.hls) art.hls.destroy();
+            const hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+            art.hls = hls;
+            art.on("destroy", () => hls.destroy());
+          } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+            video.src = url;
+          } else {
+            art.notice.show = "Unsupported playback format: m3u8";
+          }
+        },
+      },
+    });
+
+    // Function for handling Fullscreen state
+    art.on("fullscreen", (state) => {
+      console.log("NOW WE ARE II FULLLSCREEN!", state);
+    });
+
+    //An event for controlling when the DOM is loaded
+    document.addEventListener("DOMContentLoaded", function () {
+      art_mask = document.querySelector(".art-mask");
+      custom_select_div = document.getElementById("custom-select-div");
+      art_bottom = document.querySelector(".art-bottom");
+      art_controls = document.querySelector(".art-controls");
+      art_video_player = document.querySelector(".art-video");
+      rect1_backgroundImage = document.querySelector(".rect1");
+      title_watchList_Element = document.getElementById("title_watchList");
+      watchLaterContainer = document.querySelector(
+        ".art-layer.art-layer-wachLaterLayer"
+      );
+      watch_Later_Card = document.querySelector(
+        ".art-layer.art-layer-wachLaterCardLayer"
+      );
+      player_container_div = document.getElementById("player-container-div");
+      selectElement = document.getElementById("season-select");
+      createElement();
+      watchListObserver();
+      observeOnStart();
+
+      document.getElementById("closeIcon").onclick = function () {
+        watchLaterContainer.style.opacity = "0";
+        watchLaterContainer.style.visibility = "hidden";
+      };
+
+      document.querySelector(".art-mask").style.display = "none";
+
+      // ---------------------- OBSERVER FOR CONTROLS ---------------------------
+
+      const observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              watch_Later_Card.style.transform = "translateX(0px)";
+
+              art.layers.update({
+                name: "rebaPlayerControls",
+                html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        	</div>
+        	<div class="center-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+        	        width: 70px;
+        	        height: 70px;
+        	    ">
+        	            <path id="playingButtonPath" d="${pathCode}" />
+        	        </svg>
+        	    </button>
+        	</div>
+        	<div class="button-rebaPlayer right-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+        	        </svg>
+        	    </button>
+        	</div>`,
+                style: {
+                  width: "100%",
+                  height: "10%",
+                  alignSelf: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "absolute",
+                },
               });
-            },
-          },
-        ],
-        moreVideoAttr: {
-          crossOrigin: "anonymous",
-        },
-        plugins:
-          adstatus === "false"
-            ? [
-                artplayerPluginHlsQuality({
-                  control: true,
-                  setting: true,
-                  getResolution: (level) => level.height + "P",
-                  title: "Quality",
-                  auto: "Auto",
-                }),
-              ]
-            : [
-                artplayerPluginAds({
-                  html: '<img src="' + adlink + '" alt="Ad Poster">',
-                  video: allLolls.length > 0 ? allLolls[0] : adlink ,
-                  url: "",
-                  playDuration: 5,
-                  totalDuration: 10,
-                  i18n: {
-                    close: "Funga",
-                    countdown: "%s Amasegonda 5",
-                    detail: "Kwamamaza",
-                    canBeClosed: "%s Amasegonda 3",
-                  },
-                }),
-                artplayerPluginHlsQuality({
-                  control: true,
-                  setting: true,
-                  getResolution: (level) => level.height + "P",
-                  title: "Quality",
-                  auto: "Auto",
-                }),
-              ],
-        customType: {
-          m3u8: function playM3u8(video, url, art) {
-            if (Hls.isSupported()) {
-              if (art.hls) art.hls.destroy();
-              const hls = new Hls();
-              hls.loadSource(url);
-              hls.attachMedia(video);
-              art.hls = hls;
-              art.on("destroy", () => hls.destroy());
-            } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-              video.src = url;
+              // Do something when the element is in the viewport
             } else {
-              art.notice.show = "Unsupported playback format: m3u8";
+              watch_Later_Card.style.transform = "translateX(350px)";
+
+              art.layers.update({
+                name: "rebaPlayerControls",
+                html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        	</div>
+        	<div class="center-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+        	        width: 70px;
+        	        height: 70px;
+        	    ">
+        	            <path id="playingButtonPath" d="${pathCode}" />
+        	        </svg>
+        	    </button>
+        	</div>
+        	<div class="button-rebaPlayer right-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+        	        </svg>
+        	    </button>
+        	</div>`,
+                style: {
+                  width: "100%",
+                  height: "10%",
+                  alignSelf: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "absolute",
+                  display: "none",
+                },
+              });
+              // Do something when the element is out of the viewport
             }
-          },
+          });
         },
-      });
+        {
+          root: null, // relative to the viewport
+          threshold: 0.7, // percentage of the element's visibility
+        }
+      );
 
-      // Function for handling Fullscreen state
-      art.on("fullscreen", (state) => {
-        console.log("NOW WE ARE II FULLLSCREEN!", state);
-      });
+      observer.observe(art_controls);
 
-      //An event for controlling when the DOM is loaded
-      document.addEventListener("DOMContentLoaded", function () {
-        art_mask = document.querySelector(".art-mask");
-        custom_select_div = document.getElementById("custom-select-div");
-        art_bottom = document.querySelector(".art-bottom");
-        art_controls = document.querySelector(".art-controls");
-        art_video_player = document.querySelector(".art-video");
-        rect1_backgroundImage = document.querySelector(".rect1");
-        title_watchList_Element = document.getElementById("title_watchList");
-        watchLaterContainer = document.querySelector(
-          ".art-layer.art-layer-wachLaterLayer"
-        );
-        watch_Later_Card = document.querySelector(
-          ".art-layer.art-layer-wachLaterCardLayer"
-        );
-        player_container_div = document.getElementById("player-container-div");
-        selectElement = document.getElementById("season-select");
-        createElement();
-        watchListObserver();
-        observeOnStart();
+      //--------------------- EVENTLISTENER FOR CLOSING WATCHLATER LIST -------------
 
-        document.getElementById("closeIcon").onclick = function () {
+      watchLaterContainer.addEventListener("click", (e) => {
+        if (
+          e.target.tagName.toLowerCase() === "div" &&
+          e.target.classList[1] == "art-layer-wachLaterLayer"
+        ) {
           watchLaterContainer.style.opacity = "0";
           watchLaterContainer.style.visibility = "hidden";
-        };
-
-        document.querySelector(".art-mask").style.display = "none";
-
-        // ---------------------- OBSERVER FOR CONTROLS ---------------------------
-
-        const observer = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                watch_Later_Card.style.transform = "translateX(0px)";
-
-                art.layers.update({
-                  name: "rebaPlayerControls",
-                  html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                </svg>
-            </button>
-        	</div>
-        	<div class="center-button-rebaPlayer" >
-        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
-        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
-        	        width: 70px;
-        	        height: 70px;
-        	    ">
-        	            <path id="playingButtonPath" d="${pathCode}" />
-        	        </svg>
-        	    </button>
-        	</div>
-        	<div class="button-rebaPlayer right-button-rebaPlayer" >
-        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-        	        </svg>
-        	    </button>
-        	</div>`,
-                  style: {
-                    width: "100%",
-                    height: "10%",
-                    alignSelf: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    position: "absolute",
-                  },
-                });
-                // Do something when the element is in the viewport
-              } else {
-                watch_Later_Card.style.transform = "translateX(350px)";
-
-                art.layers.update({
-                  name: "rebaPlayerControls",
-                  html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                </svg>
-            </button>
-        	</div>
-        	<div class="center-button-rebaPlayer" >
-        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
-        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
-        	        width: 70px;
-        	        height: 70px;
-        	    ">
-        	            <path id="playingButtonPath" d="${pathCode}" />
-        	        </svg>
-        	    </button>
-        	</div>
-        	<div class="button-rebaPlayer right-button-rebaPlayer" >
-        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-        	        </svg>
-        	    </button>
-        	</div>`,
-                  style: {
-                    width: "100%",
-                    height: "10%",
-                    alignSelf: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    position: "absolute",
-                    display: "none",
-                  },
-                });
-                // Do something when the element is out of the viewport
-              }
-            });
-          },
-          {
-            root: null, // relative to the viewport
-            threshold: 0.7, // percentage of the element's visibility
-          }
-        );
-
-        observer.observe(art_controls);
-
-        //--------------------- EVENTLISTENER FOR CLOSING WATCHLATER LIST -------------
-
-        watchLaterContainer.addEventListener("click", (e) => {
-          if (
-            e.target.tagName.toLowerCase() === "div" &&
-            e.target.classList[1] == "art-layer-wachLaterLayer"
-          ) {
-            watchLaterContainer.style.opacity = "0";
-            watchLaterContainer.style.visibility = "hidden";
-          }
-        });
-
-        // Add an event listener for the change event
-        selectElement.addEventListener("change", changeSeason);
-        //---------------------- FUNCTION TO AUTO PLAYER -------------------------------
-
-        art_video_player.addEventListener("canplay", function () {
-          // art.play();
-          art.aspectRatio = "16:9";
-        });
-
-        sendMessage({ action: "loaded" });
+        }
       });
 
-      //Function To Receives data
-      window.addEventListener("message", function (event) {
-        if (event.data.action == "seasonData") {
-          slideData = event.data.data.epsodes;
-          seasons = event.data.data.seasons;
-          onloadSeason_Episode();
-        } else if (event.data.action == "getstreamingurl") {
-          nextToWatch(event.data.data.link, event.data.data.movieId);
-        } else if (event.data.action == "copyTimeSave") {
-          alert(event.data.data);
-        } else if (event.data.action == "initialData") {
-          allLolls = event.data.allLolls;
-          newData = event.data.data;
-          if (newData.cwId == undefined) {
-            sendMessage({ action: "callTimer" });
+      // Add an event listener for the change event
+      selectElement.addEventListener("change", changeSeason);
+      //---------------------- FUNCTION TO AUTO PLAYER -------------------------------
+
+      art_video_player.addEventListener("canplay", function () {
+        // art.play();
+        art.aspectRatio = "16:9";
+      });
+
+      sendMessage({ action: "loaded" });
+    });
+
+    //Function To Receives data
+    window.addEventListener("message", function (event) {
+      if (event.data.action == "seasonData") {
+        slideData = event.data.data.epsodes;
+        seasons = event.data.data.seasons;
+        onloadSeason_Episode();
+      } else if (event.data.action == "getstreamingurl") {
+        nextToWatch(event.data.data.link, event.data.data.movieId);
+      } else if (event.data.action == "copyTimeSave") {
+        alert(event.data.data);
+      } else if (event.data.action == "initialData") {
+        allLolls = event.data.allLolls;
+        newData = event.data.data;
+        if (newData.cwId == undefined) {
+          sendMessage({ action: "callTimer" });
+        }
+      } else if (event.data.action == "addToContinueWatching") {
+        startTimer_To_Save_To_ContinueWatching();
+      } else if (event.data.action == "watchLaterData") {
+        watch_Later_List_Data = event.data.data;
+        onloadWatchlater_Movies();
+      } else if (event.data.action == "changeQuality") {
+        art.switchUrl(event.data.data).then(() => {
+          art.play();
+        });
+      }
+    });
+
+    function startTimer_To_Save_To_ContinueWatching() {
+      startTimer(10, function () {
+        sendMessage({ action: "addToContinueWatching" });
+        // You can perform any action you want when the timer ends
+      });
+    }
+
+    // Function to start the timer
+    function startTimer(duration, callback) {
+      let timer = duration * 60; // Convert minutes to seconds
+
+      let interval = setInterval(function () {
+        let minutes = Math.floor(timer / 60);
+        let seconds = timer % 60;
+
+        // Decrease the timer
+        timer--;
+
+        // Check if the timer has reached 0
+        if (timer < 0) {
+          clearInterval(interval);
+          // Execute the callback function
+          if (typeof callback === "function") {
+            callback();
           }
-        } else if (event.data.action == "addToContinueWatching") {
-          startTimer_To_Save_To_ContinueWatching();
-        } else if (event.data.action == "watchLaterData") {
-          watch_Later_List_Data = event.data.data;
-          onloadWatchlater_Movies();
-        } else if (event.data.action == "changeQuality") {
-          art.switchUrl(event.data.data).then(() => {
-            art.play();
+        }
+      }, 1000); // Update the timer every second (1000 milliseconds)
+    }
+
+    function sen_is_copying(data) {
+      // Select the element containing the time
+      const timeElement = document.querySelector(".art-control-time");
+
+      if (timeElement) {
+        // Get the text content of the element
+        const timeText = timeElement.textContent.trim();
+
+        // Split the text by the slash character ('/')
+        const timeParts = timeText.split(" / ");
+
+        // Extract the time before the slash
+        const currentTime = timeParts[0];
+        const totalTime = timeParts[1];
+
+        function convertTimeToSec(arrayTime) {
+          // Split the time by colon
+          const timeUnits = arrayTime
+            .split(":")
+            .map((part) => parseInt(part, 10));
+
+          // Initialize variables for hours, minutes, and seconds
+          let hours = 0,
+            minutes = 0,
+            seconds = 0;
+
+          // Check the length of timeUnits to determine if hours are included
+          if (timeUnits.length === 3) {
+            // Format is hh:mm:ss
+            [hours, minutes, seconds] = timeUnits;
+          } else if (timeUnits.length === 2) {
+            // Format is mm:ss
+            [minutes, seconds] = timeUnits;
+          }
+
+          // Convert the time to seconds
+          return hours * 3600 + minutes * 60 + seconds;
+        }
+
+        const currentTimeInSeconds = convertTimeToSec(currentTime);
+        const totalTimeInSeconds = convertTimeToSec(totalTime);
+
+        let percentageTime = currentTimeInSeconds / totalTimeInSeconds;
+
+        // Initializing the starting time
+        if (percentageTime < 0.5) {
+          allTime[0] = currentTimeInSeconds;
+          art.notice.show = "Staring Time Copied";
+        }
+
+        // Initializing the ending time
+        if (percentageTime > 0.5) {
+          allTime[1] = currentTimeInSeconds;
+          art.notice.show = "Ending Time Copied";
+        }
+
+        // All Time set and sent to DB
+        if (allTime[0] != null && allTime[1] != null) {
+          allTime[2] = totalTime;
+          sendMessage({
+            action: "copyTime",
+            time: allTime,
+            data: { id: data.id, dbName: data.dbName, type: data.type },
           });
+          art.notice.show = "Time Stamps Sent to be saved !";
         }
-      });
-
-      function startTimer_To_Save_To_ContinueWatching() {
-        startTimer(10, function () {
-          sendMessage({ action: "addToContinueWatching" });
-          // You can perform any action you want when the timer ends
-        });
+      } else {
+        console.error("Time element not found.");
       }
+    }
 
-      // Function to start the timer
-      function startTimer(duration, callback) {
-        let timer = duration * 60; // Convert minutes to seconds
+    function onloadWatchlater_Movies() {
+      rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(
+        watch_Later_List_Data[0].longCover
+      )})`;
+      if (slides_availability == true) {
+        populateSlides(watch_Later_List_Data);
+        watchLaterSelectAndTitleElement(false);
+      } else {
+        let timer;
 
-        let interval = setInterval(function () {
-          let minutes = Math.floor(timer / 60);
-          let seconds = timer % 60;
-
-          // Decrease the timer
-          timer--;
-
-          // Check if the timer has reached 0
-          if (timer < 0) {
-            clearInterval(interval);
-            // Execute the callback function
-            if (typeof callback === "function") {
-              callback();
-            }
+        timer = setInterval(function () {
+          if (slides_availability) {
+            clearInterval(timer);
+            populateSlides(watch_Later_List_Data);
+            watchLaterSelectAndTitleElement(false);
           }
-        }, 1000); // Update the timer every second (1000 milliseconds)
+        }, 1000); // Check every second
       }
+    }
 
-      function sen_is_copying(data) {
-        // Select the element containing the time
-        const timeElement = document.querySelector(".art-control-time");
-
-        if (timeElement) {
-          // Get the text content of the element
-          const timeText = timeElement.textContent.trim();
-
-          // Split the text by the slash character ('/')
-          const timeParts = timeText.split(" / ");
-
-          // Extract the time before the slash
-          const currentTime = timeParts[0];
-          const totalTime = timeParts[1];
-
-          function convertTimeToSec(arrayTime) {
-            // Split the time by colon
-            const timeUnits = arrayTime
-              .split(":")
-              .map((part) => parseInt(part, 10));
-
-            // Initialize variables for hours, minutes, and seconds
-            let hours = 0,
-              minutes = 0,
-              seconds = 0;
-
-            // Check the length of timeUnits to determine if hours are included
-            if (timeUnits.length === 3) {
-              // Format is hh:mm:ss
-              [hours, minutes, seconds] = timeUnits;
-            } else if (timeUnits.length === 2) {
-              // Format is mm:ss
-              [minutes, seconds] = timeUnits;
-            }
-
-            // Convert the time to seconds
-            return hours * 3600 + minutes * 60 + seconds;
-          }
-
-          const currentTimeInSeconds = convertTimeToSec(currentTime);
-          const totalTimeInSeconds = convertTimeToSec(totalTime);
-
-          let percentageTime = currentTimeInSeconds / totalTimeInSeconds;
-
-          // Initializing the starting time
-          if (percentageTime < 0.5) {
-            allTime[0] = currentTimeInSeconds;
-            art.notice.show = "Staring Time Copied";
-          }
-
-          // Initializing the ending time
-          if (percentageTime > 0.5) {
-            allTime[1] = currentTimeInSeconds;
-            art.notice.show = "Ending Time Copied";
-          }
-
-          // All Time set and sent to DB
-          if (allTime[0] != null && allTime[1] != null) {
-            allTime[2] = totalTime;
-            sendMessage({
-              action: "copyTime",
-              time: allTime,
-              data: { id: data.id, dbName: data.dbName, type: data.type },
-            });
-            art.notice.show = "Time Stamps Sent to be saved !";
-          }
-        } else {
-          console.error("Time element not found.");
-        }
-      }
-
-      function onloadWatchlater_Movies() {
+    function onloadSeason_Episode() {
+      if (slides_availability == true) {
+        current_slideData = slideData[current_season_index];
         rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(
-          watch_Later_List_Data[0].longCover
+          current_slideData[0].longCover
         )})`;
-        if (slides_availability == true) {
-          populateSlides(watch_Later_List_Data);
-          watchLaterSelectAndTitleElement(false);
-        } else {
-          let timer;
+        populateSlides(current_slideData);
+        populateSeason(seasons);
+        watchLaterSelectAndTitleElement(true);
+      } else {
+        let timer;
 
-          timer = setInterval(function () {
-            if (slides_availability) {
-              clearInterval(timer);
-              populateSlides(watch_Later_List_Data);
-              watchLaterSelectAndTitleElement(false);
-            }
-          }, 1000); // Check every second
+        timer = setInterval(function () {
+          if (slides_availability) {
+            clearInterval(timer);
+            slideData = event.data.data.epsodes;
+            seasons = event.data.data.seasons;
+            current_slideData = slideData[current_season_index];
+            rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(
+              current_slideData[0].longCover
+            )})`;
+            populateSlides(current_slideData);
+            populateSeason(seasons);
+            watchLaterSelectAndTitleElement(true);
+          }
+        }, 1000); // Check every second
+      }
+    }
+
+    // ------------ detect savers ----------------------------------------
+    function observeOnStart() {
+      // Select the video element using querySelector
+      const videoElement = document.querySelector("video");
+
+      // Options for the observer (which mutations to observe)
+      const config = { attributes: true };
+
+      // Callback function to execute when mutations are observed
+      const callback = function (mutationsList, observer) {
+        for (let mutation of mutationsList) {
+          if (
+            mutation.type === "attributes" &&
+            mutation.attributeName === "__idm_id__"
+          ) {
+            console.log(
+              "__idm_id__ attribute added:",
+              videoElement.getAttribute("__idm_id__")
+            );
+          }
         }
+      };
+
+      // Create an observer instance linked to the callback function
+      const observer = new MutationObserver(callback);
+
+      // Start observing the video element for configured mutations
+      observer.observe(videoElement, config);
+    }
+
+    //-----------  Functions for sending messages and tracking time updates --------
+    function sendMessage(msg) {
+      window.parent.postMessage(msg, "*");
+    }
+
+    function onTimeUpdate() {
+      percentage = (art.currentTime / art.duration) * 100;
+
+      if (percentage > 50 && percentage < 80 && midLoll == false) {
+        midLoll = true;
+        const adsPlugin = art.plugins.artplayerPluginAds;
+        adsPlugin.updateVideoLink(allLolls[1] == undefined ? adlink : allLolls[1]);
       }
 
-      function onloadSeason_Episode() {
-        if (slides_availability == true) {
-          current_slideData = slideData[current_season_index];
-          rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(
-            current_slideData[0].longCover
-          )})`;
-          populateSlides(current_slideData);
-          populateSeason(seasons);
-          watchLaterSelectAndTitleElement(true);
-        } else {
-          let timer;
-
-          timer = setInterval(function () {
-            if (slides_availability) {
-              clearInterval(timer);
-              slideData = event.data.data.epsodes;
-              seasons = event.data.data.seasons;
-              current_slideData = slideData[current_season_index];
-              rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(
-                current_slideData[0].longCover
-              )})`;
-              populateSlides(current_slideData);
-              populateSeason(seasons);
-              watchLaterSelectAndTitleElement(true);
-            }
-          }, 1000); // Check every second
-        }
+      if (percentage > 80 && postLoll == false) {
+        postLoll = true;
+        const adsPlugin = art.plugins.artplayerPluginAds;
+        adsPlugin.updateVideoLink(allLolls[2] == undefined ? adlink : allLolls[2]);
       }
 
-      // ------------ detect savers ----------------------------------------
-      function observeOnStart() {
-        // Select the video element using querySelector
-        const videoElement = document.querySelector("video");
+      if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
+        art.off("video:timeupdate", onTimeUpdate);
+        art.storage.del(newData.id);
+        sendMessage({ action: "deleteContinue", data: newData });
+        continueToWatchDeleted == true;
+      } else if (
+        percentage > 80 &&
+        type != "M" &&
+        is_last_season == true &&
+        newMainSlideId == "slideLast" &&
+        continueToWatchDeleted == false
+      ) {
+        art.off("video:timeupdate", onTimeUpdate);
+        art.storage.del(newData.id);
+        sendMessage({ action: "deleteContinue", data: newData });
+        continueToWatchDeleted == true;
+      }
+    }
 
-        // Options for the observer (which mutations to observe)
-        const config = { attributes: true };
+    art.on("video:timeupdate", onTimeUpdate);
 
-        // Callback function to execute when mutations are observed
-        const callback = function (mutationsList, observer) {
-          for (let mutation of mutationsList) {
-            if (
-              mutation.type === "attributes" &&
-              mutation.attributeName === "__idm_id__"
-            ) {
-              console.log(
-                "__idm_id__ attribute added:",
-                videoElement.getAttribute("__idm_id__")
-              );
+    art.on("video:ended", go_to_next_slide);
+
+    art.on("pause", () => {
+      pathCode = "M8 5v14l11-7z";
+      art.layers.update({
+        name: "rebaPlayerControls",
+        html: `<div class="button-rebaPlayer left-button-rebaPlayer">
+          <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+                  <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+              </svg>
+          </button>
+        </div>
+        <div class="center-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+                <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+                width: 70px;
+                height: 70px;
+            ">
+                    <path id="playingButtonPath" d="${pathCode}" />
+                </svg>
+            </button>
+        </div>
+        <div class="button-rebaPlayer right-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        </div>`,
+        style: {
+          width: "100%",
+          height: "10%",
+          alignSelf: "center",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "absolute",
+          //display: "none",
+        },
+      });
+    });
+
+    art.on("play", () => {
+
+      if (adstatus === "true" && preLoll == false) {
+        preLoll = true;
+        const adsPlugin = art.plugins.artplayerPluginAds;
+        adsPlugin.startAd();
+      }
+
+      pathCode = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+      art.layers.update({
+        name: "rebaPlayerControls",
+        html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
+          <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+                  <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+              </svg>
+          </button>
+        </div>
+        <div class="center-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+                <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+                width: 70px;
+                height: 70px;
+            ">
+                    <path id="playingButtonPath" d="${pathCode}" />
+                </svg>
+            </button>
+        </div>
+        <div class="button-rebaPlayer right-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        </div>`,
+        style: {
+          width: "100%",
+          height: "10%",
+          alignSelf: "center",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "absolute",
+          //display: "none",
+        },
+      });
+    });
+
+    function leftButtonClick() {
+      if (deviceType == "desktop") {
+        art.backward = 30;
+        art.notice.show =
+          languageCode == "rw"
+            ? "Wihutishije amasegonda - 30 "
+            : "Fast Backward - 30 ";
+      } else {
+        //go_to_next_slide();
+      }
+    }
+
+    function rightButtonClick() {
+      if (deviceType == "desktop") {
+        art.forward = 30;
+        art.notice.show =
+          languageCode == "rw"
+            ? "Wihutishije amasegonda + 30 "
+            : "Fast Forward + 30 ";
+      } else {
+        go_to_next_slide();
+      }
+    }
+
+    function centerButtonClick() {
+      art.toggle();
+    }
+
+    function watchListObserver() {
+      const target = document.querySelector(
+        ".art-layer.art-layer-wachLaterLayer"
+      );
+      const observer = new MutationObserver((mutationsList, observer) => {
+        mutationsList.forEach((mutation) => {
+          if (
+            mutation.type === "attributes" &&
+            mutation.attributeName === "style"
+          ) {
+            const visibility = getComputedStyle(target).visibility;
+            if (visibility === "visible") {
+              // Element visibility changed to visible!
+              art_mask.style.visibility = "hidden";
+              art_bottom.style.transform = "translateY(300px)";
+            } else if (visibility === "hidden") {
+              art_mask.style.visibility = "visible";
+              art_bottom.style.transform = "translateY(0px)";
+              // Element visibility changed to hidden!
             }
           }
-        };
-
-        // Create an observer instance linked to the callback function
-        const observer = new MutationObserver(callback);
-
-        // Start observing the video element for configured mutations
-        observer.observe(videoElement, config);
-      }
-
-      //-----------  Functions for sending messages and tracking time updates --------
-      function sendMessage(msg) {
-        window.parent.postMessage(msg, "*");
-      }
-
-      function onTimeUpdate() {
-        percentage = (art.currentTime / art.duration) * 100;
-
-        if (percentage > 50 && percentage < 80 && midLoll == false) {
-          midLoll = true;
-          const adsPlugin = art.plugins.artplayerPluginAds;
-          adsPlugin.updateVideoLink(allLolls[1]);
-        }
-
-        if (percentage > 80 && postLoll == false) {
-          postLoll = true;
-          const adsPlugin = art.plugins.artplayerPluginAds;
-          adsPlugin.updateVideoLink(allLolls[2]);          
-        }
-
-        if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
-          art.off("video:timeupdate", onTimeUpdate);
-          art.storage.del(newData.id);
-          sendMessage({ action: "deleteContinue", data: newData });
-          continueToWatchDeleted == true;
-        } else if (
-          percentage > 80 &&
-          type != "M" &&
-          is_last_season == true &&
-          newMainSlideId == "slideLast" &&
-          continueToWatchDeleted == false
-        ) {
-          art.off("video:timeupdate", onTimeUpdate);
-          art.storage.del(newData.id);
-          sendMessage({ action: "deleteContinue", data: newData });
-          continueToWatchDeleted == true;
-        }
-      }
-
-      art.on("video:timeupdate", onTimeUpdate);
-
-      art.on("video:ended", go_to_next_slide);
-
-      art.on("pause", () => {
-        pathCode = "M8 5v14l11-7z";
-        art.layers.update({
-          name: "rebaPlayerControls",
-          html: `<div class="button-rebaPlayer left-button-rebaPlayer">
-          <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                  <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-              </svg>
-          </button>
-        </div>
-        <div class="center-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
-                <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
-                width: 70px;
-                height: 70px;
-            ">
-                    <path id="playingButtonPath" d="${pathCode}" />
-                </svg>
-            </button>
-        </div>
-        <div class="button-rebaPlayer right-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                </svg>
-            </button>
-        </div>`,
-          style: {
-            width: "100%",
-            height: "10%",
-            alignSelf: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "absolute",
-            //display: "none",
-          },
         });
       });
 
-      art.on("play", () => {
-
-        if (adstatus === "true" && preLoll == false) {
-          preLoll = true;
-          const adsPlugin = art.plugins.artplayerPluginAds;
-          adsPlugin.startAd();
-        }
-        
-        pathCode = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
-        art.layers.update({
-          name: "rebaPlayerControls",
-          html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
-          <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-              <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                  <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-              </svg>
-          </button>
-        </div>
-        <div class="center-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
-                <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
-                width: 70px;
-                height: 70px;
-            ">
-                    <path id="playingButtonPath" d="${pathCode}" />
-                </svg>
-            </button>
-        </div>
-        <div class="button-rebaPlayer right-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                </svg>
-            </button>
-        </div>`,
-          style: {
-            width: "100%",
-            height: "10%",
-            alignSelf: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "absolute",
-            //display: "none",
-          },
-        });
+      observer.observe(target, {
+        attributes: true,
+        attributeFilter: ["style"],
       });
+    }
 
-      function leftButtonClick() {
-        if (deviceType == "desktop") {
-          art.backward = 30;
-          art.notice.show =
-            languageCode == "rw"
-              ? "Wihutishije amasegonda - 30 "
-              : "Fast Backward - 30 ";
-        } else {
-          //go_to_next_slide();
-        }
+    function changeSeason() {
+      const selectedIndex = selectElement.selectedIndex;
+      populateSlides(slideData[selectedIndex]);
+      selectedSlide(oldMainSlideId, null);
+      if (selectedIndex == current_season_index) {
+        selectedSlide(null, oldMainSlideId);
       }
+    }
 
-      function rightButtonClick() {
-        if (deviceType == "desktop") {
-          art.forward = 30;
-          art.notice.show =
-            languageCode == "rw"
-              ? "Wihutishije amasegonda + 30 "
-              : "Fast Forward + 30 ";
-        } else {
-          go_to_next_slide();
-        }
-      }
+    // Check if "Final" exists in the string
+    function findFinal(str) {
+      return str.includes("Final");
+    }
 
-      function centerButtonClick() {
-        art.toggle();
-      }
+    // Function to add options dynamically
+    function addOption(value, text) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = text;
+      selectElement.appendChild(option);
+    }
 
-      function watchListObserver() {
-        const target = document.querySelector(
-          ".art-layer.art-layer-wachLaterLayer"
-        );
-        const observer = new MutationObserver((mutationsList, observer) => {
-          mutationsList.forEach((mutation) => {
-            if (
-              mutation.type === "attributes" &&
-              mutation.attributeName === "style"
-            ) {
-              const visibility = getComputedStyle(target).visibility;
-              if (visibility === "visible") {
-                // Element visibility changed to visible!
-                art_mask.style.visibility = "hidden";
-                art_bottom.style.transform = "translateY(300px)";
-              } else if (visibility === "hidden") {
-                art_mask.style.visibility = "visible";
-                art_bottom.style.transform = "translateY(0px)";
-                // Element visibility changed to hidden!
-              }
-            }
+    function populateSeason(seasonsparameter) {
+      selectElement.innerHTML = ""; // deleting all existing options
+      seasonsparameter.forEach((season) => {
+        addOption(season.value, season.label);
+      });
+      selectElement.selectedIndex = current_season_index;
+    }
+
+    function populateSlides(slideDataParameter) {
+      const slideWrapper = document.querySelector(".slide-wrapper");
+      slideWrapper.innerHTML = ""; // Clear previous slides if any
+      slideDataParameter.forEach((slide, index) => {
+        let slideDiv;
+
+        if (index === 0) {
+          slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
+            marginRight: "10px",
+            marginLeft: "10px",
           });
-        });
-
-        observer.observe(target, {
-          attributes: true,
-          attributeFilter: ["style"],
-        });
-      }
-
-      function changeSeason() {
-        const selectedIndex = selectElement.selectedIndex;
-        populateSlides(slideData[selectedIndex]);
-        selectedSlide(oldMainSlideId, null);
-        if (selectedIndex == current_season_index) {
-          selectedSlide(null, oldMainSlideId);
-        }
-      }
-
-      // Check if "Final" exists in the string
-      function findFinal(str) {
-        return str.includes("Final");
-      }
-
-      // Function to add options dynamically
-      function addOption(value, text) {
-        const option = document.createElement("option");
-        option.value = value;
-        option.textContent = text;
-        selectElement.appendChild(option);
-      }
-
-      function populateSeason(seasonsparameter) {
-        selectElement.innerHTML = ""; // deleting all existing options
-        seasonsparameter.forEach((season) => {
-          addOption(season.value, season.label);
-        });
-        selectElement.selectedIndex = current_season_index;
-      }
-
-      function populateSlides(slideDataParameter) {
-        const slideWrapper = document.querySelector(".slide-wrapper");
-        slideWrapper.innerHTML = ""; // Clear previous slides if any
-        slideDataParameter.forEach((slide, index) => {
-          let slideDiv;
-
-          if (index === 0) {
-            slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
-              marginRight: "10px",
-              marginLeft: "10px",
-            });
-            slideDiv.id = "slide" + (index + 1);
-            // insert Data : image , title
-            slideDiv.innerHTML = `
+          slideDiv.id = "slide" + (index + 1);
+          // insert Data : image , title
+          slideDiv.innerHTML = `
                          <img src="${convertWixImageUrl(
-                           slide.longCover
-                         )}" alt="Slide ${index + 1}">
-                         <img id="slide_loading_icon${
-                           index + 1
-                         }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
+            slide.longCover
+          )}" alt="Slide ${index + 1}">
+                         <img id="slide_loading_icon${index + 1
+            }" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
                             " alt="Description of the GIF" style="
                             width: 120px;
                             height: 35px;
@@ -1399,39 +1398,36 @@
                             top: 40%;
                             right: 30%;
                         ">
-                         <div id="slide_label${
-                           index + 1
-                         }" class="slide_label" style=" display: ${
-              type == "M" ? "none" : "block"
+                         <div id="slide_label${index + 1
+            }" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
             };"><b id="slide_number${index + 1}">${slide.episode}</b></div>
                          <div class="gradient" id="gradient${index + 1}"></div>
                          <div class="caption">${slide.title}</div>
                          <!-- Your SVG icon here -->
-                         <svg id="svg_icon${
-                           index + 1
-                         }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+                         <svg id="svg_icon${index + 1
+            }" xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
                              <path d="M8 5v14l11-7z" />
                          </svg>
                      `;
-          } else {
-            slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
-              marginRight: "10px",
-            });
-            slideDiv.id =
-              "slide" +
-              (slideDataParameter.length == index + 1 &&
+        } else {
+          slideDiv = createAndAppendElement("div", slideWrapper, "slide", {
+            marginRight: "10px",
+          });
+          slideDiv.id =
+            "slide" +
+            (slideDataParameter.length == index + 1 &&
               findFinal(slide.episode)
-                ? "Last"
-                : index + 1);
-            // insert Data : image , title
-            const indexed =
-              slideDataParameter.length == index + 1 && findFinal(slide.episode)
-                ? "Last"
-                : index + 1;
-            slideDiv.innerHTML = `
+              ? "Last"
+              : index + 1);
+          // insert Data : image , title
+          const indexed =
+            slideDataParameter.length == index + 1 && findFinal(slide.episode)
+              ? "Last"
+              : index + 1;
+          slideDiv.innerHTML = `
                          <img src="${convertWixImageUrl(
-                           slide.longCover
-                         )}" alt="Slide ${index + 1}">
+            slide.longCover
+          )}" alt="Slide ${index + 1}">
                          <img id="slide_loading_icon${indexed}" src="https://static.wixstatic.com/media/3e4e16_5b64f82ca4374e32854549e04fc0a481~mv2.gif
                             " alt="Description of the GIF" style="
                             width: 120px;
@@ -1441,8 +1437,7 @@
                             top: 40%;
                             right: 30%;
                         ">
-                         <div id="slide_label${indexed}" class="slide_label" style=" display: ${
-              type == "M" ? "none" : "block"
+                         <div id="slide_label${indexed}" class="slide_label" style=" display: ${type == "M" ? "none" : "block"
             };"><b id="slide_number${indexed}">${slide.episode}</b></div>
                          <div class="gradient" id="gradient${indexed}"></div>
                          <div class="caption">${slide.title}</div>
@@ -1451,75 +1446,112 @@
                              <path d="M8 5v14l11-7z" />
                          </svg>
                      `;
-          }
+        }
 
-          // Click event listener per Slide
-          slideDiv.addEventListener("click", () => {
-            watchLaterContainer.style.opacity = "0";
-            watchLaterContainer.style.visibility = "hidden";
-            // function to call nextMovie ....
+        // Click event listener per Slide
+        slideDiv.addEventListener("click", () => {
+          watchLaterContainer.style.opacity = "0";
+          watchLaterContainer.style.visibility = "hidden";
+          // function to call nextMovie ....
 
-            newMainSlideId = slideDiv.id;
-            newData = slideDataParameter[index];
-            newData["S_E"][2] = newMainSlideId;
-            selectedSlide(oldMainSlideId, newMainSlideId);
-            oldMainSlideId = newMainSlideId;
-            sendMessage({
-              action: "getstreamingurl",
-              data: {
-                links: slideDataParameter[index]["v_v"],
-                movieId: slideDataParameter[index].id,
-                saveData: newData,
-              },
-            });
-            current_slide_index = index;
-            current_season_index = Number(selectElement.selectedIndex);
-
-            if (newMainSlideId != "slideLast") {
-              rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(
-                current_slideData[current_slide_index + 1].longCover
-              )})`;
-            }
+          newMainSlideId = slideDiv.id;
+          newData = slideDataParameter[index];
+          newData["S_E"][2] = newMainSlideId;
+          selectedSlide(oldMainSlideId, newMainSlideId);
+          oldMainSlideId = newMainSlideId;
+          sendMessage({
+            action: "getstreamingurl",
+            data: {
+              links: slideDataParameter[index]["v_v"],
+              movieId: slideDataParameter[index].id,
+              saveData: newData,
+            },
           });
-        });
+          current_slide_index = index;
+          current_season_index = Number(selectElement.selectedIndex);
 
-        slideWidth = document.querySelector(".slide").clientWidth;
+          if (newMainSlideId != "slideLast") {
+            rect1_backgroundImage.style.backgroundImage = `url(${convertWixImageUrl(
+              current_slideData[current_slide_index + 1].longCover
+            )})`;
+          }
+        });
+      });
+
+      slideWidth = document.querySelector(".slide").clientWidth;
+      selectedSlide(oldMainSlideId, newMainSlideId);
+
+      // event to handle initial scroll
+      slideWrapper.scrollTo({
+        left: current_slide_index * (slideWidth + 10),
+      });
+    }
+
+    function hide_next_Button(state) {
+      art.controls.update({
+        name: "next-episode-button",
+        index: 20,
+        position: "left",
+        html: '<svg height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
+        tooltip: "Next Episode",
+        style: {
+          display: deviceType == "desktop" && type != "M" ? "flex" : "none",
+        },
+        click: function (...args) {
+          go_to_next_slide();
+        },
+      });
+    }
+
+    function go_to_next_slide() {
+      current_slide_index = current_slide_index + 1;
+
+      if (current_slideData.length == current_slide_index + 1) {
+        if (is_last_season == true) {
+          // Function to Hide Next Button
+        }
+        newMainSlideId = "slideLast";
+        newData = current_slideData[current_slide_index];
+        newData["S_E"][2] = newMainSlideId;
         selectedSlide(oldMainSlideId, newMainSlideId);
-
-        // event to handle initial scroll
-        slideWrapper.scrollTo({
-          left: current_slide_index * (slideWidth + 10),
+        oldMainSlideId = newMainSlideId;
+        sendMessage({
+          action: "getstreamingurl",
+          data: {
+            links: current_slideData[current_slide_index]["v_v"],
+            movieId: current_slideData[current_slide_index].id,
+            saveData: newData,
+          },
+        });
+      } else if (current_slideData.length > current_slide_index + 1) {
+        newMainSlideId = "slide" + (current_slide_index + 1);
+        newData = current_slideData[current_slide_index];
+        newData["S_E"][2] = newMainSlideId;
+        selectedSlide(oldMainSlideId, newMainSlideId);
+        oldMainSlideId = newMainSlideId;
+        sendMessage({
+          action: "getstreamingurl",
+          data: {
+            links: current_slideData[current_slide_index]["v_v"],
+            movieId: current_slideData[current_slide_index].id,
+            saveData: newData,
+          },
         });
       }
 
-      function hide_next_Button(state) {
-        art.controls.update({
-          name: "next-episode-button",
-          index: 20,
-          position: "left",
-          html: '<svg height="100%" version="1.1" viewBox="-6 -6 36 36" width="100%"><path  d="M 12,24 20.5,18 12,12 V 24 z M 22,12 v 12 h 2 V 12 h -2 z"  style="fill: #ffffff;"></path></svg>',
-          tooltip: "Next Episode",
-          style: {
-            display: deviceType == "desktop" && type != "M" ? "flex" : "none",
-          },
-          click: function (...args) {
-            go_to_next_slide();
-          },
-        });
-      }
-
-      function go_to_next_slide() {
-        current_slide_index = current_slide_index + 1;
-
-        if (current_slideData.length == current_slide_index + 1) {
-          if (is_last_season == true) {
-            // Function to Hide Next Button
-          }
-          newMainSlideId = "slideLast";
+      if (current_slideData.length < current_slide_index + 1) {
+        let temp_season_index = current_season_index + 1;
+        if (seasons.length > temp_season_index) {
+          current_season_index = current_season_index + 1;
+          selectElement.selectedIndex = current_season_index;
+          current_slideData = slideData[current_season_index];
+          oldMainSlideId = "slide1";
+          newMainSlideId = "slide1";
+          current_slide_index = 0;
           newData = current_slideData[current_slide_index];
           newData["S_E"][2] = newMainSlideId;
+          populateSlides(current_slideData);
           selectedSlide(oldMainSlideId, newMainSlideId);
-          oldMainSlideId = newMainSlideId;
           sendMessage({
             action: "getstreamingurl",
             data: {
@@ -1528,237 +1560,200 @@
               saveData: newData,
             },
           });
-        } else if (current_slideData.length > current_slide_index + 1) {
-          newMainSlideId = "slide" + (current_slide_index + 1);
-          newData = current_slideData[current_slide_index];
-          newData["S_E"][2] = newMainSlideId;
-          selectedSlide(oldMainSlideId, newMainSlideId);
-          oldMainSlideId = newMainSlideId;
-          sendMessage({
-            action: "getstreamingurl",
-            data: {
-              links: current_slideData[current_slide_index]["v_v"],
-              movieId: current_slideData[current_slide_index].id,
-              saveData: newData,
-            },
-          });
-        }
 
-        if (current_slideData.length < current_slide_index + 1) {
-          let temp_season_index = current_season_index + 1;
-          if (seasons.length > temp_season_index) {
-            current_season_index = current_season_index + 1;
-            selectElement.selectedIndex = current_season_index;
-            current_slideData = slideData[current_season_index];
-            oldMainSlideId = "slide1";
-            newMainSlideId = "slide1";
-            current_slide_index = 0;
-            newData = current_slideData[current_slide_index];
-            newData["S_E"][2] = newMainSlideId;
-            populateSlides(current_slideData);
-            selectedSlide(oldMainSlideId, newMainSlideId);
-            sendMessage({
-              action: "getstreamingurl",
-              data: {
-                links: current_slideData[current_slide_index]["v_v"],
-                movieId: current_slideData[current_slide_index].id,
-                saveData: newData,
-              },
-            });
-
-            seasons.length == current_season_index
-              ? (is_last_season = true)
-              : (is_last_season = false);
-          }
+          seasons.length == current_season_index
+            ? (is_last_season = true)
+            : (is_last_season = false);
         }
       }
+    }
 
-      function createAndAppendElement(
-        tag,
-        parent,
-        className,
-        styles,
-        innerHTML,
-        id
-      ) {
-        const element = document.createElement(tag);
+    function createAndAppendElement(
+      tag,
+      parent,
+      className,
+      styles,
+      innerHTML,
+      id
+    ) {
+      const element = document.createElement(tag);
 
-        if (id) element.id = id;
-        if (className) element.className = className;
-        if (styles) Object.assign(element.style, styles);
-        if (innerHTML) element.innerHTML = innerHTML;
-        parent.appendChild(element);
-        if (className == "slide-wrapper") {
-          slides_availability = true;
-        }
-        return element;
+      if (id) element.id = id;
+      if (className) element.className = className;
+      if (styles) Object.assign(element.style, styles);
+      if (innerHTML) element.innerHTML = innerHTML;
+      parent.appendChild(element);
+      if (className == "slide-wrapper") {
+        slides_availability = true;
       }
+      return element;
+    }
 
-      function slide1AndLastAreInViewPort(elementId, element) {
-        /* const target = document.getElementById(elementId);
+    function slide1AndLastAreInViewPort(elementId, element) {
+      /* const target = document.getElementById(elementId);
  
-     const observer = new IntersectionObserver(
-       (entries, observer) => {
-         entries.forEach((entry) => {
-           if (entry.isIntersecting) {
-             element.style.visibility = "hidden";
-             // Do something when the element is in the viewport
-           } else {
-             element.style.visibility = "visible";
-             // Do something when the element is out of the viewport
-           }
-         });
-       },
-       {
-         root: null, // relative to the viewport
-         threshold: 0.7, // percentage of the element's visibility
-       }
-     );
+   const observer = new IntersectionObserver(
+     (entries, observer) => {
+       entries.forEach((entry) => {
+         if (entry.isIntersecting) {
+           element.style.visibility = "hidden";
+           // Do something when the element is in the viewport
+         } else {
+           element.style.visibility = "visible";
+           // Do something when the element is out of the viewport
+         }
+       });
+     },
+     {
+       root: null, // relative to the viewport
+       threshold: 0.7, // percentage of the element's visibility
+     }
+   );
  
-     observer.observe(target);*/
-      }
+   observer.observe(target);*/
+    }
 
-      function nextToWatch(url, movieId) {
-        art.switchUrl(url).then(() => {
-          art.option.id = newData.id;
-          art.play();
-        });
-      }
+    function nextToWatch(url, movieId) {
+      art.switchUrl(url).then(() => {
+        art.option.id = newData.id;
+        art.play();
+      });
+    }
 
-      function selectedSlide(oldSlideId, newSlideId) {
-        const oldIndex = oldSlideId
-          ? oldSlideId.replace(/slide(\d+|Last)/g, "$1")
-          : null;
-        const newIndex = newSlideId
-          ? newSlideId.replace(/slide(\d+|Last)/g, "$1")
-          : null;
+    function selectedSlide(oldSlideId, newSlideId) {
+      const oldIndex = oldSlideId
+        ? oldSlideId.replace(/slide(\d+|Last)/g, "$1")
+        : null;
+      const newIndex = newSlideId
+        ? newSlideId.replace(/slide(\d+|Last)/g, "$1")
+        : null;
 
-        const oldElementgradient = oldIndex
-          ? document.getElementById("gradient" + oldIndex)
-          : null;
-        const oldElementslide = oldIndex
-          ? document.getElementById("slide" + oldIndex)
-          : null;
-        const oldElementslide_label = oldIndex
-          ? document.getElementById("slide_label" + oldIndex)
-          : null;
-        const oldElementslide_loading_icon = oldIndex
-          ? document.getElementById("slide_loading_icon" + oldIndex)
-          : null;
-        const oldElementsvg = oldIndex
-          ? document.getElementById("svg_icon" + oldIndex)
-          : null;
-        const oldElementslide_number = oldIndex
-          ? document.getElementById("slide_number" + oldIndex)
-          : null;
+      const oldElementgradient = oldIndex
+        ? document.getElementById("gradient" + oldIndex)
+        : null;
+      const oldElementslide = oldIndex
+        ? document.getElementById("slide" + oldIndex)
+        : null;
+      const oldElementslide_label = oldIndex
+        ? document.getElementById("slide_label" + oldIndex)
+        : null;
+      const oldElementslide_loading_icon = oldIndex
+        ? document.getElementById("slide_loading_icon" + oldIndex)
+        : null;
+      const oldElementsvg = oldIndex
+        ? document.getElementById("svg_icon" + oldIndex)
+        : null;
+      const oldElementslide_number = oldIndex
+        ? document.getElementById("slide_number" + oldIndex)
+        : null;
 
-        const newElementgradient = newIndex
-          ? document.getElementById("gradient" + newIndex)
-          : null;
-        const newElementslide = newIndex
-          ? document.getElementById("slide" + newIndex)
-          : null;
-        const newElementslide_label = newIndex
-          ? document.getElementById("slide_label" + newIndex)
-          : null;
-        const newElementslide_loading_icon = newIndex
-          ? document.getElementById("slide_loading_icon" + newIndex)
-          : null;
-        const newElementsvg = newIndex
-          ? document.getElementById("svg_icon" + newIndex)
-          : null;
-        const newElementslide_number = newIndex
-          ? document.getElementById("slide_number" + newIndex)
-          : null;
+      const newElementgradient = newIndex
+        ? document.getElementById("gradient" + newIndex)
+        : null;
+      const newElementslide = newIndex
+        ? document.getElementById("slide" + newIndex)
+        : null;
+      const newElementslide_label = newIndex
+        ? document.getElementById("slide_label" + newIndex)
+        : null;
+      const newElementslide_loading_icon = newIndex
+        ? document.getElementById("slide_loading_icon" + newIndex)
+        : null;
+      const newElementsvg = newIndex
+        ? document.getElementById("svg_icon" + newIndex)
+        : null;
+      const newElementslide_number = newIndex
+        ? document.getElementById("slide_number" + newIndex)
+        : null;
 
-        function removeInlineStyleIfExists(element, property) {
-          if (element && element.style.getPropertyValue(property)) {
-            element.style.removeProperty(property);
-          }
-        }
-
-        if (oldSlideId != null) {
-          if (oldElementgradient)
-            removeInlineStyleIfExists(oldElementgradient, "opacity");
-          if (oldElementslide)
-            removeInlineStyleIfExists(oldElementslide, "border");
-          if (oldElementslide_number)
-            removeInlineStyleIfExists(oldElementslide_number, "color");
-          if (oldElementslide_label)
-            removeInlineStyleIfExists(
-              oldElementslide_label,
-              "background-color"
-            );
-          if (oldElementslide_loading_icon)
-            oldElementslide_loading_icon.style.display = "none";
-          if (oldElementsvg) oldElementsvg.style.display = "block";
-        }
-
-        if (newSlideId != null) {
-          if (newElementgradient) newElementgradient.style.opacity = "1";
-          if (newElementslide)
-            newElementslide.style.border = "3px solid #00ff0a";
-          if (newElementslide_label)
-            newElementslide_label.style.backgroundColor = "#00ff0a";
-          if (newElementslide_loading_icon)
-            newElementslide_loading_icon.style.display = "block";
-          if (newElementsvg) newElementsvg.style.display = "none";
-          if (newElementslide_number)
-            newElementslide_number.style.color = "black";
+      function removeInlineStyleIfExists(element, property) {
+        if (element && element.style.getPropertyValue(property)) {
+          element.style.removeProperty(property);
         }
       }
 
-      function createElement() {
-        const mainDiv = document.getElementById("main-div");
+      if (oldSlideId != null) {
+        if (oldElementgradient)
+          removeInlineStyleIfExists(oldElementgradient, "opacity");
+        if (oldElementslide)
+          removeInlineStyleIfExists(oldElementslide, "border");
+        if (oldElementslide_number)
+          removeInlineStyleIfExists(oldElementslide_number, "color");
+        if (oldElementslide_label)
+          removeInlineStyleIfExists(
+            oldElementslide_label,
+            "background-color"
+          );
+        if (oldElementslide_loading_icon)
+          oldElementslide_loading_icon.style.display = "none";
+        if (oldElementsvg) oldElementsvg.style.display = "block";
+      }
 
-        navButtonLeft = createAndAppendElement(
-          "div",
-          mainDiv,
-          "nav-button left",
-          {
-            visibility: "visible", // To Change
-          }
-        );
-        navButtonLeft.innerHTML = `
+      if (newSlideId != null) {
+        if (newElementgradient) newElementgradient.style.opacity = "1";
+        if (newElementslide)
+          newElementslide.style.border = "3px solid #00ff0a";
+        if (newElementslide_label)
+          newElementslide_label.style.backgroundColor = "#00ff0a";
+        if (newElementslide_loading_icon)
+          newElementslide_loading_icon.style.display = "block";
+        if (newElementsvg) newElementsvg.style.display = "none";
+        if (newElementslide_number)
+          newElementslide_number.style.color = "black";
+      }
+    }
+
+    function createElement() {
+      const mainDiv = document.getElementById("main-div");
+
+      navButtonLeft = createAndAppendElement(
+        "div",
+        mainDiv,
+        "nav-button left",
+        {
+          visibility: "visible", // To Change
+        }
+      );
+      navButtonLeft.innerHTML = `
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                          <path d="M8 5v14l11-7z" />
                      </svg>
                  `;
 
-        navButtonRight = createAndAppendElement(
-          "div",
-          mainDiv,
-          "nav-button right",
-          {
-            visibility: "visible",
-          }
-        );
-        navButtonRight.innerHTML = `
+      navButtonRight = createAndAppendElement(
+        "div",
+        mainDiv,
+        "nav-button right",
+        {
+          visibility: "visible",
+        }
+      );
+      navButtonRight.innerHTML = `
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                          <path d="M8 5v14l11-7z" />
                      </svg>
                  `;
 
-        const slideshowContainer = createAndAppendElement(
-          "div",
-          mainDiv,
-          "slideshow-container",
-          {
-            position: "relative",
-            height: "100%",
-            overflow: "hidden",
-            marginLeft: "10px",
-          }
-        );
-        const slideWrapper = createAndAppendElement(
-          "div",
-          slideshowContainer,
-          "slide-wrapper"
-        );
+      const slideshowContainer = createAndAppendElement(
+        "div",
+        mainDiv,
+        "slideshow-container",
+        {
+          position: "relative",
+          height: "100%",
+          overflow: "hidden",
+          marginLeft: "10px",
+        }
+      );
+      const slideWrapper = createAndAppendElement(
+        "div",
+        slideshowContainer,
+        "slide-wrapper"
+      );
 
-        // Adding styles for dynamic elements
-        const style = document.createElement("style");
-        style.innerHTML = `
+      // Adding styles for dynamic elements
+      const style = document.createElement("style");
+      style.innerHTML = `
                      .slide {
                          display: inline-block;
                          padding-left: 0px;
@@ -2113,84 +2108,84 @@
                          /* Flip horizontally */
                      }
                  `;
-        document.head.appendChild(style);
+      document.head.appendChild(style);
 
-        // Button functionality
-        slide1AndLastAreInViewPort("slide1", navButtonLeft);
-        slide1AndLastAreInViewPort("slideLast", navButtonRight);
+      // Button functionality
+      slide1AndLastAreInViewPort("slide1", navButtonLeft);
+      slide1AndLastAreInViewPort("slideLast", navButtonRight);
 
-        navButtonLeft.addEventListener("click", () => {
-          slideWrapper.scrollTo({
-            left: slideWrapper.scrollLeft - slideWidth - 10,
-            behavior: "smooth",
-          });
+      navButtonLeft.addEventListener("click", () => {
+        slideWrapper.scrollTo({
+          left: slideWrapper.scrollLeft - slideWidth - 10,
+          behavior: "smooth",
         });
+      });
 
-        navButtonRight.addEventListener("click", () => {
-          slideWrapper.scrollTo({
-            left: slideWrapper.scrollLeft + slideWidth + 10,
-            behavior: "smooth",
-          });
+      navButtonRight.addEventListener("click", () => {
+        slideWrapper.scrollTo({
+          left: slideWrapper.scrollLeft + slideWidth + 10,
+          behavior: "smooth",
         });
+      });
+    }
+
+    function convertWixImageUrl(wixImageUrl) {
+      const regex =
+        /^wix:image:\/\/v1\/([^\/]+)\/([^\/]+)\.(jpg|jpeg|png|webp|gif|bmp|tiff|svg)/;
+      const match = wixImageUrl.match(regex);
+
+      if (match) {
+        const extractedPart1 = match[1];
+        const fileExtension = match[3];
+        return `https://static.wixstatic.com/media/${extractedPart1}`;
+      } else {
+        return undefined; // or handle the case where the pattern is not found
       }
+    }
 
-      function convertWixImageUrl(wixImageUrl) {
-        const regex =
-          /^wix:image:\/\/v1\/([^\/]+)\/([^\/]+)\.(jpg|jpeg|png|webp|gif|bmp|tiff|svg)/;
-        const match = wixImageUrl.match(regex);
+    function watchLaterSelectAndTitleElement(isSerie) {
+      let cardTitleContinue1 = document.getElementById("cardTitleContinue1");
+      let cardTitleContinue2 = document.getElementById("cardTitleContinue2");
+      title_watchList_Element = document.getElementById("title_watchList");
+      custom_select_div = document.getElementById("custom-select-div");
 
-        if (match) {
-          const extractedPart1 = match[1];
-          const fileExtension = match[3];
-          return `https://static.wixstatic.com/media/${extractedPart1}`;
-        } else {
-          return undefined; // or handle the case where the pattern is not found
-        }
+      let title_continue = languageCode == "rw" ? "Izindi" : "Other";
+      let title_watching = languageCode == "rw" ? "Filme" : "Movies";
+      let title_watchList =
+        languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
+
+      if (isSerie) {
+        // codes for When is Serie
+        cardTitleContinue1.textContent =
+          languageCode == "rw" ? "Izindi" : "Next";
+        cardTitleContinue2.textContent =
+          languageCode == "rw" ? "Episode" : "Epsodes";
+        title_watchList_Element.textContent =
+          languageCode == "rw" ? "Izindi Filme" : "Watch List";
+        custom_select_div.style.display = "block";
+        title_watchList_Element.style.display = "none";
+      } else {
+        // codes for When is Movie
+        cardTitleContinue1.textContent =
+          languageCode == "rw" ? "Izindi" : "Other";
+        cardTitleContinue2.textContent =
+          languageCode == "rw" ? "Filme" : "Movies";
+        title_watchList_Element.textContent =
+          languageCode == "rw" ? "Izindi Filme" : "Watch List";
+        custom_select_div.style.display = "none";
+        title_watchList_Element.style.display = "block";
       }
+    }
+    //---------------------------- Element watchLater -----------------------------------------------------------------
 
-      function watchLaterSelectAndTitleElement(isSerie) {
-        let cardTitleContinue1 = document.getElementById("cardTitleContinue1");
-        let cardTitleContinue2 = document.getElementById("cardTitleContinue2");
-        title_watchList_Element = document.getElementById("title_watchList");
-        custom_select_div = document.getElementById("custom-select-div");
-
-        let title_continue = languageCode == "rw" ? "Izindi" : "Other";
-        let title_watching = languageCode == "rw" ? "Filme" : "Movies";
-        let title_watchList =
-          languageCode == "rw" ? "Filme Wahisemo" : "Continue Watching ";
-
-        if (isSerie) {
-          // codes for When is Serie
-          cardTitleContinue1.textContent =
-            languageCode == "rw" ? "Izindi" : "Next";
-          cardTitleContinue2.textContent =
-            languageCode == "rw" ? "Episode" : "Epsodes";
-          title_watchList_Element.textContent =
-            languageCode == "rw" ? "Izindi Filme" : "Watch List";
-          custom_select_div.style.display = "block";
-          title_watchList_Element.style.display = "none";
-        } else {
-          // codes for When is Movie
-          cardTitleContinue1.textContent =
-            languageCode == "rw" ? "Izindi" : "Other";
-          cardTitleContinue2.textContent =
-            languageCode == "rw" ? "Filme" : "Movies";
-          title_watchList_Element.textContent =
-            languageCode == "rw" ? "Izindi Filme" : "Watch List";
-          custom_select_div.style.display = "none";
-          title_watchList_Element.style.display = "block";
-        }
-      }
-      //---------------------------- Element watchLater -----------------------------------------------------------------
-
-      function wachLaterCardLayer(
-        displayValue,
-        title_continue,
-        title_watching
-      ) {
-        return {
-          name: "wachLaterCardLayer",
-          html: `
+    function wachLaterCardLayer(
+      displayValue,
+      title_continue,
+      title_watching
+    ) {
+      return {
+        name: "wachLaterCardLayer",
+        html: `
                        <div class="playlist_icon_container" style="position: absolute;">
                           <div style="margin-right: 10px; margin-left: 10px;">
                               <div id="cardTitleContinue1" style="font-size: calc(${watchList_title_size} - 5px);">${title_continue}</div>
@@ -2210,42 +2205,42 @@
                       </div>
                       
                       `,
-          style: {
-            position: "absolute",
-            width: deviceType == "desktop" ? "330px" : "230px",
-            height: deviceType == "desktop" ? "160px" : "120px",
-            overflow: "hidden",
-            opacity: "1",
-            visibility: "visible",
-            transition: "opacity 0.5s ease-in-out",
-            display: displayValue,
-            right: "10px",
-            bottom: "calc(var(--art-control-height) + 15px)",
-            transform: "translateX(350px)",
-            transition: "transform 0.4s",
-          },
-          click: function () {
-            // scroll to the beginning of the selected slide
-            selectElement.selectedIndex = Number(current_season_index);
-            const slideWrapper = document.querySelector(".slide-wrapper");
-            slideWrapper.scrollTo({
-              left: current_slide_index * (slideWidth + 10),
-            });
-            // change styles for watchLaterContainer
-            watchLaterContainer.style.visibility = "visible";
-            watchLaterContainer.style.opacity = "1";
-          },
-        };
-      }
+        style: {
+          position: "absolute",
+          width: deviceType == "desktop" ? "330px" : "230px",
+          height: deviceType == "desktop" ? "160px" : "120px",
+          overflow: "hidden",
+          opacity: "1",
+          visibility: "visible",
+          transition: "opacity 0.5s ease-in-out",
+          display: displayValue,
+          right: "10px",
+          bottom: "calc(var(--art-control-height) + 15px)",
+          transform: "translateX(350px)",
+          transition: "transform 0.4s",
+        },
+        click: function () {
+          // scroll to the beginning of the selected slide
+          selectElement.selectedIndex = Number(current_season_index);
+          const slideWrapper = document.querySelector(".slide-wrapper");
+          slideWrapper.scrollTo({
+            left: current_slide_index * (slideWidth + 10),
+          });
+          // change styles for watchLaterContainer
+          watchLaterContainer.style.visibility = "visible";
+          watchLaterContainer.style.opacity = "1";
+        },
+      };
+    }
 
-      function wachLaterLayer(
-        title_watchList_status,
-        select_watchList_status,
-        title_watchList
-      ) {
-        return {
-          name: "wachLaterLayer",
-          html: `<div id= "player-container-div" style=" width: 100%;  height: ${device_height};  overflow: hidden; position: absolute; bottom: ${player_container_div_marginBottom};">
+    function wachLaterLayer(
+      title_watchList_status,
+      select_watchList_status,
+      title_watchList
+    ) {
+      return {
+        name: "wachLaterLayer",
+        html: `<div id= "player-container-div" style=" width: 100%;  height: ${device_height};  overflow: hidden; position: absolute; bottom: ${player_container_div_marginBottom};">
                       <div class="title_container" id="myDiv">
                         <div>
                           <span id= "title_watchList" style="font-size: ${watchList_title_size};display: ${title_watchList_status};">${title_watchList}</span>
@@ -2264,25 +2259,26 @@
                       <div id="main-div" style="width: 100%; height: 75%; "></div>
                       </div>
                       `,
-          style: {
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-            //marginBottom: '10px',
-            //alignSelf: 'center',
-            background: `linear-gradient(to bottom,
+        style: {
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          //marginBottom: '10px',
+          //alignSelf: 'center',
+          background: `linear-gradient(to bottom,
                              transparent 45%,
                              black 75%,
                              black)
             		            `,
-            opacity: "0",
-            visibility: "hidden",
-            transition: "opacity 0.5s ease-in-out",
-            display: "grid",
-          },
-        };
-      }
-    </script>
-  </body>
+          opacity: "0",
+          visibility: "hidden",
+          transition: "opacity 0.5s ease-in-out",
+          display: "grid",
+        },
+      };
+    }
+  </script>
+</body>
+
 </html>
