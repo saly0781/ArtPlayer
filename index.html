@@ -337,7 +337,7 @@
                       u(y, "display", "flex");
                       u(m, "display", "flex");
                       u(v, "display", "none");
-                      n.emit("preLoll", e);
+                      n.emit("adStarted", e);
                     }
                     n.proxy(document, "visibilitychange", () => {
                       if (document.hidden) {
@@ -760,7 +760,7 @@
                 close: "Funga Kwamamaza",
                 countdown: "%s Amasegonda abura",
                 detail: "Kwamamaza",
-                canBeClosed: "%s Amasegonda abura",
+                canBeClosed: "%s Totali ya Amasegonda",
               },
             }),
             artplayerPluginHlsQuality({
@@ -1161,13 +1161,13 @@
     function onTimeUpdate() {
       percentage = (art.currentTime / art.duration) * 100;
 
-      if (percentage > 50 && percentage < 80 && midLoll == false) {
+      if (percentage > 50 && percentage < 80 && midLoll == false && adstatus === "true") {
         midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[1]);
       }
 
-      if (percentage > 80 && postLoll == false) {
+      if (percentage > 80 && postLoll == false && adstatus === "true") {
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[2]);
@@ -1618,7 +1618,10 @@
     function nextToWatch(url, movieId) {
       art.switchUrl(url).then(() => {
         art.option.id = newData.id;
-        art.play();
+        if (adstatus === "false") {
+          art.play();
+        }
+
       });
     }
 
