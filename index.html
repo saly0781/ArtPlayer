@@ -564,7 +564,6 @@
     let oldMainSlideId = getParameterByName("currentEpisodeSlideId");
     let email;
     let finalMovieId = episodeId == "empty" ? movieId : episodeId;
-    let percentage = 0;
     let container = document.querySelector(".artplayer-app");
     let watchLaterContainer;
     let watch_Later_Card;
@@ -1159,18 +1158,21 @@
     }
 
     function onTimeUpdate() {
-      percentage = (art.currentTime / art.duration) * 100;
+
+      let percentage = (art.currentTime / art.duration) * 100;
 
       if (percentage > 50 && percentage < 80 && midLoll == false && adstatus === "true") {
         midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[1]);
+        adsPlugin.startAd();
+        //adsPlugin.updateVideoLink(allLolls[1]);
       }
 
-      if (percentage > 80 && postLoll == false && adstatus === "true") {
+      if (percentage > 75 && postLoll == false && adstatus === "true") {
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[2]);
+        adsPlugin.startAd();
+        //adsPlugin.updateVideoLink(allLolls[2]);
       }
 
       if (percentage > 20 && preLoll == false && adstatus === "true") {
@@ -1180,7 +1182,6 @@
       }
 
       if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
-        art.off("video:timeupdate", onTimeUpdate);
         art.storage.del(newData.id);
         sendMessage({ action: "deleteContinue", data: newData });
         continueToWatchDeleted == true;
@@ -1191,7 +1192,6 @@
         newMainSlideId == "slideLast" &&
         continueToWatchDeleted == false
       ) {
-        art.off("video:timeupdate", onTimeUpdate);
         art.storage.del(newData.id);
         sendMessage({ action: "deleteContinue", data: newData });
         continueToWatchDeleted == true;
