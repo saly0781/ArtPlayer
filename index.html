@@ -967,9 +967,7 @@
         watch_Later_List_Data = event.data.data;
         onloadWatchlater_Movies();
       } else if (event.data.action == "changeQuality") {
-        art.switchUrl(event.data.data).then(() => {
-          art.play();
-        });
+        art.switchQuality(event.data.data);
       }
     });
 
@@ -2283,6 +2281,8 @@
         },
       };
     }
+
+    
   </script>
 </body>
 
