@@ -356,7 +356,9 @@
 
                 // Create and dispatch a custom event
                 const event = new CustomEvent('playerLoaded', {
-                  status: "oky"
+                    detail: {
+                      status: "oky",
+                    },
                 });
                 document.dispatchEvent(event);
               }
