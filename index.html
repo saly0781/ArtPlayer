@@ -6863,10 +6863,8 @@
       console.log("NOW WE ARE II FULLLSCREEN!", state);
     });
 
-    //Custom Event Listner
-
-    document.addEventListener('playerLoaded', (e) => {
-      console.log('Custom event triggered:', e.detail.status);
+    //An event for controlling when the DOM is loaded
+    document.addEventListener("DOMContentLoaded", function () {
       art_mask = document.querySelector(".art-mask");
       custom_select_div = document.getElementById("custom-select-div");
       art_bottom = document.querySelector(".art-bottom");
@@ -7012,6 +7010,13 @@
       });
 
       sendMessage({ action: "loaded" });
+    });
+
+    //Custom Event Listner
+
+    document.addEventListener('playerLoaded', (e) => {
+      console.log('Custom event triggered:', e);
+      
     });
 
 
