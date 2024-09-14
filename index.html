@@ -346,13 +346,20 @@
             ((window.Artplayer = G),
             u.setStyleText("artplayer-style", o.default),
             setTimeout(() => {
-              G.LOG_VERSION &&
+              if (G.LOG_VERSION) {
                 console.log(
                   `%c Rebamovie-Player %c ${G.version} %c https://www.rebamovie.com`,
                   "color: #fff; background: #5f5f5f",
                   "color: #fff; background: #4bc729",
                   ""
                 );
+
+                // Create and dispatch a custom event
+                const event = new CustomEvent('playerLoaded', {
+                  status: "oky"
+                });
+                document.dispatchEvent(event);
+              }
             }, 100));
       },
       {
@@ -7002,6 +7009,14 @@
 
       sendMessage({ action: "loaded" });
     });
+
+    //Custom Event Listner
+
+    document.addEventListener('playerLoaded', (e) => {
+      console.log('Custom event triggered:', e.status);
+      // Do something with the event details, e.g., version or URL
+    });
+
 
     //Function To Receives data
     window.addEventListener("message", function (event) {
