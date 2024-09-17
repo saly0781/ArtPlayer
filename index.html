@@ -6610,10 +6610,10 @@
 
     // Get movielink, adlink, and adstatus from URL parameters
     let done = false;
-    let type = getParameterByName("type");
+    let type = getParameterByName("type");//!
     let movielink = getParameterByName("movieLink");
     let adlink = getParameterByName("adlink");
-    let adstatus = getParameterByName("adstatus");
+    let adstatus = getParameterByName("adstatus");//!
     let movieId = getParameterByName("movieId");
     let episodeId = getParameterByName("episodeId");
     let languageCode = getParameterByName("languageCode");
@@ -6682,14 +6682,44 @@
     Artplayer.MOBILE_DBCLICK_PLAY = true;
     Artplayer.CONTEXTMENU = false;
     Artplayer.TOUCH_MOVE_RATIO = 1;
-    Artplayer.LOG_VERSION = true;
+    Artplayer.LOG_VERSION = false;
     Artplayer.AUTO_PLAYBACK_MAX = 20;
+
+        //Function To Receives data
+    window.addEventListener("message", function (event) {
+      if (event.data.action == "seasonData") {
+        slideData = event.data.data.epsodes;
+        seasons = event.data.data.seasons;
+        onloadSeason_Episode();
+      } else if (event.data.action == "getstreamingurl") {
+        preLoll = false;
+        midLoll = false;
+        postLoll = false;
+        nextToWatch(event.data.data.link, event.data.data.movieId);
+      } else if (event.data.action == "copyTimeSave") {
+        alert(event.data.data);
+      } else if (event.data.action == "initialData") {
+        allLolls = event.data.allLolls;
+        newData = event.data.data;
+        art.switchUrl(event.data.e);
+        if (newData.cwId == undefined) {
+          sendMessage({ action: "callTimer" });
+        }
+      } else if (event.data.action == "addToContinueWatching") {
+        startTimer_To_Save_To_ContinueWatching();
+      } else if (event.data.action == "watchLaterData") {
+        watch_Later_List_Data = event.data.data;
+        onloadWatchlater_Movies();
+      } else if (event.data.action == "changeQuality") {
+        art.switchQuality(event.data.data);
+      }
+    });
 
     // Initialize the Player
     art = new Artplayer({
       container: ".artplayer-app",
       id: finalMovieId,
-      url: movielink,
+      url: "",
       poster:
         "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
       isLive: false,
@@ -6850,6 +6880,14 @@
           }
         },
       },
+    });
+
+    art.on('loading', (state) => {
+      // Check if the loading state is true and the URL has not been set yet
+      if (state && !done) {
+          createElementsOnload();
+          done = true; // Mark 'done' as true to prevent future URL changes
+      }
     });
 
     // Function for handling Fullscreen state
@@ -7154,43 +7192,6 @@
       sendMessage({ action: "loaded" });
     });
 */
-    
-    art.on('loading', (state) => {
-      // Check if the loading state is true and the URL has not been set yet
-      if (state && !done) {
-          createElementsOnload();
-          done = true; // Mark 'done' as true to prevent future URL changes
-      }
-    });
-
-    //Function To Receives data
-    window.addEventListener("message", function (event) {
-      if (event.data.action == "seasonData") {
-        slideData = event.data.data.epsodes;
-        seasons = event.data.data.seasons;
-        onloadSeason_Episode();
-      } else if (event.data.action == "getstreamingurl") {
-        preLoll = false;
-        midLoll = false;
-        postLoll = false;
-        nextToWatch(event.data.data.link, event.data.data.movieId);
-      } else if (event.data.action == "copyTimeSave") {
-        alert(event.data.data);
-      } else if (event.data.action == "initialData") {
-        allLolls = event.data.allLolls;
-        newData = event.data.data;
-        if (newData.cwId == undefined) {
-          sendMessage({ action: "callTimer" });
-        }
-      } else if (event.data.action == "addToContinueWatching") {
-        startTimer_To_Save_To_ContinueWatching();
-      } else if (event.data.action == "watchLaterData") {
-        watch_Later_List_Data = event.data.data;
-        onloadWatchlater_Movies();
-      } else if (event.data.action == "changeQuality") {
-        art.switchQuality(event.data.data);
-      }
-    });
 
     function startTimer_To_Save_To_ContinueWatching() {
       startTimer(10, function () {
