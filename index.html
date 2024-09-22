@@ -7384,15 +7384,13 @@
       if (percentage > 50 && percentage < 80 && midLoll == false && adstatus === "true") {
         midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.startAd();
-        //adsPlugin.updateVideoLink(allLolls[1]);
+        adsPlugin.updateVideoLink(allLolls[1]);
       }
 
       if (percentage > 75 && postLoll == false && adstatus === "true") {
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.startAd();
-        //adsPlugin.updateVideoLink(allLolls[2]);
+        adsPlugin.updateVideoLink(allLolls[2]);
       }
 
       if (percentage > 20 && preLoll == false && adstatus === "true") {
