@@ -9529,9 +9529,8 @@ return (
       "E13ST"
     );
   </script>
-  <!-- Include ArtPlayer Ads Plugin -->
-  <!-- Include ArtPlayer Danmuku Plugin -->
-  <!-- <script src="path/to/artplayer-plugin-danmuku.js"></script> -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.2/dash.all.min.js"></script>
+ 
   <style>
     html,
     body {
@@ -9738,7 +9737,8 @@ return (
       } else if (event.data.action == "initialData") {
         allLolls = event.data.allLolls;
         newData = event.data.data;
-        event.data.e ? art.switchUrl(event.data.e) : art.switchUrl(movielink);
+        //art.option.id = event.data.id;
+        event.data.e ? event.data.x == 'y' ? _y(event.data.e, event.data.p) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
         if (newData.cwId == undefined) {
           sendMessage({ action: "callTimer" });
         }
