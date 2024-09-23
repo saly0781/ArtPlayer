@@ -10419,10 +10419,10 @@
     function _y(y,x) {
       let x1 = CryptoJS.AES.decrypt(y, x);
       x1 =  decrypted.toString(CryptoJS.enc.Utf8);
-      const y = new Blob([x1], { type: 'application/dash+xml' });
-      x1 = URL.createObjectURL(y);
+      const y1 = new Blob([x1], { type: 'application/dash+xml' });
+      x1 = URL.createObjectURL(y1);
       art.type = "x";
-      art.switchUrl(x);
+      art.switchUrl(x1);
     }
 
     art.on("video:timeupdate", onTimeUpdate);
