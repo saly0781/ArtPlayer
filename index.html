@@ -9870,14 +9870,14 @@
       },
     });
 
-    art.on('loading', (state) => {
+    /*art.on('loading', (state) => {
       // Check if the loading state is true and the URL has not been set yet
       if (state && !done) {
           createElementsOnload();
           done = true; // Mark 'done' as true to prevent future URL changes
       }
     });
-
+*/
     // Function for handling Fullscreen state
     art.on("fullscreen", (state) => {
       console.log("NOW WE ARE II FULLLSCREEN!", state);
@@ -10032,154 +10032,13 @@
       sendMessage({ action: "loaded" });
     }
     
-    /*document.addEventListener("DOMContentLoaded", function () {
-      art_mask = document.querySelector(".art-mask");
-      custom_select_div = document.getElementById("custom-select-div");
-      art_bottom = document.querySelector(".art-bottom");
-      art_controls = document.querySelector(".art-controls");
-      art_video_player = document.querySelector(".art-video");
-      rect1_backgroundImage = document.querySelector(".rect1");
-      title_watchList_Element = document.getElementById("title_watchList");
-      watchLaterContainer = document.querySelector(
-        ".art-layer.art-layer-wachLaterLayer"
-      );
-      watch_Later_Card = document.querySelector(
-        ".art-layer.art-layer-wachLaterCardLayer"
-      );
-      player_container_div = document.getElementById("player-container-div");
-      selectElement = document.getElementById("season-select");
-      createElement();
-      watchListObserver();
-      observeOnStart();
-
-      document.getElementById("closeIcon").onclick = function () {
-        watchLaterContainer.style.opacity = "0";
-        watchLaterContainer.style.visibility = "hidden";
-      };
-
-      document.querySelector(".art-mask").style.display = "none";
-
-      // ---------------------- OBSERVER FOR CONTROLS ---------------------------
-
-      const observer = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              watch_Later_Card.style.transform = "translateX(0px)";
-
-              art.layers.update({
-                name: "rebaPlayerControls",
-                html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                </svg>
-            </button>
-        	</div>
-        	<div class="center-button-rebaPlayer" >
-        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
-        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
-        	        width: 70px;
-        	        height: 70px;
-        	    ">
-        	            <path id="playingButtonPath" d="${pathCode}" />
-        	        </svg>
-        	    </button>
-        	</div>
-        	<div class="button-rebaPlayer right-button-rebaPlayer" >
-        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-        	        </svg>
-        	    </button>
-        	</div>`,
-                style: {
-                  width: "100%",
-                  height: "10%",
-                  alignSelf: "center",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                },
-              });
-              // Do something when the element is in the viewport
-            } else {
-              watch_Later_Card.style.transform = "translateX(350px)";
-
-              art.layers.update({
-                name: "rebaPlayerControls",
-                html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                </svg>
-            </button>
-        	</div>
-        	<div class="center-button-rebaPlayer" >
-        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
-        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
-        	        width: 70px;
-        	        height: 70px;
-        	    ">
-        	            <path id="playingButtonPath" d="${pathCode}" />
-        	        </svg>
-        	    </button>
-        	</div>
-        	<div class="button-rebaPlayer right-button-rebaPlayer" >
-        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-        	        </svg>
-        	    </button>
-        	</div>`,
-                style: {
-                  width: "100%",
-                  height: "10%",
-                  alignSelf: "center",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                  display: "none",
-                },
-              });
-              // Do something when the element is out of the viewport
-            }
-          });
-        },
-        {
-          root: null, // relative to the viewport
-          threshold: 0.7, // percentage of the element's visibility
-        }
-      );
-
-      observer.observe(art_controls);
-
-      //--------------------- EVENTLISTENER FOR CLOSING WATCHLATER LIST -------------
-
-      watchLaterContainer.addEventListener("click", (e) => {
-        if (
-          e.target.tagName.toLowerCase() === "div" &&
-          e.target.classList[1] == "art-layer-wachLaterLayer"
-        ) {
-          watchLaterContainer.style.opacity = "0";
-          watchLaterContainer.style.visibility = "hidden";
-        }
-      });
-
-      // Add an event listener for the change event
-      selectElement.addEventListener("change", changeSeason);
-      //---------------------- FUNCTION TO AUTO PLAYER -------------------------------
-
-      art_video_player.addEventListener("canplay", function () {
-        // art.play();
-        art.aspectRatio = "16:9";
-      });
-
-      sendMessage({ action: "loaded" });
+    document.addEventListener("DOMContentLoaded", function () {
+      // Check if the loading state is true and the URL has not been set yet
+      if (state && !done) {
+          createElementsOnload();
+          done = true; // Mark 'done' as true to prevent future URL changes
+      }
     });
-*/
 
     function startTimer_To_Save_To_ContinueWatching() {
       startTimer(10, function () {
