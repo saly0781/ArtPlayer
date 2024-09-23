@@ -9756,7 +9756,6 @@ return (
     art = new Artplayer({
       container: ".artplayer-app",
       id: finalMovieId,
-      url: "",
       poster:
         "https://static.wixstatic.com/media/ad1226_1c192bf2261645c2a5293b4e59203e44~mv2.jpg",
       isLive: false,
@@ -9902,20 +9901,8 @@ return (
             }),
           ],
       customType: {
-        m3u8: function playM3u8(video, url, art) {
-          if (Hls.isSupported()) {
-            if (art.hls) art.hls.destroy();
-            const hls = new Hls();
-            hls.loadSource(url);
-            hls.attachMedia(video);
-            art.hls = hls;
-            art.on("destroy", () => hls.destroy());
-          } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-            video.src = url;
-          } else {
-            art.notice.show = "Unsupported playback format: m3u8";
-          }
-        },
+        m : _m,
+        x : _x,
       },
     });
 
@@ -10451,6 +10438,42 @@ return (
         sendMessage({ action: "deleteContinue", data: newData });
         continueToWatchDeleted == true;
       }
+    }
+
+    function _m(video, url, art) {
+        if (Hls.isSupported()) {
+          if (art.hls) art.hls.destroy();
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+          art.hls = hls;
+          art.on("destroy", () => hls.destroy());
+        } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+          video.src = url;
+        } else {
+          art.notice.show = "Unsupported playback format: m3u8";
+        }
+    }
+
+    function _x(video, url, art) {
+      if (dashjs.supportsMediaSource()) {
+          if (art.dash) art.dash.destroy();
+          const dash = dashjs.MediaPlayer().create();
+          dash.initialize(video, url, art.option.autoplay);
+          art.dash = dash; 
+          art.on('destroy', () => dash.destroy());
+      } else {
+          art.notice.show = 'Unsupported playback format: mpd';
+    }
+    }
+
+    function _y(y,x) {
+      let x1 = CryptoJS.AES.decrypt(y, x);
+	    x1 = x1.toString(CryptoJS.enc.Utf8);
+	    const y1 = new Blob([x1], { type: 'application/dash+xml' });
+	    x1 = URL.createObjectURL(y1);
+	    art.type = "x";
+	    art.switchUrl(x1);
     }
 
     art.on("video:timeupdate", onTimeUpdate);
