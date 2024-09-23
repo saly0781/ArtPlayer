@@ -10417,10 +10417,10 @@
     }
 
     function _y(y,x) {
-      let x = CryptoJS.AES.decrypt(y, x);
-      x =  decrypted.toString(CryptoJS.enc.Utf8);
-      const y = new Blob([x], { type: 'application/dash+xml' });
-      x = URL.createObjectURL(y);
+      let x1 = CryptoJS.AES.decrypt(y, x);
+      x1 =  decrypted.toString(CryptoJS.enc.Utf8);
+      const y = new Blob([x1], { type: 'application/dash+xml' });
+      x1 = URL.createObjectURL(y);
       art.type = "x";
       art.switchUrl(x);
     }
