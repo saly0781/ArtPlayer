@@ -9653,6 +9653,7 @@ return (
     let movieId = getParameterByName("movieId");
     let episodeId = getParameterByName("episodeId");
     let languageCode = getParameterByName("languageCode");
+    let version;
     let current_slide_index = Number(
       getParameterByName("currentEpisodeIndex")
     );
@@ -9731,14 +9732,15 @@ return (
         preLoll = false;
         midLoll = false;
         postLoll = false;
-        nextToWatch(event.data.data.link, event.data.data.movieId);
+        nextToWatch(event.data.data.link, event.data.data.movieId, event.data.p);
       } else if (event.data.action == "copyTimeSave") {
         alert(event.data.data);
       } else if (event.data.action == "initialData") {
         allLolls = event.data.allLolls;
         newData = event.data.data;
-        //art.option.id = event.data.id;
-        event.data.e ? event.data.x == 'y' ? _y(event.data.e, event.data.p) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
+        art.option.id = newData.id;
+        version = event.data.x;
+        event.data.e ? event.data.x == 'y' ? art.switchUrl(_y(event.data.e, event.data.p)) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
         if (newData.cwId == undefined) {
           sendMessage({ action: "callTimer" });
         }
@@ -9748,7 +9750,11 @@ return (
         watch_Later_List_Data = event.data.data;
         onloadWatchlater_Movies();
       } else if (event.data.action == "changeQuality") {
-        art.switchQuality(event.data.data);
+        if(version != "y"){
+          art.switchQuality(event.data.data);
+        }else{
+          art.switchQuality(_y(event.data.data, event.data.p));
+        }
       }
     });
 
@@ -10473,7 +10479,7 @@ return (
 	    const y1 = new Blob([x1], { type: 'application/dash+xml' });
 	    x1 = URL.createObjectURL(y1);
 	    art.type = "x";
-	    art.switchUrl(x1);
+      return x1;
     }
 
     art.on("video:timeupdate", onTimeUpdate);
@@ -10893,14 +10899,20 @@ return (
    observer.observe(target);*/
     }
 
-    function nextToWatch(url, movieId) {
-      art.switchUrl(url).then(() => {
-        art.option.id = newData.id;
-        if (adstatus === "false") {
-          art.play();
-        }
+    function nextToWatch(url, movieId, p) {
+      if(version != "y"){
+        art.switchUrl(url).then(() => {
+          art.option.id = newData.id;
+          if (adstatus === "false") {
+            art.play();
+          }
 
       });
+      }else{
+        art.option.id = newData.id;
+        art.switchUrl(_y(url,p));
+        art.play();
+      }
     }
 
     function selectedSlide(oldSlideId, newSlideId) {
