@@ -9732,10 +9732,11 @@ return (
         preLoll = false;
         midLoll = false;
         postLoll = false;
-        nextToWatch(event.data.data.link, event.data.data.movieId, event.data.p);
+        nextToWatch(event.data.data.link, event.data.data.movieId, event.data.data.p);
       } else if (event.data.action == "copyTimeSave") {
         alert(event.data.data);
       } else if (event.data.action == "initialData") {
+        art.type = "x";
         allLolls = event.data.allLolls;
         newData = event.data.data;
         art.option.id = newData.id;
@@ -10478,7 +10479,6 @@ return (
 	    x1 = x1.toString(CryptoJS.enc.Utf8);
 	    const y1 = new Blob([x1], { type: 'application/dash+xml' });
 	    x1 = URL.createObjectURL(y1);
-	    art.type = "x";
       return x1;
     }
 
@@ -10907,7 +10907,7 @@ return (
             art.play();
           }
 
-      });
+        });
       }else{
         art.option.id = newData.id;
         art.switchUrl(_y(url,p));
