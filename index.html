@@ -9746,7 +9746,7 @@
         watch_Later_List_Data = event.data.data;
         onloadWatchlater_Movies();
       } else if (event.data.action == "changeQuality") {
-        if (version != "y" || version != "x") {
+        if (!version) {
           art.switchQuality(event.data.data);
         } else {
           art.switchQuality(_y(event.data.data, event.data.p, version));
@@ -10897,7 +10897,7 @@
     }
 
     function nextToWatch(url, movieId, p) {
-      if (version != "y" || version != "x") {
+      if (!version) {
         art.switchUrl(url).then(() => {
           art.option.id = movieId;
           if (adstatus === "false") {
