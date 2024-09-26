@@ -9534,6 +9534,62 @@
       padding: 0;
     }
 
+    .all_button-rebaPlayer {
+        border-radius: 50%;
+        transition: transform 0.1s;
+     }
+
+    .all_button-rebaPlayer:active {
+         transform: scale(0.8);
+      }
+    .button-rebaPlayer {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+    }
+
+    .left-button-rebaPlayer {
+        right: 50%;
+        margin-right: 8%;
+        /* 40px + half the width of the button (50px) */
+    }
+
+    .right-button-rebaPlayer {
+        left: 50%;
+        margin-left: 8%;
+        /* 40px + half the width of the button (50px) */
+    }
+
+    .button-rebaPlayer button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .center-button-rebaPlayer {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .center-button-rebaPlayer button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .rebaPlayerSvg {
+        width: 60px;
+        height: 60px;
+        fill: white;
+        background-color: #00000040;
+        border-radius: 50%;
+    }
+
+    .left-button-rebaPlayer svg {
+        transform: scaleX(-1);
+        /* Flip horizontally */
+    }
     .artplayer-app {
       width: 100%;
       height: 100%;
@@ -9551,7 +9607,7 @@
       document.onselectstart = new Function("return false");
     } else {
       document.onmousedown = new Function("return false");
-    document.onmouseup = new Function("return false");
+      document.onmouseup = new Function("return false");
     }
   </script>
 
@@ -11343,62 +11399,6 @@
                           padding: 10px;
                      }
 
-                      .all_button-rebaPlayer {
-                         border-radius: 50%;
-                         transition: transform 0.1s;
-                      }
-                  
-                     .all_button-rebaPlayer:active {
-                          transform: scale(0.8);
-                       }
-                     .button-rebaPlayer {
-                         display: flex;
-                         justify-content: center;
-                         position: absolute;
-                     }
-                  
-                     .left-button-rebaPlayer {
-                         right: 50%;
-                         margin-right: 8%;
-                         /* 40px + half the width of the button (50px) */
-                     }
-                  
-                     .right-button-rebaPlayer {
-                         left: 50%;
-                         margin-left: 8%;
-                         /* 40px + half the width of the button (50px) */
-                     }
-                  
-                     .button-rebaPlayer button {
-                         background: none;
-                         border: none;
-                         cursor: pointer;
-                     }
-                  
-                     .center-button-rebaPlayer {
-                         position: absolute;
-                         left: 50%;
-                         transform: translateX(-50%);
-                     }
-                  
-                     .center-button-rebaPlayer button {
-                         background: none;
-                         border: none;
-                         cursor: pointer;
-                     }
-                  
-                     .rebaPlayerSvg {
-                         width: 60px;
-                         height: 60px;
-                         fill: white;
-                         background-color: #00000040;
-                         border-radius: 50%;
-                     }
-                  
-                     .left-button-rebaPlayer svg {
-                         transform: scaleX(-1);
-                         /* Flip horizontally */
-                     }
                  `;
       document.head.appendChild(style);
 
