@@ -9736,7 +9736,7 @@
         newData = event.data.data;
         art.option.id = newData.id;
         version = event.data.x;
-        event.data.e ? event.data.x == 'y' ? art.switchUrl(_y(event.data.e, event.data.p, version)) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
+        event.data.e ? event.data.x ? art.switchUrl(_y(event.data.e, event.data.p, version)) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
         if (newData.cwId == undefined) {
           sendMessage({ action: "callTimer" });
         }
@@ -10476,6 +10476,7 @@
         const y1 = new Blob([x1], { type: 'application/dash+xml' });
         x1 = URL.createObjectURL(y1);
       }
+      console.log("LINK : ", x1);
       return x1;
     }
 
