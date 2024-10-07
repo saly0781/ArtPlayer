@@ -9792,7 +9792,17 @@
         newData = event.data.data;
         art.option.id = newData.id;
         version = event.data.x;
-        event.data.e ? event.data.x ? art.switchUrl(_y(event.data.e, event.data.p, version)) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
+        event.data.e ? event.data.x ? art.switchUrl(_y(event.data.e, event.data.p, version)).then((results) => { 
+          	// Select the element with aria-label="buttonSkip"
+            let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
+
+            // Check if the element exists
+            if (buttonSkip && newData.startTime) {
+                // Change the transform property to translate the element by 300px
+                buttonSkip.style.transform = 'translateX(0px)';
+            }
+         }) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
+
         if (newData.cwId == undefined) {
           sendMessage({ action: "callTimer" });
         }
@@ -9840,6 +9850,39 @@
       theme: "#05C546",
       lang: navigator.language.toLowerCase(),
       layers: [
+        //object for Skip
+        {
+		    	name: 'skipContent',
+		    	html: ` <div class="skip-intro-btn" id="skipIntroBtn">
+		    		        <span class="text">Taruka<span class="intro"> Ahabanza</span></span>
+		    		        <span class="icon">
+		    		            <svg viewBox="0 0 8480 7665" xmlns="http://www.w3.org/2000/svg" fill="none" style="
+		    						    display: grid;
+		    						">
+		    		                <path d="M1604.5 774.495L5666.56 3808L1604.5 6841.5L1604.5 774.495Z" fill="#05C546" stroke="#05C546" stroke-width="265"></path>
+		    		                <path d="M4196.5 774.495L8258.56 3808L4196.5 6841.5L4196.5 774.495Z" fill="#05C546" stroke="#05C546" stroke-width="265"></path>
+		    		            </svg>
+		    		        </span>
+		    		    </div>
+		    	`,
+		    	tooltip: 'buttonSkip',
+		    	style: {
+		    		position: 'absolute',
+		    		bottom: "calc(var(--art-control-height) + 20px)",
+		    		left: '10px',
+		    		height: deviceType == "desktop" ? "70px" : "50px",
+		    		transition: "opacity 0.5s ease-in-out",
+		    		transform: "translateX(-300px)",
+		    		transition: "transform 0.4s",
+		    		overflow: "hidden",
+		    	},
+		    	click: function (...args) {
+		    		art.seek = newData.startTime;
+		    	},
+		    	mounted: function (...args) {
+            //
+		    	},
+		    },
         //Object for Next-Previous-Play Button
         {
           name: "rebaPlayerControls",
@@ -10125,155 +10168,6 @@
 
       sendMessage({ action: "loaded" });
     }
-
-    /*document.addEventListener("DOMContentLoaded", function () {
-      art_mask = document.querySelector(".art-mask");
-      custom_select_div = document.getElementById("custom-select-div");
-      art_bottom = document.querySelector(".art-bottom");
-      art_controls = document.querySelector(".art-controls");
-      art_video_player = document.querySelector(".art-video");
-      rect1_backgroundImage = document.querySelector(".rect1");
-      title_watchList_Element = document.getElementById("title_watchList");
-      watchLaterContainer = document.querySelector(
-        ".art-layer.art-layer-wachLaterLayer"
-      );
-      watch_Later_Card = document.querySelector(
-        ".art-layer.art-layer-wachLaterCardLayer"
-      );
-      player_container_div = document.getElementById("player-container-div");
-      selectElement = document.getElementById("season-select");
-      createElement();
-      watchListObserver();
-      observeOnStart();
-
-      document.getElementById("closeIcon").onclick = function () {
-        watchLaterContainer.style.opacity = "0";
-        watchLaterContainer.style.visibility = "hidden";
-      };
-
-      document.querySelector(".art-mask").style.display = "none";
-
-      // ---------------------- OBSERVER FOR CONTROLS ---------------------------
-
-      const observer = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              watch_Later_Card.style.transform = "translateX(0px)";
-
-              art.layers.update({
-                name: "rebaPlayerControls",
-                html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                </svg>
-            </button>
-          </div>
-          <div class="center-button-rebaPlayer" >
-              <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
-                  <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
-                  width: 70px;
-                  height: 70px;
-              ">
-                      <path id="playingButtonPath" d="${pathCode}" />
-                  </svg>
-              </button>
-          </div>
-          <div class="button-rebaPlayer right-button-rebaPlayer" >
-              <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-                  <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                      <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                  </svg>
-              </button>
-          </div>`,
-                style: {
-                  width: "100%",
-                  height: "10%",
-                  alignSelf: "center",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                },
-              });
-              // Do something when the element is in the viewport
-            } else {
-              watch_Later_Card.style.transform = "translateX(350px)";
-
-              art.layers.update({
-                name: "rebaPlayerControls",
-                html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
-            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
-                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                </svg>
-            </button>
-          </div>
-          <div class="center-button-rebaPlayer" >
-              <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
-                  <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
-                  width: 70px;
-                  height: 70px;
-              ">
-                      <path id="playingButtonPath" d="${pathCode}" />
-                  </svg>
-              </button>
-          </div>
-          <div class="button-rebaPlayer right-button-rebaPlayer" >
-              <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
-                  <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
-                      <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
-                  </svg>
-              </button>
-          </div>`,
-                style: {
-                  width: "100%",
-                  height: "10%",
-                  alignSelf: "center",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "absolute",
-                  display: "none",
-                },
-              });
-              // Do something when the element is out of the viewport
-            }
-          });
-        },
-        {
-          root: null, // relative to the viewport
-          threshold: 0.7, // percentage of the element's visibility
-        }
-      );
-
-      observer.observe(art_controls);
-
-      //--------------------- EVENTLISTENER FOR CLOSING WATCHLATER LIST -------------
-
-      watchLaterContainer.addEventListener("click", (e) => {
-        if (
-          e.target.tagName.toLowerCase() === "div" &&
-          e.target.classList[1] == "art-layer-wachLaterLayer"
-        ) {
-          watchLaterContainer.style.opacity = "0";
-          watchLaterContainer.style.visibility = "hidden";
-        }
-      });
-
-      // Add an event listener for the change event
-      selectElement.addEventListener("change", changeSeason);
-      //---------------------- FUNCTION TO AUTO PLAYER -------------------------------
-
-      art_video_player.addEventListener("canplay", function () {
-        // art.play();
-        art.aspectRatio = "16:9";
-      });
-
-      sendMessage({ action: "loaded" });
-    });
-*/
 
     function startTimer_To_Save_To_ContinueWatching() {
       startTimer(10, function () {
@@ -10963,8 +10857,9 @@
         });
       } else {
         art.option.id = movieId;
-        art.switchUrl(_y(url, p, version));
+        art.switchUrl(_y(url, p, version)).then(() => {
         art.play();
+        });
       }
     }
 
@@ -11398,6 +11293,41 @@
                           align-content: center;
                           padding: 10px;
                      }
+
+                    .skip-intro-btn {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-around;
+                        background-color: #000000;
+                        border: 2px solid green;
+                        border-radius: 5px;
+                        padding: 18px;
+                        cursor: pointer;
+                        font-family: Arial, sans-serif;
+                        font-size: ${deviceType == "desktop" ? "160%" : "130%"};
+                        color: white;
+                        width: fit-content;
+                        height: 100%;
+                        box-sizing: border-box;
+                    }
+              
+                    .skip-intro-btn .text {
+                        font-weight: bold;
+                    }
+              
+                    .skip-intro-btn .text .intro {
+                        color: #05C546;
+                    }
+              
+                    .skip-intro-btn .icon {
+                        margin-left: 20px;
+                        width: ${deviceType == "desktop" ? "50px" : "30px"};
+                        height: fit-content;
+                    }
+              
+                    .skip-intro-btn:hover {
+                        background-color: #202020;
+                    }
 
                  `;
       document.head.appendChild(style);
