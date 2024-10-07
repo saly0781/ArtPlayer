@@ -9796,18 +9796,18 @@
         newData = event.data.data;
         art.option.id = newData.id;
         version = event.data.x;
-        event.data.e ? event.data.x ? art.switchUrl(_y(event.data.e, event.data.p, version)).then((results) => {
-          // Select the element with aria-label="buttonSkip"
-          let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
+        event.data.e ? event.data.x ? art.switchUrl(_y(event.data.e, event.data.p, version)) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
 
-          console.log("NEW DATA :",newData);
+        // Select the element with aria-label="buttonSkip"
+        let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
 
-          // Check if the element exists
-          if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
-            // Change the transform property to translate the element by 300px
-            buttonSkip.style.transform = 'translateX(0px)';
-          }
-        }) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
+        console.log("NEW DATA :",newData);
+              
+        // Check if the element exists
+        if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
+          // Change the transform property to translate the element by 300px
+          buttonSkip.style.transform = 'translateX(0px)';
+        }
 
         if (newData.cwId == undefined) {
           sendMessage({ action: "callTimer" });
