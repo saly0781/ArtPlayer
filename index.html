@@ -9768,6 +9768,7 @@
     let midLoll = false;
     let postLoll = false;
     let allLolls = [];
+    let skippedContent = false;
     // Artplayer settings
     Artplayer.MOBILE_DBCLICK_PLAY = true;
     Artplayer.CONTEXTMENU = false;
@@ -9785,6 +9786,7 @@
         preLoll = false;
         midLoll = false;
         postLoll = false;
+        skippedContent = false;
         nextToWatch(event.data.data.link, event.data.data.movieId, event.data.data.p);
       } else if (event.data.action == "copyTimeSave") {
         alert(event.data.data);
@@ -9882,6 +9884,7 @@
             // Select the element with aria-label="buttonSkip"
             let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
             buttonSkip.style.transform = 'translateX(0px)';
+            skippedContent = true;
           },
           mounted: function (...args) {
             //
@@ -10358,6 +10361,13 @@
     }
 
     function onTimeUpdate() {
+
+      if(newData.startTime < art.currentTime && skippedContent = false){
+          // Select the element with aria-label="buttonSkip"
+          let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
+          buttonSkip.style.transform = 'translateX(-300px)';
+          skippedContent = true;
+      }
 
       let percentage = (art.currentTime / art.duration) * 100;
 
