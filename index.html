@@ -9875,7 +9875,7 @@
             left: '10px',
             height: deviceType == "desktop" ? "60px" : "50px",
             transition: "opacity 0.5s ease-in-out",
-            transform: "translateX(-300px)",
+            transform: userRole == "Admin" ? "translateX(0px)" : "translateX(-300px)",
             transition: "transform 0.4s",
             overflow: "hidden",
           },
