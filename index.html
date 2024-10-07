@@ -9880,10 +9880,10 @@
             overflow: "hidden",
           },
           click: function (...args) {
+            let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
             art.seek = newData.startTime;
             art.play();
             // Select the element with aria-label="buttonSkip"
-            let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
             buttonSkip.style.transform = 'translateX(-300px)';
             skippedContent = true;
           },
