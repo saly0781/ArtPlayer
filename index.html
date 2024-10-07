@@ -9801,7 +9801,7 @@
           let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
 
           // Check if the element exists
-          if (buttonSkip && newData.startTime) {
+          if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
             // Change the transform property to translate the element by 300px
             buttonSkip.style.transform = 'translateX(0px)';
           }
@@ -9875,7 +9875,7 @@
             left: '10px',
             height: deviceType == "desktop" ? "60px" : "50px",
             transition: "opacity 0.5s ease-in-out",
-            transform: userRole == "Admin" ? "translateX(0px)" : "translateX(-300px)",
+            transform: userRole == "Admin" ? "translateX(-300px)" : "translateX(-300px)",
             transition: "transform 0.4s",
             overflow: "hidden",
           },
