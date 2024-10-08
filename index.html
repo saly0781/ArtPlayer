@@ -9791,7 +9791,6 @@
       } else if (event.data.action == "copyTimeSave") {
         alert(event.data.data);
       } else if (event.data.action == "initialData") {
-        let autoplay = findMatchingTime(event.data.data.id);
         art.type = event.data.x == "x" ? "m" : "x";
         allLolls = event.data.allLolls;
         newData = event.data.data;
@@ -9801,11 +9800,9 @@
         // Select the element with aria-label="buttonSkip"
         let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
         // Check if the element exists
-        
-        console.log("AUTOPLAY STATUS : ", autoplay);
-        if (buttonSkip && newData.startTime != null || newData.startTime != undefined && autoplay == false) {
+        if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
           // Change the transform property to translate the element by 300px
-          buttonSkip.style.transform = 'translateX(0px)';
+          findMatchingTime(event.data.data.id, buttonSkip);
         }
 
         if (newData.cwId == undefined) {
@@ -10650,7 +10647,7 @@
       selectElement.appendChild(option);
     }
 
-    function findMatchingTime(keyToFind) {
+    function findMatchingTime(keyToFind, buttonSkip) {
       // Get artplayer_settings from localStorage
       const settings = localStorage.getItem('artplayer_settings');
 
@@ -10665,6 +10662,8 @@
           if (parsedSettings.times && typeof parsedSettings.times === 'object') {
               // Look for a matching key in the 'times' object
               if (keyToFind in parsedSettings.times) {
+                
+                  buttonSkip.style.transform = 'translateX(0px)';
                   return true; // Match found
               }
           }
