@@ -9800,7 +9800,7 @@
         // Select the element with aria-label="buttonSkip"
         let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
         // Check if the element exists
-        if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
+        if (buttonSkip && newData.startTime != null || newData.startTime != undefined && !findMatchingTime(newData.id)) {
           // Change the transform property to translate the element by 300px
           buttonSkip.style.transform = 'translateX(0px)';
         }
@@ -9851,6 +9851,9 @@
       airplay: true,
       theme: "#05C546",
       lang: navigator.language.toLowerCase(),
+      moreVideoAttr: {
+        'webkit-playsinline': true,
+      },
       layers: [
         {
           name: 'skipContent',
@@ -10174,30 +10177,35 @@
 
       // Select the element with the specified class and data attribute
       let targetElement = document.querySelector('.art-layer.art-layer-auto-playback[data-index="5"]');
+      let jumpElement = document.querySelector('.art-auto-playback-jump');
+      // Select the element with the class 'art-auto-playback-last'
+      let lastSeenElement = document.querySelector('.art-auto-playback-last');
 
       // Check if the element exists
       if (targetElement) {
+
+          // Get the current text content
+          let currentText = lastSeenElement.textContent;
+          let currentText1 = jumpElement.textContent;
+          // Replace only the 'Last Seen' part with your own text
+          jumpElement.textContent = currentText1.replace('Jump Play', 'Taruka');
+          lastSeenElement.textContent = currentText.replace('Last Seen', 'Aho warugeze');
+
           targetElement.style.display = 'flex';
-          targetElement.style.height = '60px';
+          targetElement.style.height = deviceType == "desktop" ? "60px" : "40px";
           targetElement.style.border = 'solid 1px green';
           targetElement.style.paddingRight = '10px';
           targetElement.style.paddingLeft = '10px';
           targetElement.style.bottom = 'calc(var(--art-control-height) + var(--art-bottom-gap) + 20px)';
-          // Create a new IntersectionObserver instance
-          let observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                      // The element is in view
-                      console.log('Element is in view');
-                  } else {
-                      // The element is out of view
-                      console.log('Element is out of view');
-                  }
-              });
-          }, { threshold: 0.1 }); // Adjust threshold for how much of the element needs to be visible
-        
-          // Start observing the target element
-          observer.observe(targetElement);
+
+          // Apply styles to jumpElement
+          jumpElement.style.height = '70%';
+          jumpElement.style.paddingRight = '10px';
+          jumpElement.style.paddingLeft = '10px';
+          jumpElement.style.backgroundColor = '#015501';
+          jumpElement.style.borderRadius = '7px';
+          jumpElement.style.alignContent = 'center';
+
       } else {
           console.log('Target element not found');
       }
@@ -10639,6 +10647,33 @@
       selectElement.appendChild(option);
     }
 
+    function findMatchingTime(keyToFind) {
+      // Get artplayer_settings from localStorage
+      const settings = localStorage.getItem('artplayer_settings');
+
+      if (!settings) {
+          return false; // No artplayer_settings found
+      }
+
+      try {
+          // Parse the settings to a JSON object
+          const parsedSettings = JSON.parse(settings);
+
+          // Check if the 'times' property exists
+          if (parsedSettings.times && typeof parsedSettings.times === 'object') {
+              // Look for a matching key in the 'times' object
+              if (keyToFind in parsedSettings.times) {
+                  return true; // Match found
+              }
+          }
+      } catch (e) {
+          // If there's an error in parsing, return false
+          return false;
+      }
+
+      return false; // No match or other error
+    }
+
     function populateSeason(seasonsparameter) {
       selectElement.innerHTML = ""; // deleting all existing options
       seasonsparameter.forEach((season) => {
@@ -10889,20 +10924,18 @@
    observer.observe(target);*/
     }
 
-    function nextToWatch(url, movieId, p) {
+    async function nextToWatch(url, movieId, p) {
       if (!version) {
-        art.switchUrl(url).then(() => {
-          art.option.id = movieId;
-          if (adstatus === "false") {
-            art.play();
-          }
-
-        });
-      } else {
+        await art.switchUrl(url)
         art.option.id = movieId;
-        art.switchUrl(_y(url, p, version)).then(() => {
+        if (adstatus === "false") {
           art.play();
-        });
+        }
+
+      } else {
+        await art.switchUrl(_y(url, p, version))
+        art.option.id = movieId;
+        art.play();
       }
     }
 
