@@ -9873,7 +9873,7 @@
             left: '10px',
             height: deviceType == "desktop" ? "60px" : "50px",
             transition: "opacity 0.5s ease-in-out",
-            transform: userRole == "Admin" ? "translateX(-300px)" : "translateX(-300px)",
+            transform: "translateX(-300px)",
             transition: "transform 0.4s",
             overflow: "hidden",
           },
@@ -10172,6 +10172,30 @@
         art.aspectRatio = "16:9";
       });
 
+      // Select the element with the specified class and data attribute
+      let targetElement = document.querySelector('.art-layer.art-layer-auto-playback[data-index="5"]');
+          
+      // Check if the element exists
+      if (targetElement) {
+          // Create a new IntersectionObserver instance
+          let observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      // The element is in view
+                      console.log('Element is in view');
+                  } else {
+                      // The element is out of view
+                      console.log('Element is out of view');
+                  }
+              });
+          }, { threshold: 0.1 }); // Adjust threshold for how much of the element needs to be visible
+        
+          // Start observing the target element
+          observer.observe(targetElement);
+      } else {
+          console.log('Target element not found');
+      }
+      
       sendMessage({ action: "loaded" });
     }
 
