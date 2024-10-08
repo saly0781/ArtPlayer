@@ -10174,9 +10174,15 @@
 
       // Select the element with the specified class and data attribute
       let targetElement = document.querySelector('.art-layer.art-layer-auto-playback[data-index="5"]');
-          
+
       // Check if the element exists
       if (targetElement) {
+          targetElement.style.display = 'flex';
+          targetElement.style.height = '60px';
+          targetElement.style.border = 'solid 1px green';
+          targetElement.style.paddingRight = '10px';
+          targetElement.style.paddingLeft = '10px';
+          targetElement.style.bottom = 'calc(var(--art-control-height) + var(--art-bottom-gap) + 20px)';
           // Create a new IntersectionObserver instance
           let observer = new IntersectionObserver((entries) => {
               entries.forEach(entry => {
@@ -10195,7 +10201,7 @@
       } else {
           console.log('Target element not found');
       }
-      
+
       sendMessage({ action: "loaded" });
     }
 
