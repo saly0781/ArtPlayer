@@ -10662,9 +10662,10 @@
           if (parsedSettings.times && typeof parsedSettings.times === 'object') {
               // Look for a matching key in the 'times' object
               if (keyToFind in parsedSettings.times) {
-                
-                  buttonSkip.style.transform = 'translateX(0px)';
+                  buttonSkip.style.transform = 'translateX(-300px)';
                   return true; // Match found
+              } else {
+                buttonSkip.style.transform = 'translateX(0px)';
               }
           }
       } catch (e) {
