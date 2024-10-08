@@ -9791,6 +9791,7 @@
       } else if (event.data.action == "copyTimeSave") {
         alert(event.data.data);
       } else if (event.data.action == "initialData") {
+        let autoplay = findMatchingTime(event.data.data.id);
         art.type = event.data.x == "x" ? "m" : "x";
         allLolls = event.data.allLolls;
         newData = event.data.data;
@@ -9800,7 +9801,7 @@
         // Select the element with aria-label="buttonSkip"
         let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
         // Check if the element exists
-        if (buttonSkip && newData.startTime != null || newData.startTime != undefined && !findMatchingTime(newData.id)) {
+        if (buttonSkip && newData.startTime != null || newData.startTime != undefined && !autoplay) {
           // Change the transform property to translate the element by 300px
           buttonSkip.style.transform = 'translateX(0px)';
         }
@@ -10649,6 +10650,7 @@
 
     function findMatchingTime(keyToFind) {
       // Get artplayer_settings from localStorage
+      console.log("ID : ", keyToFind);
       const settings = localStorage.getItem('artplayer_settings');
 
       if (!settings) {
@@ -10658,7 +10660,7 @@
       try {
           // Parse the settings to a JSON object
           const parsedSettings = JSON.parse(settings);
-
+          console.log("SETTINGS : ", parsedSettings);
           // Check if the 'times' property exists
           if (parsedSettings.times && typeof parsedSettings.times === 'object') {
               // Look for a matching key in the 'times' object
