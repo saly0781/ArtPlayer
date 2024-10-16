@@ -10934,10 +10934,8 @@
         await art.switchUrl(_y(url, p, version));
         art.option.id = movieId;
         skippedContent = false;
-        console.log("SKIP 1 CONTENT :", buttonSkip, newData ,newData.startTime);
         if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
           // Change the transform property to translate the element by 300px
-          console.log("SKIP 2 CONTENT ");
           findMatchingTime(event.data.data.id, buttonSkip);
         }
         art.play();
