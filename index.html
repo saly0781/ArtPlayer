@@ -9769,6 +9769,7 @@
     let postLoll = false;
     let allLolls = [];
     let skippedContent = false;
+    let buttonSkip;
     // Artplayer settings
     Artplayer.MOBILE_DBCLICK_PLAY = true;
     Artplayer.CONTEXTMENU = false;
@@ -9797,7 +9798,7 @@
         version = event.data.x;
         event.data.e ? event.data.x ? art.switchUrl(_y(event.data.e, event.data.p, version)) : art.switchUrl(event.data.e) : art.switchUrl(movielink);
         // Select the element with aria-label="buttonSkip"
-        let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
+        buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
         // Check if the element exists
         if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
           // Change the transform property to translate the element by 300px
@@ -9880,7 +9881,6 @@
             overflow: "hidden",
           },
           click: function (...args) {
-            let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
             art.seek = newData.startTime;
             art.play();
             // Select the element with aria-label="buttonSkip"
@@ -10397,8 +10397,6 @@
     function onTimeUpdate() {
 
       if(newData.startTime < art.currentTime && skippedContent == false){
-          // Select the element with aria-label="buttonSkip"
-          let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
           buttonSkip.style.transform = 'translateX(-300px)';
           skippedContent = true;
       }
@@ -10924,8 +10922,6 @@
     }
 
     async function nextToWatch(url, movieId, p) {
-
-      let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
       // Check if the element exists
 
       if (!version) {
