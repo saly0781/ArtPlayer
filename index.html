@@ -10923,9 +10923,15 @@
 
     async function nextToWatch(url, movieId, p) {
       // Check if the element exists
-
       if (!version) {
         await art.switchUrl(url);
+        art.option.id = movieId;
+        if (adstatus === "false") {
+          art.play();
+        }
+
+      } else {
+        await art.switchUrl(_y(url, p, version));
         art.option.id = movieId;
         skippedContent = false;
         console.log("SKIP 1 CONTENT :", buttonSkip, newData ,newData.startTime);
@@ -10934,13 +10940,6 @@
           console.log("SKIP 2 CONTENT ");
           findMatchingTime(event.data.data.id, buttonSkip);
         }
-        if (adstatus === "false") {
-          art.play();
-        }
-
-      } else {
-        await art.switchUrl(_y(url, p, version));
-        art.option.id = movieId;
         art.play();
       }
     }
