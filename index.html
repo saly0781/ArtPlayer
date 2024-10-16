@@ -9786,7 +9786,6 @@
         preLoll = false;
         midLoll = false;
         postLoll = false;
-        skippedContent = false;
         nextToWatch(event.data.data.link, event.data.data.movieId, event.data.data.p);
       } else if (event.data.action == "copyTimeSave") {
         alert(event.data.data);
@@ -10932,8 +10931,10 @@
       if (!version) {
         await art.switchUrl(url);
         art.option.id = movieId;
+        skippedContent = false;
         if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
           // Change the transform property to translate the element by 300px
+          console.log("SKIP CONTENT ");
           findMatchingTime(event.data.data.id, buttonSkip);
         }
         if (adstatus === "false") {
