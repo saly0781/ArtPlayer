@@ -9853,12 +9853,12 @@
       lang: navigator.language.toLowerCase(),
       moreVideoAttr: {
         'webkit-playsinline': true,
-      },
+        },
       layers: [
         {
           name: 'skipContent',
           html: ` <div class="skip-intro-btn" id="skipIntroBtn">
-		    		        <span class="text">Taruka<span class="intro"> Indirimbo</span></span>
+		    		        <span class="text">${languageCode == "rw" ? "Taruka" : "Skip"}<span class="intro"> ${languageCode == "rw" ? "Indirimbo" : "Intro"}</span></span>
 		    		        <span class="icon">
 		    		            <svg viewBox="0 0 8480 7665" xmlns="http://www.w3.org/2000/svg" fill="none" style="
 		    						    display: grid;
@@ -9941,7 +9941,6 @@
           "Episodes"
         ),
       ],
-
       controls: [
         {
           name: "next-episode-button",
@@ -10926,15 +10925,23 @@
     }
 
     async function nextToWatch(url, movieId, p) {
+
+      let buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
+      // Check if the element exists
+
       if (!version) {
-        await art.switchUrl(url)
+        await art.switchUrl(url);
         art.option.id = movieId;
+        if (buttonSkip && newData.startTime != null || newData.startTime != undefined) {
+          // Change the transform property to translate the element by 300px
+          findMatchingTime(event.data.data.id, buttonSkip);
+        }
         if (adstatus === "false") {
           art.play();
         }
 
       } else {
-        await art.switchUrl(_y(url, p, version))
+        await art.switchUrl(_y(url, p, version));
         art.option.id = movieId;
         art.play();
       }
