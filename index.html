@@ -10584,7 +10584,7 @@
 
         // Select the element with the specified class and data attribute
         let targetElement = document.querySelector(
-          '.art-layer.art-layer-auto-playback[data-index="5"]'
+          '.art-layer.art-layer-auto-playback[data-index="6"]'
         );
         let jumpElement = document.querySelector(".art-auto-playback-jump");
         // Select the element with the class 'art-auto-playback-last'
@@ -10596,7 +10596,7 @@
           let currentText = lastSeenElement.textContent;
           let currentText1 = jumpElement.textContent;
           // Replace only the 'Last Seen' part with your own text
-          jumpElement.textContent = currentText1.replace("Jump Play", "Taruka");
+          jumpElement.textContent = "Taruka"; //currentText1.replace("Jump Play", "Taruka");
           lastSeenElement.textContent = currentText.replace(
             "Last Seen",
             "Aho warugeze"
