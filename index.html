@@ -11076,7 +11076,8 @@
         if(x_ == true){
           document.querySelector('.art-bottom').style.display = 'none';
       	  document.querySelector('.art-layer.art-layer-popup').style.display = 'block';
-          document.querySelector('.art-layer.art-layer-rebaPlayerControls').style.display = 'none';
+          document.querySelector('.art-layer.art-layer-rebaPlayerControls[data-index="18"]').style.display = 'none';
+          art.fullscreen = false;
           blocker_ = true ;
         }else{
           document.querySelector('.art-bottom').style.display = 'flex';
