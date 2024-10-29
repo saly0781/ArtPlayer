@@ -11076,13 +11076,85 @@
         if(x_ == true){
           document.querySelector('.art-bottom').style.display = 'none';
       	  document.querySelector('.art-layer.art-layer-popup').style.display = 'block';
-          document.querySelector('.art-layer.art-layer-rebaPlayerControls[data-index="14"]').style.display = 'none';
+          art.layers.update({
+                  name: "rebaPlayerControls",
+                  html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        	</div>
+        	<div class="center-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+        	        width: 70px;
+        	        height: 70px;
+        	    ">
+        	            <path id="playingButtonPath" d="${pathCode}" />
+        	        </svg>
+        	    </button>
+        	</div>
+        	<div class="button-rebaPlayer right-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+        	        </svg>
+        	    </button>
+        	</div>`,
+                  style: {
+                    width: "100%",
+                    height: "10%",
+                    alignSelf: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "absolute",
+                    display: "none",
+                  },
+                });
           art.fullscreen = false;
           blocker_ = true ;
         }else{
           document.querySelector('.art-bottom').style.display = 'flex';
       	  document.querySelector('.art-layer.art-layer-popup').style.display = 'none';
-          document.querySelector('.art-layer.art-layer-rebaPlayerControls[data-index="14"]').style.display = 'flex';
+          art.layers.update({
+                  name: "rebaPlayerControls",
+                  html: `<div class="button-rebaPlayer left-button-rebaPlayer" >
+            <button class="all_button-rebaPlayer" onclick="leftButtonClick()">
+                <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+                    <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+                </svg>
+            </button>
+        	</div>
+        	<div class="center-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="centerButtonClick()">
+        	        <svg class="rebaPlayerSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="
+        	        width: 70px;
+        	        height: 70px;
+        	    ">
+        	            <path id="playingButtonPath" d="${pathCode}" />
+        	        </svg>
+        	    </button>
+        	</div>
+        	<div class="button-rebaPlayer right-button-rebaPlayer" >
+        	    <button class="all_button-rebaPlayer" onclick="rightButtonClick()">
+        	        <svg class="rebaPlayerSvg" height="100%" version="1.1" viewBox="${viewBoxSize}" width="100%">
+        	            <path d="${next_fast_pathCode}" style="fill:#ffffff ; stroke: #ffffff; stroke-width: 2;"></path>
+        	        </svg>
+        	    </button>
+        	</div>`,
+                  style: {
+                    width: "100%",
+                    height: "10%",
+                    alignSelf: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "absolute",
+                    display: "flex",
+                  },
+                });
           blocker_ = false ; 
         }
 
