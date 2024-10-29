@@ -11073,10 +11073,9 @@
 
       function blocker() {
       	// Select the element
-      	const artBottomDiv = document.querySelector('.art-bottom');
-      	// Change display to "block" to make it visible
-      	artBottomDiv.style.display = 'none';
+        document.querySelector('.art-bottom').style.display = 'none';
       	document.querySelector('.art-layer.art-layer-popup').style.display = 'block';
+        document.querySelector('.art-layer.art-layer-rebaPlayerControls').style.display = 'none';
         blocker_ = true ;
       }
 
