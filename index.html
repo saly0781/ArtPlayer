@@ -10324,7 +10324,7 @@
 		      	name: 'popup',
 		      	html: `<h1>ISHYURA <span>UKOMEZA</span> KUREBA!</h1>
               	<p>iyi filme irakomeza mumaze kwishyura ifatabuguzi</p>
-              	<button>Ishyura 500 Rwf Icyumweru</button>`,
+              	<button onclick="redirect()">Ishyura 500 Rwf Icyumweru</button>`,
 		      	tooltip: '',
 		      	style: {
 		      		alignContent: 'center',
@@ -10335,12 +10335,6 @@
 		      		height: '100%',
 		      		transition: "opacity 0.5s ease-in-out",
 		      		display: 'none'
-		      	},
-		      	click: function (...args) {
-		      		console.info('click', args);
-		      	},
-		      	mounted: function (...args) {
-		      		console.info('mounted', args);
 		      	},
 		      },
           //Object for wachLater Layer
@@ -10464,6 +10458,7 @@
         document.getElementById("closeIcon").onclick = function () {
           watchLaterContainer.style.opacity = "0";
           watchLaterContainer.style.visibility = "hidden";
+          blocker(false);
         };
 
         document.querySelector(".art-mask").style.display = "none";
@@ -10574,6 +10569,7 @@
           ) {
             watchLaterContainer.style.opacity = "0";
             watchLaterContainer.style.visibility = "hidden";
+            blocker(false);
           }
         });
 
@@ -10812,6 +10808,10 @@
         window.parent.postMessage(msg, "*");
       }
 
+      function redirect(){
+        sendMessage({ action: "toPay" });
+      }
+
       function onTimeUpdate() {
 
         let percentage = (art.currentTime / art.duration) * 100;
@@ -10819,7 +10819,7 @@
         if(f_ && percentage > 50 && newData.type == "M"){
           art.pause();
           if (!blocker_) {
-            blocker();
+            blocker(true);
           }
         }
 
@@ -11071,12 +11071,20 @@
         selectElement.appendChild(option);
       }
 
-      function blocker() {
+      function blocker(x_) {
       	// Select the element
-        document.querySelector('.art-bottom').style.display = 'none';
-      	document.querySelector('.art-layer.art-layer-popup').style.display = 'block';
-        document.querySelector('.art-layer.art-layer-rebaPlayerControls').style.display = 'none';
-        blocker_ = true ;
+        if(x_ == true){
+          document.querySelector('.art-bottom').style.display = 'none';
+      	  document.querySelector('.art-layer.art-layer-popup').style.display = 'block';
+          document.querySelector('.art-layer.art-layer-rebaPlayerControls').style.display = 'none';
+          blocker_ = true ;
+        }else{
+          document.querySelector('.art-bottom').style.display = 'block';
+      	  document.querySelector('.art-layer.art-layer-popup').style.display = 'none';
+          document.querySelector('.art-layer.art-layer-rebaPlayerControls').style.display = 'block';
+          blocker_ = false ; 
+        }
+
       }
 
       function findMatchingTime(keyToFind, buttonSkip) {
@@ -11208,7 +11216,8 @@
             //slide.lockedd--
             if (slide.locked) {
               art.pause();
-              blocker();
+              blocker(true);
+              blocker_ = true;
             } else {
               watchLaterContainer.style.opacity = "0";
               watchLaterContainer.style.visibility = "hidden";
@@ -11274,7 +11283,8 @@
           newMainSlideId = "slideLast";
           newData = current_slideData[current_slide_index];
           if (newData.locked) {
-            blocker();
+            blocker(true);
+            blocker_ = true;
           }else{
           newData["S_E"][2] = newMainSlideId;
           selectedSlide(oldMainSlideId, newMainSlideId);
@@ -11291,7 +11301,8 @@
           newMainSlideId = "slide" + (current_slide_index + 1);
           newData = current_slideData[current_slide_index];
           if (newData.locked) {
-            blocker();
+            blocker(true);
+            blocker_ = true;
           }else{
           newData["S_E"][2] = newMainSlideId;
           selectedSlide(oldMainSlideId, newMainSlideId);
@@ -11318,7 +11329,8 @@
             current_slide_index = 0;
             newData = current_slideData[current_slide_index];
             if (newData.locked) {
-            blocker();
+            blocker(true);
+            blocker_ = true;
             }else{
             newData["S_E"][2] = newMainSlideId;
             populateSlides(current_slideData);
