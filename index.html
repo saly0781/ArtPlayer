@@ -10323,10 +10323,11 @@
           {
 		      	name: 'popup',
 		      	html: `<h1>${languageCode == "rw" ? "ISHYURA" : "PAY TO "} <span>${languageCode == "rw" ? "UKOMEZA" : "CONTINUE"}</span> ${languageCode == "rw" ? "KUREBA" : "WATCHING"}!</h1>
-              	<p>${languageCode == "rw" ? "iyi filme irakomeza mumaze kwishyura ifatabuguzi" : "this movie will continue streaming after you have getting a subscription."}</p>
+              	<p>${languageCode == "rw" ? "iyi filme irakomeza mumaze kwishyura ifatabuguzi" : "this movie will continue streaming after you have purchased a subscription."}</p>
               	<button onclick="redirect()">${languageCode == "rw" ? "Ishyura 500 Rwf Icyumweru" : "Pay 1400 Ugx weekly"}</button>`,
 		      	tooltip: '',
 		      	style: {
+              zIndex: '100',
 		      		alignContent: 'center',
 		      		textAlign: 'center',
 		      		padding: '20px',
