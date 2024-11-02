@@ -10322,9 +10322,9 @@
 
           {
 		      	name: 'popup',
-		      	html: `<h1>ISHYURA <span>UKOMEZA</span> KUREBA!</h1>
-              	<p>iyi filme irakomeza mumaze kwishyura ifatabuguzi</p>
-              	<button onclick="redirect()">Ishyura 500 Rwf Icyumweru</button>`,
+		      	html: `<h1>${languageCode == "rw" ? "ISHYURA" : "PAY TO "} <span>${languageCode == "rw" ? "UKOMEZA" : "CONTINUE"}</span> ${languageCode == "rw" ? "KUREBA" : "WATCHING"}!</h1>
+              	<p>${languageCode == "rw" ? "iyi filme irakomeza mumaze kwishyura ifatabuguzi" : "this movie will continue streaming after you have getting a subscription."}</p>
+              	<button onclick="redirect()">${languageCode == "rw" ? "Ishyura 500 Rwf Icyumweru" : "Pay 1400 Ugx weekly"}</button>`,
 		      	tooltip: '',
 		      	style: {
 		      		alignContent: 'center',
