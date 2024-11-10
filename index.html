@@ -10144,6 +10144,7 @@
       let buttonSkip;
       let f_;
       let blocker_ = false;
+      let timerId;
       // Artplayer settings
       Artplayer.MOBILE_DBCLICK_PLAY = true;
       Artplayer.CONTEXTMENU = false;
@@ -10202,8 +10203,10 @@
         } else if (event.data.action == "changeQuality") {
           if (!version) {
             art.switchQuality(event.data.data);
+            art.play();
           } else {
             art.switchQuality(_y(event.data.data, event.data.p, version));
+            art.play();
           }
         }
       });
@@ -10420,6 +10423,18 @@
           m: _m,
           x: _x,
         },
+      });
+
+      art.on('video:waiting', () => {
+        timerId = setTimeout(() => {
+          sendMessage({ action: "reBuffer" });
+      }, 5000);
+      });
+
+      art.on('video:canplaythrough', () => {
+        if (timerId) {
+          clearTimeout(timerId);
+        }
       });
 
       art.on("loading", (state) => {
