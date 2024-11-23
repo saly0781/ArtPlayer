@@ -10141,6 +10141,7 @@
       let postLoll = false;
       let allLolls = [];
       let skippedContent = false;
+      let selected_Index = 0;
       let buttonSkip;
       let f_;
       let blocker_ = false;
@@ -10428,7 +10429,7 @@
       art.on('video:waiting', () => {
         timerId = setTimeout(() => {
           sendMessage({ action: "reBuffer" });
-      }, 5000);
+      }, 8000);
       });
 
       art.on('video:canplaythrough', () => {
@@ -11066,10 +11067,10 @@
       }
 
       function changeSeason() {
-        const selectedIndex = selectElement.selectedIndex;
-        populateSlides(slideData[selectedIndex]);
+        selected_Index = selectElement.selectedIndex;
+        populateSlides(slideData[selected_Index]);
         selectedSlide(oldMainSlideId, null);
-        if (selectedIndex == current_season_index) {
+        if (selected_Index == current_season_index) {
           selectedSlide(null, oldMainSlideId);
         }
       }
@@ -12016,7 +12017,7 @@
         if (match) {
           const extractedPart1 = match[1];
           const fileExtension = match[3];
-          return `https://static.wixstatic.com/media/${extractedPart1}`;
+          return `https://static.wixstatic.com/media/${extractedPart1}/v1/fill/w_200,h_170,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/loading_edited.jpg`;
         } else {
           return undefined; // or handle the case where the pattern is not found
         }
@@ -12100,7 +12101,8 @@
           },
           click: function () {
             // scroll to the beginning of the selected slide
-            selectElement.selectedIndex = Number(current_season_index);
+            selectElement.selectedIndex = Number(selected_Index);
+            console.log("DATA 1 : ", current_season_index);
             const slideWrapper = document.querySelector(".slide-wrapper");
             slideWrapper.scrollTo({
               left: current_slide_index * (slideWidth + 10),
