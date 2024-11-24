@@ -11338,6 +11338,40 @@
           });
         });
 
+        let seasonChange;
+
+        if(type == "S" && Number(selected_Index) != (Number(seasons.length) - 1)){
+          seasonChange = createAndAppendElement("div", slideWrapper, "slide", {
+              marginRight: "10px",
+            });
+
+          seasonChange.id = "slidenextSeason";
+          seasonChange.style = "margin-right: 10px;background-image: url(&quot;${convertWixImageUrl(slide.longCover)}&quot;);background-size: cover;background-position: center;border: 1px solid #42b777;";
+          seasonChange.innerHTML = `
+              <div id="slide_labelnextSeason" style="display: grid; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000000bf;">
+                  <span id="slide_numbernextSeason" style="font-size: 10rem;font-weight: bold;color: #ffffff00;-webkit-text-stroke: 3px #00cc4b70;text-align: center;display: block;">${Number(selected_Index) + 2}</span><b id="slide_numbernextSeason" style="
+              font-size: x-large;
+              position: absolute;
+              align-self: center;
+              text-align: -webkit-center;
+              background-color: black;
+              padding: 0px;
+              padding-right: 10px;
+              padding-left: 10px;
+              left: 30%;
+              border-radius: 7px;
+              ">${season[Number(selected_Index) + 1].label.toUpperCase()}</b>
+              </div>`;
+          seasonChange.addEventListener("click", () => {
+            selected_Index = Number(selected_Index) + 1;
+            populateSlides(slideData[selected_Index]);
+            selectedSlide(oldMainSlideId, null);
+            if (selected_Index == current_season_index) {
+              selectedSlide(null, oldMainSlideId);
+            }
+          });
+        }
+
         slideWidth = document.querySelector(".slide").clientWidth;
         selectedSlide(oldMainSlideId, newMainSlideId);
 
@@ -11674,7 +11708,7 @@
                          background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
                          border-radius: 0 0 15px 15px;
                          transition: opacity 0.3s ease;
-                         opacity: 0;
+                         opacity: 1;
                      }
 
                     .playlist-icon {
@@ -12000,7 +12034,6 @@
             behavior: "smooth",
           });
         });
-
         navButtonRight.addEventListener("click", () => {
           slideWrapper.scrollTo({
             left: slideWrapper.scrollLeft + slideWidth + 10,
