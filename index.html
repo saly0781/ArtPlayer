@@ -11339,6 +11339,7 @@
         });
 
         let seasonChange;
+        let seasonName = seasons[Number(selected_Index) + 1].label.toUpperCase()
 
         if(type == "S" && Number(selected_Index) != (Number(seasons.length) - 1)){
           seasonChange = createAndAppendElement("div", slideWrapper, "slide", {
@@ -11360,7 +11361,7 @@
               padding-left: 10px;
               left: 30%;
               border-radius: 7px;
-              ">${season[Number(selected_Index) + 1].label.toUpperCase()}</b>
+              ">${seasonName}</b>
               </div>`;
           seasonChange.addEventListener("click", () => {
             selected_Index = Number(selected_Index) + 1;
