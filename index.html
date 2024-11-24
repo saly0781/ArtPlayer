@@ -11352,8 +11352,8 @@
           seasonChange.style = "margin-right: 10px; background-image: url('" + imageLink + "'); background-size: cover; background-position: center; border: 1px solid #42b777;";
           seasonChange.innerHTML = `
               <div id="slide_labelnextSeason" style="display: grid; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000000bf;">
-                  <span id="slide_numbernextSeason" style="font-size: 10rem;font-weight: bold;color: #ffffff00;-webkit-text-stroke: 3px #00cc4b70;text-align: center;display: block;">${Number(selected_Index) + 2}</span><b id="slide_numbernextSeason" style="
-              font-size: x-large;
+                  <span id="slide_numbernextSeason" style="font-size: ${deviceType == "desktop" ? "10rem" : "8.5rem"};font-weight: bold;color: #ffffff00;-webkit-text-stroke: 3px #00cc4b70;text-align: center;letter-spacing: -20px;display: block;line-height: 1;">${Number(selected_Index) + 2}</span><b id="slide_numbernextSeason" style="
+              font-size: ${deviceType == "desktop" ? "x-large" : "large"};
               position: absolute;
               align-self: center;
               text-align: -webkit-center;
@@ -11681,12 +11681,13 @@
 
         // Adding styles for dynamic elements
         const style = document.createElement("style");
+        const slide_size = deviceType == "desktop" ? "60px" : "20px";
         style.innerHTML = `
                      .slide {
                          display: inline-block;
                          padding-left: 0px;
                          margin-right: 0px;
-                         width: calc(${device_height} + 60px);
+                         width: calc(${device_height} + ${slide_size});
                          scroll-snap-align: start;
                          border-radius: 15px;
                          overflow: hidden;
@@ -11984,7 +11985,7 @@
                           border-bottom-right-radius: 10px;
                           border-bottom-left-radius: 10px;
                           font-family: sans-serif;
-                          font-size: 150%;
+                          font-size: ${deviceType == "desktop" ? "large" : "medium"};
                           text-align: center;
                           align-content: center;
                           padding: 10px;
