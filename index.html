@@ -11367,6 +11367,7 @@
               </div>`;
           seasonChange.addEventListener("click", () => {
             selected_Index = Number(selected_Index) + 1;
+            selectElement.selectedIndex = selected_Index;
             populateSlides(slideData[selected_Index]);
             selectedSlide(oldMainSlideId, null);
             if (selected_Index == current_season_index) {
