@@ -11343,7 +11343,14 @@
         let seasonChange;
         let seasonName = seasons[Number(selected_Index) + 1].label.toUpperCase()
 
-        if(type == "S" && Number(selected_Index) != (Number(seasons.length) - 1)){
+
+       let testing = false;
+        /*if(type == "S" && Number(selected_Index) != (Number(seasons.length) - 1)){
+          seasonChange = createAndAppendElement("div", slideWrapper, "slide", {
+              marginRight: "10px",
+            })*/
+           
+        if(testing == true){
           seasonChange = createAndAppendElement("div", slideWrapper, "slide", {
               marginRight: "10px",
             });
