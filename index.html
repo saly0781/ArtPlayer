@@ -11340,42 +11340,42 @@
           });
         });
 
-        let seasonChange;
-        let seasonName = seasons[Number(selected_Index) + 1].label.toUpperCase()
-
         if(seasons.length >= 2 ){
-        if(type == "S" && Number(selected_Index) != (Number(seasons.length) - 1)){
-          seasonChange = createAndAppendElement("div", slideWrapper, "slide", {
-              marginRight: "10px",
+          let seasonChange;
+          let seasonName = seasons[Number(selected_Index) + 1].label.toUpperCase();
+          
+          if(type == "S" && Number(selected_Index) != (Number(seasons.length) - 1)){
+            seasonChange = createAndAppendElement("div", slideWrapper, "slide", {
+                marginRight: "10px",
+              });
+            
+            seasonChange.id = "slidenextSeason";
+            seasonChange.style = "margin-right: 10px; background-image: url('" + imageLink + "'); background-size: cover; background-position: center; border: 1px solid #42b777;";
+            seasonChange.innerHTML = `
+                <div id="slide_labelnextSeason" style="display: grid; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000000bf;">
+                    <span id="slide_numbernextSeason" style="font-size: ${deviceType == "desktop" ? "10rem" : "8.5rem"};font-weight: bold;color: #ffffff00;-webkit-text-stroke: 3px #00cc4b70;text-align: center;display: block;line-height: 1;">${Number(selected_Index) + 2}</span><b id="slide_numbernextSeason" style="
+                font-size: ${deviceType == "desktop" ? "x-large" : "large"};
+                position: absolute;
+                align-self: center;
+                text-align: -webkit-center;
+                background-color: black;
+                padding: 0px;
+                padding-right: 10px;
+                padding-left: 10px;
+                left: 30%;
+                border-radius: 7px;
+                ">${seasonName}</b>
+                </div>`;
+            seasonChange.addEventListener("click", () => {
+              selected_Index = Number(selected_Index) + 1;
+              selectElement.selectedIndex = selected_Index;
+              populateSlides(slideData[selected_Index]);
+              selectedSlide(oldMainSlideId, null);
+              if (selected_Index == current_season_index) {
+                selectedSlide(null, oldMainSlideId);
+              }
             });
-           
-          seasonChange.id = "slidenextSeason";
-          seasonChange.style = "margin-right: 10px; background-image: url('" + imageLink + "'); background-size: cover; background-position: center; border: 1px solid #42b777;";
-          seasonChange.innerHTML = `
-              <div id="slide_labelnextSeason" style="display: grid; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000000bf;">
-                  <span id="slide_numbernextSeason" style="font-size: ${deviceType == "desktop" ? "10rem" : "8.5rem"};font-weight: bold;color: #ffffff00;-webkit-text-stroke: 3px #00cc4b70;text-align: center;display: block;line-height: 1;">${Number(selected_Index) + 2}</span><b id="slide_numbernextSeason" style="
-              font-size: ${deviceType == "desktop" ? "x-large" : "large"};
-              position: absolute;
-              align-self: center;
-              text-align: -webkit-center;
-              background-color: black;
-              padding: 0px;
-              padding-right: 10px;
-              padding-left: 10px;
-              left: 30%;
-              border-radius: 7px;
-              ">${seasonName}</b>
-              </div>`;
-          seasonChange.addEventListener("click", () => {
-            selected_Index = Number(selected_Index) + 1;
-            selectElement.selectedIndex = selected_Index;
-            populateSlides(slideData[selected_Index]);
-            selectedSlide(oldMainSlideId, null);
-            if (selected_Index == current_season_index) {
-              selectedSlide(null, oldMainSlideId);
-            }
-          });
-        }
+          }
         }
 
         slideWidth = document.querySelector(".slide").clientWidth;
