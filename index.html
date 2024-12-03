@@ -11339,22 +11339,16 @@
             }
           });
         });
-/*
+
         let seasonChange;
         let seasonName = seasons[Number(selected_Index) + 1].label.toUpperCase()
 
-
-       let testing = false;
-        //if(type == "S" && Number(selected_Index) != (Number(seasons.length) - 1)){
-          seasonChange = createAndAppendElement("div", slideWrapper, "slide", {
-              marginRight: "10px",
-            })
-           
-        if(testing == true){
+        if(seasons.length >= 2 ){
+        if(type == "S" && Number(selected_Index) != (Number(seasons.length) - 1)){
           seasonChange = createAndAppendElement("div", slideWrapper, "slide", {
               marginRight: "10px",
             });
-
+           
           seasonChange.id = "slidenextSeason";
           seasonChange.style = "margin-right: 10px; background-image: url('" + imageLink + "'); background-size: cover; background-position: center; border: 1px solid #42b777;";
           seasonChange.innerHTML = `
@@ -11382,7 +11376,8 @@
             }
           });
         }
-*/
+        }
+
         slideWidth = document.querySelector(".slide").clientWidth;
         selectedSlide(oldMainSlideId, newMainSlideId);
 
