@@ -10147,6 +10147,7 @@
       let blocker_ = false;
       let timerId;
       let trackContinueStatus = false;
+      let continueWatching = false
       // Artplayer settings
       Artplayer.MOBILE_DBCLICK_PLAY = true;
       Artplayer.CONTEXTMENU = false;
@@ -10640,6 +10641,7 @@
       function startTimer_To_Save_To_ContinueWatching() {
         startTimer(10, function () {
           let temp = JSON.parse(JSON.stringify(newData));
+          continueWatching = true;
           delete temp.v_v;
           sendMessage({ action: "addToContinueWatching" , data: temp});
           // You can perform any action you want when the timer ends
@@ -11324,12 +11326,15 @@
               newData["S_E"][2] = newMainSlideId;
               selectedSlide(oldMainSlideId, newMainSlideId);
               oldMainSlideId = newMainSlideId;
+              let temp = JSON.parse(JSON.stringify(newData));
+              delete temp.v_v;
               sendMessage({
                 action: "getstreamingurl",
                 data: {
                   links: slideDataParameter[index]["v_v"],
                   movieId: slideDataParameter[index].id,
-                  saveData: newData,
+                  saveData: temp,
+                  continueWatching: continueWatching,
                 },
               });
               current_slide_index = index;
@@ -11423,12 +11428,15 @@
           newData["S_E"][2] = newMainSlideId;
           selectedSlide(oldMainSlideId, newMainSlideId);
           oldMainSlideId = newMainSlideId;
+          let temp = JSON.parse(JSON.stringify(newData));
+          delete temp.v_v;
           sendMessage({
             action: "getstreamingurl",
             data: {
               links: current_slideData[current_slide_index]["v_v"],
               movieId: current_slideData[current_slide_index].id,
-              saveData: newData,
+              saveData: temp,
+              continueWatching: continueWatching,
             },
           });}
         } else if (current_slideData.length > current_slide_index + 1) {
@@ -11441,12 +11449,15 @@
           newData["S_E"][2] = newMainSlideId;
           selectedSlide(oldMainSlideId, newMainSlideId);
           oldMainSlideId = newMainSlideId;
+          let temp = JSON.parse(JSON.stringify(newData));
+          delete temp.v_v;
           sendMessage({
             action: "getstreamingurl",
             data: {
               links: current_slideData[current_slide_index]["v_v"],
               movieId: current_slideData[current_slide_index].id,
-              saveData: newData,
+              saveData: temp,
+              continueWatching: continueWatching,
             },
           });
         }
@@ -11469,12 +11480,15 @@
             newData["S_E"][2] = newMainSlideId;
             populateSlides(current_slideData);
             selectedSlide(oldMainSlideId, newMainSlideId);
+            let temp = JSON.parse(JSON.stringify(newData));
+            delete temp.v_v;
             sendMessage({
               action: "getstreamingurl",
               data: {
                 links: current_slideData[current_slide_index]["v_v"],
                 movieId: current_slideData[current_slide_index].id,
-                saveData: newData,
+                saveData: temp,
+                continueWatching: continueWatching,
               },
             });
 
