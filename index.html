@@ -10194,9 +10194,6 @@
             findMatchingTime(event.data.data.id, buttonSkip);
           }
 
-          if (newData.cwId == undefined) {
-            sendMessage({ action: "callTimer" });
-          }
         } else if (event.data.action == "watchLaterData") {
           watch_Later_List_Data = event.data.data;
           onloadWatchlater_Movies();
@@ -10642,7 +10639,9 @@
 
       function startTimer_To_Save_To_ContinueWatching() {
         startTimer(10, function () {
-          sendMessage({ action: "addToContinueWatching" , data: newData});
+          let temp = JSON.parse(JSON.stringify(newData));
+          delete temp.v_v;
+          sendMessage({ action: "addToContinueWatching" , data: temp});
           // You can perform any action you want when the timer ends
         });
       }
