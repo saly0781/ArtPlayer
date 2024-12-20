@@ -10146,6 +10146,7 @@
       let f_;
       let blocker_ = false;
       let timerId;
+      let trackContinueStatus = false;
       // Artplayer settings
       Artplayer.MOBILE_DBCLICK_PLAY = true;
       Artplayer.CONTEXTMENU = false;
@@ -10196,8 +10197,6 @@
           if (newData.cwId == undefined) {
             sendMessage({ action: "callTimer" });
           }
-        } else if (event.data.action == "addToContinueWatching") {
-          startTimer_To_Save_To_ContinueWatching();
         } else if (event.data.action == "watchLaterData") {
           watch_Later_List_Data = event.data.data;
           onloadWatchlater_Movies();
@@ -10643,7 +10642,7 @@
 
       function startTimer_To_Save_To_ContinueWatching() {
         startTimer(10, function () {
-          sendMessage({ action: "addToContinueWatching" });
+          sendMessage({ action: "addToContinueWatching" , data: newData});
           // You can perform any action you want when the timer ends
         });
       }
@@ -10831,7 +10830,13 @@
 
       function onTimeUpdate() {
 
+        if (trackContinueStatus == false) {
+          trackContinueStatus = true;
+          startTimer_To_Save_To_ContinueWatching();
+        }
+
         let percentage = (art.currentTime / art.duration) * 100;
+        newData.minPercentage = percentage;
 
         if(f_ && percentage > 50 && newData.type == "M"){
           art.pause();
