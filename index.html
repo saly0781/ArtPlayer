@@ -10173,6 +10173,7 @@
         } else if (event.data.action == "copyTimeSave") {
           alert(event.data.data);
         } else if (event.data.action == "initialData") {
+          console.log("DATA MO :",event.data.data);
           art.type = event.data.x == "x" ? "m" : "x";
           allLolls = event.data.allLolls;
           newData = event.data.data;
@@ -10201,7 +10202,6 @@
         } else if (event.data.action == "changeQuality") {
           if (!version) {
             art.switchQuality(event.data.data);
-            console.log("Quality Changed :",event.data.data);
             art.play();
           } else {
             art.switchQuality(_y(event.data.data, event.data.p, version));
