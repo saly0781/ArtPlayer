@@ -10173,7 +10173,6 @@
         } else if (event.data.action == "copyTimeSave") {
           alert(event.data.data);
         } else if (event.data.action == "initialData") {
-          console.log("DATA MO :",event.data.data);
           art.type = event.data.x == "x" ? "m" : "x";
           allLolls = event.data.allLolls;
           newData = event.data.data;
@@ -10923,9 +10922,11 @@
         let x1 = CryptoJS.AES.decrypt(y, x);
         x1 = x1.toString(CryptoJS.enc.Utf8);
         if (z != "x") {
+          console.log("DATA MO 2 :",x1);
           const y1 = new Blob([x1], { type: "application/dash+xml" });
           x1 = URL.createObjectURL(y1);
         }
+        console.log("DATA MO 1 :",x1);
         return x1;
       }
 
