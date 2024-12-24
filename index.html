@@ -10922,11 +10922,9 @@
         let x1 = CryptoJS.AES.decrypt(y, x);
         x1 = x1.toString(CryptoJS.enc.Utf8);
         if (z != "x") {
-          console.log("DATA MO 2 :",x1);
           const y1 = new Blob([x1], { type: "application/dash+xml" });
           x1 = URL.createObjectURL(y1);
         }
-        console.log("DATA MO 1 :",x1);
         return x1;
       }
 
