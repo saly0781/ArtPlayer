@@ -10201,6 +10201,7 @@
         } else if (event.data.action == "changeQuality") {
           if (!version) {
             art.switchQuality(event.data.data);
+            console.log("Quality Changed :",event.data.data);
             art.play();
           } else {
             art.switchQuality(_y(event.data.data, event.data.p, version));
