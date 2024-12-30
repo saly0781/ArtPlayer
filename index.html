@@ -10639,10 +10639,15 @@
       }
 
       function startTimer_To_Save_To_ContinueWatching() {
+        // Start the timer
         startTimer(10, function () {
+          if(newData["S_E"][0] == 0 && newData["S_E"][1] == 0){
+            newData = slideData[0];
+          }
           let temp = JSON.parse(JSON.stringify(newData));
           continueWatching = true;
           delete temp.v_v;
+
           sendMessage({ action: "addToContinueWatching" , data: temp});
           // You can perform any action you want when the timer ends
         });
@@ -10925,7 +10930,7 @@
           const y1 = new Blob([x1], { type: "application/dash+xml" });
           x1 = URL.createObjectURL(y1);
         }
-       /* if (z == "x") {
+       /* if (z == "x") { 
             console.log("DATA TEST : ", x1);
           } */
         return x1;
