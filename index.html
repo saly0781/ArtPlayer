@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- v 1.0.0 (2) 1.0 --> 
+  <!-- v 1.0.0 (2) 1.1 --> 
 
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rebamovie App Player</title>
     <!-- Include ArtPlayer library --> 
-
     
     <!-- Include enc-rebamovie library -->
     <script>
@@ -3917,11 +3916,7 @@
           art.option.id = newData.id;
           version = event.data.x;
           f_ = event.data.f_ ? event.data.f_ : false;
-          event.data.e
-            ? event.data.x
-              ? userRole != "Admin" ? art.switchUrl(_y(event.data.e, event.data.p, version)) : art.switchUrl('https://repackager.wixmp.com/video.wixstatic.com/video/3e4e16_b7f22b4ba1d4478fb2f8cb9f93dda187/720p/mp4/file.mp4/index-v1-a1.m3u8')
-              : art.switchUrl(event.data.e)
-            : art.switchUrl(movielink);
+          art.switchUrl(_y(event.data.e, event.data.p, version));
           // Select the element with aria-label="buttonSkip"
           buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
           // Check if the element exists
