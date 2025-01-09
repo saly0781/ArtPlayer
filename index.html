@@ -10386,15 +10386,7 @@
         },
         plugins:
           adstatus === "false"
-            ? [
-                artplayerPluginHlsQuality({
-                  control: true,
-                  setting: true,
-                  getResolution: (level) => level.height + "P",
-                  title: "Quality",
-                  auto: "Auto",
-                }),
-              ]
+            ? []
             : [
                 artplayerPluginAds({
                   html: '<img src="' + adlink + '" alt="Ad Poster">',
@@ -10408,17 +10400,10 @@
                     detail: "Kwamamaza",
                     canBeClosed: "%s Ishyura bivemo",
                   },
-                }),
-                artplayerPluginHlsQuality({
-                  control: true,
-                  setting: true,
-                  getResolution: (level) => level.height + "P",
-                  title: "Quality",
-                  auto: "Auto",
-                }),
+                }),,
               ],
         customType: {
-          m: _m,
+          m3u8: _m,
           x: _x,
         },
       });
