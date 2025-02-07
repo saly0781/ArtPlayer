@@ -5041,7 +5041,6 @@
             if (slide.locked) {
               art.pause();
               blocker(true);
-              blocker_ = true;
             } else {
               watchLaterContainer.style.opacity = "0";
               watchLaterContainer.style.visibility = "hidden";
@@ -5149,7 +5148,6 @@
           newData = current_slideData[current_slide_index];
           if (newData.locked) {
             blocker(true);
-            blocker_ = true;
           }else{
           newData["S_E"][2] = newMainSlideId;
           selectedSlide(oldMainSlideId, newMainSlideId);
@@ -5170,7 +5168,6 @@
           newData = current_slideData[current_slide_index];
           if (newData.locked) {
             blocker(true);
-            blocker_ = true;
           }else{
           newData["S_E"][2] = newMainSlideId;
           selectedSlide(oldMainSlideId, newMainSlideId);
@@ -5201,7 +5198,6 @@
             newData = current_slideData[current_slide_index];
             if (newData.locked) {
             blocker(true);
-            blocker_ = true;
             }else{
             newData["S_E"][2] = newMainSlideId;
             populateSlides(current_slideData);
