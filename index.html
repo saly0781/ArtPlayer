@@ -4615,19 +4615,33 @@
       }
 
       function _m(video, url, art) {
-        if (Hls.isSupported()) {
-          if (art.hls) art.hls.destroy();
-          const hls = new Hls();
-          hls.loadSource(url);
-          hls.attachMedia(video);
-          art.hls = hls;
-          art.on("destroy", () => hls.destroy());
-        } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-          video.src = url;
-        } else {
-          art.notice.show = "Unsupported playback format: m";
-        }
-      }
+    if (Hls.isSupported()) {
+        if (art.hls) art.hls.destroy();
+        const hls = new Hls();
+        
+        // Debugging events
+        hls.on(Hls.Events.ERROR, (event, data) => {
+            console.error("HLS.js Error:", data);
+        });
+
+        hls.on(Hls.Events.MANIFEST_LOADED, (event, data) => {
+            console.log("HLS Manifest Loaded:", data);
+        });
+
+        hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+            console.log("HLS.js Attached to Video Element");
+        });
+
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        art.hls = hls;
+        art.on("destroy", () => hls.destroy());
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = url;
+    } else {
+        art.notice.show = "Unsupported playback format: m";
+    }
+}
 
       function _x(video, url, art) {
         if (dashjs.supportsMediaSource()) {
