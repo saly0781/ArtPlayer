@@ -4614,9 +4614,47 @@
 
 
 
-
-
     function _m(video, url, art) {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    let firstLoad = true; // Track first load attempt
+
+    if (Hls.isSupported() && !isSafari) {
+        if (art.hls) art.hls.destroy();
+        const hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        art.hls = hls;
+        art.on("destroy", () => hls.destroy());
+
+        hls.on(Hls.Events.ERROR, (_, data) => {
+            if (data.fatal && firstLoad) {
+                firstLoad = false;
+                setTimeout(() => {
+                    hls.loadSource(url);
+                    hls.attachMedia(video);
+                }, 500);
+            }
+        });
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = url;
+        video.load();
+
+        video.addEventListener("error", function () {
+            if (firstLoad) {
+                firstLoad = false;
+                setTimeout(() => {
+                    video.src = url;
+                    video.load();
+                }, 500);
+            }
+        });
+    } else {
+        art.notice.show = "Unsupported playback format!";
+    }
+}
+
+
+    /*function _m(video, url, art) {
       if (Hls.isSupported()) {
         if (art.hls) art.hls.destroy();
         const hls = new Hls();
@@ -4629,7 +4667,7 @@
       } else {
         art.notice.show = "Unsupported playback format: m";
       }
-    }
+    } */
 
     function _x(video, url, art) {
       if (dashjs.supportsMediaSource()) {
