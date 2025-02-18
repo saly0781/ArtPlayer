@@ -4615,7 +4615,9 @@
       }
       
       function _m(video, url, art) {
-    if (Hls.isSupported() && !/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    if (Hls.isSupported() && !isSafari) {
         if (art.hls) art.hls.destroy();
         const hls = new Hls();
         hls.loadSource(url);
@@ -4623,14 +4625,15 @@
         art.hls = hls;
         art.on("destroy", () => hls.destroy());
     } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = url;
-        video.addEventListener("error", function () {
-            art.notice.show = "Error playing HLS stream!";
-        });
+        setTimeout(() => {
+            video.src = url;
+            video.load();  // Force video to reload
+        }, 100);  // Delay to avoid infinite loading
     } else {
         art.notice.show = "Unsupported playback format!";
     }
 }
+
 
 
       /*function _m(video, url, art) {
