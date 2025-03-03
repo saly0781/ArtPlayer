@@ -4560,7 +4560,7 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 50 && newData.type == "M") {
+      if (f_ && percentage > 55 && newData.type == "M") {
         art.pause();
         if (!blocker_) {
           blocker(true);
@@ -4573,7 +4573,7 @@
       }
 
       if (
-        percentage > 50 &&
+        percentage > 45 &&
         percentage < 80 &&
         midLoll == false &&
         adstatus === "true"
@@ -4583,13 +4583,13 @@
         adsPlugin.updateVideoLink(allLolls[1]);
       }
 
-      if (percentage > 75 && postLoll == false && adstatus === "true") {
+      if (percentage > 80 && postLoll == false && adstatus === "true") {
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[2]);
       }
 
-      if (percentage > 20 && preLoll == false && adstatus === "true") {
+      if (percentage > 20 && percentage < 45 && preLoll == false && f_) {
         preLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.startAd();
@@ -4611,8 +4611,6 @@
         continueToWatchDeleted == true;
       }
     }
-
-   
 
     function _m(video, url, art) {
       if (Hls.isSupported()) {
