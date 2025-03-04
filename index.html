@@ -3442,7 +3442,7 @@
                       );
                       const d = p(".artplayer-plugin-ads-detail", m);
                       const x = p(".artplayer-plugin-ads-muted", m);
-                      //const h = p(".artplayer-plugin-ads-fullscreen", m);
+                      const h = p(".artplayer-plugin-ads-fullscreen", m);
                       if (e.url) {
                         n.proxy(d, "click", () => {
                           window.open(e.url);
@@ -3473,7 +3473,7 @@
                       } else {
                         u(x, "display", "none");
                       }
-                      /*const b = s(h, a);
+                      const b = s(h, a);
                       const w = s(h, r);
                       u(w, "display", "none");
                       n.proxy(h, "click", () => {
@@ -3485,7 +3485,7 @@
                           u(b, "display", "none");
                           u(w, "display", "inline-flex");
                         }
-                      });*/
+                      });
                       n.proxy(c, "click", () => {
                         if (e.url) {
                           window.open(e.url);
@@ -4549,7 +4549,7 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
-    let isSimulatedPause = false;
+    
     function onTimeUpdate() {
 
       if (trackContinueStatus == false) {
@@ -4560,70 +4560,59 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 55 && newData.type == "M") {
-        if (!isSimulatedPause) {
-          isSimulatedPause = true; // Set the flag to true
-          art.currentTime = art.currentTime; // Simulate pause
-          console.log("Video paused using art.currentTime fallback.");
+      if (f_ && percentage > 50 && newData.type == "M") {
+        art.pause();
+        if (!blocker_) {
+          blocker(true);
         }
       }
-      // art.pause();
-      // art.video.pause();
-      // art.currentTime = art.currentTime;
-      if (!blocker_) {
-        blocker(true);
+
+      if (newData.startTime < art.currentTime && skippedContent == false) {
+        buttonSkip.style.transform = "translateX(-300px)";
+        skippedContent = true;
       }
-      art.pause();
-     // art.currentTime = art.currentTime;
+
+      if (
+        percentage > 50 &&
+        percentage < 80 &&
+        midLoll == false &&
+        adstatus === "true"
+      ) {
+        midLoll = true;
+        const adsPlugin = art.plugins.artplayerPluginAds;
+        adsPlugin.updateVideoLink(allLolls[1]);
+      }
+
+      if (percentage > 75 && postLoll == false && adstatus === "true") {
+        postLoll = true;
+        const adsPlugin = art.plugins.artplayerPluginAds;
+        adsPlugin.updateVideoLink(allLolls[2]);
+      }
+
+      if (percentage > 20 && preLoll == false && adstatus === "true") {
+        preLoll = true;
+        const adsPlugin = art.plugins.artplayerPluginAds;
+        adsPlugin.startAd();
+      }
+
+      if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
+        art.storage.del(newData.id);
+        sendMessage({ action: "deleteContinue", data: newData });
+        continueToWatchDeleted == true;
+      } else if (
+        percentage > 80 &&
+        type != "M" &&
+        is_last_season == true &&
+        newMainSlideId == "slideLast" &&
+        continueToWatchDeleted == false
+      ) {
+        art.storage.del(newData.id);
+        sendMessage({ action: "deleteContinue", data: newData });
+        continueToWatchDeleted == true;
+      }
     }
 
-    if (newData.startTime < art.currentTime && skippedContent == false) {
-      buttonSkip.style.transform = "translateX(-300px)";
-      skippedContent = true;
-    }
-
-    if (
-      percentage > 45 &&
-      percentage < 80 &&
-      midLoll == false &&
-      adstatus === "true"
-    ) {
-      midLoll = true;
-      const adsPlugin = art.plugins.artplayerPluginAds;
-      adsPlugin.updateVideoLink(allLolls[1]);
-
-    }
-
-    if (percentage > 80 && postLoll == false && adstatus === "true") {
-      postLoll = true;
-      const adsPlugin = art.plugins.artplayerPluginAds;
-      adsPlugin.updateVideoLink(allLolls[2]);
-    }
-
-
-    if (percentage > 20 && percentage < 45 && preLoll == false && adstatus === "true") {
-      preLoll = true;
-      const adsPlugin = art.plugins.artplayerPluginAds;
-      adsPlugin.startAd();
-    }
-
-
-    if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
-      art.storage.del(newData.id);
-      sendMessage({ action: "deleteContinue", data: newData });
-      continueToWatchDeleted == true;
-    } else if (
-      percentage > 80 &&
-      type != "M" &&
-      is_last_season == true &&
-      newMainSlideId == "slideLast" &&
-      continueToWatchDeleted == false
-    ) {
-      art.storage.del(newData.id);
-      sendMessage({ action: "deleteContinue", data: newData });
-      continueToWatchDeleted == true;
-    }
-    }
+   
 
     function _m(video, url, art) {
       if (Hls.isSupported()) {
@@ -4638,7 +4627,7 @@
       } else {
         art.notice.show = "Unsupported playback format: m";
       }
-    }
+    } 
 
     function _x(video, url, art) {
       if (dashjs.supportsMediaSource()) {
