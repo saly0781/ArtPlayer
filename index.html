@@ -4560,11 +4560,14 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 55 && newData.type == "M") {
+      if (f_ && percentage > 55 && percentage < 70 && newData.type == "M") {
         art.pause();
-        art.controls.disable();
         if (!blocker_) {
           blocker(true);
+        }
+        const controls = art.container.querySelector(".art-controls");
+        if (controls) {
+            controls.style.display = "none"; // Hide the controls
         }
       }
       if (f_ && percentage > 70 && newData.type == "M") {
@@ -4572,7 +4575,10 @@
         if (!blocker_) {
           blocker(true);
         }
-        art.controls.disable();
+        const controls = art.container.querySelector(".art-controls");
+        if (controls) {
+            controls.style.display = "none"; // Hide the controls
+        }
       }
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
