@@ -4565,15 +4565,7 @@
         if (!blocker_) {
           blocker(true);
         }
-        const controls = art.container.querySelector(".art-controls");
-        if (controls) {
-          controls.remove();
-          controls.style.display = "none"; // Hide the controls
-        }
-        art.controls.disable();
       }
-     
-     
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
         buttonSkip.style.transform = "translateX(-300px)";
@@ -4620,7 +4612,7 @@
       }
     }
 
-
+   
 
     function _m(video, url, art) {
       if (Hls.isSupported()) {
@@ -4635,7 +4627,7 @@
       } else {
         art.notice.show = "Unsupported playback format: m";
       }
-    }
+    } 
 
     function _x(video, url, art) {
       if (dashjs.supportsMediaSource()) {
@@ -4661,9 +4653,8 @@
          } */
       return x1;
     }
-    let isSimulatedPause = false;
+
     art.on("video:timeupdate", onTimeUpdate);
-    art.on("video:play", onTimeUpdate);
 
     art.on("video:ended", go_to_next_slide);
 
@@ -5277,7 +5268,9 @@
       if (!version) {
         await art.switchUrl(url);
         art.option.id = movieId;
-        art.play();
+        if (adstatus === "false") {
+          art.play();
+        }
       } else {
         await art.switchUrl(_y(url, p, version));
         art.option.id = movieId;
@@ -5289,7 +5282,7 @@
           // Change the transform property to translate the element by 300px
           findMatchingTime(movieId, buttonSkip);
         }
-        art.play();
+        //art.play();
       }
     }
 
