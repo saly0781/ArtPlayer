@@ -4561,7 +4561,42 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 60 && newData.type == "M") {
-        art.switchUrl("https://video.wixstatic.com/video/d7f9fb_40e4e89d0eb54d799d0842cdd28a4c1f/720p/mp4/file.mp4");
+        art.destroy();
+
+// Create the popup HTML
+const popupHTML = `
+    <div id="custom-popup" style="
+        z-index: 100;
+        align-content: center;
+        text-align: center;
+        padding: 20px;
+        background-color: rgb(0 0 0 / 86%);
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.5s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    ">
+        <h1>${languageCode == "rw" ? "ISHYURA" : "PAY"} <span>${languageCode == "rw" ? "500 RWF" : "UGX 1500"}</span> ${languageCode == "rw" ? "KUCYUMWERU" : "WEEKLY"}!</h1>
+        <h5>${languageCode == "rw" ? "Wishyura 500 Rwf ukarangiza iyi filme ukareba nizindi zose Icyumweru." : "Pay UGX 1500 To Continue This Movie And Watch all Vj Movies For a Week."}</h5>
+        <button onclick="redirect()" style="
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        ">${languageCode == "rw" ? "KANDA HANO WISHYURE" : "CLICK HERE TO PAY"}</button>
+    </div>
+`;
+
+// Inject the popup into the DOM
+const container = document.querySelector('.artplayer-app'); // Get the ArtPlayer container
+container.innerHTML = popupHTML; // Replace the container content with the popup
         if (!blocker_) {
           blocker(true);
         }
