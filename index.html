@@ -4560,7 +4560,7 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 50 && newData.type == "M") {
+      if (f_ && percentage > 51 && newData.type == "M") {
         art.pause();
         if (!blocker_) {
           blocker(true);
