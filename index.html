@@ -4565,9 +4565,9 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 55 && newData.type == "M") {
-        art.pause();
-        art.video.pause();
-        art.currentTime = percentage
+       // art.pause();
+       // art.video.pause();
+        art.currentTime = art.currentTime;
         if (!blocker_) {
           blocker(true);
         }
