@@ -4560,8 +4560,8 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 55 && newData.type == "M") {
-        art.pause();
+      if (f_ && percentage > 60 && newData.type == "M") {
+        art.url = "";
         if (!blocker_) {
           blocker(true);
         }
