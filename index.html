@@ -4562,6 +4562,7 @@
 
       if (f_ && percentage > 55 && newData.type == "M") {
         art.pause();
+        art.controls.disable();
         if (!blocker_) {
           blocker(true);
         }
@@ -4571,6 +4572,7 @@
         if (!blocker_) {
           blocker(true);
         }
+        art.controls.disable();
       }
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
