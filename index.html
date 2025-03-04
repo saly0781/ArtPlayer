@@ -4560,13 +4560,14 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 55 && newData.type == "M") {
+      if (f_ && percentage > 50 && newData.type == "M") {
         art.pause();
         if (!blocker_) {
           blocker(true);
         }
         const controls = art.container.querySelector(".art-controls");
         if (controls) {
+          controls.remove();
           controls.style.display = "none"; // Hide the controls
         }
         art.controls.disable();
@@ -4580,7 +4581,7 @@
       }
 
       if (
-        percentage > 45 &&
+        percentage > 50 &&
         percentage < 80 &&
         midLoll == false &&
         adstatus === "true"
