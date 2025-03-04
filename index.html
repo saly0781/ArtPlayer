@@ -4567,6 +4567,7 @@
       if (f_ && percentage > 55 && newData.type == "M") {
         art.pause();
         art.video.pause();
+        art.currentTime = percentage
         if (!blocker_) {
           blocker(true);
         }
