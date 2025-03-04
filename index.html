@@ -4561,7 +4561,7 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 60 && newData.type == "M") {
-        art.url = "";
+        art.switchUrl("");
         if (!blocker_) {
           blocker(true);
         }
