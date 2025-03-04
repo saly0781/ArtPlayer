@@ -5268,9 +5268,7 @@
       if (!version) {
         await art.switchUrl(url);
         art.option.id = movieId;
-        if (adstatus === "false") {
-          art.play();
-        }
+        art.play();
       } else {
         await art.switchUrl(_y(url, p, version));
         art.option.id = movieId;
@@ -5282,7 +5280,7 @@
           // Change the transform property to translate the element by 300px
           findMatchingTime(movieId, buttonSkip);
         }
-        //art.play();
+        art.play();
       }
     }
 
