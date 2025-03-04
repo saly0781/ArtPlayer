@@ -4567,18 +4567,32 @@
         }
         const controls = art.container.querySelector(".art-controls");
         if (controls) {
-            controls.style.display = "none"; // Hide the controls
+          controls.style.display = "none"; // Hide the controls
         }
         art.controls.disable();
       }
-      if (f_ && percentage > 70 && newData.type == "M") {
-        art.url = ""; 
+      if (f_ && percentage > 70 && percentage < 80 && newData.type == "M") {
+        art.url = "";
         if (!blocker_) {
           blocker(true);
         }
         const controls = art.container.querySelector(".art-controls");
         if (controls) {
-            controls.style.display = "none"; // Hide the controls
+          controls.style.display = "none"; // Hide the controls
+        }
+        art.controls.disable();
+      }
+      if (f_ && percentage > 80 && newData.type == "M") {
+        art.container.style.display = "none";
+        const message = document.createElement("div");
+        message.textContent = "You have reached the 50% limit. Upgrade to continue watching.";
+        document.body.appendChild(message);
+        if (!blocker_) {
+          blocker(true);
+        }
+        const controls = art.container.querySelector(".art-controls");
+        if (controls) {
+          controls.style.display = "none"; // Hide the controls
         }
         art.controls.disable();
       }
