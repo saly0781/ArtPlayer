@@ -4549,7 +4549,7 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
-
+    let isSimulatedPause = false;
     function onTimeUpdate() {
 
       if (trackContinueStatus == false) {
@@ -4561,62 +4561,68 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 55 && newData.type == "M") {
-       // art.pause();
-       // art.video.pause();
-       // art.currentTime = art.currentTime;
-        if (!blocker_) {
-          blocker(true);
+        if (!isSimulatedPause) {
+          isSimulatedPause = true; // Set the flag to true
+          art.currentTime = art.currentTime; // Simulate pause
+          console.log("Video paused using art.currentTime fallback.");
         }
-        art.pause();
-        art.currentTime = art.currentTime;
       }
-
-      if (newData.startTime < art.currentTime && skippedContent == false) {
-        buttonSkip.style.transform = "translateX(-300px)";
-        skippedContent = true;
+      // art.pause();
+      // art.video.pause();
+      // art.currentTime = art.currentTime;
+      if (!blocker_) {
+        blocker(true);
       }
+      art.pause();
+     // art.currentTime = art.currentTime;
+    }
 
-      if (
-        percentage > 45 &&
-        percentage < 80 &&
-        midLoll == false &&
-        adstatus === "true"
-      ) {
-        midLoll = true;
-        const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[1]);
+    if (newData.startTime < art.currentTime && skippedContent == false) {
+      buttonSkip.style.transform = "translateX(-300px)";
+      skippedContent = true;
+    }
 
-      }
+    if (
+      percentage > 45 &&
+      percentage < 80 &&
+      midLoll == false &&
+      adstatus === "true"
+    ) {
+      midLoll = true;
+      const adsPlugin = art.plugins.artplayerPluginAds;
+      adsPlugin.updateVideoLink(allLolls[1]);
 
-      if (percentage > 80 && postLoll == false && adstatus === "true") {
-        postLoll = true;
-        const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[2]);
-      }
+    }
 
-      
-     if (percentage > 20 && percentage < 45 && preLoll == false && adstatus === "true") {
-          preLoll = true;
-          const adsPlugin = art.plugins.artplayerPluginAds;
-          adsPlugin.startAd();
-        }
-      
+    if (percentage > 80 && postLoll == false && adstatus === "true") {
+      postLoll = true;
+      const adsPlugin = art.plugins.artplayerPluginAds;
+      adsPlugin.updateVideoLink(allLolls[2]);
+    }
 
-      if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
-        art.storage.del(newData.id);
-        sendMessage({ action: "deleteContinue", data: newData });
-        continueToWatchDeleted == true;
-      } else if (
-        percentage > 80 &&
-        type != "M" &&
-        is_last_season == true &&
-        newMainSlideId == "slideLast" &&
-        continueToWatchDeleted == false
-      ) {
-        art.storage.del(newData.id);
-        sendMessage({ action: "deleteContinue", data: newData });
-        continueToWatchDeleted == true;
-      }
+
+    if (percentage > 20 && percentage < 45 && preLoll == false && adstatus === "true") {
+      preLoll = true;
+      const adsPlugin = art.plugins.artplayerPluginAds;
+      adsPlugin.startAd();
+    }
+
+
+    if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
+      art.storage.del(newData.id);
+      sendMessage({ action: "deleteContinue", data: newData });
+      continueToWatchDeleted == true;
+    } else if (
+      percentage > 80 &&
+      type != "M" &&
+      is_last_season == true &&
+      newMainSlideId == "slideLast" &&
+      continueToWatchDeleted == false
+    ) {
+      art.storage.del(newData.id);
+      sendMessage({ action: "deleteContinue", data: newData });
+      continueToWatchDeleted == true;
+    }
     }
 
     function _m(video, url, art) {
