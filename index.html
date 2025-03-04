@@ -4567,11 +4567,12 @@
       if (f_ && percentage > 55 && newData.type == "M") {
        // art.pause();
        // art.video.pause();
-        art.currentTime = art.currentTime;
+       // art.currentTime = art.currentTime;
         if (!blocker_) {
           blocker(true);
         }
         art.pause();
+        art.currentTime = art.currentTime;
       }
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
