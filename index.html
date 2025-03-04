@@ -4619,6 +4619,15 @@
         // Inject the popup into the DOM
         const container = document.querySelector('.artplayer-app'); // Get the ArtPlayer container
         container.innerHTML = popupHTML;
+        if (art && art.video) {
+          art.video.pause(); // Pause the video
+          art.video.muted = true; // Mute the video
+        }
+
+        // Destroy the ArtPlayer instance
+        if (art) {
+          art.destroy(); // Destroy the player
+        }
       }
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
