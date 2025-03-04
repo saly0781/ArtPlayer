@@ -4569,6 +4569,7 @@
         if (controls) {
             controls.style.display = "none"; // Hide the controls
         }
+        art.controls.disable();
       }
       if (f_ && percentage > 70 && newData.type == "M") {
         art.url = ""; 
@@ -4579,6 +4580,7 @@
         if (controls) {
             controls.style.display = "none"; // Hide the controls
         }
+        art.controls.disable();
       }
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
