@@ -4560,7 +4560,7 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 55 && percentage < 70 && newData.type == "M") {
+      if (f_ && percentage > 55 && newData.type == "M") {
         art.pause();
         if (!blocker_) {
           blocker(true);
@@ -4571,31 +4571,8 @@
         }
         art.controls.disable();
       }
-      if (f_ && percentage > 70 && percentage < 80 && newData.type == "M") {
-        art.url = "";
-        if (!blocker_) {
-          blocker(true);
-        }
-        const controls = art.container.querySelector(".art-controls");
-        if (controls) {
-          controls.style.display = "none"; // Hide the controls
-        }
-        art.controls.disable();
-      }
-      if (f_ && percentage > 80 && newData.type == "M") {
-        art.container.style.display = "none";
-        const message = document.createElement("div");
-        message.textContent = "You have reached the 50% limit. Upgrade to continue watching.";
-        document.body.appendChild(message);
-        if (!blocker_) {
-          blocker(true);
-        }
-        const controls = art.container.querySelector(".art-controls");
-        if (controls) {
-          controls.style.display = "none"; // Hide the controls
-        }
-        art.controls.disable();
-      }
+     
+     
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
         buttonSkip.style.transform = "translateX(-300px)";
