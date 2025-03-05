@@ -4585,10 +4585,10 @@
         if (!blocker_) {
           blocker(true);
         }
-         if (percentage > 75) {
-           art.destroy();
-           // Create the popup HTML
-           const popupHTML = `
+        if (percentage > 75) {
+          art.destroy();
+          // Create the popup HTML
+          const popupHTML = `
      <div id="custom-popup" style="
          position: fixed;
          top: 0;
@@ -4633,22 +4633,28 @@
                  border-radius: 15px;
                  cursor: pointer;
                  transition: background-color 0.3s ease;
-             ">
+             "
+                onmouseover="this.style.backgroundColor='rgba(31, 223, 103, 0.3)'" 
+                onmouseout="this.style.backgroundColor='rgba(31, 223, 103, 0.7)'" 
+                onmousedown="this.style.backgroundColor='white'; this.style.color='black'" 
+                onmouseup="this.style.backgroundColor='rgba(31, 223, 103, 0.3)'; this.style.color='white'"
+                ontouchstart="this.style.backgroundColor='white'; this.style.color='black'" 
+                ontouchend="this.style.backgroundColor='rgba(31, 223, 103, 0.3)'; this.style.color='white'">
                  ${languageCode == "rw" ? "KANDA HANO WISHYURE" : "CLICK HERE TO PAY"}
              </button>
          </div>
      </div>
  `;
- 
-           // Inject the popup into the DOM
-           const container = document.querySelector('.artplayer-app'); // Get the ArtPlayer container
-           container.innerHTML = popupHTML;
-           if (art && art.video) {
-             art.video.muted = true; // Mute the video
-             art.video.pause(); // Pause the video
-           }
- 
-         } 
+
+          // Inject the popup into the DOM
+          const container = document.querySelector('.artplayer-app'); // Get the ArtPlayer container
+          container.innerHTML = popupHTML;
+          if (art && art.video) {
+            art.video.muted = true; // Mute the video
+            art.video.pause(); // Pause the video
+          }
+
+        }
         return;
       }
 
