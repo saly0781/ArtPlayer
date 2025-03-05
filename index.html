@@ -4757,13 +4757,15 @@
         adsPlugin.updateVideoLink(allLolls[1]);
       }
 
-      if (percentage > 75 && postLoll == false && adstatus === "true") {
+      if (percentage > 80 && postLoll == false && adstatus === "true") {
+        priorityAction = true;
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[2]);
       }
 
       if (percentage > 20 && preLoll == false && adstatus === "true") {
+        priorityAction = true;
         preLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.startAd();
