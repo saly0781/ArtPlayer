@@ -4565,7 +4565,7 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 55 && newData.type == "M") {
+      if (f_ && percentage > 55 && newData.type == "M" && midLoll == true ) {
 
         try {
           art.pause();
