@@ -4571,6 +4571,7 @@
 
         try {
           art.pause();
+          art.video.muted = true;
 
           if (!art.paused) {
             art.video.pause();
@@ -4584,7 +4585,7 @@
         if (!blocker_) {
           blocker(true);
         }
-        /* if (!art.paused || !blocker_) {
+         if (!art.paused || !blocker_) {
            art.destroy();
            // Create the popup HTML
            const popupHTML = `
@@ -4647,7 +4648,7 @@
              art.video.pause(); // Pause the video
            }
  
-         } */
+         } 
         return;
       }
 
