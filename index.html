@@ -4552,7 +4552,12 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
-
+    function onSeek() {
+      if (f_ && percentage > 75 && newData.type == "M") {
+        throttleDelay = 100;
+       }
+    
+    }
     function onTimeUpdate() {
       const now = Date.now();
       if (now - lastUpdateTime < throttleDelay) return; // Skip if called too soon
@@ -4748,7 +4753,7 @@
     }
 
     art.on("video:timeupdate", onTimeUpdate);
-
+    art.on("video:seeked", onSeek);
     art.on("video:ended", go_to_next_slide);
 
     art.on("pause", () => {
