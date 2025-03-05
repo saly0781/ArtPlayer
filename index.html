@@ -4569,11 +4569,11 @@
 
         try {
           art.pause();
-          setTimeout(() => {
-            if (!art.paused) {
-              art.video.pause();
-            }
-          }, 100);
+
+          if (!art.paused) {
+            art.video.pause();
+          }
+
         } catch (error) {
           // 2 attempts
         }
