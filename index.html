@@ -3883,6 +3883,7 @@
     let f_;
     let blocker_ = false;
     let lastUpdateTime = 0;
+    let priorityAction = false;
     const throttleDelay = 1000;
     let timerId;
     let trackContinueStatus = false;
@@ -4565,8 +4566,8 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 55 && newData.type == "M") {
-
+      if (f_ && percentage > 55 && newData.type == "M" && priorityAction == false ) {
+        priorityAction = true;
         try {
           art.pause();
 
@@ -4657,7 +4658,8 @@
         percentage > 50 &&
         percentage < 80 &&
         midLoll == false &&
-        adstatus === "true"
+        adstatus === "true" &&
+        priorityAction == true
       ) {
         midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
