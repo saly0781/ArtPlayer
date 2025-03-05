@@ -4585,7 +4585,7 @@
         if (!blocker_) {
           blocker(true);
         }
-        if (blocker_) return;
+        if (blocker_ && art.paused) return;
          if (!art.paused || !blocker_) {
            art.destroy();
            // Create the popup HTML
