@@ -4832,7 +4832,7 @@
     }
 
     art.on("video:timeupdate", onTimeUpdate);
-    art.on("seeked", onSeek);
+    art.on("video:seeked", onSeek);
     art.on("video:ended", go_to_next_slide);
 
     art.on("pause", () => {
