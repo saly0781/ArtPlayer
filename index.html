@@ -3884,7 +3884,7 @@
     let blocker_ = false;
     let lastUpdateTime = 0;
     let priorityAction = false;
-    const throttleDelay = 60000;
+    let throttleDelay = 60000;
     let timerId;
     let trackContinueStatus = false;
     let continueWatching = false
@@ -4567,6 +4567,7 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 55 && newData.type == "M" && priorityAction == true ) {
+        throttleDelay = 1000;
         
         try {
           art.pause();
