@@ -4582,7 +4582,7 @@
         if (!blocker_) {
           blocker(true);
         }
-        if (!art.paused || !blocker_) {
+       /* if (!art.paused || !blocker_) {
           art.destroy();
           // Create the popup HTML
           const popupHTML = `
@@ -4601,14 +4601,14 @@
         padding: 20px;
         box-sizing: border-box;
         z-index: 100;
-        overflow: hidden; /* Prevent scrollbars */
+        overflow: hidden;
     ">
         <div style="
             max-width: 90%;
             width: 100%;
         ">
             <h1 style="
-                font-size: clamp(24px, 5vw, 36px); /* Responsive font size */
+                font-size: clamp(24px, 5vw, 36px);
                 margin: 0 0 20px 0;
             ">
                 ${languageCode == "rw" ? "ISHYURA" : "PAY"} 
@@ -4616,16 +4616,16 @@
                 ${languageCode == "rw" ? "KUCYUMWERU" : "WEEKLY"}!
             </h1>
             <h5 style="
-                font-size: clamp(16px, 3vw, 24px); /* Responsive font size */
+                font-size: clamp(16px, 3vw, 24px);
                 margin: 0 0 30px 0;
             ">
                 ${languageCode == "rw" ? "Wishyura 500 Rwf ukarangiza iyi filme ukareba nizindi zose Icyumweru." : "Pay UGX 1500 To Continue This Movie And Watch all Vj Movies For a Week."}
             </h5>
             <button onclick="redirect()" style="
                 padding: 15px 30px;
-                font-size: clamp(16px, 3vw, 20px); /* Responsive font size */
+                font-size: clamp(16px, 3vw, 20px);
                 color: white;
-                background-color: rgba(31, 223, 103, 0.7); /* Green background (#1FDF67) */
+                background-color: rgba(31, 223, 103, 0.7);
                 border: none;
                 border-radius: 15px;
                 cursor: pointer;
@@ -4645,7 +4645,7 @@
             art.video.pause(); // Pause the video
           }
 
-        }
+        } */
       }
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
