@@ -4553,6 +4553,7 @@
       sendMessage({ action: "toPay" });
     }
     function onSeek() {
+      art.pause();
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
