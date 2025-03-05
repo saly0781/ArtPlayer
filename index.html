@@ -4553,7 +4553,6 @@
       sendMessage({ action: "toPay" });
     }
     function onSeek() {
-      art.pause();
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
@@ -4656,7 +4655,7 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
 
-      if (f_ && percentage > 55 && newData.type == "M" && priorityAction == true) {
+      if (f_ && percentage > 55 && newData.type == "M") {
         throttleDelay = 100;
 
         try {
@@ -4738,6 +4737,7 @@
            }
  
          } */
+        return
       }
 
       if (newData.startTime < art.currentTime && skippedContent == false) {
@@ -4749,10 +4749,8 @@
         percentage > 50 &&
         percentage < 80 &&
         midLoll == false &&
-        adstatus === "true" &&
-        priorityAction == false
+        adstatus === "true"
       ) {
-        priorityAction = true;
         midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[1]);
