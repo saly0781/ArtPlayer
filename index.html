@@ -4585,8 +4585,7 @@
         if (!blocker_) {
           blocker(true);
         }
-        if (blocker_ && art.paused) return;
-         if (!art.paused || !blocker_) {
+         if (percentage > 75) {
            art.destroy();
            // Create the popup HTML
            const popupHTML = `
