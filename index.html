@@ -4622,24 +4622,11 @@
       if (f_ && percentage > 55 && newData.type == "M") {
         throttleDelay = 100;
         if (percentage > 75) {
-
+          const adsPlugin = art.plugins.artplayerPluginAds; 
           adsPlugin.update({
-            html: `popupAdHtml`,
+            html: popupAdHtml,
             video: '',
             url: '',
-            // Ad must be watched for 5 seconds before closing
-            playDuration: 5,
-
-            // Total ad duration before auto-closing (optional)
-            totalDuration: 10,
-
-            // Multi-language support
-            i18n: {
-              close: '关闭广告',
-              countdown: '%s秒',
-              detail: '查看详情',
-              canBeClosed: '%s秒后可关闭广告',
-            },
           });
 
           adsPlugin.startAd();
