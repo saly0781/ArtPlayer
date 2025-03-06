@@ -3423,6 +3423,13 @@
                           event.stopImmediatePropagation();
                         }
                       });
+
+                      function blockHotkeys(event) {
+                        if (isAdActive && (event.key === " " || event.key === "Enter")) {
+                          event.preventDefault();
+                          console.log("Ad is playing, play/pause hotkeys are disabled.");
+                        }
+                      }
                       y = s(
                         n.template.$ads,
                         `<div class="artplayer-plugin-ads-timer"><div class="artplayer-plugin-ads-close">${e.playDuration <= 0
