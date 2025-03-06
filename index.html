@@ -4622,10 +4622,10 @@
       if (f_ && percentage > 55 && newData.type == "M") {
         throttleDelay = 100;
         if (percentage > 75) {
-          const adsPlugin = art.plugins.artplayerPluginAds; 
+          adsPlugin.updateVideoLink("https://video.wixstatic.com/video/d7f9fb_b001ed949337444bb822a4a2b32a2c60/1080p/mp4/file.mp4");
+          const adsPlugin = art.plugins.artplayerPluginAds;
           adsPlugin.update({
             html: popupAdHtml,
-            video: 'https://video.wixstatic.com/video/d7f9fb_b001ed949337444bb822a4a2b32a2c60/1080p/mp4/file.mp4',
             url: '',
           });
 
