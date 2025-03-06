@@ -3349,8 +3349,6 @@
                     n.emit("artplayerPluginAds:skip", e);
                   isAdActive = false;
                   resetAd();
-                  n.template.$player.setAttribute('controls', 'true');
-                  n.template.$player.style.pointerEvents = 'auto';
                 }
                 function O() {
                   b ||
@@ -3404,9 +3402,6 @@
                   if (!w) {
                     w = true;
                     isAdActive = true;
-                    n.template.$player.setAttribute('controls', 'false');
-                    n.template.$player.style.pointerEvents = 'none';
-                    k();
                     (function () {
                       n.template.$ads = s(
                         l,
