@@ -3343,11 +3343,12 @@
                 }
                 function k() {
                   (b = !0),
-                    n.play(),
+                    n.play(),                  
                     e.video && c.pause(),
                     u(n.template.$ads, "display", "none"),
                     n.emit("artplayerPluginAds:skip", e);
                   resetAd();
+                  isAdActive = false;
                 }
                 function O() {
                   b ||
@@ -3494,6 +3495,7 @@
                       });
                     })();
                     n.pause();
+                    isAdActive = true;
                     if (e.video) {
                       n.proxy(c, "error", k);
                       n.proxy(c, "loadedmetadata", () => {
@@ -3887,6 +3889,7 @@
     let f_;
     let blocker_ = false;
     let lastUpdateTime = 0;
+    let isAdActive = false;
     let priorityAction = false;
     let throttleDelay = 0;
     let timerId;
