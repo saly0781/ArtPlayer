@@ -3419,7 +3419,7 @@
                         '<div class="artplayer-plugin-ads-loading"></div>'
                       );
                       s(v, o);
-                      
+
                       n.proxy(n.template.$player, "click", (event) => {
                         if (isAdActive) {
                           event.stopImmediatePropagation();
@@ -3511,7 +3511,12 @@
                       });
                     })();
                     n.pause();
-                    
+                    n.on("timeupdate", function () {
+                      if (isAdActive && n.currentTime > 0) {
+                        n.pause();  // Pause the video if the ad is still running
+                        console.log("Ad is playing, main video is paused.");
+                      }
+                    });
                     if (e.video) {
                       n.proxy(c, "error", k);
                       n.proxy(c, "loadedmetadata", () => {
