@@ -4621,7 +4621,17 @@
 
       if (f_ && percentage > 55 && newData.type == "M") {
         throttleDelay = 100;
+        if (percentage > 75) {
 
+          adsPlugin.update({
+            html: popupAdHtml,
+            video: '',
+            url: '',
+          });
+
+          adsPlugin.startAd();
+
+        } return;
         try {
           art.pause();
           art.video.muted = true;
@@ -4638,17 +4648,7 @@
         if (!blocker_) {
           blocker(true);
         }
-        if (percentage > 75) {
 
-          adsPlugin.update({
-            html: popupAdHtml,
-            video: '',
-            url: '',
-          });
-
-          adsPlugin.startAd();
-
-        }
         return;
       }
 
