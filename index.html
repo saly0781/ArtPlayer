@@ -3420,12 +3420,6 @@
                       );
                       s(v, o);
 
-                      n.proxy(n.template.$player, "click", (event) => {
-                        if (isAdActive) {
-                          event.stopImmediatePropagation();
-                        }
-                      });
-
                       function blockHotkeys(event) {
                         if (isAdActive && (event.key === " " || event.key === "Enter")) {
                           event.preventDefault();
@@ -3577,7 +3571,7 @@
           {
             "bundle-text:./style.less": "5j5O2",
             "@parcel/transformer-js/src/esmodule-helpers.js": "9v6Cv",
-          }, //
+          },
         ],
         "5j5O2": [
           function (e, n, l) {
