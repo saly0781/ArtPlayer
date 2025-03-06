@@ -4679,6 +4679,8 @@
         midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[1]);
+        adsPlugin.playDuration = 20;
+        adsPlugin.totalDuration = 50;
       }
 
       if (percentage > 80 && postLoll == false && adstatus === "true") {
@@ -4686,6 +4688,8 @@
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[2]);
+        adsPlugin.playDuration = 20;
+        adsPlugin.totalDuration = 50;
       }
 
       if (percentage > 20 && preLoll == false && adstatus === "true") {
