@@ -3888,7 +3888,7 @@
     let blocker_ = false;
     let lastUpdateTime = 0;
     let priorityAction = false;
-    let throttleDelay = 3000;
+    let throttleDelay = 0;
     let timerId;
     let trackContinueStatus = false;
     let continueWatching = false
@@ -4560,7 +4560,7 @@
       let percentage = (art.currentTime / art.duration) * 100;
       newData.minPercentage = percentage;
       if (f_ && percentage > 77 && newData.type == "M") {
-        throttleDelay = 5000;
+        throttleDelay = 0;
       }
 
     }
@@ -4578,7 +4578,7 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 55 && newData.type == "M") {
-        throttleDelay = 100;
+        throttleDelay = 0;
 
         try {
           art.pause();
