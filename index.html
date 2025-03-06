@@ -3904,7 +3904,6 @@
     let blocker_ = false;
     let lastUpdateTime = 0;
     let priorityAction = false;
-    let throttleDelay = 5000;
     let isAdActive = false;
     let timerId;
     let trackContinueStatus = false;
@@ -4573,21 +4572,11 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
-    function onSeek() {
-      let percentage = (art.currentTime / art.duration) * 100;
-      newData.minPercentage = percentage;
-      if (f_ && percentage > 77 && newData.type == "M") {
-        throttleDelay = 5000;
-      }
-
-    }
+   
     function onTimeUpdate() {
-      if (isAdActive) {
+      if (f_ && isAdActive) {
         art.pause();
       }
-      const now = Date.now();
-      if (now - lastUpdateTime < throttleDelay) return; // Skip if called too soon
-      lastUpdateTime = now;
 
       if (trackContinueStatus == false) {
         trackContinueStatus = true;
@@ -4598,7 +4587,7 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 55 && newData.type == "M") {
-        throttleDelay = 100;
+      
 
         try {
           art.pause();
@@ -4779,7 +4768,6 @@
     }
 
     art.on("video:timeupdate", onTimeUpdate);
-    art.on("video:seeked", onSeek);
     art.on("video:ended", go_to_next_slide);
 
     art.on("pause", () => {
