@@ -3419,7 +3419,7 @@
                         '<div class="artplayer-plugin-ads-loading"></div>'
                       );
                       s(v, o);
-                      
+
                       n.proxy(n.template.$player, "click", (event) => {
                         if (isAdActive) {
                           event.stopImmediatePropagation();
@@ -3511,69 +3511,73 @@
                       });
                     })();
                     n.pause();
-                    if (e.video) {
-                      n.proxy(c, "error", k);
-                      n.proxy(c, "loadedmetadata", () => {
+                    n.on("timeupdate", function () {
+                      if (isAdActive && n.currentTime > 0) {
+                        n.pause(); 
+                      }
+                      if (e.video) {
+                        n.proxy(c, "error", k);
+                        n.proxy(c, "loadedmetadata", () => {
+                          O();
+                          c.play();
+                          u(y, "display", "flex");
+                          u(m, "display", "flex");
+                          u(v, "display", "none");
+                          n.emit("preLoll", e);
+                        });
+                      } else {
                         O();
-                        c.play();
                         u(y, "display", "flex");
                         u(m, "display", "flex");
                         u(v, "display", "none");
-                        n.emit("preLoll", e);
-                      });
-                    } else {
-                      O();
-                      u(y, "display", "flex");
-                      u(m, "display", "flex");
-                      u(v, "display", "none");
-                      n.emit("adStarted", e);
-                    }
-                    n.proxy(document, "visibilitychange", () => {
-                      if (document.hidden) {
-                        $();
-                      } else {
-                        O();
+                        n.emit("adStarted", e);
                       }
-                    });
+                      n.proxy(document, "visibilitychange", () => {
+                        if (document.hidden) {
+                          $();
+                        } else {
+                          O();
+                        }
+                      });
+                    }
+                }
+
+                  function updateVideoLink(newVideoLink, newPlayDuration, newTotalDuration) {
+                    P();
+                    e.video = newVideoLink;
+                    e.playDuration = newPlayDuration;
+                    e.totalDuration = newTotalDuration;
+
+                    c.src = newVideoLink;
+                    c.load();
                   }
-                }
 
-                function updateVideoLink(newVideoLink, newPlayDuration, newTotalDuration) {
-                  P();
-                  e.video = newVideoLink;
-                  e.playDuration = newPlayDuration;
-                  e.totalDuration = newTotalDuration;
-
-                  c.src = newVideoLink;
-                  c.load();
-                }
-
-                return {
-                  name: "artplayerPluginAds",
-                  skip: k,
-                  pause: $,
-                  play: O,
-                  startAd: P, // Expose the P function
-                  updateVideoLink, // Expose the updateVideoLink function
-                  resetAd,
+                  return {
+                    name: "artplayerPluginAds",
+                    skip: k,
+                    pause: $,
+                    play: O,
+                    startAd: P, // Expose the P function
+                    updateVideoLink, // Expose the updateVideoLink function
+                    resetAd,
+                  };
                 };
-              };
-            }
-            if (
-              ((l.default = r),
-                (r.env = "production"),
-                (r.version = "1.0.6"),
-                (r.build = "1663552935766"),
-                "undefined" != typeof document &&
-                !document.getElementById("artplayer-plugin-ads"))
-            ) {
-              const e = document.createElement("style");
-              (e.id = "artplayer-plugin-ads"),
-                (e.textContent = a.default),
-                document.head.appendChild(e);
-            }
-            "undefined" != typeof window && (window.artplayerPluginAds = r);
-          },
+              }
+              if (
+                ((l.default = r),
+                  (r.env = "production"),
+                  (r.version = "1.0.6"),
+                  (r.build = "1663552935766"),
+                  "undefined" != typeof document &&
+                  !document.getElementById("artplayer-plugin-ads"))
+              ) {
+                const e = document.createElement("style");
+                (e.id = "artplayer-plugin-ads"),
+                  (e.textContent = a.default),
+                  document.head.appendChild(e);
+              }
+              "undefined" != typeof window && (window.artplayerPluginAds = r);
+            },
           {
             "bundle-text:./style.less": "5j5O2",
             "@parcel/transformer-js/src/esmodule-helpers.js": "9v6Cv",
