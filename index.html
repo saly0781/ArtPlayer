@@ -3347,8 +3347,6 @@
                     e.video && c.pause(),
                     u(n.template.$ads, "display", "none"),
                     n.emit("artplayerPluginAds:skip", e);
-                  isAdActive = false;
-                  document.removeEventListener('keydown', blockHotkeys, false);
                   resetAd();
                 }
                 function O() {
@@ -3402,7 +3400,6 @@
                 function P() {
                   if (!w) {
                     w = true;
-                    isAdActive = true;
                     (function () {
                       n.template.$ads = s(
                         l,
@@ -3419,14 +3416,6 @@
                         '<div class="artplayer-plugin-ads-loading"></div>'
                       );
                       s(v, o);
-
-                      function blockHotkeys(event) {
-                        if (isAdActive && (event.key === " " || event.key === "Enter")) {
-                          event.preventDefault();
-                          console.log("Ad is playing, play/pause hotkeys are disabled.");
-                        }
-                      }
-                      document.addEventListener('keydown', blockHotkeys, false);
                       y = s(
                         n.template.$ads,
                         `<div class="artplayer-plugin-ads-timer"><div class="artplayer-plugin-ads-close">${e.playDuration <= 0
@@ -3532,12 +3521,9 @@
                   }
                 }
 
-                function updateVideoLink(newVideoLink, newPlayDuration, newTotalDuration) {
+                function updateVideoLink(newVideoLink) {
                   P();
                   e.video = newVideoLink;
-                  e.playDuration = newPlayDuration;
-                  e.totalDuration = newTotalDuration;
-
                   c.src = newVideoLink;
                   c.load();
                 }
@@ -3576,7 +3562,7 @@
         "5j5O2": [
           function (e, n, l) {
             n.exports =
-              ".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;bottom:50px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}";
+              ".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;top:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}";
           },
           {},
         ],
@@ -3898,7 +3884,7 @@
     let blocker_ = false;
     let lastUpdateTime = 0;
     let priorityAction = false;
-    let isAdActive = false;
+    let throttleDelay = 60000;
     let timerId;
     let trackContinueStatus = false;
     let continueWatching = false
@@ -4566,11 +4552,18 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
-   
+    function onSeek() {
+      let percentage = (art.currentTime / art.duration) * 100;
+      newData.minPercentage = percentage;
+      if (f_ && percentage > 77 && newData.type == "M") {
+        throttleDelay = 5000;
+       }
+    
+    }
     function onTimeUpdate() {
-      if (f_ && isAdActive) {
-        art.pause();
-      }
+      const now = Date.now();
+      if (now - lastUpdateTime < throttleDelay) return; // Skip if called too soon
+      lastUpdateTime = now;
 
       if (trackContinueStatus == false) {
         trackContinueStatus = true;
@@ -4581,7 +4574,7 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 55 && newData.type == "M") {
-      
+        throttleDelay = 100;
 
         try {
           art.pause();
@@ -4685,14 +4678,14 @@
       ) {
         midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[1], 20, 50);
+        adsPlugin.updateVideoLink(allLolls[1]);
       }
 
       if (percentage > 80 && postLoll == false && adstatus === "true") {
         priorityAction = true;
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[2], 20, 50);
+        adsPlugin.updateVideoLink(allLolls[2]);
       }
 
       if (percentage > 20 && preLoll == false && adstatus === "true") {
@@ -4762,6 +4755,7 @@
     }
 
     art.on("video:timeupdate", onTimeUpdate);
+    art.on("video:seeked", onSeek);
     art.on("video:ended", go_to_next_slide);
 
     art.on("pause", () => {
