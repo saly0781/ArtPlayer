@@ -3885,55 +3885,9 @@
     let lastUpdateTime = 0;
     let priorityAction = false;
     let throttleDelay = 60000;
-    let popupAdShown = false;
     let timerId;
     let trackContinueStatus = false;
     let continueWatching = false
-    const popupAdHtml = `
-    <div id="custom-popup" style="
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 0.86);
-        color: white;
-        text-align: center;
-        padding: 20px;
-        box-sizing: border-box;
-        z-index: 9999; 
-    ">
-        <div style="max-width: 80%; width: 100%;">
-            <h1 style="font-size: clamp(24px, 5vw, 36px); margin: 0 0 20px 0;">
-                ${languageCode === "rw" ? "ISHYURA" : "PAY"} 
-                <span style="color: #1FDF67;">${languageCode === "rw" ? "500 RWF" : "UGX 1500"}</span> 
-                ${languageCode === "rw" ? "KUCYUMWERU" : "WEEKLY"}!
-            </h1>
-            <h5 style="font-size: clamp(16px, 3vw, 24px); margin: 0 0 30px 0;">
-                ${languageCode === "rw" ? "Wishyura 500 Rwf ukarangiza iyi filme ukareba nizindi zose Icyumweru。" : "Pay UGX 1500 To Continue This Movie And Watch all Vj Movies For a Week."}
-            </h5>
-            <button onclick="redirect()" style="
-                padding: 15px 30px;
-                font-size: clamp(16px, 3vw, 20px);
-                color: white;
-                background-color: rgba(31, 223, 103, 0.7);
-                border: none;
-                border-radius: 15px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            "
-               onmouseover="this.style.backgroundColor='rgba(31, 223, 103, 0.3)'" 
-               onmouseout="this.style.backgroundColor='rgba(31, 223, 103, 0.7)'" 
-               onmousedown="this.style.backgroundColor='white'; this.style.color='black'" 
-               onmouseup="this.style.backgroundColor='rgba(31, 223, 103, 0.3)'; this.style.color='white'">
-                ${languageCode === "rw" ? "KANDA HANO WISHYURE" : "CLICK HERE TO PAY"}
-            </button>
-        </div>
-    </div>
-`;
     // Artplayer settings
     Artplayer.MOBILE_DBCLICK_PLAY = true;
     Artplayer.CONTEXTMENU = false;
@@ -4603,8 +4557,8 @@
       newData.minPercentage = percentage;
       if (f_ && percentage > 77 && newData.type == "M") {
         throttleDelay = 5000;
-      }
-
+       }
+    
     }
     function onTimeUpdate() {
       const now = Date.now();
@@ -4621,12 +4575,7 @@
 
       if (f_ && percentage > 55 && newData.type == "M") {
         throttleDelay = 100;
-        if (percentage > 75) {
-          adsPlugin.updateVideoLink("");
-          const adsPlugin = art.plugins.artplayerPluginAds;
-          adsPlugin.startAd();
 
-        } return;
         try {
           art.pause();
           art.video.muted = true;
@@ -4643,7 +4592,76 @@
         if (!blocker_) {
           blocker(true);
         }
+        if (percentage > 75) {
+          art.destroy();
+          // Create the popup HTML
+          const popupHTML = `
+     <div id="custom-popup" style="
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         background-color: rgb(0 0 0 / 86%);
+         color: white;
+         text-align: center;
+         padding: 20px;
+         box-sizing: border-box;
+         z-index: 100;
+         overflow: hidden;
+     ">
+         <div style="
+             max-width: 90%;
+             width: 100%;
+         ">
+             <h1 style="
+                 font-size: clamp(24px, 5vw, 36px);
+                 margin: 0 0 20px 0;
+             ">
+                 ${languageCode == "rw" ? "ISHYURA" : "PAY"} 
+                 <span style="color: #1FDF67;">${languageCode == "rw" ? "500 RWF" : "UGX 1500"}</span> 
+                 ${languageCode == "rw" ? "KUCYUMWERU" : "WEEKLY"}!
+             </h1>
+             <h5 style="
+                 font-size: clamp(16px, 3vw, 24px);
+                 margin: 0 0 30px 0;
+             ">
+                 ${languageCode == "rw" ? "Wishyura 500 Rwf ukarangiza iyi filme ukareba nizindi zose Icyumweru." : "Pay UGX 1500 To Continue This Movie And Watch all Vj Movies For a Week."}
+             </h5>
+             <button onclick="redirect()" style="
+                 padding: 15px 30px;
+                 font-size: clamp(16px, 3vw, 20px);
+                 color: white;
+                 background-color: rgba(31, 223, 103, 0.7);
+                 border: none;
+                 border-radius: 15px;
+                 cursor: pointer;
+                 transition: background-color 0.3s ease;
+             "
+                onmouseover="this.style.backgroundColor='rgba(31, 223, 103, 0.3)'" 
+                onmouseout="this.style.backgroundColor='rgba(31, 223, 103, 0.7)'" 
+                onmousedown="this.style.backgroundColor='white'; this.style.color='black'" 
+                onmouseup="this.style.backgroundColor='rgba(31, 223, 103, 0.3)'; this.style.color='white'"
+                ontouchstart="this.style.backgroundColor='white'; this.style.color='black'" 
+                ontouchend="this.style.backgroundColor='rgba(31, 223, 103, 0.3)'; this.style.color='white'">
+                 ${languageCode == "rw" ? "KANDA HANO WISHYURE" : "CLICK HERE TO PAY"}
+             </button>
+         </div>
+     </div>
+ `;
 
+          // Inject the popup into the DOM
+          const container = document.querySelector('.artplayer-app'); // Get the ArtPlayer container
+          container.innerHTML = popupHTML;
+          if (art && art.video) {
+            art.video.muted = true; // Mute the video
+            art.video.pause(); // Pause the video
+          }
+
+        }
         return;
       }
 
