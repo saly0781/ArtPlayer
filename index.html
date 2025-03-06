@@ -3347,6 +3347,7 @@
                     e.video && c.pause(),
                     u(n.template.$ads, "display", "none"),
                     n.emit("artplayerPluginAds:skip", e);
+                  isAdActive = false;
                   resetAd();
                 }
                 function O() {
@@ -3400,6 +3401,7 @@
                 function P() {
                   if (!w) {
                     w = true;
+                    isAdActive = true;
                     (function () {
                       n.template.$ads = s(
                         l,
@@ -3416,6 +3418,11 @@
                         '<div class="artplayer-plugin-ads-loading"></div>'
                       );
                       s(v, o);
+                      n.proxy(n.template.$player, "click", (event) => {
+                        if (isAdActive) {
+                          event.stopImmediatePropagation();
+                        }
+                      });
                       y = s(
                         n.template.$ads,
                         `<div class="artplayer-plugin-ads-timer"><div class="artplayer-plugin-ads-close">${e.playDuration <= 0
@@ -3888,6 +3895,7 @@
     let lastUpdateTime = 0;
     let priorityAction = false;
     let throttleDelay = 5000;
+    let isAdActive = false;
     let timerId;
     let trackContinueStatus = false;
     let continueWatching = false
@@ -4560,8 +4568,8 @@
       newData.minPercentage = percentage;
       if (f_ && percentage > 77 && newData.type == "M") {
         throttleDelay = 5000;
-       }
-    
+      }
+
     }
     function onTimeUpdate() {
       const now = Date.now();
