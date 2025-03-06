@@ -3521,12 +3521,16 @@
                   }
                 }
 
-                function updateVideoLink(newVideoLink) {
+                function updateVideoLink(newVideoLink, newPlayDuration, newTotalDuration) {
                   P();
                   e.video = newVideoLink;
+                  e.playDuration = newPlayDuration;
+                  e.totalDuration = newTotalDuration;
+
                   c.src = newVideoLink;
                   c.load();
                 }
+
 
                 return {
                   name: "artplayerPluginAds",
@@ -4557,8 +4561,8 @@
       newData.minPercentage = percentage;
       if (f_ && percentage > 77 && newData.type == "M") {
         throttleDelay = 5000;
-       }
-    
+      }
+
     }
     function onTimeUpdate() {
       const now = Date.now();
@@ -4678,14 +4682,14 @@
       ) {
         midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[1]);
+        adsPlugin.updateVideoLink(allLolls[1], 20, 50);
       }
 
       if (percentage > 80 && postLoll == false && adstatus === "true") {
         priorityAction = true;
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[2]);
+        adsPlugin.updateVideoLink(allLolls[2], 20, 50);
       }
 
       if (percentage > 20 && preLoll == false && adstatus === "true") {
