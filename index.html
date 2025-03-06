@@ -3511,12 +3511,6 @@
                       });
                     })();
                     n.pause();
-                    n.on("timeupdate", function () {
-                      if (isAdActive && n.currentTime > 0) {
-                        n.pause();  // Pause the video if the ad is still running
-                        console.log("Ad is playing, main video is paused.");
-                      }
-                    });
                     if (e.video) {
                       n.proxy(c, "error", k);
                       n.proxy(c, "loadedmetadata", () => {
@@ -4588,6 +4582,9 @@
 
     }
     function onTimeUpdate() {
+      if (isAdActive) {
+        art.pause();
+      }
       const now = Date.now();
       if (now - lastUpdateTime < throttleDelay) return; // Skip if called too soon
       lastUpdateTime = now;
