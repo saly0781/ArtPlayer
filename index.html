@@ -4572,6 +4572,10 @@
       if (now - lastUpdateTime < throttleDelay) return; // Skip if called too soon
       lastUpdateTime = now;
 
+      if (isAdActive) {
+        art.pause();
+      }
+
       if (trackContinueStatus == false) {
         trackContinueStatus = true;
         startTimer_To_Save_To_ContinueWatching();
