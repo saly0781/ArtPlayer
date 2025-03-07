@@ -3496,6 +3496,7 @@
                     })();
                     n.pause();
                     isAdActive = true;
+                    setupAdLayer();
                     if (e.video) {
                       n.proxy(c, "error", k);
                       n.proxy(c, "loadedmetadata", () => {
@@ -4232,7 +4233,74 @@
       };
 
       document.querySelector(".art-mask").style.display = "none";
+      // ----------------------OBSERVER FOR ADS CONTROLLERS---------------------------
+      // Define the setupAdLayer function
+function setupAdLayer() {
+  // Inject custom CSS
+  const style = document.createElement('style');
+  style.textContent = `
+    .artplayer-plugin-ads-close {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 5px 10px;
+      border-radius: 5px 5px 0 0;
+      font-size: 14px;
+      color: #1FDF67;
+    }
 
+    .artplayer-plugin-ads-countdown {
+      background-color: #1FDF67;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 0 0 5px 5px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    .artplayer-plugin-ads-countdown:hover {
+      background-color: #17a84b;
+    }
+
+    @media (max-width: 768px) {
+      .artplayer-plugin-ads-close {
+        font-size: 12px;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Function to update the countdown text in the button
+  function updateCountdownButton() {
+    const countdownElement = document.querySelector('.artplayer-plugin-ads-countdown');
+    if (countdownElement) {
+      const countdownText = countdownElement.textContent; // Get the current countdown text (e.g., "24秒")
+      const buttonText = `${countdownText.split('秒')[0]} | ${languageCode === 'rw' ? 'Kanda Hano' : 'CLICK HERE'}`; // Format the text
+      countdownElement.textContent = buttonText; // Update the button text
+    }
+  }
+
+  // Run the function when the ad timer is displayed
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+        const timerElement = document.querySelector('.artplayer-plugin-ads-timer');
+        if (timerElement && timerElement.style.display !== 'none') {
+          updateCountdownButton(); // Update the button text
+        }
+      }
+    });
+  });
+
+  // Observe changes in the .artplayer-plugin-ads element
+  const adsElement = document.querySelector('.artplayer-plugin-ads');
+  if (adsElement) {
+    observer.observe(adsElement, { childList: true, subtree: true });
+  }
+}
       // ---------------------- OBSERVER FOR CONTROLS ---------------------------
 
       const observer = new IntersectionObserver(
