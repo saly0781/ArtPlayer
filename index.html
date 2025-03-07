@@ -3496,7 +3496,7 @@
                     })();
                     n.pause();
                     isAdActive = true;
-                   // setupAdLayer();
+                    // setupAdLayer();
                     if (e.video) {
                       n.proxy(c, "error", k);
                       n.proxy(c, "loadedmetadata", () => {
@@ -3570,8 +3570,8 @@
           function (e, n, l) {
             n.exports =
               ".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;bottom:50px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:last-child{cursor:pointer;background-color:#1FDF67;color:#000;border:none;padding:5px 10px;border-radius:0 0 5px 5px;font-size:14px;font-weight:bold;cursor:pointer;transition:background-color 0.3s ease;width:auto;white-space:nowrap}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}";
-               //".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;bottom:50px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}";
-            },
+            //".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:none;position:absolute;bottom:50px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}";
+          },
           {},
         ],
         "9v6Cv": [
@@ -4168,10 +4168,10 @@
               playDuration: 48,
               totalDuration: 50,
               i18n: {
-                close: "Taruka",
-                countdown: "Kanda Hano",
-                detail: "Kwamamaza",
-                canBeClosed: "%s Kwishyura?",
+                close: languageCode === 'rw' ? 'Taruka' : 'Skip Ad',
+                countdown: languageCode === 'rw' ? 'Kanda Hano' : 'Click Here',
+                detail: languageCode === 'rw' ? 'Kwamamaza' : 'Ad',
+                canBeClosed: languageCode === 'rw' ? '%s Kwishyura?' : '%s To Pay?',
               },
             }),
           ],
@@ -4238,9 +4238,9 @@
       // Define the setupAdLayer function
       function setupAdLayer() {
 
-  // Inject custom CSS
-  const style = document.createElement('style');
-  style.textContent = `
+        // Inject custom CSS
+        const style = document.createElement('style');
+        style.textContent = `
     .artplayer-plugin-ads .artplayer-plugin-ads-timer .artplayer-plugin-ads-close {
       text-align: center;
       background-color: rgba(0, 0, 0, 0.5);
@@ -4273,44 +4273,44 @@
       }
     }
   `;
-  document.head.appendChild(style);
+        document.head.appendChild(style);
 
-  // Function to update the countdown text in the button
-  let isUpdating = false;
-  function updateCountdownButton() {
-    if (isUpdating) return;
-    isUpdating = true;
+        // Function to update the countdown text in the button
+        let isUpdating = false;
+        function updateCountdownButton() {
+          if (isUpdating) return;
+          isUpdating = true;
 
-    const countdownElement = document.querySelector('.artplayer-plugin-ads-countdown');
-    if (countdownElement) {
-      const countdownText = countdownElement.textContent;
-      const buttonText = `${countdownText.split('秒')[0]} | ${languageCode === 'rw' ? 'Kanda Hano' : 'CLICK HERE'}`;
-      countdownElement.textContent = buttonText;
-    }
+          const countdownElement = document.querySelector('.artplayer-plugin-ads-countdown');
+          if (countdownElement) {
+            const countdownText = countdownElement.textContent;
+            const buttonText = `${countdownText.split('秒')[0]} | ${languageCode === 'rw' ? 'Kanda Hano' : 'CLICK HERE'}`;
+            countdownElement.textContent = buttonText;
+          }
 
-    isUpdating = false;
-  }
+          isUpdating = false;
+        }
 
-  // Run the function when the ad timer is displayed
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'childList' || mutation.type === 'attributes') {
-        const timerElement = document.querySelector('.artplayer-plugin-ads-timer');
-        if (timerElement && timerElement.style.display !== 'none') {
-          updateCountdownButton();
+        // Run the function when the ad timer is displayed
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'childList' || mutation.type === 'attributes') {
+              const timerElement = document.querySelector('.artplayer-plugin-ads-timer');
+              if (timerElement && timerElement.style.display !== 'none') {
+                updateCountdownButton();
+              }
+            }
+          });
+        });
+
+        // Observe changes in the .artplayer-plugin-ads element
+        const adsElement = document.querySelector('.artplayer-plugin-ads');
+        if (adsElement) {
+          observer.observe(adsElement, { childList: true, subtree: true, attributes: true });
         }
       }
-    });
-  });
 
-  // Observe changes in the .artplayer-plugin-ads element
-  const adsElement = document.querySelector('.artplayer-plugin-ads');
-  if (adsElement) {
-    observer.observe(adsElement, { childList: true, subtree: true, attributes: true });
-  }
-}
-
-// Call the function to set up the ad layer
+      // Call the function to set up the ad layer
       // ---------------------- OBSERVER FOR CONTROLS ---------------------------
 
       const observer = new IntersectionObserver(
@@ -4788,37 +4788,37 @@
 
         let time = 0.50 * art.duration - art.currentTime;
         countDownAds(time)
-        if (percentage > 50){
+        if (percentage > 50) {
           midLoll = true;
-        const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[1], 40, 50);
+          const adsPlugin = art.plugins.artplayerPluginAds;
+          adsPlugin.updateVideoLink(allLolls[1], 40, 50);
 
         }
-        
+
       }
 
       if (percentage > 79 && postLoll == false && adstatus === "true") {
         let time = 0.80 * art.duration - art.currentTime;
         countDownAds(time)
-        if (percentage > 80){
+        if (percentage > 80) {
           postLoll = true;
-        const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.updateVideoLink(allLolls[2], 40, 50);
+          const adsPlugin = art.plugins.artplayerPluginAds;
+          adsPlugin.updateVideoLink(allLolls[2], 40, 50);
 
         }
-        
+
       }
 
       if (percentage > 19 && preLoll == false && adstatus === "true") {
         let time = 0.20 * art.duration - art.currentTime;
         countDownAds(time)
-        if (percentage > 20){
+        if (percentage > 20) {
           preLoll = true;
-        const adsPlugin = art.plugins.artplayerPluginAds;
-        adsPlugin.startAd();
+          const adsPlugin = art.plugins.artplayerPluginAds;
+          adsPlugin.startAd();
 
         }
-       
+
       }
 
       if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
@@ -4841,35 +4841,35 @@
     let lastCountdownTime = null; // Track the last displayed countdown time
 
     function countDownAds(time) {
-  const countdownLayer = document.querySelector('.art-layer-adCountdown'); // Target the parent div
-  const countdownTime = countdownLayer?.querySelector('.countdown-time');
+      const countdownLayer = document.querySelector('.art-layer-adCountdown'); // Target the parent div
+      const countdownTime = countdownLayer?.querySelector('.countdown-time');
 
-  if (!countdownLayer || !countdownTime) {
-    console.error("Countdown layer or time element not found!");
-    return;
-  }
+      if (!countdownLayer || !countdownTime) {
+        console.error("Countdown layer or time element not found!");
+        return;
+      }
 
-  if (time > 9 || time < 0) { // Hide if time is invalid or greater than 11 seconds
-    if (countdownLayer.style.display !== "none") {
-      countdownLayer.style.display = "none";
+      if (time > 9 || time < 0) { // Hide if time is invalid or greater than 11 seconds
+        if (countdownLayer.style.display !== "none") {
+          countdownLayer.style.display = "none";
+        }
+        return;
+      }
+
+      // Show the countdown layer if it's hidden
+      if (countdownLayer.style.display !== "flex") {
+        countdownLayer.style.display = "flex";
+      }
+
+      // Calculate the current countdown time (rounded up)
+      const currentTime = Math.ceil(time);
+      console.log("Updating countdown to:", currentTime); // Debugging line
+
+      // Only update the DOM if the countdown time has changed
+      if (countdownTime.textContent !== currentTime.toString()) {
+        countdownTime.textContent = currentTime;
+      }
     }
-    return;
-  }
-
-  // Show the countdown layer if it's hidden
-  if (countdownLayer.style.display !== "flex") {
-    countdownLayer.style.display = "flex";
-  }
-
-  // Calculate the current countdown time (rounded up)
-  const currentTime = Math.ceil(time);
-  console.log("Updating countdown to:", currentTime); // Debugging line
-
-  // Only update the DOM if the countdown time has changed
-  if (countdownTime.textContent !== currentTime.toString()) {
-    countdownTime.textContent = currentTime;
-  }
-}
 
 
     function _m(video, url, art) {
