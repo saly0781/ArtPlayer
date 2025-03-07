@@ -4581,15 +4581,16 @@
           if (!art.paused) {
             art.video.pause();
           }
+          if (!blocker_) {
+          blocker(true);
+        }
 
         } catch (error) {
           // 2 attempts
         }
 
 
-        if (!blocker_) {
-          blocker(true);
-        }
+        
         if (percentage > 75) {
           art.destroy();
           // Create the popup HTML
