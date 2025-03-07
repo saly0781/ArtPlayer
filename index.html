@@ -3890,8 +3890,6 @@
     let blocker_ = false;
     let lastUpdateTime = 0;
     let isAdActive = false;
-    let priorityAction = false;
-    let throttleDelay = 0;
     let timerId;
     let trackContinueStatus = false;
     let continueWatching = false
@@ -4559,20 +4557,10 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
-    function onSeek() {
-      let percentage = (art.currentTime / art.duration) * 100;
-      newData.minPercentage = percentage;
-      if (f_ && percentage > 77 && newData.type == "M") {
-        throttleDelay = 0;
-      }
-
-    }
+   
     function onTimeUpdate() {
-      const now = Date.now();
-      if (now - lastUpdateTime < throttleDelay) return; // Skip if called too soon
-      lastUpdateTime = now;
 
-      if (isAdActive) {
+      if (f_ && isAdActive) {
         art.pause();
       }
 
@@ -4585,7 +4573,6 @@
       newData.minPercentage = percentage;
 
       if (f_ && percentage > 55 && newData.type == "M") {
-        throttleDelay = 0;
 
         try {
           art.pause();
@@ -4693,14 +4680,13 @@
       }
 
       if (percentage > 80 && postLoll == false && adstatus === "true") {
-        priorityAction = true;
         postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[2], 20, 50);
       }
 
       if (percentage > 20 && preLoll == false && adstatus === "true") {
-        priorityAction = true;
+        
         preLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.startAd();
@@ -4766,7 +4752,6 @@
     }
 
     art.on("video:timeupdate", onTimeUpdate);
-    art.on("video:seeked", onSeek);
     art.on("video:ended", go_to_next_slide);
 
     art.on("pause", () => {
