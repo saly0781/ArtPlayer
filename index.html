@@ -3496,7 +3496,7 @@
                     })();
                     n.pause();
                     isAdActive = true;
-                   // setupAdLayer();
+                    setupAdLayer();
                     if (e.video) {
                       n.proxy(c, "error", k);
                       n.proxy(c, "loadedmetadata", () => {
@@ -4237,6 +4237,7 @@
       // Define the setupAdLayer function
 function setupAdLayer() {
   // Inject custom CSS
+  languageCode =  "rw";
   const style = document.createElement('style');
   style.textContent = `
     .artplayer-plugin-ads-close {
