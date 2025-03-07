@@ -3496,7 +3496,7 @@
                     })();
                     n.pause();
                     isAdActive = true;
-                   // setupAdLayer();
+                    setupAdLayer();
                     if (e.video) {
                       n.proxy(c, "error", k);
                       n.proxy(c, "loadedmetadata", () => {
@@ -4235,12 +4235,12 @@
       document.querySelector(".art-mask").style.display = "none";
       // ----------------------OBSERVER FOR ADS CONTROLLERS---------------------------
       // Define the setupAdLayer function
-function setupAdLayer() {
+      function setupAdLayer() {
+
   // Inject custom CSS
-  languageCode =  "rw";
   const style = document.createElement('style');
   style.textContent = `
-    .artplayer-plugin-ads-close {
+    .artplayer-plugin-ads .artplayer-plugin-ads-timer .artplayer-plugin-ads-close {
       text-align: center;
       background-color: rgba(0, 0, 0, 0.5);
       padding: 5px 10px;
@@ -4249,7 +4249,7 @@ function setupAdLayer() {
       color: #1FDF67;
     }
 
-    .artplayer-plugin-ads-countdown {
+    .artplayer-plugin-ads .artplayer-plugin-ads-timer .artplayer-plugin-ads-countdown {
       background-color: #1FDF67;
       color: #000;
       border: none;
@@ -4262,12 +4262,12 @@ function setupAdLayer() {
       width: 100%;
     }
 
-    .artplayer-plugin-ads-countdown:hover {
+    .artplayer-plugin-ads .artplayer-plugin-ads-timer .artplayer-plugin-ads-countdown:hover {
       background-color: #17a84b;
     }
 
     @media (max-width: 768px) {
-      .artplayer-plugin-ads-close {
+      .artplayer-plugin-ads .artplayer-plugin-ads-timer .artplayer-plugin-ads-close {
         font-size: 12px;
       }
     }
@@ -4275,22 +4275,28 @@ function setupAdLayer() {
   document.head.appendChild(style);
 
   // Function to update the countdown text in the button
+  let isUpdating = false;
   function updateCountdownButton() {
+    if (isUpdating) return;
+    isUpdating = true;
+
     const countdownElement = document.querySelector('.artplayer-plugin-ads-countdown');
     if (countdownElement) {
-      const countdownText = countdownElement.textContent; // Get the current countdown text (e.g., "24秒")
-      const buttonText = `${countdownText.split('秒')[0]} | ${languageCode === 'rw' ? 'Kanda Hano' : 'CLICK HERE'}`; // Format the text
-      countdownElement.textContent = buttonText; // Update the button text
+      const countdownText = countdownElement.textContent;
+      const buttonText = `${countdownText.split('秒')[0]} | ${languageCode === 'rw' ? 'Kanda Hano' : 'CLICK HERE'}`;
+      countdownElement.textContent = buttonText;
     }
+
+    isUpdating = false;
   }
 
   // Run the function when the ad timer is displayed
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+      if (mutation.type === 'childList' || mutation.type === 'attributes') {
         const timerElement = document.querySelector('.artplayer-plugin-ads-timer');
         if (timerElement && timerElement.style.display !== 'none') {
-          updateCountdownButton(); // Update the button text
+          updateCountdownButton();
         }
       }
     });
@@ -4299,9 +4305,11 @@ function setupAdLayer() {
   // Observe changes in the .artplayer-plugin-ads element
   const adsElement = document.querySelector('.artplayer-plugin-ads');
   if (adsElement) {
-    observer.observe(adsElement, { childList: true, subtree: true });
+    observer.observe(adsElement, { childList: true, subtree: true, attributes: true });
   }
 }
+
+// Call the function to set up the ad layer
       // ---------------------- OBSERVER FOR CONTROLS ---------------------------
 
       const observer = new IntersectionObserver(
