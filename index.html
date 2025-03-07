@@ -3343,7 +3343,7 @@
                 }
                 function k() {
                   (b = !0),
-                    n.play(),                  
+                    n.play(),
                     e.video && c.pause(),
                     u(n.template.$ads, "display", "none"),
                     n.emit("artplayerPluginAds:skip", e);
@@ -4059,6 +4059,38 @@
             //display: "none",
           },
         },
+        {
+          name: "adCountdown",
+          html: `
+        <div class="artplayer-plugin-counter">
+            <span class="text">
+                ${languageCode == "rw" ? "Kwamamaza" : "Ad in"} 
+                <span class="countdown-time">10</span>
+            </span>
+        </div>
+    `,
+          tooltip: "adCountdown",
+          style: {
+            position: "absolute",
+            bottom: "50px",
+            right: "10px",
+            fontSize: "18px",
+            fontWeight: "bold",
+            color: "#fff",
+            backgroundColor: "#000",
+            padding: "10px 15px",
+            borderRadius: "10px",
+            display: "none",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: "150",
+            transition: "opacity 0.5s ease-in-out",
+          },
+          mounted: function (...args) {
+            // You can add functionality to start countdown here
+          }
+        },
+
 
         {
           name: 'popup',
@@ -4557,7 +4589,7 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
-   
+
     function onTimeUpdate() {
 
       if (f_ && isAdActive) {
@@ -4582,15 +4614,15 @@
             art.video.pause();
           }
           if (!blocker_) {
-          blocker(true);
-        }
+            blocker(true);
+          }
 
         } catch (error) {
           // 2 attempts
         }
 
 
-        
+
         if (percentage > 75) {
           art.destroy();
           // Create the popup HTML
@@ -4670,27 +4702,45 @@
       }
 
       if (
-        percentage > 50 &&
+        percentage > 49 &&
         percentage < 80 &&
         midLoll == false &&
         adstatus === "true"
       ) {
-        midLoll = true;
+
+        let time = 0.50 * art.duration - art.currentTime;
+        countDownAds(time)
+        if (percentage > 50){
+          midLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[1], 40, 50);
+
+        }
+        
       }
 
-      if (percentage > 80 && postLoll == false && adstatus === "true") {
-        postLoll = true;
+      if (percentage > 79 && postLoll == false && adstatus === "true") {
+        let time = 0.80 * art.duration - art.currentTime;
+        countDownAds(time)
+        if (percentage > 80){
+          postLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.updateVideoLink(allLolls[2], 40, 50);
+
+        }
+        
       }
 
-      if (percentage > 20 && preLoll == false && adstatus === "true") {
-        
-        preLoll = true;
+      if (percentage > 19 && preLoll == false && adstatus === "true") {
+        let time = 0.20 * art.duration - art.currentTime;
+        countDownAds(time)
+        if (percentage > 20){
+          preLoll = true;
         const adsPlugin = art.plugins.artplayerPluginAds;
         adsPlugin.startAd();
+
+        }
+       
       }
 
       if (percentage > 80 && type == "M" && continueToWatchDeleted == false) {
@@ -4710,6 +4760,35 @@
       }
     }
 
+    function countDownAds(time) {
+  if (time > 11) {
+    // If time is greater than 11 seconds, hide the countdown
+    const countdownLayer = document.querySelector('.artplayer-plugin-counter');
+    if (countdownLayer) countdownLayer.style.display = "none";
+    return;
+  }
+
+  // Ensure countdown layer exists
+  const countdownLayer = document.querySelector('.artplayer-plugin-counter');
+  if (!countdownLayer) return;
+
+  const countdownElement = countdownLayer.querySelector('.countdown-time');
+  if (!countdownElement) return;
+
+  // Update countdown value without interval
+  const countDownTime = Math.ceil(time);
+  countdownElement.textContent = countDownTime;
+
+  // Show the countdown layer if not already shown
+  if (countdownLayer.style.display !== "flex") {
+    countdownLayer.style.display = "flex";
+  }
+
+  // Hide the countdown when time is zero or below
+  if (countDownTime <= 0) {
+    countdownLayer.style.display = "none";
+  }
+}
 
 
     function _m(video, url, art) {
