@@ -4080,7 +4080,7 @@
             backgroundColor: "#000",
             padding: "10px 15px",
             borderRadius: "10px",
-            display: "flex",
+            display: "none",
             alignItems: "center",
             justifyContent: "center",
             zIndex: "150",
@@ -4762,15 +4762,18 @@
 
     let lastCountdownTime = null; // Track the last displayed countdown time
 
-function countDownAds(time) {
-  const countdownLayer = document.querySelector('.artplayer-plugin-counter');
-  const countdownTime = countdownLayer.querySelector('.countdown-time');
+    function countDownAds(time) {
+  const countdownLayer = document.querySelector('.art-layer-adCountdown'); // Target the parent div
+  const countdownTime = countdownLayer?.querySelector('.countdown-time');
 
-  // Hide the countdown if time is greater than 11 seconds
-  if (time > 11) {
+  if (!countdownLayer || !countdownTime) {
+    console.error("Countdown layer or time element not found!");
+    return;
+  }
+
+  if (time > 11 || time < 0) { // Hide if time is invalid or greater than 11 seconds
     if (countdownLayer.style.display !== "none") {
       countdownLayer.style.display = "none";
-      lastCountdownTime = null; // Reset the last countdown time
     }
     return;
   }
@@ -4782,11 +4785,11 @@ function countDownAds(time) {
 
   // Calculate the current countdown time (rounded up)
   const currentTime = Math.ceil(time);
+  console.log("Updating countdown to:", currentTime); // Debugging line
 
   // Only update the DOM if the countdown time has changed
-  if (lastCountdownTime !== currentTime) {
+  if (countdownTime.textContent !== currentTime.toString()) {
     countdownTime.textContent = currentTime;
-    lastCountdownTime = currentTime; // Update the last countdown time
   }
 }
 
