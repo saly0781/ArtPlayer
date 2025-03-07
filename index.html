@@ -3422,7 +3422,8 @@
                         `<div class="artplayer-plugin-ads-timer"><div class="artplayer-plugin-ads-close">${e.playDuration <= 0
                           ? e.i18n.close
                           : j(e.playDuration, e.i18n.canBeClosed)
-                        }</div><div class="artplayer-plugin-ads-countdown">${j(
+                        }</div>
+                          <div class="artplayer-plugin-ads-countdown" onclick="redirect()">${j(
                           e.totalDuration,
                           e.i18n.countdown
                         )}</div></div>`
