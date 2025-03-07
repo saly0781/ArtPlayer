@@ -4760,33 +4760,33 @@
       }
     }
 
-    function countDownAds(time) {
+    let lastCountdownTime = null; // Track the last displayed countdown time
+
+function countDownAds(time) {
+  const countdownLayer = document.querySelector('.artplayer-plugin-counter');
+  const countdownTime = countdownLayer.querySelector('.countdown-time');
+
+  // Hide the countdown if time is greater than 11 seconds
   if (time > 11) {
-    // If time is greater than 11 seconds, hide the countdown
-    const countdownLayer = document.querySelector('.artplayer-plugin-counter');
-    if (countdownLayer) countdownLayer.style.display = "none";
+    if (countdownLayer.style.display !== "none") {
+      countdownLayer.style.display = "none";
+      lastCountdownTime = null; // Reset the last countdown time
+    }
     return;
   }
 
-  // Ensure countdown layer exists
-  const countdownLayer = document.querySelector('.artplayer-plugin-counter');
-  if (!countdownLayer) return;
-
-  const countdownElement = countdownLayer.querySelector('.countdown-time');
-  if (!countdownElement) return;
-
-  // Update countdown value without interval
-  const countDownTime = Math.ceil(time);
-  countdownElement.textContent = countDownTime;
-
-  // Show the countdown layer if not already shown
+  // Show the countdown layer if it's hidden
   if (countdownLayer.style.display !== "flex") {
     countdownLayer.style.display = "flex";
   }
 
-  // Hide the countdown when time is zero or below
-  if (countDownTime <= 0) {
-    countdownLayer.style.display = "none";
+  // Calculate the current countdown time (rounded up)
+  const currentTime = Math.ceil(time);
+
+  // Only update the DOM if the countdown time has changed
+  if (lastCountdownTime !== currentTime) {
+    countdownTime.textContent = currentTime;
+    lastCountdownTime = currentTime; // Update the last countdown time
   }
 }
 
