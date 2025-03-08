@@ -4702,7 +4702,7 @@
           }
 
         } catch (error) {
-          // 2 attempts
+          console.log("error to pause", error)
         }
 
 
@@ -4792,8 +4792,8 @@
         adstatus === "true"
       ) {
 
-        let time = 0.50 * art.duration - art.currentTime;
-        countDownAds(time)
+      //  let time = 0.50 * art.duration - art.currentTime;
+      //  countDownAds(time)
         if (percentage > 50) {
           midLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4811,8 +4811,8 @@
         adstatus === "true"
       ) {
 
-        let time = 0.50 * art.duration - art.currentTime;
-        countDownAds(time)
+      //  let time = 0.50 * art.duration - art.currentTime;
+      //  countDownAds(time)
         if (percentage > 50) {
           midLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4823,8 +4823,8 @@
       }
 
       if (!f_ && percentage > 79 && postLoll == false && adstatus === "true") {
-        let time = 0.80 * art.duration - art.currentTime;
-        countDownAds(time)
+      //  let time = 0.80 * art.duration - art.currentTime;
+      //  countDownAds(time)
         if (percentage > 80) {
           postLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4834,8 +4834,8 @@
 
       }
       if (f_ && percentage > 79 && postLoll == false && adstatus === "true") {
-        let time = 0.80 * art.duration - art.currentTime;
-        countDownAds(time)
+      //  let time = 0.80 * art.duration - art.currentTime;
+      //  countDownAds(time)
         if (percentage > 80) {
           postLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4845,8 +4845,8 @@
       }
 
       if (percentage > 19 && preLoll == false && adstatus === "true") {
-        let time = 0.20 * art.duration - art.currentTime;
-        countDownAds(time)
+      //  let time = 0.20 * art.duration - art.currentTime;
+      //  countDownAds(time)
         if (percentage > 20) {
           preLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4949,18 +4949,6 @@
 
     art.on("video:timeupdate", onTimeUpdate);
     art.on("video:ended", go_to_next_slide);
-    art.on('ready', () => {
-    console.log('Player is ready');
-    const counter = document.querySelector('.artplayer-plugin-counter');
-    if (counter) {
-      console.log ("player has counter")
-      console.log("counter", counter)
-        counter.style.display = 'flex';
-        counter.style.opacity = '1';
-    } else {
-        console.error('Counter element not found');
-    }
-});
 
     art.on("pause", () => {
       pathCode = "M8 5v14l11-7z";
