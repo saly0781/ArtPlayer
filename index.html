@@ -4779,10 +4779,7 @@
         }
       }
 
-      if (newData.startTime < art.currentTime && skippedContent == false) {
-        buttonSkip.style.transform = "translateX(-300px)";
-        skippedContent = true;
-      }
+      
 
       if (
         f_ &&
@@ -4870,6 +4867,11 @@
         art.storage.del(newData.id);
         sendMessage({ action: "deleteContinue", data: newData });
         continueToWatchDeleted == true;
+      }
+      
+      if (newData.startTime < art.currentTime && skippedContent == false) {
+        buttonSkip.style.transform = "translateX(-300px)";
+        skippedContent = true;
       }
     }
 
