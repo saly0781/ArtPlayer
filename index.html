@@ -3934,7 +3934,7 @@
         f_ = event.data.f_ ? event.data.f_ : false;
         art.switchUrl(_y(event.data.e, event.data.p, version));
         // Select the element with aria-label="buttonSkip"
-        buttonSkip = document.querySelector('[aria-label="buttonSkip"]');
+        buttonSkip = document.querySelector('.art-layer.art-layer-skipContent');
         // Check if the element exists
         if (
           (buttonSkip && newData.startTime != null) ||
