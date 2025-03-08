@@ -4786,6 +4786,26 @@
       }
 
       if (
+        f_ &&
+        percentage > 49 &&
+        percentage < 80 &&
+        midLoll == false &&
+        adstatus === "true"
+      ) {
+
+        let time = 0.50 * art.duration - art.currentTime;
+        countDownAds(time)
+        if (percentage > 55) {
+          midLoll = true;
+          const adsPlugin = art.plugins.artplayerPluginAds;
+          adsPlugin.updateVideoLink(allLolls[3], 86400, 86400);
+
+        }
+
+      }
+
+      if (
+        !f_ &&
         percentage > 49 &&
         percentage < 80 &&
         midLoll == false &&
