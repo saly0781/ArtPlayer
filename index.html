@@ -4823,13 +4823,24 @@
 
       }
 
-      if (percentage > 79 && postLoll == false && adstatus === "true") {
+      if (!f_ && percentage > 79 && postLoll == false && adstatus === "true") {
         let time = 0.80 * art.duration - art.currentTime;
         countDownAds(time)
         if (percentage > 80) {
           postLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
           adsPlugin.updateVideoLink(allLolls[2], 40, 50);
+
+        }
+
+      }
+      if (f_ && percentage > 79 && postLoll == false && adstatus === "true") {
+        let time = 0.80 * art.duration - art.currentTime;
+        countDownAds(time)
+        if (percentage > 80) {
+          postLoll = true;
+          const adsPlugin = art.plugins.artplayerPluginAds;
+          adsPlugin.updateVideoLink(allLolls[3], 86400, 86400);
 
         }
 
