@@ -4779,7 +4779,7 @@
         }
       }
 
-      
+
 
       if (
         f_ &&
@@ -4789,8 +4789,8 @@
         adstatus === "true"
       ) {
 
-      //  let time = 0.50 * art.duration - art.currentTime;
-      //  countDownAds(time)
+        //  let time = 0.50 * art.duration - art.currentTime;
+        //  countDownAds(time)
         if (percentage > 50) {
           midLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4808,8 +4808,8 @@
         adstatus === "true"
       ) {
 
-      //  let time = 0.50 * art.duration - art.currentTime;
-      //  countDownAds(time)
+        //  let time = 0.50 * art.duration - art.currentTime;
+        //  countDownAds(time)
         if (percentage > 50) {
           midLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4820,8 +4820,8 @@
       }
 
       if (!f_ && percentage > 79 && postLoll == false && adstatus === "true") {
-      //  let time = 0.80 * art.duration - art.currentTime;
-      //  countDownAds(time)
+        //  let time = 0.80 * art.duration - art.currentTime;
+        //  countDownAds(time)
         if (percentage > 80) {
           postLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4831,8 +4831,8 @@
 
       }
       if (f_ && percentage > 79 && postLoll == false && adstatus === "true") {
-      //  let time = 0.80 * art.duration - art.currentTime;
-      //  countDownAds(time)
+        //  let time = 0.80 * art.duration - art.currentTime;
+        //  countDownAds(time)
         if (percentage > 80) {
           postLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4842,8 +4842,8 @@
       }
 
       if (percentage > 19 && preLoll == false && adstatus === "true") {
-      //  let time = 0.20 * art.duration - art.currentTime;
-      //  countDownAds(time)
+        //  let time = 0.20 * art.duration - art.currentTime;
+        //  countDownAds(time)
         if (percentage > 20) {
           preLoll = true;
           const adsPlugin = art.plugins.artplayerPluginAds;
@@ -4868,43 +4868,46 @@
         sendMessage({ action: "deleteContinue", data: newData });
         continueToWatchDeleted == true;
       }
-      
+
       if (newData.startTime < art.currentTime && skippedContent == false) {
         buttonSkip.style.transform = "translateX(-300px)";
         skippedContent = true;
       }
     }
 
-    let lastCountdownTime = null; // Track the last displayed countdown time
+    let lastCountdownTime = null;
 
     function countDownAds(time) {
-      const countdownLayer = document.querySelector('.art-layer-adCountdown'); // Target the parent div
-      const countdownTime = countdownLayer?.querySelector('.countdown-time');
+      try {
+        const countdownLayer = document.querySelector('.art-layer-adCountdown');
+        const countdownTime = countdownLayer?.querySelector('.countdown-time');
 
-      if (!countdownLayer || !countdownTime) {
-        console.error("Countdown layer or time element not found!");
-        return;
-      }
-
-      if (time > 9 || time < 0) { // Hide if time is invalid or greater than 11 seconds
-        if (countdownLayer.style.display !== "none") {
-          countdownLayer.style.display = "none";
+        if (!countdownLayer || !countdownTime) {
+          console.error("Countdown layer or time element not found!");
+          return;
         }
-        return;
-      }
 
-      // Show the countdown layer if it's hidden
-      if (countdownLayer.style.display !== "flex") {
-        countdownLayer.style.display = "flex";
-      }
+        if (time > 9 || time < 0) {
+          if (countdownLayer.style.display !== "none") {
+            countdownLayer.style.display = "none";
+          }
+          return;
+        }
 
-      // Calculate the current countdown time (rounded up)
-      const currentTime = Math.ceil(time);
-      console.log("Updating countdown to:", currentTime); // Debugging line
 
-      // Only update the DOM if the countdown time has changed
-      if (countdownTime.textContent !== currentTime.toString()) {
-        countdownTime.textContent = currentTime;
+        if (countdownLayer.style.display !== "flex") {
+          countdownLayer.style.display = "flex";
+        }
+
+
+        const currentTime = Math.ceil(time);
+
+
+        if (countdownTime.textContent !== currentTime.toString()) {
+          countdownTime.textContent = currentTime;
+        }
+      } catch (error) {
+        console.log("error to update", error)
       }
     }
 
