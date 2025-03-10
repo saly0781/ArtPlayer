@@ -4690,7 +4690,13 @@
       sendMessage({ action: "toPay" });
     }
 
+    function blockerWix() {
+      let percentage = (art.currentTime / art.duration) * 100;
+      if (f_ && percentage > 55 && newData.type == "M") {  // && !isAdActive
+        sendMessage({ action: "toblock" });
+      }
 
+    }
 
     function onTimeUpdate() {
 
@@ -4933,7 +4939,10 @@
       return x1;
     }
 
-    art.on("video:timeupdate", onTimeUpdate);
+    art.on("video:timeupdate", () => {
+      onTimeUpdate();
+      blockerWix();
+    });
     art.on("video:ended", go_to_next_slide);
 
     art.on("pause", () => {
