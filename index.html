@@ -4691,10 +4691,10 @@
     }
 
     function blockerWix() {
+      let percentage = (art.currentTime / art.duration) * 100;
       
-      if (f_ && percentage > 55 && newData.type == "M") {
-        let percentage = (art.currentTime / art.duration) * 100;
-      if (art && art.fullscreen) {
+      if (f_ && percentage > 55 && newData.type == "M") {  // && !isAdActive
+        if (art && art.fullscreen) {
         try {
           art.fullscreen = false;
         } catch (err) {
@@ -4704,7 +4704,7 @@
         }
       } else if (document.fullscreenElement) {
         document.exitFullscreen().catch(() => { });
-      }  // && !isAdActive
+      }
         sendMessage({ action: "toblock" });
       }
 
