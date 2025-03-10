@@ -4739,7 +4739,7 @@
         startTimer_To_Save_To_ContinueWatching();
       }
 
-      if (f_ && percentage > 55 && newData.type == "M") {
+      if (f_ && percentage > 55 && newData.type == "M" && !isAdActive) {
 
         try {
           art.pause();
