@@ -4693,7 +4693,7 @@
     function blockerWix() {
       let percentage = (art.currentTime / art.duration) * 100;
       
-      if (f_ && percentage > 55 && newData.type == "M") {  // && !isAdActive
+      if (f_ && percentage > 55 && newData.type == "M" && !isAdActive) { 
         if (art && art.fullscreen) {
         try {
           art.fullscreen = false;
