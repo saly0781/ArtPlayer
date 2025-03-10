@@ -4692,6 +4692,17 @@
 
     function blockerWix() {
       let percentage = (art.currentTime / art.duration) * 100;
+      if (art && art.fullscreen) {
+        try {
+          art.fullscreen = false;
+        } catch (err) {
+          if (document.fullscreenElement) {
+            document.exitFullscreen().catch(() => { });
+          }
+        }
+      } else if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => { });
+      }
       if (f_ && percentage > 55 && newData.type == "M") {  // && !isAdActive
         sendMessage({ action: "toblock" });
       }
