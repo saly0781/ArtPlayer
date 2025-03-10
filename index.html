@@ -4691,7 +4691,9 @@
     }
 
     function blockerWix() {
-      let percentage = (art.currentTime / art.duration) * 100;
+      
+      if (f_ && percentage > 55 && newData.type == "M") {
+        let percentage = (art.currentTime / art.duration) * 100;
       if (art && art.fullscreen) {
         try {
           art.fullscreen = false;
@@ -4702,8 +4704,7 @@
         }
       } else if (document.fullscreenElement) {
         document.exitFullscreen().catch(() => { });
-      }
-      if (f_ && percentage > 55 && newData.type == "M") {  // && !isAdActive
+      }  // && !isAdActive
         sendMessage({ action: "toblock" });
       }
 
