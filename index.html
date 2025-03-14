@@ -3902,7 +3902,14 @@
     let trackContinueStatus = false;
     let continueWatching = false;
     let adsBackup = languageCode === "rw" ? "https://download-video.wixmp.com/video/d7f9fb_8fc2ee0ea31b47f2bfc7a10056690edf/720p/mp4/file.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTc0MTM5NDMwOCwiZXhwIjoxNzcyOTUxOTE4LCJqdGkiOiI1NGY4M2Q0NS02MDQzLTQwYTgtOGRlZC0xYzI0ZDBhNTVkOTEiLCJvYmoiOltbeyJwYXRoIjoiL3ZpZGVvL2Q3ZjlmYl84ZmMyZWUwZWEzMWI0N2YyYmZjN2ExMDA1NjY5MGVkZi83MjBwL21wNC9maWxlLm1wNCJ9XV0sInJlZCI6Imh0dHBzOi8vd3d3LnJlYmFtb3ZpZS5jb20iLCJkaXMiOnsiZmlsZW5hbWUiOiJLd2FtYW1hemEubXA0IiwidHlwZSI6ImF0dGFjaG1lbnQifX0.IlSd0MR5jf8ys5N0DAKuHVvlZwAvPH6BoP-sJ2rMDws" : "https://download-video.wixmp.com/video/d7f9fb_aee0149131ca48cbae65c144656e74f1/720p/mp4/file.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTc0MTM5NDM5NywiZXhwIjoxNzcyOTUyMDA3LCJqdGkiOiI4NTk3OTg3Yi1mMzQ1LTRiMmMtOTQ3ZC1mYjhkNGQ5ZmQ2YzQiLCJvYmoiOltbeyJwYXRoIjoiL3ZpZGVvL2Q3ZjlmYl9hZWUwMTQ5MTMxY2E0OGNiYWU2NWMxNDQ2NTZlNzRmMS83MjBwL21wNC9maWxlLm1wNCJ9XV0sInJlZCI6Imh0dHBzOi8vd3d3LnJlYmFtb3ZpZS5jb20iLCJkaXMiOnsiZmlsZW5hbWUiOiJLd2FtYW1hemEubXA0IiwidHlwZSI6ImF0dGFjaG1lbnQifX0.Tmdo_aw9vJb1nSKb-Ry0dUEf1S4Yljs3WpdTDwenl_0";
+    let isIphone = false;
+    try {
+      isIphone = /iphone/.test(navigator.userAgent.toLowerCase());
+    } catch (error) {
+      isIphone = false;
+    }
     // Artplayer settings
+
     Artplayer.MOBILE_DBCLICK_PLAY = true;
     Artplayer.CONTEXTMENU = false;
     Artplayer.TOUCH_MOVE_RATIO = 1;
@@ -4692,19 +4699,19 @@
 
     function blockerWix() {
       let percentage = (art.currentTime / art.duration) * 100;
-      
-      if (f_ && percentage > 55 && newData.type == "M" && !isAdActive) { 
+
+      if (f_ && percentage > 55 && newData.type == "M" && !isAdActive) {
         if (art && art.fullscreen) {
-        try {
-          art.fullscreen = false;
-        } catch (err) {
-          if (document.fullscreenElement) {
-            document.exitFullscreen().catch(() => { });
+          try {
+            art.fullscreen = false;
+          } catch (err) {
+            if (document.fullscreenElement) {
+              document.exitFullscreen().catch(() => { });
+            }
           }
+        } else if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => { });
         }
-      } else if (document.fullscreenElement) {
-        document.exitFullscreen().catch(() => { });
-      }
         sendMessage({ action: "toblock" });
       }
 
@@ -4717,7 +4724,7 @@
       newData.minPercentage = percentage;
       const adsPlugin = art.plugins.artplayerPluginAds;
 
-      if (percentage > 19 && !preLoll && adstatus == "true") {
+      if (percentage > 19 && !preLoll && adstatus == "true" && !isIphone) {
         let time = 0.20 * art.duration - art.currentTime;
         countDownAds(time);
         if (percentage > 20) {
@@ -4726,7 +4733,7 @@
         }
       }
 
-      if (percentage > 49 && percentage < 80 && !midLoll && adstatus == "true") {
+      if (percentage > 49 && percentage < 80 && !midLoll && adstatus == "true" && (f_ || !isIphone)) {
         let time = 0.50 * art.duration - art.currentTime;
         countDownAds(time);
         if (percentage > 50) {
@@ -4737,7 +4744,7 @@
         }
       }
 
-      if (percentage > 79 && !postLoll && adstatus == "true") {
+      if (percentage > 79 && !postLoll && adstatus == "true" && !isIphone) {
         let time = 0.80 * art.duration - art.currentTime;
         countDownAds(time);
         if (percentage > 80) {
