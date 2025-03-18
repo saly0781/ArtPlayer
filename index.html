@@ -3533,7 +3533,7 @@
                   e.i18n.canBeClosed = newPlayDuration > 120
                     ? languageCode === 'rw' ? 'Kwishyura?' : 'To Pay?'
                     : languageCode === 'rw' ? '%s | Kwishyura?' : '%s | To Pay?';
-                  if (redirectingAd) {
+                  if (redirectingAd && newPlayDuration <= 120) {
                     e.i18n.canBeClosed = newPlayDuration > 120
                     ? languageCode === 'rw' ? 'Kwiyandikisha?' : 'To Pay?'
                     : languageCode === 'rw' ? '%s | Kwiyandikisha?' : '%s | To Pay?';
@@ -3542,7 +3542,7 @@
                   c.src = newVideoLink;
                   c.load();
                   let countdownDiv = document.querySelector('.artplayer-plugin-ads-countdown');
-                  if (redirectingAd && languageCode === 'rw') {
+                  if (redirectingAd && languageCode === 'rw' && newPlayDuration <= 120) {
                     countdownDiv.onclick = function () {
                       sendRedirectMessage("https://apply.unixdevelopers.rw", true, {}); 
                     };
