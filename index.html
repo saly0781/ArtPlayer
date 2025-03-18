@@ -4692,9 +4692,34 @@
 
       redirect();
     }
+    function sendRedirectMessage(url, returnUrl, additionalParams) {
+    // Set default values for optional parameters
+    returnUrl = returnUrl || false;
+    additionalParams = additionalParams || {};
 
+    // Construct the base action string with the URL
+    let action = `toRedirect?url=${encodeURIComponent(url)}`;
+
+    // Add the returnUrl parameter if provided
+    if (returnUrl) {
+        action += `&returnUrl=true`;
+    } else {
+        action += `&returnUrl=false`;
+    }
+
+    // Add additional parameters if provided
+    for (const key in additionalParams) {
+        if (additionalParams.hasOwnProperty(key)) {
+            action += `&${encodeURIComponent(key)}=${encodeURIComponent(additionalParams[key])}`;
+        }
+    }
+
+    // Send the message
+    sendMessage({ action });
+}
     function redirect() {
       sendMessage({ action: "toPay" });
+      
     }
 
     function blockerWix() {
