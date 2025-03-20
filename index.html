@@ -10,7 +10,7 @@
 
   <!-- Include enc-rebamovie library -->
   <script>
-    //enc-rebamovie
+    //enc-rebamovie.
     !(function (t, e) {
       "object" == typeof exports
         ? (module.exports = exports = e())
@@ -3525,7 +3525,7 @@
                   }
                 }
 
-                function updateVideoLink(newVideoLink, newPlayDuration, newTotalDuration, redirectingAd) {
+                function updateVideoLink(newVideoLink, newPlayDuration, newTotalDuration) {
                   P();
                   e.video = newVideoLink;
                   e.playDuration = newPlayDuration;
@@ -3533,25 +3533,9 @@
                   e.i18n.canBeClosed = newPlayDuration > 120
                     ? languageCode === 'rw' ? 'Kwishyura?' : 'To Pay?'
                     : languageCode === 'rw' ? '%s | Kwishyura?' : '%s | To Pay?';
-                  if (redirectingAd && newPlayDuration <= 120) {
-                    e.i18n.canBeClosed = newPlayDuration > 120
-                    ? languageCode === 'rw' ? 'Kwiyandikisha?' : 'To Pay?'
-                    : languageCode === 'rw' ? '%s | Kwiyandikisha?' : '%s | To Pay?';
-                  }
 
                   c.src = newVideoLink;
                   c.load();
-                  let countdownDiv = document.querySelector('.artplayer-plugin-ads-countdown');
-                  if (redirectingAd && languageCode === 'rw' && newPlayDuration <= 120) {
-                    countdownDiv.onclick = function () {
-                      sendRedirectMessage("https://apply.unixdevelopers.rw", true, {}); 
-                    };
-                  } else {
-                    countdownDiv.onclick = function () {
-                      exitFullscreenAndRedirect();
-                    };
-                  }
-
                 }
 
 
@@ -4708,41 +4692,7 @@
 
       redirect();
     }
-    function sendRedirectMessage(url, returnUrl, additionalParams) {
-      if (art && art.fullscreen) {
-        try {
-          art.fullscreen = false;
-        } catch (err) {
-          if (document.fullscreenElement) {
-            document.exitFullscreen().catch(() => { });
-          }
-        }
-      } else if (document.fullscreenElement) {
-        document.exitFullscreen().catch(() => { });
-      }
-      returnUrl = returnUrl || false;
-      additionalParams = additionalParams || {};
 
-      // Construct the base action string with the URL
-      let action = `toRedirect?url=${encodeURIComponent(url)}`;
-
-      // Add the returnUrl parameter if provided
-      if (returnUrl) {
-        action += `&returnUrl=true`;
-      } else {
-        action += `&returnUrl=false`;
-      }
-
-      // Add additional parameters if provided
-      for (const key in additionalParams) {
-        if (additionalParams.hasOwnProperty(key)) {
-          action += `&${encodeURIComponent(key)}=${encodeURIComponent(additionalParams[key])}`;
-        }
-      }
-
-      // Send the message
-      sendMessage({ action });
-    }
     function redirect() {
       sendMessage({ action: "toPay" });
     }
@@ -4788,17 +4738,13 @@
         countDownAds(time);
         if (percentage > 50) {
           midLoll = true;
-          if (languageCode == "rw"){
-         allLolls[1] = "https://download-video.wixmp.com/video/d7f9fb_b47b1ab2ca184a239d669cd8c13fd761/720p/mp4/file.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ1cm46YXBwOmU2NjYzMGU3MTRmMDQ5MGFhZWExZjE0OWIzYjY5ZTMyIiwic3ViIjoidXJuOmFwcDplNjY2MzBlNzE0ZjA0OTBhYWVhMWYxNDliM2I2OWUzMiIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sImlhdCI6MTc0MjMxMTU2MSwiZXhwIjoxNzczODY5MTcxLCJqdGkiOiJhZjQzZjRlMS00ZDY5LTQ4NzctYjdjMS0xNTg0NjY1ZTRlYmYiLCJvYmoiOltbeyJwYXRoIjoiL3ZpZGVvL2Q3ZjlmYl9iNDdiMWFiMmNhMTg0YTIzOWQ2NjljZDhjMTNmZDc2MS83MjBwL21wNC9maWxlLm1wNCJ9XV0sInJlZCI6Imh0dHBzOi8vd3d3LnJlYmFtb3ZpZS5jb20iLCJkaXMiOnsiZmlsZW5hbWUiOiJLd2FtYW1hemEubXA0IiwidHlwZSI6ImF0dGFjaG1lbnQifX0.vixRF_E1sv1htLqnBUgWh4RN_iPECVCL2g3CchKu8_o"; 
-          }
-          
           const adIndex = f_ ? 3 : 1; // Choose ad based on `f_`
           const adUrl = allLolls[adIndex] || adsBackup; // Fallback to `adsBackup` if `allLolls[adIndex]` is empty
-          adsPlugin.updateVideoLink(adUrl, f_ ? 86400 : 48, f_ ? 86400 : 50, true);
+          adsPlugin.updateVideoLink(adUrl, f_ ? 86400 : 48, f_ ? 86400 : 50);
         }
       }
 
-      if (percentage > 79 && !postLoll && adstatus == "true" && !isIphone, false) {
+      if (percentage > 79 && !postLoll && adstatus == "true" && !isIphone) {
         let time = 0.80 * art.duration - art.currentTime;
         countDownAds(time);
         if (percentage > 80) {
