@@ -4219,6 +4219,9 @@
     // Function for handling Fullscreen state
     art.on("fullscreen", (state) => {
       console.log("NOW WE ARE II FULLLSCREEN!", state);
+      if (!state){
+        checkAdStatus()
+      }
     });
 
     //An event for controlling when the DOM is loaded
@@ -4698,6 +4701,7 @@
       sendMessage({ action: "toPay" });
     }
     function checkAdStatus(){
+    console.log("we are checking redirecting")
    let percentage = (art.currentTime / art.duration) * 100;
    newData.minPercentage = percentage;
    if (isAdActive && percentage > 55 && f_) 
