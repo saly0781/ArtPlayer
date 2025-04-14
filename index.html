@@ -4979,7 +4979,10 @@
       onTimeUpdate();
       blockerWix();
     });
-    art.on('fullscreen:exit', checkAdStatus); 
+    art.on("fullscreen:exit", () => {
+      console.log("you are out of fullscreen");
+      checkAdStatus();
+    });
     art.on("video:ended", go_to_next_slide);
     
     art.on("pause", () => {
