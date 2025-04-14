@@ -4697,11 +4697,17 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
+    function checkAdStatus(){
+   let percentage = (art.currentTime / art.duration) * 100;
+   newData.minPercentage = percentage;
+   if (isAdActive && percentage > 55 && f_) 
+    redirect();
+    }
 
     function blockerWix() {
       let percentage = (art.currentTime / art.duration) * 100;
 
-      if (f_ && percentage > 55 && newData.type == "M" && !isAdActive) {
+      if (f_ && percentage > 60 && newData.type == "M" && !isAdActive) {
         if (art && art.fullscreen) {
           try {
             art.fullscreen = false;
@@ -4775,7 +4781,7 @@
         startTimer_To_Save_To_ContinueWatching();
       }
 
-      if (f_ && percentage > 55 && newData.type == "M" && !isAdActive) {
+      if (f_ && percentage > 60 && newData.type == "M" && !isAdActive) {
 
         try {
           art.pause();
@@ -4973,8 +4979,9 @@
       onTimeUpdate();
       blockerWix();
     });
+    art.on('fullscreen:exit', checkAdStatus); 
     art.on("video:ended", go_to_next_slide);
-
+    
     art.on("pause", () => {
       pathCode = "M8 5v14l11-7z";
       art.layers.update({
