@@ -4219,7 +4219,7 @@
     // Function for handling Fullscreen state
     art.on("fullscreen", (state) => {
       console.log("NOW WE ARE II FULLLSCREEN!", state);
-      if (!state){
+      if (!state) {
         checkAdStatus()
       }
     });
@@ -4700,12 +4700,11 @@
     function redirect() {
       sendMessage({ action: "toPay" });
     }
-    function checkAdStatus(){
-    console.log("we are checking redirecting")
-   let percentage = (art.currentTime / art.duration) * 100;
-   newData.minPercentage = percentage;
-   if (isAdActive && percentage > 55 && f_) 
-    redirect();
+    function checkAdStatus() {
+      let percentage = (art.currentTime / art.duration) * 100;
+      newData.minPercentage = percentage;
+      if (isAdActive && percentage > 55 && f_)
+        redirect();
     }
 
     function blockerWix() {
@@ -4983,12 +4982,9 @@
       onTimeUpdate();
       blockerWix();
     });
-    art.on("fullscreen:exit", () => {
-      console.log("you are out of fullscreen");
-      checkAdStatus();
-    });
+
     art.on("video:ended", go_to_next_slide);
-    
+
     art.on("pause", () => {
       pathCode = "M8 5v14l11-7z";
       art.layers.update({
