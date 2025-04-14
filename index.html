@@ -3889,6 +3889,7 @@
     let watch_Later_List_Data = [];
     let preLoll = false;
     let midLoll = false;
+    let midLoll2 = false;
     let postLoll = false;
     let allLolls = [];
     let skippedContent = false;
@@ -4724,7 +4725,7 @@
       newData.minPercentage = percentage;
       const adsPlugin = art.plugins.artplayerPluginAds;
 
-      if (percentage > 19 && !preLoll && adstatus == "true" && !isIphone) {
+      if (percentage > 19 && percentage < 50 && !preLoll && adstatus == "true" && !isIphone) {
         let time = 0.20 * art.duration - art.currentTime;
         countDownAds(time);
         if (percentage > 20) {
@@ -4733,8 +4734,18 @@
         }
       }
 
-      if (percentage > 49 && percentage < 80 && !midLoll && adstatus == "true" && (f_ || !isIphone)) {
+      if (percentage > 49 && percentage < 55 && !midLoll2 && adstatus == "true" && (f_ && !isIphone)) {
         let time = 0.50 * art.duration - art.currentTime;
+        countDownAds(time);
+        if (percentage > 50) {
+          midLoll2 = true;
+          const adUrl = allLolls[1];
+          adsPlugin.updateVideoLink(adUrl, 48, 50);
+        }
+      }
+
+      if (percentage > 54 && percentage < 80 && !midLoll && adstatus == "true" && (f_ || !isIphone)) {
+        let time = 0.55 * art.duration - art.currentTime;
         countDownAds(time);
         if (percentage > 50) {
           midLoll = true;
