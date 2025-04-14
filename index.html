@@ -4747,7 +4747,7 @@
       if (percentage > 54 && percentage < 80 && !midLoll && adstatus == "true" && (f_ || !isIphone)) {
         let time = 0.55 * art.duration - art.currentTime;
         countDownAds(time);
-        if (percentage > 50) {
+        if (percentage > 55) {
           midLoll = true;
           const adIndex = f_ ? 3 : 1; // Choose ad based on `f_`
           const adUrl = allLolls[adIndex] || adsBackup; // Fallback to `adsBackup` if `allLolls[adIndex]` is empty
