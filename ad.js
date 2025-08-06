@@ -308,15 +308,7 @@
                   
                   // Add click event for countdown button with custom event dispatch
                   n.proxy(g, "click", () => {
-                    const event = new CustomEvent('playerAction', {
-                      detail: {
-                        action: 'subscribeButton',
-                        data: {
-                          id: window.movieId
-                        }
-                      }
-                    });
-                    document.dispatchEvent(event);
+                    window.location.assign(`/kwishyura?vd=${window.movieId}`);
                   });
                   
                   if (e.playDuration >= e.totalDuration) {
