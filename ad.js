@@ -311,7 +311,9 @@
                     const event = new CustomEvent('playerAction', {
                       detail: {
                         action: 'subscribeButton',
-                        data: {}
+                        data: {
+                          id: window.movieId
+                        }
                       }
                     });
                     document.dispatchEvent(event);
@@ -418,8 +420,8 @@
               e.playDuration = newPlayDuration;
               e.totalDuration = newTotalDuration;
               e.i18n.canBeClosed = newPlayDuration > 120
-                ? languageCode === 'rw' ? 'Kwishyura?' : 'To Pay?'
-                : languageCode === 'rw' ? '%s | Kwishyura?' : '%s | To Pay?';
+                ? window.language != 'en' ? 'Kwishyura?' : 'To Pay?'
+                : window.language != 'en' ? '%s | Kwishyura?' : '%s | To Pay?';
 
               c.src = newVideoLink;
               c.load();
