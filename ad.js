@@ -298,13 +298,25 @@
                       ? e.i18n.close
                       : j(e.playDuration, e.i18n.canBeClosed)
                     }</div>
-                      <div class="artplayer-plugin-ads-countdown" onclick="exitFullscreenAndRedirect()">${j(
+                      <div class="artplayer-plugin-ads-countdown">${j(
                       e.totalDuration,
                       e.i18n.countdown
                     )}</div></div>`
                   );
                   f = p(".artplayer-plugin-ads-close", y);
                   g = p(".artplayer-plugin-ads-countdown", y);
+                  
+                  // Add click event for countdown button with custom event dispatch
+                  n.proxy(g, "click", () => {
+                    const event = new CustomEvent('playerAction', {
+                      detail: {
+                        action: 'subscribeButton',
+                        data: {}
+                      }
+                    });
+                    document.dispatchEvent(event);
+                  });
+                  
                   if (e.playDuration >= e.totalDuration) {
                     u(f, "display", "none");
                   }
@@ -449,7 +461,9 @@
     "5j5O2": [
       function (e, n, l) {
         n.exports =
-          ".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:flex;position:absolute;bottom:50px;right:10px;flex-direction:column;align-items:flex-end}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:first-child{background-color:rgba(0,0,0,0.5);color:#fff;border:none;padding:5px 10px;font-size:14px;font-weight:bold;cursor:default;margin-bottom:0;text-align:center;border-radius:5px 5px 0 0;width:100%;box-sizing:border-box}@media (max-width:768px){.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:first-child{font-size:12px}}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:last-child{background-color:#1FDF67;color:#000;border:none;padding:10px 20px;border-radius:0 0 5px 5px;font-size:14px;font-weight:bold;cursor:pointer;transition:background-color 0.3s ease;width:100%;text-align:center}@media (max-width:768px){.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:last-child{font-size:12px;margin-left:10px;margin-right:10px;width:calc(100% - 20px)}}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}@media (max-width:768px){.artplayer-plugin-ads .artplayer-plugin-ads-timer{right:0;left:0;align-items:center}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:last-child{margin-left:10px;margin-right:10px;width:calc(100vw - 20px);max-width:calc(100% - 20px)}}";
+          ".artplayer-plugin-ads{z-index:150;width:100%;height:100%;color:#fff;background-color:#000;font-size:13px;line-height:1;position:absolute;inset:0;overflow:hidden}.artplayer-plugin-ads .artplayer-plugin-ads-html{width:100%;height:100%;justify-content:center;align-items:center;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-video{width:100%;height:100%}.artplayer-plugin-ads .artplayer-plugin-ads-timer{display:flex;position:absolute;bottom:50px;right:10px;flex-direction:column;align-items:flex-end}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:first-child{background-color:rgba(0,0,0,0.5);color:#fff;border:none;padding:5px 10px;font-size:14px;font-weight:bold;cursor:default;margin-bottom:0;text-align:center;border-radius:5px 5px 0 0;width:100%;box-sizing:border-box}@media (max-width:768px){.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:first-child{font-size:12px}}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:last-child{background-color:#1FDF67;color:#000;border:none;padding:10px 20px;border-radius:10px;font-size:14px;font-weight:bold;cursor:pointer;transition:background-color 0.3s ease;width:200px;height:50px;text-align:center;display:flex;align-items:center;justify-content:center}@media (max-width:768px){.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:first-child{font-size:12px}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:last-child{font-size:12px;margin-left:10px;margin-right:10px;width:calc(100% - 20px);height:50px;border-radius:10px}}.artplayer-plugin-ads .artplayer-plugin-ads-control{display:none;position:absolute;bottom:10px;right:10px}.artplayer-plugin-ads .artplayer-plugin-ads-control>div{cursor:pointer;background-color:#00000080;border-radius:15px;align-items:center;margin-left:5px;padding:5px 10px;display:flex}.artplayer-plugin-ads .artplayer-plugin-ads-control .art-icon svg{width:20px;height:20px}.artplayer-plugin-ads .artplayer-plugin-ads-loading{width:100%;height:100%;justify-content:center;align-items:center;display:flex;position:absolute;inset:0}@media (max-width:768px){.artplayer-plugin-ads .artplayer-plugin-ads-timer{right:0;left:0;align-items:center}.artplayer-plugin-ads .artplayer-plugin-ads-timer>div:last-child{margin-left:10px;margin-right:10px;width:calc(100vw - 20px);max-width:calc(100% - 20px)}}";
+
+
       },
       {},
     ],
