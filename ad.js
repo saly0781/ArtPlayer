@@ -154,7 +154,7 @@
                 // Store original keydown handler if it exists
                 originalKeydownHandler = document.onkeydown;
                 // Block all keydown events
-                document.onkeydown = function(event) {
+                document.onkeydown = function (event) {
                   event.preventDefault();
                   event.stopPropagation();
                   return false;
@@ -200,16 +200,16 @@
                 n.play(),
                 e.video && c.pause(),
                 u(n.template.$ads, "display", "none"),
-                
+
                 // Unblock keystrokes when ad finishes
                 unblockKeystrokes();
-                
-                // Remove timeupdate listener
-                n.off('video:timeupdate', addTimeupdateListener);
-                
-                // Emit close event when ad finishes
-                n.emit("artplayerPluginAds:close", e);
-                n.emit("artplayerPluginAds:skip", e);
+
+              // Remove timeupdate listener
+              n.off('video:timeupdate', addTimeupdateListener);
+
+              // Emit close event when ad finishes
+              n.emit("artplayerPluginAds:close", e);
+              n.emit("artplayerPluginAds:skip", e);
               resetAd();
               isAdActive = false;
             }
@@ -269,13 +269,13 @@
             function P() {
               if (!w) {
                 w = true;
-                
+
                 // Block keystrokes when ad starts
                 blockKeystrokes();
-                
+
                 // Add timeupdate listener to pause main video
                 n.on('video:timeupdate', addTimeupdateListener);
-                
+
                 (function () {
                   n.template.$ads = s(
                     l,
@@ -305,12 +305,15 @@
                   );
                   f = p(".artplayer-plugin-ads-close", y);
                   g = p(".artplayer-plugin-ads-countdown", y);
-                  
+
                   // Add click event for countdown button with custom event dispatch
                   n.proxy(g, "click", () => {
-                    window.location.assign(`/kwishyura?vd=${window.movieId}`);
+                    window.device == "web" ? window.location.assign(`/kwishyura?vd=${window.movieId}`) : window.flutter_inappwebview.callHandler('kwishyura', {
+                      action: 'subscribeButton',
+                      data: window.movieId
+                    });
                   });
-                  
+
                   if (e.playDuration >= e.totalDuration) {
                     u(f, "display", "none");
                   }
