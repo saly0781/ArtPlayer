@@ -308,7 +308,7 @@
 
                   // Add click event for countdown button with custom event dispatch
                   n.proxy(g, "click", () => {
-                    window.device == "web" ? window.location.assign(`/kwishyura?vd=${window.movieId}`) : window.flutter_inappwebview.callHandler('kwishyura', {
+                    window.device == "web" ? window.location.assign(`/kwishyura?vd=${window.movieId}`) : window.flutter_inappwebview.callHandler('playerAction', {
                       action: 'subscribeButton',
                       data: window.movieId
                     });
@@ -326,6 +326,12 @@
                     n.template.$ads,
                     `<div class="artplayer-plugin-ads-control"><div class="artplayer-plugin-ads-detail">${e.i18n.detail}</div><div class="artplayer-plugin-ads-muted"></div><div class="artplayer-plugin-ads-fullscreen"></div></div>`
                   );
+
+                  // Hide control element when window.device is not "web"
+                  if (typeof window !== 'undefined' && window.device !== "web") {
+                    u(m, "display", "none");
+                  }
+
                   const d = p(".artplayer-plugin-ads-detail", m);
                   const x = p(".artplayer-plugin-ads-muted", m);
                   const h = p(".artplayer-plugin-ads-fullscreen", m);
@@ -388,14 +394,24 @@
                     O();
                     c.play();
                     u(y, "display", "flex");
-                    u(m, "display", "flex");
+                    
+                    // Only show control if window.device is "web"
+                    if (typeof window !== 'undefined' && window.device === "web") {
+                      u(m, "display", "flex");
+                    }
+                    
                     u(v, "display", "none");
                     n.emit("preLoll", e);
                   });
                 } else {
                   O();
                   u(y, "display", "flex");
-                  u(m, "display", "flex");
+                  
+                  // Only show control if window.device is "web"
+                  if (typeof window !== 'undefined' && window.device === "web") {
+                    u(m, "display", "flex");
+                  }
+                  
                   u(v, "display", "none");
                   n.emit("adStarted", e);
                 }
